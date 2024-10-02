@@ -2,7 +2,7 @@ import streamlit as st
 from utils import *
 
 # Características básicas de la página
-st.set_page_config(page_icon="🚆", page_title="Detección de anomalías cardiacas", layout="wide")
+st.set_page_config(page_icon="🚆", page_title="Detección de Anomalías en Afluencia del Metro de Medellín", layout="wide")
 
 # Crear una fila para centrar el título y el logo
 c1, c2, c3 = st.columns([1, 6, 1])
