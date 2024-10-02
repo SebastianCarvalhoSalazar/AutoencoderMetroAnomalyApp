@@ -44,7 +44,7 @@ with c30:
         dato = leer_dato(uploaded_file)
 
         # Cargar el modelo preentrenado en formato .keras o .h5
-        autoencoder, scaler = cargar_modelo_preentrenado('./dev/results/tf_modelo_76_71_75.keras', './dev/results/scaler_76_71_75.pkl')
+        autoencoder, scaler = cargar_modelo_preentrenado('./dev/results/tf_modelo_78_65_71.keras', './dev/results/scaler_78_65_71.pkl')
 
         # Realizar la predicción
         prediccion = predecir(autoencoder, dato, UMBRAL, scaler)
