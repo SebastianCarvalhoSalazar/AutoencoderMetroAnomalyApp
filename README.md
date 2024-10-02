@@ -1,5 +1,7 @@
 # Detección de Anomalías en Afluencia del Metro de Medellín con Autoencoders y Streamlit
 
+![Logo](./assets/logo.png)
+
 Este proyecto tiene como objetivo detectar anomalías en la afluencia de pasajeros del **Metro de Medellín** utilizando **Autoencoders** para el análisis de series temporales y un panel interactivo creado con **Streamlit**. El enfoque se basa en la descomposición de series temporales y el uso de técnicas de aprendizaje profundo para identificar comportamientos anómalos en los datos de afluencia.
 
 ## Explicación del aplicativo
@@ -64,14 +66,14 @@ El aplicativo facilita el análisis visual y dinámico de los datos de afluencia
 
 # Cómo usar este proyecto
 
-# 1. Clona el repositorio en tu máquina local:
+### 1. Clona el repositorio en tu máquina local:
 git clone https://github.com/usuario/AutoencoderMetroAfluencia.git
 
-# 2. Navega al directorio del proyecto:
+### 2. Navega al directorio del proyecto:
 cd AutoencoderMetroAfluencia
 
-# 3. Instala las dependencias necesarias:
+### 3. Instala las dependencias necesarias:
 pip install -r requirements.txt
 
-# 4. Ejecuta la aplicación con Streamlit:
+### 4. Ejecuta la aplicación con Streamlit:
 streamlit run app.py
