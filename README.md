@@ -1,5 +1,7 @@
 # Detección de Anomalías en Afluencia del Metro de Medellín con Autoencoders y Streamlit
 
+![Logo](./assets/logo.png)
+
 Este proyecto tiene como objetivo detectar anomalías en la afluencia de pasajeros del **Metro de Medellín** utilizando **Autoencoders** para el análisis de series temporales y un panel interactivo creado con **Streamlit**. El enfoque se basa en la descomposición de series temporales y el uso de técnicas de aprendizaje profundo para identificar comportamientos anómalos en los datos de afluencia.
 
 ## Explicación del aplicativo
