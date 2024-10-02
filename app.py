@@ -23,7 +23,7 @@ with c2:
 # Definir las columnas para el cargador de archivos
 c29, c30, c31 = st.columns([1, 6, 1])  # 3 columnas: 10%, 60%, 10%
 
-UMBRAL = 989  # Umbral ajustable para la predicción
+UMBRAL = 904  # Umbral ajustable para la predicción
 
 with c30:
     uploaded_file = st.file_uploader(
