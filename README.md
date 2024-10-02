@@ -77,3 +77,8 @@ pip install -r requirements.txt
 
 ### 4. Ejecuta la aplicación con Streamlit:
 streamlit run app.py
+
+# Dataset
+
+### 1. Kaggle:
+https://www.kaggle.com/datasets/roysandoval/afluencia-metro-de-medelln-2023
