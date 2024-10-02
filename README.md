@@ -64,6 +64,10 @@ El aplicativo facilita el análisis visual y dinámico de los datos de afluencia
 - **joblib**
 - **etc**
 
+# Trabajos futuros:
+
+Como trabajo futuro, se propone entrenar el modelo utilizando una ventana deslizante de horas, lo que permitiría analizar secuencias de datos de afluencia en bloques de tiempo más recientes y mejorar las predicciones en tiempo real. Esta mejora permitiría que el modelo ajuste su análisis de manera continua cada vez que se actualice el dato de la última hora, capturando patrones recientes y detectando anomalías en tiempo real. Implementar este enfoque podría habilitar el monitoreo continuo del comportamiento de la afluencia, actualizando las predicciones cada hora en un entorno de producción. Esto ofrecería una herramienta de alta precisión para identificar irregularidades o tendencias inesperadas de forma inmediata, optimizando así la gestión operativa del Metro de Medellín.
+
 # Cómo usar este proyecto
 
 ### 1. Clona el repositorio en tu máquina local:
