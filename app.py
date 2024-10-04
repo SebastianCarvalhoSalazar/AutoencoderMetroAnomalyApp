@@ -23,7 +23,7 @@ with c2:
 # Definir las columnas para el cargador de archivos
 c29, c30, c31 = st.columns([1, 6, 1])  # 3 columnas: 10%, 60%, 10%
 
-UMBRAL = 1680  # Umbral ajustable para la predicción
+UMBRAL = 1389  # Umbral ajustable para la predicción
 
 with c30:
     uploaded_file = st.file_uploader(
@@ -44,7 +44,7 @@ with c30:
         dato = leer_dato(uploaded_file)
 
         # Cargar el modelo preentrenado en formato .keras o .h5
-        autoencoder, scaler = cargar_modelo_preentrenado('./dev/results/tf_modelo_77_30_38.keras', './dev/results/scaler_77_30_38.pkl')
+        autoencoder, scaler = cargar_modelo_preentrenado('./dev/results/tf_modelo_76_42_48.keras', './dev/results/scaler_76_42_48.pkl')
 
         # Realizar la predicción
         prediccion = predecir(autoencoder, dato, UMBRAL, scaler)
