@@ -59,8 +59,8 @@ with c30:
         st.subheader("Comparación entre los datos originales y reconstruidos")
 
         fig, ax = plt.subplots(figsize=(10, 5))
-        ax.plot(scaled_datos.flatten(), label='Datos Originales', color='blue')
-        ax.plot(scaled_reconstrucciones.flatten(), label='Reconstrucción del Autoencoder', color='red')
+        ax.plot(scaled_datos.flatten(), label='Datos Originales', color='blue', lw=2)
+        ax.plot(scaled_reconstrucciones.flatten(), label='Reconstrucción del Autoencoder', color='red', lw=2, linestyle='--')
         ax.set_title('Datos Originales vs Reconstrucción')
         ax.set_xlabel('Índice')
         ax.set_ylabel('Afluencia')
