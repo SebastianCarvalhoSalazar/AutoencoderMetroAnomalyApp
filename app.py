@@ -1,5 +1,6 @@
 import streamlit as st
 from utils import *
+import matplotlib.pyplot as plt
 
 # Características básicas de la página
 st.set_page_config(page_icon="🚆", page_title="Detección de Anomalías en Afluencia del Metro de Medellín", layout="wide")
@@ -9,44 +10,39 @@ c1, c2, c3 = st.columns([1, 6, 1])
 
 # Centrar el título y el logo en la segunda columna
 with c2:
-    # Crear una fila dividida en dos partes: título y logo
     col1, col2 = st.columns([8, 2])  # La primera columna más grande para el título, la segunda más pequeña para el logo
-
-    # Colocar el título en la primera columna
     with col1:
         st.title("Detección de Anomalías en Afluencia del Metro de Medellín con Autoencoders")
-
-    # Colocar el logo en la segunda columna, proporcional al tamaño del texto
     with col2:
-        st.image("./assets/logo.png", width=200)  # Ajusta el tamaño del logo para que sea proporcional al título
+        st.image("./assets/logo.png", width=200)
 
 # Definir las columnas para el cargador de archivos
-c29, c30, c31 = st.columns([1, 6, 1])  # 3 columnas: 10%, 60%, 10%
+c29, c30, c31 = st.columns([1, 6, 1])
 
-UMBRAL = 1132  # Umbral ajustable para la predicción
+UMBRAL = 827  # Umbral ajustable para la predicción
 
 with c30:
-    uploaded_file = st.file_uploader(
-        "", type='pkl',
-        key="1",
-    )
+    uploaded_file = st.file_uploader("", type='pkl', key="1")
 
     if uploaded_file is not None:
         file_container = st.expander("Verifique el archivo .pkl que acaba de subir")
 
         # Espacio para el mensaje de estado
         info_box = st.empty()
-
-        # Mostrar el mensaje de espera
         info_box.info("🕒 Realizando la clasificación...")
 
         # Cargar el dato desde el archivo .pkl
         dato = leer_dato(uploaded_file)
 
         # Cargar el modelo preentrenado en formato .keras o .h5
-        autoencoder, scaler = cargar_modelo_preentrenado('./dev/results/tf_modelo_72_58_52.keras', './dev/results/scaler_72_58_52.pkl')
+        autoencoder, scaler = cargar_modelo_preentrenado('./dev/results/tf_modelo_77_81_78.keras', './dev/results/scaler_77_81_78.pkl')
 
         # Realizar la predicción
+        reconstrucciones = autoencoder.predict(np.array([dato]))  # Predicción completa
+        scaled_reconstrucciones = scaler.inverse_transform(reconstrucciones.reshape(1, -1))
+        scaled_datos = scaler.inverse_transform(dato.reshape(1, -1))
+
+        # Calcular la pérdida
         prediccion = predecir(autoencoder, dato, UMBRAL, scaler)
         categoria = obtener_categoria(prediccion)
 
@@ -59,8 +55,21 @@ with c30:
         else:
             st.success(f"🎉 El dato analizado corresponde a un sujeto: **{categoria}**")
 
+        # Graficar los datos originales y reconstruidos
+        st.subheader("Comparación entre los datos originales y reconstruidos")
+
+        fig, ax = plt.subplots(figsize=(10, 5))
+        ax.plot(scaled_datos.flatten(), label='Datos Originales', color='blue')
+        ax.plot(scaled_reconstrucciones.flatten(), label='Reconstrucción del Autoencoder', color='red')
+        ax.set_title('Datos Originales vs Reconstrucción')
+        ax.set_xlabel('Índice')
+        ax.set_ylabel('Afluencia')
+        plt.grid(True)
+        ax.legend()
+
+        # Mostrar la gráfica en Streamlit
+        st.pyplot(fig)
+
     else:
-        st.info(
-            "👆 Debe cargar primero un dato con extensión .pkl"
-        )
+        st.info("👆 Debe cargar primero un dato con extensión .pkl")
         st.stop()
