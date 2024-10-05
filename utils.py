@@ -14,19 +14,20 @@ def cargar_modelo_preentrenado(model_path, scaler_path):
     scaler = joblib.load(scaler_path)
     return modelo, scaler
 
-def predecir(modelo, datos, umbral, scaler):
-    # Modificamos para usar TensorFlow/Keras
-    # Realizamos la predicción con el modelo de Keras
-    reconstrucciones = modelo.predict(np.array([datos]))  # Predecimos con un solo dato
-
+def predecir(modelo, datos_afluencia, datos_horas_seno, datos_horas_coseno, umbral, scaler):
+    # Predicción usando las tres entradas: afluencia, horas en seno y horas en coseno
+    reconstrucciones = modelo.predict([datos_afluencia, datos_horas_seno, datos_horas_coseno])
+    
+    # Invertir la normalización de los datos y las reconstrucciones
     scaled_reconstrucciones = scaler.inverse_transform(reconstrucciones.reshape(1, -1))
-    scaled_datos = scaler.inverse_transform(datos.reshape(1, -1))
-
-    # Calculamos la pérdida utilizando MAE
+    scaled_datos = scaler.inverse_transform(datos_afluencia.reshape(1, -1))
+    
+    # Calcular la pérdida utilizando MAE
     perdida = np.mean(np.abs(scaled_reconstrucciones - scaled_datos))
-    print(f"PERDIDA: {np.round(perdida,0)}")
+    print(f"PERDIDA: {np.round(perdida, 0)}")
 
-    return perdida < umbral  # Comparamos con el umbral
+    # Comparar con el umbral
+    return perdida < umbral
 
 def obtener_categoria(comparaciones):
     # No se requiere el uso de "for" pues tendremos sólo 1 dato
