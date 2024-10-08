@@ -6,6 +6,7 @@ import sklearn
 
 def leer_dato(uploaded_file):
     dato = pickle.loads(uploaded_file.getvalue())
+    print(dato)
     return dato
 
 def cargar_modelo_preentrenado(model_path, scaler_path):
