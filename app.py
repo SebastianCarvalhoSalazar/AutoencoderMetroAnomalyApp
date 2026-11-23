@@ -1,80 +1,121 @@
+"""Aplicación Streamlit: detección contextual de anomalías en la afluencia horaria de la Línea A.
+
+Ejecutar desde la raíz del repositorio: ``streamlit run app.py``
+"""
+from __future__ import annotations
+
+from pathlib import Path
+
+import altair as alt
+import pandas as pd
 import streamlit as st
-from utils import *
-import matplotlib.pyplot as plt
 
-# Características básicas de la página
-st.set_page_config(page_icon="🚆", page_title="Detección de Anomalías en Afluencia del Metro de Medellín", layout="wide")
+from metro_anomaly import service as S
+from metro_anomaly.data import SCORED_HOURS
 
-# Crear una fila para centrar el título y el logo
-c1, c2, c3 = st.columns([1, 6, 1])
+ROOT = Path(__file__).resolve().parent
+DEFAULT_DATE = pd.Timestamp("2023-08-28")
+DIAS = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
 
-# Centrar el título y el logo en la segunda columna
-with c2:
-    col1, col2 = st.columns([8, 2])  # La primera columna más grande para el título, la segunda más pequeña para el logo
-    with col1:
-        st.title("Detección de Anomalías en Afluencia del Metro de Medellín con Autoencoders")
-    with col2:
-        st.image("./assets/logo.png", width=200)
+st.set_page_config(page_icon="🚆", page_title="Anomalías de afluencia — Línea A", layout="wide")
 
-# Definir las columnas para el cargador de archivos
-c29, c30, c31 = st.columns([1, 6, 1])
 
-UMBRAL = 827  # Umbral ajustable para la predicción
+@st.cache_resource(show_spinner="Cargando histórico y modelo…")
+def _resources():
+    hist = S.load_history(ROOT / "data")
+    det, thr, doc = S.load_model(ROOT / "artifacts" / "modelo.json")
+    return hist, det, thr, doc
 
-with c30:
-    uploaded_file = st.file_uploader("", type='pkl', key="1")
 
-    if uploaded_file is not None:
-        file_container = st.expander("Verifique el archivo .pkl que acaba de subir")
+def _chart(r: S.DayResult):
+    h = [c[1:] + "h" for c in SCORED_HOURS]
+    df = pd.DataFrame({"Hora": h, "Observado": r.observed.to_numpy(), "Esperado": r.expected.to_numpy(),
+                       "Banda inferior": r.band_low.to_numpy(), "Banda superior": r.band_high.to_numpy(),
+                       "Fuera de banda": [c in r.hour_flags for c in SCORED_HOURS]})
+    x = alt.X("Hora:N", sort=h, title="Hora")
+    band = alt.Chart(df).mark_area(opacity=0.25).encode(x=x, y=alt.Y("Banda inferior:Q", title="Entradas por hora"), y2="Banda superior:Q")
+    exp = alt.Chart(df).mark_line(strokeDash=[5, 3]).encode(x=x, y="Esperado:Q")
+    obs = alt.Chart(df).mark_line(point=True).encode(x=x, y="Observado:Q", tooltip=["Hora", "Observado", "Esperado"])
+    flags = alt.Chart(df[df["Fuera de banda"]]).mark_point(size=160, shape="diamond", filled=True, color="#d62728").encode(x=x, y="Observado:Q")
+    return (band + exp + obs + flags).properties(height=340)
 
-        # Espacio para el mensaje de estado
-        info_box = st.empty()
-        info_box.info("🕒 Realizando la clasificación...")
 
-        # Cargar el dato desde el archivo .pkl
-        try:
-            dato = leer_dato(uploaded_file)
-        except ValueError as e:
-            info_box.empty()
-            st.error(f"❌ {e}")
-            st.stop()
-
-        # Cargar el modelo preentrenado en formato .keras o .h5
-        autoencoder, scaler = cargar_modelo_preentrenado('./dev/results/tf_modelo_77_81_78.keras', './dev/results/scaler_77_81_78.pkl')
-
-        # Realizar la predicción
-        reconstrucciones = autoencoder.predict(np.array([dato]))  # Predicción completa
-        scaled_reconstrucciones = scaler.inverse_transform(reconstrucciones.reshape(1, -1))
-        scaled_datos = scaler.inverse_transform(dato.reshape(1, -1))
-
-        # Calcular la pérdida
-        prediccion = predecir(autoencoder, dato, UMBRAL, scaler)
-        categoria = obtener_categoria(prediccion)
-
-        # Limpiar el mensaje de espera y mostrar el resultado de forma llamativa
-        info_box.empty()
-
-        # Mostrar el resultado, usando rojo si es anormal y verde si es normal
-        if categoria == "Anormal":
-            st.error(f"⚠️ El dato analizado corresponde a un sujeto: **{categoria}**")
-        else:
-            st.success(f"🎉 El dato analizado corresponde a un sujeto: **{categoria}**")
-
-        # Graficar los datos originales y reconstruidos
-        st.subheader("Comparación entre los datos originales y reconstruidos")
-
-        fig, ax = plt.subplots(figsize=(10, 5))
-        ax.plot(scaled_datos.flatten(), label='Datos Originales', color='blue', lw=2)
-        ax.plot(scaled_reconstrucciones.flatten(), label='Reconstrucción del Autoencoder', color='red', lw=2, linestyle='--')
-        ax.set_title('Datos Originales vs Reconstrucción')
-        ax.set_xlabel('Índice')
-        ax.set_ylabel('Afluencia')
-        plt.grid(True)
-        ax.legend()
-
-        # Mostrar la gráfica en Streamlit
-        st.pyplot(fig)
-
+def _show_day(r: S.DayResult):
+    head = f"**{r.date.date()}** · {DIAS[r.date.dayofweek]} · tipo de día: `{r.day_type}`" + (f" · 📅 {r.note}" if r.note else "")
+    st.markdown(head)
+    if r.alert:
+        st.error(f"⚠️ ANOMALÍA — score {r.score:.2f} > umbral {r.threshold:.2f}. "
+                 f"Desviación media del día: {r.deviation_pct:+.1f} %. Horas fuera de banda: "
+                 f"{', '.join(c[1:] + 'h' for c in r.hour_flags) or 'ninguna (desplazamiento global del día)'}.")
     else:
-        st.info("👆 Debe cargar primero un dato con extensión .pkl")
+        st.success(f"✅ Normal — score {r.score:.2f} ≤ umbral {r.threshold:.2f}. Desviación media del día: {r.deviation_pct:+.1f} %.")
+    if r.missing_hours:
+        st.warning(f"Calidad de datos: sin dato en {', '.join(c[1:] + 'h' for c in r.missing_hours)} (no se imputan; el día se evalúa con las horas disponibles).")
+    st.altair_chart(_chart(r), use_container_width=True)
+    with st.expander("Detalle por hora"):
+        st.dataframe(pd.DataFrame({"Observado": r.observed.round(0), "Esperado": r.expected.round(0), "z": r.z.round(2),
+                                   "Fuera de banda": [c in r.hour_flags for c in SCORED_HOURS]},
+                                  index=[c[1:] + "h" for c in SCORED_HOURS]), use_container_width=True)
+
+
+def main():
+    st.title("🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín")
+    try:
+        hist, det, thr, doc = _resources()
+    except Exception as e:  # noqa: BLE001 — fallo de despliegue: mensaje claro, sin traza
+        st.error(f"No se pudo cargar el histórico o el modelo: {type(e).__name__}: {e}")
         st.stop()
+
+    with st.sidebar:
+        st.header("Modelo")
+        st.markdown(f"- Detector: `{doc['detector']}` (`{doc['agg']}`)\n- Umbral: **{thr:.3f}** (presupuesto de alertas del 5 % en DEV)\n"
+                    f"- Entrenado con: {doc['trained_on'][0]} → {doc['trained_on'][1]}\n- Línea: {doc['line']}")
+        m = doc.get("holdout_metrics", {})
+        st.markdown("**Validación en holdout (2023-07 → 2024-06)**")
+        st.markdown(f"- Tasa de alertas: {100 * m.get('tasa_alertas', float('nan')):.1f} %\n"
+                    f"- Recall anomalías severas: {m.get('recall_severa', float('nan')):.2f}\n"
+                    f"- Recall anomalías moderadas: {m.get('recall_moderada', float('nan')):.2f}\n"
+                    f"- Alertas en festivos: {100 * m.get('tasa_alertas_festivos', float('nan')):.1f} %")
+        st.caption("Limitaciones y criterios no cumplidos: docs/validacion/F4.md. La banda sombreada es el rango por hora "
+                   "fuera del cual una hora se marca; la alerta del día usa el score agregado.")
+
+    tab1, tab2 = st.tabs(["📆 Explorar histórico", "📤 Cargar archivo"])
+    with tab1:
+        valid = hist.index[hist[SCORED_HOURS].notna().any(axis=1)]
+        d = st.date_input("Fecha", value=DEFAULT_DATE.date(), min_value=pd.Timestamp("2019-03-01").date(),
+                          max_value=valid.max().date(), key="fecha")
+        try:
+            _show_day(S.score_days(det, thr, hist, [pd.Timestamp(d)])[0])
+        except S.InputError as e:
+            st.error(f"❌ {e}")
+
+    with tab2:
+        st.markdown("Suba un archivo **.xlsx** o **.csv** con el formato oficial (`Día`, `Línea de Servicio`, columnas "
+                    "04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.")
+        up = st.file_uploader("Archivo de afluencia", type=["xlsx", "csv"], key="archivo")
+        if up is not None:
+            try:
+                new = S.parse_upload(up.getvalue(), up.name)
+                ctx = S.merge_context(hist, new)
+                days = [d for d in new.index if new.loc[d, SCORED_HOURS].notna().any()]
+                results, errors = [], []
+                for dd in days:
+                    try:
+                        results.extend(S.score_days(det, thr, ctx, [dd]))
+                    except S.InputError as e:
+                        errors.append(str(e))
+                if errors:
+                    st.warning(f"{len(errors)} día(s) no evaluables: " + "; ".join(errors[:3]))
+                if results:
+                    tbl = S.summary_table(results)
+                    n_al = int((tbl["Estado"] == "ANOMALÍA").sum())
+                    st.info(f"{len(results)} día(s) evaluados · {n_al} anomalía(s).")
+                    st.dataframe(tbl, use_container_width=True, hide_index=True)
+                    sel = st.selectbox("Ver detalle del día", [r.date.date() for r in results],
+                                       index=next((i for i, r in enumerate(results) if r.alert), 0), key="detalle")
+                    _show_day(next(r for r in results if r.date.date() == sel))
+            except S.InputError as e:
+                st.error(f"❌ {e}")
+
+
+main()

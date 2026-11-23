@@ -98,3 +98,9 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - **Artefacto:** `artifacts/modelo.json` (perfil_contextual/peak_shift, entrenado con 2023-07-02…2024-06-30, umbral de DEV, hash SHA-256 de los 6 archivos, commit, métricas del holdout).
 - **Decisión:** se despliega exactamente la configuración evaluada (umbral de DEV), aunque en el holdout resultó conservadora (2,2 % de alertas). La recalibración periódica queda como trabajo futuro no evaluado.
 - **Estado:** el modelo es funcional y supera claramente al sistema original, pero **no cumple todos los criterios pre-registrados (D2, D3)**. Se informa así; no se declara éxito del modelo.
+
+## 2026-11-23 — [F5] Aplicación nueva
+- **Cambio:** `service.py`, `app.py` nuevo, app original en `legacy/`, tests `test_service.py` (18), `test_app.py` (4) y E2E (`tests/e2e/`).
+- **Resultado:** todo en verde; E2E p95 de 665 ms; la interrupción inyectada se detecta vía archivo; el archivo inválido da un error controlado.
+- **Incidencias:** (1) selector E2E débil que dio una captura en estado de carga → corregido; (2) un test mal nombrado → renombrado. Detalle en `docs/validacion/F5.md`.
+- **CI:** GitHub Actions activo; ejecuciones 2–5 en `success` (verificado con la API de Actions).

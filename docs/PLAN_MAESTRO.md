@@ -182,9 +182,9 @@ Depende de: F4.6
 
 | ID | Tarea | Criterio | Estado |
 |---|---|---|---|
-| F5.1 | `service.py`: API pura (validar → puntuar → explicar) | Tests unitarios y de casos límite (fuzz) | PENDIENTE |
-| F5.2 | Nueva `app.py` (fecha del histórico + carga de xlsx/csv); app antigua movida a `legacy/` | AppTest en verde | PENDIENTE |
-| F5.3 | End-to-end con Playwright (subir archivo, elegir fecha, capturas) + latencia (A5) | Script e2e en verde; latencia medida | PENDIENTE |
+| F5.1 | `service.py`: API pura (validar → puntuar → explicar) | Tests unitarios y de casos límite (fuzz) | COMPLETADA — 18 tests de integración del servicio ([F5](validacion/F5.md)) |
+| F5.2 | Nueva `app.py` (fecha del histórico + carga de xlsx/csv); app antigua movida a `legacy/` | AppTest en verde | COMPLETADA — 4 tests AppTest |
+| F5.3 | End-to-end con Playwright (subir archivo, elegir fecha, capturas) + latencia (A5) | Script e2e en verde; latencia medida | COMPLETADA — p95 665 ms; capturas en `docs/validacion/img/` |
 
 ### F6 — Reproducibilidad e infraestructura
 Depende de: F4, F5
@@ -216,6 +216,6 @@ Depende de: todo
 | F2 | COMPLETADA (con limitaciones documentadas) | [F2](validacion/F2.md) |
 | F3 | COMPLETADA (D7 → limitación) | [F3](validacion/F3.md) |
 | F4 | COMPLETADA con criterios incumplidos (D2, D3) | [F4](validacion/F4.md) |
-| F5 | EN PROGRESO | – |
-| F6 | PENDIENTE | – |
+| F5 | COMPLETADA | [F5](validacion/F5.md) |
+| F6 | EN PROGRESO | – |
 | F7 | PENDIENTE | – |
