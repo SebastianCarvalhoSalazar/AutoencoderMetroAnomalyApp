@@ -26,7 +26,11 @@ def test_causality_and_severe_detection(fitted, name):
     full = det.score(days, s).day
     t = days.index[10]
     poisoned = s.copy(); poisoned.loc[t + pd.Timedelta(days=1):] *= 5
-    assert det.score(days.loc[[t]], poisoned).day.iloc[0] == pytest.approx(full.loc[t], rel=1e-6)
+    # Causalidad: mismo tamaño de lote, con y sin el futuro alterado -> igualdad exacta.
+    assert det.score(days.loc[[t]], poisoned).day.iloc[0] == det.score(days.loc[[t]], s).day.iloc[0]
+    # Lote completo frente a día individual: TensorFlow en float32 depende del tamaño del lote y de la CPU
+    # (en GitHub Actions se observó una diferencia relativa de 1,4e-6); se admite una tolerancia de float32.
+    assert det.score(days.loc[[t]], s).day.iloc[0] == pytest.approx(full.loc[t], rel=1e-4)
     inj = det.score(inject(days, "T1_severa", 0, s)[0], s).day
     assert (inj.to_numpy() > full.to_numpy()).mean() > 0.8
 
