@@ -101,3 +101,11 @@ def test_full_coverage_through_year_end_season(name):
     det = REGISTRY[name]().fit(s.loc[:"2022-11-30"], s)
     sc = det.score(s.loc["2022-12-01":"2023-02-28"], s).day
     assert sc.notna().all(), sc[sc.isna()].index[:5]
+
+
+def test_fit_without_complete_days_raises_clear_error(synth):
+    """Regresión F8 (E7): una línea sin días completos (p. ej., Línea L) fallaba al puntuar con un error opaco."""
+    from metro_anomaly.detectors import ProfileContextDetector
+    s = synth.copy(); s["h05"] = np.nan
+    with pytest.raises(ValueError, match="Historia insuficiente"):
+        ProfileContextDetector(agg="peak_shift").fit(s.loc[:"2023-01-31"], s)

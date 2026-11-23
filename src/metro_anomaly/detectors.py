@@ -126,8 +126,11 @@ class LevelShapeDetector(Detector):
     def _finish_fit(self, hist, context):
         """Escalas de agregación con los z de la propia historia de entrenamiento (necesario para peak_shift)."""
         h = hist[hist[SCORED_HOURS].notna().all(axis=1)]
-        z = self._z(h, context).dropna(how="all")
+        z = self._z(h, context).dropna(how="all") if len(h) else pd.DataFrame()
         self.agg_stats_ = aggregation_stats(z) if len(z) else None
+        if self.agg == "peak_shift" and self.agg_stats_ is None:
+            raise ValueError("Historia insuficiente: no hay días con las 19 horas completas para calibrar el score "
+                             "(p. ej., líneas que no operan en todas las horas).")
         return self
 
     def _z(self, X, context):
@@ -171,6 +174,8 @@ class ProfileDetector(LevelShapeDetector):
     def fit(self, hist, context):
         hist = hist.loc[hist.index.max() - pd.Timedelta(days=self.window_days - 1):]
         Y = self._deleveled(hist, context).dropna(how="any")
+        if Y.empty:
+            raise ValueError("Historia insuficiente: no hay días completos con nivel disponible para ajustar el perfil.")
         dt_ = pd.Series(self._types(Y.index), index=Y.index)
         types = DAY_TYPES_EXT if self.extended else DAY_TYPES
         self.med_, self.sig_ = {}, {}

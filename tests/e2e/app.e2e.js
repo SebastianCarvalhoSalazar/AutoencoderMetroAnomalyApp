@@ -7,7 +7,7 @@ const fail = (m) => { console.error('FALLO: ' + m); process.exit(1); };
   const p = await b.newPage({ viewport: { width: 1400, height: 1500 } });
   await p.goto(url, { waitUntil: 'networkidle' });
   // Nota: 'text=' no distingue mayúsculas (coincidía con "anomalías" del título); se espera la alerta real.
-  await p.waitForSelector('[data-testid="stAlert"] >> text=/ANOMALÍA — score/', { timeout: 120000 });
+  await p.waitForSelector('[data-testid="stMain"] [data-testid="stAlert"]', { timeout: 120000 });
   await p.waitForSelector('[data-testid="stVegaLiteChart"], .vega-embed', { timeout: 60000 });
   if (await p.locator('[data-testid="stException"]').count()) fail('excepción en carga inicial');
   await p.screenshot({ path: `${shots}/e2e_1_historico.png`, fullPage: true });
@@ -15,14 +15,21 @@ const fail = (m) => { console.error('FALLO: ' + m); process.exit(1); };
   // Latencia (A5): cambiar la fecha varias veces con caché caliente
   const lat = [];
   const dates = ['2024/03/06', '2023/10/29', '2024/01/11', '2023/12/14', '2024/05/15', '2023/08/28'];
+  // Corrección F9: fill() no aplica la fecha en el campo con máscara (la versión anterior medía reejecuciones
+  // sin cambio). Se escribe carácter a carácter y se espera a que el encabezado muestre la nueva fecha.
   for (const d of dates) {
     const inp = p.locator('[data-testid="stDateInput"] input');
-    await inp.click(); await inp.fill(d); await inp.press('Enter');
+    const cur = await inp.inputValue();
+    const [y, mo, da] = d.split('/');
+    const val = /^\d{4}\//.test(cur) ? d : `${da}/${mo}/${y}`;
+    await inp.click(); await inp.press('Control+A'); await inp.pressSequentially(val, { delay: 10 });
     const t0 = Date.now();
-    await p.waitForFunction(() => !document.querySelector('[data-testid="stStatusWidget"]'), null, { timeout: 30000 }).catch(() => {});
-    await p.waitForTimeout(150);
+    await inp.press('Enter');
+    const iso = `${y}-${mo}-${da}`;
+    await p.waitForSelector(`[data-testid="stMain"] strong:has-text("${iso}")`, { timeout: 30000 });
     await p.waitForFunction(() => !document.querySelector('[data-testid="stStatusWidget"]'), null, { timeout: 30000 });
     lat.push(Date.now() - t0);
+    await p.keyboard.press('Escape');
   }
   lat.sort((a, c) => a - c);
   const p95 = lat[Math.min(lat.length - 1, Math.ceil(0.95 * lat.length) - 1)];

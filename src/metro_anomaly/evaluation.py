@@ -91,7 +91,9 @@ def rolling_evaluate(factory: Callable, W: pd.DataFrame, eval_start, eval_end, t
     real["tipo_dia"] = day_type(real.index)
     real["festivo"] = is_holiday(real.index)
     real["mes"] = real.index.to_period("M").astype(str)
-    return RollingResult(det_name, real, pd.concat(inj_rows, ignore_index=True),
+    inj = pd.concat(inj_rows, ignore_index=True) if inj_rows else pd.DataFrame(
+        columns=["fecha", "escenario", "tipo", "severidad", "score", "aplicable", "top_hora_ok"])
+    return RollingResult(det_name, real, inj,
                          pd.concat(zs) if zs else None, fit_s)
 
 

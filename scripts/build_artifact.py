@@ -8,6 +8,8 @@ import yaml
 from metro_anomaly import data as D
 from metro_anomaly.artifacts import git_commit, save_profile, sha256_file
 from metro_anomaly.detectors import REGISTRY
+from metro_anomaly.evaluation import budget_threshold, rolling_evaluate
+import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -21,7 +23,14 @@ def main():
     hold = pd.read_csv(ROOT / "reports" / "holdout_metricas.csv", index_col=0)
     cfg = f"{sel['detector']}/{sel['agg']}"
     keys = ["tasa_alertas", "tasa_alertas_festivos", "recall_severa", "recall_moderada", "recall_leve", "recall_T5_perfil_festivo"]
+    # Distribución de referencia: scores fuera de muestra de los días reales de DEV (rolling mensual, sin inyección).
+    dev = rolling_evaluate(lambda: REGISTRY[sel["detector"]](agg=sel["agg"]), W, "2022-04-01", "2023-06-30", "2022-01-01", scenarios=[])
+    ref = np.sort(dev.real["score"].dropna().to_numpy())
+    assert np.isclose(budget_threshold(dev.real["score"]), sel["umbral"]), "el umbral no coincide con la referencia de DEV"
     meta = {
+        "reference_scores": {"periodo": "DEV 2022-04-01…2023-06-30 (rolling mensual, días reales, fuera de muestra)",
+                             "n": int(len(ref)), "p95": float(np.quantile(ref, 0.95)), "p99": float(np.quantile(ref, 0.99)),
+                             "max": float(ref.max()), "valores_ordenados": [round(float(x), 6) for x in ref]},
         "line": "LINEA A",
         "trained_on": [str((end - pd.Timedelta(days=det.window_days - 1)).date()), str(end.date())],
         "threshold_provenance": sel["procedencia_umbral"],

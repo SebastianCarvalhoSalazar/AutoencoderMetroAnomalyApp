@@ -145,4 +145,36 @@ def test_date_without_data(env):
 def test_summary_table(env):
     hist, det, thr = env
     t = S.summary_table(S.score_days(det, thr, hist, ["2023-08-28", "2024-03-06"]))
-    assert t["Estado"].tolist() == ["ANOMALÍA", "Normal"]
+    # F9: la UI no presenta la alerta como incidente; distingue "anomalía estadística"
+    assert t["Estado"].tolist() == ["Anomalía estadística", "Sin anomalía estadística"]
+    assert t["Fecha"].tolist() == ["28/08/2023", "06/03/2024"]
+
+
+def test_severity_and_exceedance(env):
+    hist, det, thr = env
+    _, _, doc = S.load_model(ROOT / "artifacts" / "modelo.json")
+    ref = S.reference_scores(doc)
+    r = S.score_days(det, thr, hist, ["2023-08-28", "2023-12-25", "2024-03-06"], ref)
+    assert r[0].severity == "extrema" and r[0].exceedance == 0.0  # mayor que todo día de referencia (máx 43,6)
+    assert r[1].severity == "moderada"
+    assert r[2].severity is None and 0.2 < r[2].exceedance <= 1.0
+
+
+def test_data_quality_rules(env):
+    hist, det, thr = env
+    # el 08/12/2023 22 h (patrón real de temporada) no debe marcarse como problema de datos
+    r = S.score_days(det, thr, hist, ["2023-12-08"])[0]
+    assert r.category != "posible_problema_de_datos", r.dq_flags
+    for f, frag in [(0.0, "Cero sospechoso"), (1000.0, "Valor implausible")]:
+        def mut(rows, f=f):
+            rows.loc["2024-06-12", D.HOUR_COLS] = rows.loc["2024-06-12", D.HOUR_COLS] * f
+            return rows
+        up = S.parse_upload(_official_bytes(hist, pd.date_range("2024-05-01", "2024-06-30"), mutate=mut), "x.xlsx")
+        r = S.score_days(det, thr, S.merge_context(hist, up), ["2024-06-12"])[0]
+        assert r.category == "posible_problema_de_datos" and any(frag in x for x in r.dq_flags)
+
+
+def test_score_series(env):
+    hist, det, thr = env
+    ts = S.score_series(det, thr, hist, "2023-08-01", "2023-08-31")
+    assert len(ts) == 31 and bool(ts.loc["2023-08-28", "alerta"]) and int(ts["alerta"].sum()) == 1
