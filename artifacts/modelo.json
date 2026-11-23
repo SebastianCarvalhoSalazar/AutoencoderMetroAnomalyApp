@@ -289,7 +289,7 @@
   "peak_mad": 1.1797290637491529,
   "shift_mad": 0.6671130065697827
  },
- "created_utc": "2026-11-23T04:19:19+00:00",
+ "created_utc": "2026-11-23T05:27:59+00:00",
  "reference_scores": {
   "periodo": "DEV 2022-04-01…2023-06-30 (rolling mensual, días reales, fuera de muestra)",
   "n": 456,
@@ -769,7 +769,7 @@
   "Afluencia_Metro_2023.xlsx": "ef092a6058ca523f039417ab6665a4a2775398adaaedae00f1db0b73024ce34a",
   "Afluencia_Metro_2024.xlsx": "7e2132ee0c14efa8fe6308cc8945020afe26e9878c910930f071158ce22a7002"
  },
- "git_commit_build": "81adf8a9012c25656eb4182be364de8a37e27885",
+ "git_commit_build": "d40e14e6bbd2f4d5c25fd4ec7844bac40fb7712f",
  "holdout_metrics": {
   "tasa_alertas": 0.022,
   "tasa_alertas_festivos": 0.1111,
