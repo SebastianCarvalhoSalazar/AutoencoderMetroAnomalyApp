@@ -120,3 +120,7 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - **Diagnóstico:** no es una fuga. El AE original no lee el contexto; la diferencia viene de comparar la predicción de un lote de 28 días con la de un día individual (float32 en TensorFlow/oneDNN depende del tamaño del lote y de la CPU).
 - **Corrección del test:** la causalidad se verifica con igualdad exacta y el mismo tamaño de lote (con y sin el futuro alterado); la comparación lote frente a día individual se mantiene aparte, con tolerancia de float32 (rel 1e-4), documentada en el test.
 - **Lección:** los tests de equivalencia numérica con redes neuronales deben separar el efecto que se prueba (causalidad) de la variabilidad de punto flotante.
+- **Verificación:** la ejecución 9 de GitHub Actions (commit `9e1b821`) terminó en `success` con los dos jobs (`tests` con cobertura ≥ 80 % y `research` con TensorFlow).
+
+## 2026-11-23 — Cierre
+- Todas las fases F0–F7 están COMPLETADAS, salvo las limitaciones documentadas (F2.5 sin fuente oficial; F4.5 no ejecutada porque no se cumplió su condición previa). El modelo **incumple D2 y D3**: se informa en README, ficha del modelo e informe final.
