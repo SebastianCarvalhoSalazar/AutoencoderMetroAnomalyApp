@@ -1,0 +1,1576 @@
+{
+ "steps": [
+  {
+   "id": "H01_carga_inicial",
+   "loadMs": 1934,
+   "screenshot": "docs/validacion/img/ux/antes/H01_carga_inicial.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H02_dia_normal",
+   "date": "2024-03-06",
+   "dateInput": {
+    "typed": "2024/03/06",
+    "applied": true,
+    "valueAfter": "2024/03/06"
+   },
+   "screenshot": "docs/validacion/img/ux/antes/H02_dia_normal.png",
+   "alerts": [
+    "✅ Normal — score 0.98 ≤ umbral 7.39. Desviación media del día: +1.7 %."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2024-03-06 · miércoles · tipo de día: habil",
+    "✅ Normal — score 0.98 ≤ umbral 7.39. Desviación media del día: +1.7 %.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H03_anomalia_2023-08-28",
+   "date": "2023-08-28",
+   "dateInput": {
+    "typed": "2023/08/28",
+    "applied": true,
+    "valueAfter": "2023/08/28"
+   },
+   "screenshot": "docs/validacion/img/ux/antes/H03_anomalia_2023-08-28.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H04_navidad",
+   "date": "2023-12-25",
+   "dateInput": {
+    "typed": "2023/12/25",
+    "applied": true,
+    "valueAfter": "2023/12/25"
+   },
+   "screenshot": "docs/validacion/img/ux/antes/H04_navidad.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 8.29 > umbral 7.39. Desviación media del día: -36.6 %. Horas fuera de banda: 04h, 06h, 07h."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-12-25 · lunes · tipo de día: domingo_festivo · 📅 Navidad; Temporada de fin de año",
+    "⚠️ ANOMALÍA — score 8.29 > umbral 7.39. Desviación media del día: -36.6 %. Horas fuera de banda: 04h, 06h, 07h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H05_elecciones",
+   "date": "2023-10-29",
+   "dateInput": {
+    "typed": "2023/10/29",
+    "applied": true,
+    "valueAfter": "2023/10/29"
+   },
+   "screenshot": "docs/validacion/img/ux/antes/H05_elecciones.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 91.23 > umbral 7.39. Desviación media del día: -99.0 %. Horas fuera de banda: 04h, 05h, 06h, 07h, 08h, 09h, 10h, 11h, 12h, 13h, 14h, 15h, 16h."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-10-29 · domingo · tipo de día: domingo_festivo · 📅 Elecciones territoriales",
+    "⚠️ ANOMALÍA — score 91.23 > umbral 7.39. Desviación media del día: -99.0 %. Horas fuera de banda: 04h, 05h, 06h, 07h, 08h, 09h, 10h, 11h, 12h, 13h, 14h, 15h, 16h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H06_hora_faltante_2023-12-24",
+   "date": "2023-12-24",
+   "dateInput": {
+    "typed": "2023/12/24",
+    "applied": true,
+    "valueAfter": "2023/12/24"
+   },
+   "screenshot": "docs/validacion/img/ux/antes/H06_hora_faltante_2023-12-24.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 18.36 > umbral 7.39. Desviación media del día: -52.4 %. Horas fuera de banda: 04h, 05h, 06h, 07h, 12h, 13h, 21h.",
+    "Calidad de datos: sin dato en 22h (no se imputan; el día se evalúa con las horas disponibles)."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-12-24 · domingo · tipo de día: especial · 📅 Temporada de fin de año; Víspera de Navidad/Año Nuevo",
+    "⚠️ ANOMALÍA — score 18.36 > umbral 7.39. Desviación media del día: -52.4 %. Horas fuera de banda: 04h, 05h, 06h, 07h, 12h, 13h, 21h.",
+    "Calidad de datos: sin dato en 22h (no se imputan; el día se evalúa con las horas disponibles).",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H07_horas_faltantes_2019-02-16",
+   "date": "2019-02-16",
+   "dateInput": {
+    "typed": "2019/02/16",
+    "applied": true,
+    "valueAfter": "2019/02/16"
+   },
+   "screenshot": "docs/validacion/img/ux/antes/H07_horas_faltantes_2019-02-16.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 73.33 > umbral 7.39. Desviación media del día: -27.6 %. Horas fuera de banda: 07h, 08h, 09h, 15h.",
+    "Calidad de datos: sin dato en 11h, 12h, 13h, 14h (no se imputan; el día se evalúa con las horas disponibles)."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2019-02-16 · sábado · tipo de día: sabado",
+    "⚠️ ANOMALÍA — score 73.33 > umbral 7.39. Desviación media del día: -27.6 %. Horas fuera de banda: 07h, 08h, 09h, 15h.",
+    "Calidad de datos: sin dato en 11h, 12h, 13h, 14h (no se imputan; el día se evalúa con las horas disponibles).",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H08_sin_datos_2020-06-13",
+   "date": "2020-06-13",
+   "dateInput": {
+    "typed": "2020/06/13",
+    "applied": true,
+    "valueAfter": "2020/06/13"
+   },
+   "screenshot": "docs/validacion/img/ux/antes/H08_sin_datos_2020-06-13.png",
+   "alerts": [
+    "❌ No hay datos para: 2020-06-13."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "❌ No hay datos para: 2020-06-13.",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 0,
+   "dataframes": 0,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H09_fecha_minima",
+   "date": "2019-03-01",
+   "dateInput": {
+    "typed": "2019/03/01",
+    "applied": true,
+    "valueAfter": "2019/03/01"
+   },
+   "screenshot": "docs/validacion/img/ux/antes/H09_fecha_minima.png",
+   "alerts": [
+    "✅ Normal — score 4.77 ≤ umbral 7.39. Desviación media del día: +7.0 %."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2019-03-01 · viernes · tipo de día: habil",
+    "✅ Normal — score 4.77 ≤ umbral 7.39. Desviación media del día: +7.0 %.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H10_fecha_maxima",
+   "date": "2024-06-30",
+   "dateInput": {
+    "typed": "2024/06/30",
+    "applied": true,
+    "valueAfter": "2024/06/30"
+   },
+   "screenshot": "docs/validacion/img/ux/antes/H10_fecha_maxima.png",
+   "alerts": [
+    "✅ Normal — score 2.18 ≤ umbral 7.39. Desviación media del día: +18.6 %."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2024-06-30 · domingo · tipo de día: domingo_festivo",
+    "✅ Normal — score 2.18 ≤ umbral 7.39. Desviación media del día: +18.6 %.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H11_semana_santa_2024-03-27",
+   "date": "2024-03-27",
+   "dateInput": {
+    "typed": "2024/03/27",
+    "applied": true,
+    "valueAfter": "2024/03/27"
+   },
+   "screenshot": "docs/validacion/img/ux/antes/H11_semana_santa_2024-03-27.png",
+   "alerts": [
+    "✅ Normal — score 0.69 ≤ umbral 7.39. Desviación media del día: -7.9 %."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2024-03-27 · miércoles · tipo de día: habil_temporada · 📅 Semana Santa",
+    "✅ Normal — score 0.69 ≤ umbral 7.39. Desviación media del día: -7.9 %.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H12_aumento_2023-12-14",
+   "date": "2023-12-14",
+   "dateInput": {
+    "typed": "2023/12/14",
+    "applied": true,
+    "valueAfter": "2023/12/14"
+   },
+   "screenshot": "docs/validacion/img/ux/antes/H12_aumento_2023-12-14.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 22.92 > umbral 7.39. Desviación media del día: +102.7 %. Horas fuera de banda: 04h, 06h, 07h, 08h, 09h, 10h, 11h, 12h, 13h, 14h, 15h, 16h, 17h, 18h, 19h, 20h."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-12-14 · jueves · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 22.92 > umbral 7.39. Desviación media del día: +102.7 %. Horas fuera de banda: 04h, 06h, 07h, 08h, 09h, 10h, 11h, 12h, 13h, 14h, 15h, 16h, 17h, 18h, 19h, 20h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H13_fecha_fuera_de_rango",
+   "dateInput": {
+    "typed": "2018/01/01",
+    "applied": true,
+    "valueAfter": "2018/01/01"
+   },
+   "screenshot": "docs/validacion/img/ux/antes/H13_fecha_fuera_de_rango.png",
+   "alerts": [
+    "❌ No hay datos para: 2018-01-01."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "❌ No hay datos para: 2018-01-01.",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 0,
+   "dataframes": 0,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H14_detalle_por_hora_abierto",
+   "date": "2023-08-28",
+   "screenshot": "docs/validacion/img/ux/antes/H14_detalle_por_hora_abierto.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U00_pestana_carga_vacia",
+   "screenshot": "docs/validacion/img/ux/antes/U00_pestana_carga_vacia.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_01_normal_may_jun_2024",
+   "file": "01_normal_may_jun_2024.xlsx",
+   "screenshot": "docs/validacion/img/ux/antes/U_01_normal_may_jun_2024.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "61 día(s) evaluados · 0 anomalía(s).",
+    "✅ Normal — score 1.78 ≤ umbral 7.39. Desviación media del día: +8.1 %."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "61 día(s) evaluados · 0 anomalía(s).",
+    "Ver detalle del día",
+    "2024-05-01 · miércoles · tipo de día: domingo_festivo · 📅 Día del Trabajo",
+    "✅ Normal — score 1.78 ≤ umbral 7.39. Desviación media del día: +8.1 %.",
+    "Detalle por hora"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 3,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_02_normal_may_jun_2024",
+   "file": "02_normal_may_jun_2024.csv",
+   "screenshot": "docs/validacion/img/ux/antes/U_02_normal_may_jun_2024.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "61 día(s) evaluados · 0 anomalía(s).",
+    "✅ Normal — score 1.78 ≤ umbral 7.39. Desviación media del día: +8.1 %."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "61 día(s) evaluados · 0 anomalía(s).",
+    "Ver detalle del día",
+    "2024-05-01 · miércoles · tipo de día: domingo_festivo · 📅 Día del Trabajo",
+    "✅ Normal — score 1.78 ≤ umbral 7.39. Desviación media del día: +8.1 %.",
+    "Detalle por hora"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 3,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_03_anomalia_inyectada_2024-06-12",
+   "file": "03_anomalia_inyectada_2024-06-12.xlsx",
+   "screenshot": "docs/validacion/img/ux/antes/U_03_anomalia_inyectada_2024-06-12.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "61 día(s) evaluados · 1 anomalía(s).",
+    "⚠️ ANOMALÍA — score 41.52 > umbral 7.39. Desviación media del día: -22.2 %. Horas fuera de banda: 17h, 18h."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "61 día(s) evaluados · 1 anomalía(s).",
+    "Ver detalle del día",
+    "2024-06-12 · miércoles · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 41.52 > umbral 7.39. Desviación media del día: -22.2 %. Horas fuera de banda: 17h, 18h.",
+    "Detalle por hora"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 3,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_03_anomalia_inyectada_2024-06-12_otro_dia",
+   "file": "03_anomalia_inyectada_2024-06-12.xlsx",
+   "selectedOption": 1,
+   "screenshot": "docs/validacion/img/ux/antes/U_03_anomalia_inyectada_2024-06-12_otro_dia.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "61 día(s) evaluados · 1 anomalía(s).",
+    "✅ Normal — score 0.79 ≤ umbral 7.39. Desviación media del día: +2.3 %."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "61 día(s) evaluados · 1 anomalía(s).",
+    "Ver detalle del día",
+    "2024-05-02 · jueves · tipo de día: habil",
+    "✅ Normal — score 0.79 ≤ umbral 7.39. Desviación media del día: +2.3 %.",
+    "Detalle por hora"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 3,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_04_horas_faltantes_2024-06-12",
+   "file": "04_horas_faltantes_2024-06-12.xlsx",
+   "screenshot": "docs/validacion/img/ux/antes/U_04_horas_faltantes_2024-06-12.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "61 día(s) evaluados · 0 anomalía(s).",
+    "✅ Normal — score 1.78 ≤ umbral 7.39. Desviación media del día: +8.1 %."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "61 día(s) evaluados · 0 anomalía(s).",
+    "Ver detalle del día",
+    "2024-05-01 · miércoles · tipo de día: domingo_festivo · 📅 Día del Trabajo",
+    "✅ Normal — score 1.78 ≤ umbral 7.39. Desviación media del día: +8.1 %.",
+    "Detalle por hora"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 3,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_05_futuro_con_contexto",
+   "file": "05_futuro_con_contexto.xlsx",
+   "screenshot": "docs/validacion/img/ux/antes/U_05_futuro_con_contexto.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "90 día(s) evaluados · 7 anomalía(s).",
+    "⚠️ ANOMALÍA — score 29.95 > umbral 7.39. Desviación media del día: -56.5 %. Horas fuera de banda: 04h, 05h, 06h, 07h, 08h, 09h, 10h, 11h, 12h, 15h, 16h, 17h, 18h, 22h."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "90 día(s) evaluados · 7 anomalía(s).",
+    "Ver detalle del día",
+    "2024-07-18 · jueves · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 29.95 > umbral 7.39. Desviación media del día: -56.5 %. Horas fuera de banda: 04h, 05h, 06h, 07h, 08h, 09h, 10h, 11h, 12h, 15h, 16h, 17h, 18h, 22h.",
+    "Detalle por hora"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 3,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_05_futuro_con_contexto_otro_dia",
+   "file": "05_futuro_con_contexto.xlsx",
+   "selectedOption": 1,
+   "screenshot": "docs/validacion/img/ux/antes/U_05_futuro_con_contexto_otro_dia.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "90 día(s) evaluados · 7 anomalía(s).",
+    "✅ Normal — score 0.46 ≤ umbral 7.39. Desviación media del día: +1.0 %."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "90 día(s) evaluados · 7 anomalía(s).",
+    "Ver detalle del día",
+    "2024-07-02 · martes · tipo de día: habil",
+    "✅ Normal — score 0.46 ≤ umbral 7.39. Desviación media del día: +1.0 %.",
+    "Detalle por hora"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 3,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_06_historia_insuficiente",
+   "file": "06_historia_insuficiente.xlsx",
+   "screenshot": "docs/validacion/img/ux/antes/U_06_historia_insuficiente.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "3 día(s) no evaluables: Historia insuficiente para 2025-06-30: se requieren al menos 10 días hábiles/sábados completos en los 91 días previos. Incluya en el archivo las semanas anteriores.; Historia insuficiente para 2025-07-01: se requieren al menos 10 días hábiles/sábados completos en los 91 días previos. Incluya en el archivo las semanas anteriores.; Historia insuficiente para 2025-07-02: se requieren al menos 10 días hábiles/sábados completos en los 91 días previos. Incluya en el archivo las semanas anteriores."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "3 día(s) no evaluables: Historia insuficiente para 2025-06-30: se requieren al menos 10 días hábiles/sábados completos en los 91 días previos. Incluya en el archivo las semanas anteriores.; Historia insuficiente para 2025-07-01: se requieren al menos 10 días hábiles/sábados completos en los 91 días previos. Incluya en el archivo las semanas anteriores.; Historia insuficiente para 2025-07-02: se requieren al menos 10 días hábiles/sábados completos en los 91 días previos. Incluya en el archivo las semanas anteriores."
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_07_otra_linea",
+   "file": "07_otra_linea.xlsx",
+   "screenshot": "docs/validacion/img/ux/antes/U_07_otra_linea.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "❌ El archivo no contiene la línea LINEA A. Líneas presentes: ['LINEA B']."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "❌ El archivo no contiene la línea LINEA A. Líneas presentes: ['LINEA B']."
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_08_valores_negativos",
+   "file": "08_valores_negativos.xlsx",
+   "screenshot": "docs/validacion/img/ux/antes/U_08_valores_negativos.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "❌ 08_valores_negativos.xlsx: hay conteos negativos"
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "❌ 08_valores_negativos.xlsx: hay conteos negativos"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_09_esquema_invalido",
+   "file": "09_esquema_invalido.csv",
+   "screenshot": "docs/validacion/img/ux/antes/U_09_esquema_invalido.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "❌ 09_esquema_invalido.csv: faltan columnas obligatorias ['Día', 'Línea de Servicio']"
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "❌ 09_esquema_invalido.csv: faltan columnas obligatorias ['Día', 'Línea de Servicio']"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_10_corrupto",
+   "file": "10_corrupto.xlsx",
+   "screenshot": "docs/validacion/img/ux/antes/U_10_corrupto.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "❌ No se pudo leer el archivo: ValueError."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "❌ No se pudo leer el archivo: ValueError."
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_11_vacio",
+   "file": "11_vacio.csv",
+   "screenshot": "docs/validacion/img/ux/antes/U_11_vacio.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "❌ El archivo está vacío."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "❌ El archivo está vacío."
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_12_valores_extremos",
+   "file": "12_valores_extremos.xlsx",
+   "screenshot": "docs/validacion/img/ux/antes/U_12_valores_extremos.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "61 día(s) evaluados · 1 anomalía(s).",
+    "⚠️ ANOMALÍA — score 230.85 > umbral 7.39. Desviación media del día: +99083.9 %. Horas fuera de banda: 04h, 05h, 06h, 07h, 08h, 09h, 10h, 11h, 12h, 13h, 14h, 15h, 16h, 17h, 18h, 19h, 20h, 21h, 22h."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "61 día(s) evaluados · 1 anomalía(s).",
+    "Ver detalle del día",
+    "2024-06-12 · miércoles · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 230.85 > umbral 7.39. Desviación media del día: +99083.9 %. Horas fuera de banda: 04h, 05h, 06h, 07h, 08h, 09h, 10h, 11h, 12h, 13h, 14h, 15h, 16h, 17h, 18h, 19h, 20h, 21h, 22h.",
+    "Detalle por hora"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 3,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_13_dia_en_ceros",
+   "file": "13_dia_en_ceros.xlsx",
+   "screenshot": "docs/validacion/img/ux/antes/U_13_dia_en_ceros.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "61 día(s) evaluados · 1 anomalía(s).",
+    "⚠️ ANOMALÍA — score 348.82 > umbral 7.39. Desviación media del día: -100.0 %. Horas fuera de banda: 04h, 05h, 06h, 07h, 08h, 09h, 10h, 11h, 12h, 13h, 14h, 15h, 16h, 17h, 18h, 19h, 20h, 21h, 22h."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "61 día(s) evaluados · 1 anomalía(s).",
+    "Ver detalle del día",
+    "2024-06-12 · miércoles · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 348.82 > umbral 7.39. Desviación media del día: -100.0 %. Horas fuera de banda: 04h, 05h, 06h, 07h, 08h, 09h, 10h, 11h, 12h, 13h, 14h, 15h, 16h, 17h, 18h, 19h, 20h, 21h, 22h.",
+    "Detalle por hora"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 3,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_14_texto_en_numeros",
+   "file": "14_texto_en_numeros.xlsx",
+   "screenshot": "docs/validacion/img/ux/antes/U_14_texto_en_numeros.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "❌ 14_texto_en_numeros.xlsx: valores no numéricos en 09:00 (filas [3])"
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "❌ 14_texto_en_numeros.xlsx: valores no numéricos en 09:00 (filas [3])"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_15_filas_duplicadas",
+   "file": "15_filas_duplicadas.xlsx",
+   "screenshot": "docs/validacion/img/ux/antes/U_15_filas_duplicadas.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "❌ 15_filas_duplicadas.xlsx: filas duplicadas para (fecha, línea): [[Timestamp('2024-05-01 00:00:00'), 'LINEA A'], [Timestamp('2024-05-01 00:00:00'), 'LINEA A']]"
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "❌ 15_filas_duplicadas.xlsx: filas duplicadas para (fecha, línea): [[Timestamp('2024-05-01 00:00:00'), 'LINEA A'], [Timestamp('2024-05-01 00:00:00'), 'LINEA A']]"
+   ],
+   "exceptions": 0,
+   "charts": 1,
+   "dataframes": 1,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_16_archivo_oficial_2024_todas_las_lineas",
+   "file": "16_archivo_oficial_2024_todas_las_lineas.xlsx",
+   "screenshot": "docs/validacion/img/ux/antes/U_16_archivo_oficial_2024_todas_las_lineas.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "182 día(s) evaluados · 3 anomalía(s).",
+    "⚠️ ANOMALÍA — score 10.32 > umbral 7.39. Desviación media del día: -45.4 %. Horas fuera de banda: 04h, 05h, 06h, 07h."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "182 día(s) evaluados · 3 anomalía(s).",
+    "Ver detalle del día",
+    "2024-01-01 · lunes · tipo de día: domingo_festivo · 📅 Año Nuevo; Temporada de fin de año",
+    "⚠️ ANOMALÍA — score 10.32 > umbral 7.39. Desviación media del día: -45.4 %. Horas fuera de banda: 04h, 05h, 06h, 07h.",
+    "Detalle por hora"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 3,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_16_archivo_oficial_2024_todas_las_lineas_otro_dia",
+   "file": "16_archivo_oficial_2024_todas_las_lineas.xlsx",
+   "selectedOption": 1,
+   "screenshot": "docs/validacion/img/ux/antes/U_16_archivo_oficial_2024_todas_las_lineas_otro_dia.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "182 día(s) evaluados · 3 anomalía(s).",
+    "✅ Normal — score 2.63 ≤ umbral 7.39. Desviación media del día: -20.9 %."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "182 día(s) evaluados · 3 anomalía(s).",
+    "Ver detalle del día",
+    "2024-01-02 · martes · tipo de día: habil_temporada · 📅 Temporada de fin de año",
+    "✅ Normal — score 2.63 ≤ umbral 7.39. Desviación media del día: -20.9 %.",
+    "Detalle por hora"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 3,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_17_extension_no_soportada",
+   "file": "17_extension_no_soportada.txt",
+   "screenshot": "docs/validacion/img/ux/antes/U_17_extension_no_soportada.png",
+   "alerts": [
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "182 día(s) evaluados · 3 anomalía(s).",
+    "✅ Normal — score 2.63 ≤ umbral 7.39. Desviación media del día: -20.9 %."
+   ],
+   "markdown": [
+    "Modelo",
+    "Detector: perfil_contextual (peak_shift)\nUmbral: 7.388 (presupuesto de alertas del 5 % en DEV)\nEntrenado con: 2023-07-02 → 2024-06-30\nLínea: LINEA A",
+    "Validación en holdout (2023-07 → 2024-06)",
+    "Tasa de alertas: 2.2 %\nRecall anomalías severas: 0.89\nRecall anomalías moderadas: 0.51\nAlertas en festivos: 11.1 %",
+    "🚆 Detección de anomalías en la afluencia — Línea A, Metro de Medellín",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha",
+    "2023-08-28 · lunes · tipo de día: habil",
+    "⚠️ ANOMALÍA — score 51.10 > umbral 7.39. Desviación media del día: -32.1 %. Horas fuera de banda: 18h, 19h.",
+    "Detalle por hora",
+    "Suba un archivo .xlsx o .csv con el formato oficial (Día, Línea de Servicio, columnas 04:00:00…23:00:00). Incluya ≥ 4 semanas previas si las fechas son posteriores al histórico.",
+    "Archivo de afluencia",
+    "182 día(s) evaluados · 3 anomalía(s).",
+    "Ver detalle del día",
+    "2024-01-02 · martes · tipo de día: habil_temporada · 📅 Temporada de fin de año",
+    "✅ Normal — score 2.63 ≤ umbral 7.39. Desviación media del día: -20.9 %.",
+    "Detalle por hora"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 3,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ ],
+ "axe": {
+  "H01_carga_inicial": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu",
+     ".stSidebar"
+    ]
+   },
+   {
+    "id": "button-name",
+    "impact": "critical",
+    "help": "Buttons must have discernible text",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu > .st-emotion-cache-w3nhqi.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-19ee8pt > .st-emotion-cache-w3nhqi.ef3psqc5[kind=\"headerNoPadding\"]"
+    ]
+   },
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": 5,
+    "targets": [
+     "code:nth-child(1)",
+     "li:nth-child(1) > code:nth-child(2)",
+     ".st-emotion-cache-1l5t55b > p",
+     "#tabs-bui3-tab-0 > .st-emotion-cache-jkfxgf.e1nzilvr5[data-testid=\"stMarkdownContainer\"] > p"
+    ]
+   },
+   {
+    "id": "summary-name",
+    "impact": "serious",
+    "help": "Summary elements must have discernible text",
+    "nodes": 1,
+    "targets": [
+     "details[title=\"Click to view actions\"] > summary"
+    ]
+   }
+  ],
+  "H14_detalle_por_hora": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu",
+     ".stSidebar"
+    ]
+   },
+   {
+    "id": "button-name",
+    "impact": "critical",
+    "help": "Buttons must have discernible text",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu > .st-emotion-cache-w3nhqi.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-19ee8pt > .st-emotion-cache-w3nhqi.ef3psqc5[kind=\"headerNoPadding\"]"
+    ]
+   },
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": 6,
+    "targets": [
+     "code:nth-child(1)",
+     "li:nth-child(1) > code:nth-child(2)",
+     ".st-emotion-cache-1l5t55b > p",
+     "#tabs-bui3-tab-0 > .st-emotion-cache-jkfxgf.e1nzilvr5[data-testid=\"stMarkdownContainer\"] > p"
+    ]
+   },
+   {
+    "id": "summary-name",
+    "impact": "serious",
+    "help": "Summary elements must have discernible text",
+    "nodes": 1,
+    "targets": [
+     "details[title=\"Click to view actions\"] > summary"
+    ]
+   }
+  ],
+  "U_03_anomalia_inyectada_2024-06-12.xlsx": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu",
+     ".stSidebar"
+    ]
+   },
+   {
+    "id": "button-name",
+    "impact": "critical",
+    "help": "Buttons must have discernible text",
+    "nodes": 3,
+    "targets": [
+     "#MainMenu > .st-emotion-cache-w3nhqi.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-19ee8pt > .st-emotion-cache-w3nhqi.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-1u7eiew"
+    ]
+   },
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": 8,
+    "targets": [
+     "code:nth-child(1)",
+     "li:nth-child(1) > code:nth-child(2)",
+     ".st-emotion-cache-1l5t55b > p",
+     "#tabs-bui3-tab-1 > .st-emotion-cache-jkfxgf.e1nzilvr5[data-testid=\"stMarkdownContainer\"] > p"
+    ]
+   },
+   {
+    "id": "nested-interactive",
+    "impact": "serious",
+    "help": "Interactive controls must not be nested",
+    "nodes": 1,
+    "targets": [
+     ".st-emotion-cache-1gulkj5"
+    ]
+   },
+   {
+    "id": "summary-name",
+    "impact": "serious",
+    "help": "Summary elements must have discernible text",
+    "nodes": 1,
+    "targets": [
+     ".st-emotion-cache-6oloea.stElementContainer[width=\"944\"]:nth-child(8) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-ma3asg.egd2k5h0 > details[title=\"Click to view actions\"] > summary"
+    ]
+   }
+  ],
+  "U_05_futuro_con_contexto.xlsx": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu",
+     ".stSidebar"
+    ]
+   },
+   {
+    "id": "button-name",
+    "impact": "critical",
+    "help": "Buttons must have discernible text",
+    "nodes": 3,
+    "targets": [
+     "#MainMenu > .st-emotion-cache-w3nhqi.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-19ee8pt > .st-emotion-cache-w3nhqi.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-1u7eiew"
+    ]
+   },
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": 8,
+    "targets": [
+     "code:nth-child(1)",
+     "li:nth-child(1) > code:nth-child(2)",
+     ".st-emotion-cache-1l5t55b > p",
+     "#tabs-bui3-tab-1 > .st-emotion-cache-jkfxgf.e1nzilvr5[data-testid=\"stMarkdownContainer\"] > p"
+    ]
+   },
+   {
+    "id": "nested-interactive",
+    "impact": "serious",
+    "help": "Interactive controls must not be nested",
+    "nodes": 1,
+    "targets": [
+     ".st-emotion-cache-1gulkj5"
+    ]
+   },
+   {
+    "id": "summary-name",
+    "impact": "serious",
+    "help": "Summary elements must have discernible text",
+    "nodes": 1,
+    "targets": [
+     ".st-emotion-cache-6oloea.stElementContainer[width=\"944\"]:nth-child(8) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-ma3asg.egd2k5h0 > details[title=\"Click to view actions\"] > summary"
+    ]
+   }
+  ],
+  "U_16_archivo_oficial_2024_todas_las_lineas.xlsx": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu",
+     ".stSidebar"
+    ]
+   },
+   {
+    "id": "button-name",
+    "impact": "critical",
+    "help": "Buttons must have discernible text",
+    "nodes": 3,
+    "targets": [
+     "#MainMenu > .st-emotion-cache-w3nhqi.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-19ee8pt > .st-emotion-cache-w3nhqi.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-1u7eiew"
+    ]
+   },
+   {
+    "id": "color-contrast",
+    "impact": "serious",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "nodes": 8,
+    "targets": [
+     "code:nth-child(1)",
+     "li:nth-child(1) > code:nth-child(2)",
+     ".st-emotion-cache-1l5t55b > p",
+     "#tabs-bui3-tab-1 > .st-emotion-cache-jkfxgf.e1nzilvr5[data-testid=\"stMarkdownContainer\"] > p"
+    ]
+   },
+   {
+    "id": "nested-interactive",
+    "impact": "serious",
+    "help": "Interactive controls must not be nested",
+    "nodes": 1,
+    "targets": [
+     ".st-emotion-cache-1gulkj5"
+    ]
+   },
+   {
+    "id": "summary-name",
+    "impact": "serious",
+    "help": "Summary elements must have discernible text",
+    "nodes": 1,
+    "targets": [
+     ".st-emotion-cache-6oloea.stElementContainer[width=\"944\"]:nth-child(8) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-ma3asg.egd2k5h0 > details[title=\"Click to view actions\"] > summary"
+    ]
+   }
+  ]
+ },
+ "responsive": {
+  "H03": {
+   "docScroll": 390,
+   "docClient": 390,
+   "mainScroll": 390,
+   "mainClient": 390
+  },
+  "U03": {
+   "docScroll": 390,
+   "docClient": 390,
+   "mainScroll": 390,
+   "mainClient": 390
+  }
+ },
+ "keyboard": {
+  "tabOrder": [
+   "BUTTON:Deploy",
+   "BUTTON:",
+   "BUTTON:",
+   "SECTION:🚆 Detección de anomalías en l",
+   "BUTTON[tab]:📆 Explorar histórico",
+   "INPUT:Select a date.",
+   "BUTTON:",
+   "SUMMARY:",
+   "SUMMARY:Detalle por hora",
+   "BUTTON:Download as CSV",
+   "BUTTON:Search",
+   "BUTTON:Fullscreen",
+   "CANVAS:",
+   "DIV:",
+   "BODY:Deploy\nModelo\nDetector: perfil",
+   "BUTTON:Deploy",
+   "BUTTON:",
+   "BUTTON:",
+   "SECTION:🚆 Detección de anomalías en l",
+   "BUTTON[tab]:📆 Explorar histórico",
+   "INPUT:Select a date.",
+   "BUTTON:",
+   "SUMMARY:",
+   "SUMMARY:Detalle por hora",
+   "BUTTON:Download as CSV"
+  ]
+ },
+ "timeline": 0
+}

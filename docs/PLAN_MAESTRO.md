@@ -256,15 +256,28 @@ Objetivo: decidir con evidencia si el sistema puede operar en producción en el 
 | ID | Tarea | Estado |
 |---|---|---|
 | F8.1 | Revisión del plan y de dependencias; criterios PR/UX pre-registrados | COMPLETADA (este commit) |
-| F8.2 | Simulación cronológica día a día (operación de fin de día) con verificación de disponibilidad temporal | PENDIENTE |
-| F8.3 | Simulación intra-día (hora a hora): latencia de detección y falsas alarmas de días parciales | PENDIENTE |
-| F8.4 | Batería de escenarios: aislados, progresivos, abruptos, recurrentes, estacionales y contextuales; sensibilidad, precisión, FP, FN, tiempo de detección y estabilidad | PENDIENTE |
-| F8.5 | Robustez: datos faltantes, retrasados, corruptos y extremos; cambios de distribución; degradación; recalibración del umbral (exploratoria) | PENDIENTE |
-| F8.6 | Eventos reales: búsqueda en plataformas oficiales colombianas (con control de prompt injection) para las alertas del holdout | PENDIENTE |
-| F8.7 | Monitoreo, trazabilidad, escalabilidad y recuperación ante fallos | PENDIENTE |
-| F8.8 | Protocolo de validación con datos operacionales y revisión humana | PENDIENTE |
-| F9.1 | Recorrido E2E completo con Playwright (todos los flujos, escenarios y capturas), con consola y red monitoreadas | PENDIENTE |
-| F9.2 | Consistencia de los datos de la UI con el backend | PENDIENTE |
-| F9.3 | Accesibilidad (axe-core), diseño responsivo e inspección visual de las gráficas | PENDIENTE |
-| F9.4 | Corrección de defectos, nueva ejecución y nuevas capturas (verificación sin regresiones) | PENDIENTE |
-| F9.5 | Dictamen de preparación para producción + inventario de pruebas + explicación en lenguaje claro | PENDIENTE |
+| F8.2 | Simulación cronológica día a día (operación de fin de día) con verificación de disponibilidad temporal | COMPLETADA — 0 violaciones; idéntica a F4; 0,04 s por día; estabilidad del 99,7 % (PR1, PR2, PR5 ✔) |
+| F8.3 | Simulación intra-día (hora a hora): latencia de detección y falsas alarmas de días parciales | COMPLETADA — retardo mediano de 1 h (abruptas); falsas alarmas parciales 3,6 % (PR3 ✔ bajo el supuesto de dato horario); PR6 anticipación NO demostrada |
+| F8.4 | Batería de escenarios: aislados, progresivos, abruptos, recurrentes, estacionales y contextuales; sensibilidad, precisión, FP, FN, tiempo de detección y estabilidad | COMPLETADA — ver F8/F9 §2.3–2.5 (precisión real desconocida sin registro de incidentes) |
+| F8.5 | Robustez: datos faltantes, retrasados, corruptos y extremos; cambios de distribución; degradación; recalibración del umbral (exploratoria) | COMPLETADA — PR4 ✔; hallazgo: conteos acumulados tras horas faltantes (2019) |
+| F8.6 | Eventos reales: búsqueda en plataformas oficiales colombianas (con control de prompt injection) para las alertas del holdout | COMPLETADA — 3 incidentes verificados (1/3 detectado) + no cobro electoral (efecto de medición); sin prompt injection. PR7 = **BLOQUEANTE** (no hay registro independiente) |
+| F8.7 | Monitoreo, trazabilidad, escalabilidad y recuperación ante fallos | COMPLETADA (parcial: sin orquestación, notificación ni autenticación) — `operations.py`, `run_daily.py`, 7 tests (PR8) |
+| F8.8 | Protocolo de validación con datos operacionales y revisión humana | COMPLETADA — `docs/PROTOCOLO_VALIDACION_OPERACIONAL.md` |
+| F9.1 | Recorrido E2E completo con Playwright (todos los flujos, escenarios y capturas), con consola y red monitoreadas | COMPLETADA — 35 pasos; UX1 0/0/0/0; capturas antes y después |
+| F9.2 | Consistencia de los datos de la UI con el backend | COMPLETADA — UX3 100 % (`reports/ux/consistencia_ui_backend.json`) |
+| F9.3 | Accesibilidad (axe-core), diseño responsivo e inspección visual de las gráficas | COMPLETADA — 0 violaciones atribuibles a la app; sin desbordamiento a 390 px; inspección visual documentada |
+| F9.4 | Corrección de defectos, nueva ejecución y nuevas capturas (verificación sin regresiones) | COMPLETADA — 16 defectos de UX + 2 de pruebas corregidos; 160 pruebas en verde |
+| F9.5 | Dictamen de preparación para producción + inventario de pruebas + explicación en lenguaje claro | COMPLETADA — `docs/validacion/DICTAMEN_PRODUCCION.md`: NO APTO para detección temprana; APTO CON CONDICIONES para revisión retrospectiva y control de calidad de datos |
+
+### Estado de los criterios de la fase 2
+| ID | Estado | Evidencia |
+|---|---|---|
+| PR1 | ✔ | 0 violaciones; idéntico a F4 |
+| PR2 | ✔ | 0,04 s por día; 1,3 s por 12 reentrenamientos |
+| PR3 | ✔ (supuesto de dato horario no verificado) | retardo mediano de 1 h; falsas alarmas parciales 3,6 % |
+| PR4 | ✔ | faltantes, retrasos y corrupción sin caídas ni contaminación |
+| PR5 | ✔ | concordancia del 99,7 % |
+| PR6 | ✘ no demostrada | el sistema no anticipa; en IN3 habría alertado ~30 min después del aviso oficial |
+| PR7 | **BLOQUEANTE** | sin registro de incidentes; 1/3 incidentes verificados con señal |
+| PR8 | parcial | auditoría, idempotencia y monitoreo ✔; sin orquestación, notificación ni autenticación |
+| UX1–UX7 | ✔ | `docs/validacion/F8_F9_produccion_y_ux.md` §4 |

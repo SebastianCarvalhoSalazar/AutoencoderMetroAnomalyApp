@@ -13,7 +13,7 @@ import pandas as pd
 
 from . import data as D
 from .artifacts import load_profile
-from .calendar import day_type_ext, event_note
+from .calendar import ELECTION_DAYS, ELECTION_FARE_FREE_NOTE, day_type_ext, event_note
 from .detectors import LEVEL_FALLBACK_DAYS, LEVEL_MIN_DAYS, level_series
 
 MODEL_LINE = "LINEA A"
@@ -29,7 +29,8 @@ DAY_TYPE_LABELS = {"habil": "Día hábil", "sabado": "Sábado", "domingo_festivo
                    "especial": "Víspera de Navidad/Año Nuevo", "habil_temporada": "Día hábil en temporada",
                    "sabado_temporada": "Sábado en temporada"}
 CATEGORY_LABELS = {"sin_anomalia": "Sin anomalía estadística", "anomalia_estadistica": "Anomalía estadística",
-                   "posible_problema_de_datos": "Posible problema de datos"}
+                   "posible_problema_de_datos": "Posible problema de datos",
+                   "efecto_de_medicion": "Efecto de medición conocido"}
 
 
 class InputError(ValueError):
@@ -58,6 +59,8 @@ class DayResult:
 
     @property
     def category(self) -> str:
+        if any(f.startswith("Jornada electoral") for f in self.dq_flags):
+            return "efecto_de_medicion"
         if any(not f.startswith("Sin dato") for f in self.dq_flags):
             return "posible_problema_de_datos"
         return "anomalia_estadistica" if self.alert else "sin_anomalia"
@@ -181,7 +184,8 @@ def score_days(det, thr: float, context: pd.DataFrame, dates, ref: np.ndarray | 
             observed=obs, expected=np.expm1(e.loc[d]), band_low=np.expm1(e.loc[d] - zt * sig.loc[d]),
             band_high=np.expm1(e.loc[d] + zt * sig.loc[d]), z=z,
             hour_flags=[c for c in D.SCORED_HOURS if abs(z[c]) >= zt], deviation_pct=100 * dev, missing_hours=miss,
-            dq_flags=data_quality_flags(obs, expd, context.loc[: d - pd.Timedelta(days=1), D.SCORED_HOURS].max()),
+            dq_flags=data_quality_flags(obs, expd, context.loc[: d - pd.Timedelta(days=1), D.SCORED_HOURS].max())
+            + ([ELECTION_FARE_FREE_NOTE] if str(d.date()) in ELECTION_DAYS else []),
             severity=sev, exceedance=exc))
     return out
 

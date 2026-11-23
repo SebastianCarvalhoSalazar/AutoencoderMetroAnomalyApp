@@ -87,7 +87,7 @@ def process(dates, history: pd.DataFrame, model_path: str | Path, log_path: str 
             summary["evaluados"] += 1
             if r.category == "anomalia_estadistica":
                 summary["alertas"].append(key[0])
-            elif r.category == "posible_problema_de_datos":
+            elif r.category in ("posible_problema_de_datos", "efecto_de_medicion"):
                 summary["problemas_de_datos"].append(key[0])
     return summary
 

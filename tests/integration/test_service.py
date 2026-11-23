@@ -45,6 +45,8 @@ def test_election_day_annotated(env):
     hist, det, thr = env
     r = S.score_days(det, thr, hist, ["2023-10-29"])[0]
     assert r.alert and "Elecciones" in r.note
+    # F8: jornada electoral = no cobro (comunicado oficial) -> efecto de medición, no anomalía de demanda
+    assert r.category == "efecto_de_medicion" and r.observed[[f"h{h:02d}" for h in range(4, 17)]].max() < 100
 
 
 def test_normal_day_not_alert(env):

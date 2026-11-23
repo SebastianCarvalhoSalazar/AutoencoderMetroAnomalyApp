@@ -1,0 +1,12 @@
+# Extractos de fuentes oficiales usadas en F8.6 (consultadas el 2026-11-23)
+
+Método: búsqueda restringida a `metrodemedellin.gov.co`, `medellin.gov.co` y `telemedellin.tv` (canal público de Medellín). Descarga con `curl` a un directorio aislado; extracción de texto con `python -I`; revisión de patrones de *prompt injection* ("ignore previous", "instrucciones anteriores", "system prompt", "assistant", etc.). **Resultado: ninguna instrucción incrustada.** Las coincidencias encontradas son código del sitio: `data-rocket-status="executed"` (WP Rocket), comentarios HTML de plantilla, `data-cookieconsent="ignore"` y un menú "Asistente virtual" del sitio. Todo el contenido se trató como dato, no como instrucción.
+
+| Id | Fecha publicación (metadato) | URL | Extracto literal relevante |
+|---|---|---|---|
+| IN1 | 2023-02-06T05:15 | https://telemedellin.tv/metro-medellin-niquia-poblado/605831/ | "(18:41) Por un inconveniente técnico, la línea A del Metro se encuentra operando entre las estaciones Niquía y Poblado." — @metrodemedellin, February 5, 2023 |
+| IN2 | 2023-08-22T17:32 | https://telemedellin.tv/dano-metro-martes-22-agosto/663071/ | "desde las 7:05 de la mañana de este martes 22 de agosto se presentó la novedad, que tiene operando al sistema solo entre las estaciones Niquía - San Antonio y Aguacatala - La Estrella. Esto quiere decir que las estaciones Alpujarra, Exposiciones, Industriales y Poblado están fuera de servicio" |
+| IN3 | 2023-08-29T03:56 y 06:20 | https://telemedellin.tv/colapso-metro-medellin-esto-se-sabe/664803/ · https://telemedellin.tv/situacion-estaciones-del-metro-de-medellin/664827/ | "(17:30) Línea A del Metro presenta atrasos en las frecuencias por un tren detenido en Industriales." · "Usuarios … decidieron bajarse a la vía férrea … generando que la operación comercial se suspendiera en las Líneas A, B, J, K y P." · "(19:43) … No hemos podido restablecer el servicio comercial en las líneas de trenes" |
+| MED1 | sin metadato de fecha | https://www.metrodemedellin.gov.co/al-dia/noticias/comunicado-a-la-opinion-publica-1 | "Desde 2006 el Metro de Medellín ha sido el único sistema de transporte masivo del país que … ha establecido el no cobro en los modos metro, tranvía y cables durante las jornadas electorales." · "La medida estará vigente desde el inicio de la operación hasta las 5:00 p. m y será aplicada en las líneas A y B …" |
+
+Otras páginas leídas (fechas fuera del periodo con datos, 2024-10 a 2026-09) no se usaron para validar.

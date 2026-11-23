@@ -1,0 +1,14 @@
+[server]
+maxUploadSize = 20          # MB; coherente con el límite del servicio (service.MAX_UPLOAD_BYTES)
+
+[client]
+toolbarMode = "viewer"      # oculta las opciones de desarrollo (botón Deploy) en producción
+showErrorDetails = false    # nunca mostrar trazas al usuario
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+primaryColor = "#1f4e9a"   # contraste ≥ 4,5:1 sobre blanco (el rojo por defecto no cumple WCAG AA en textos)
+textColor = "#111111"      # el texto atenuado (60 %) queda en ~#707070: contraste ≈ 4,9:1 (antes #83858c, 3,68:1)

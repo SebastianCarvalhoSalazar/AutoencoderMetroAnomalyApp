@@ -13,8 +13,8 @@
   "violaciones_guarda": 0,
   "guardado_igual_a_lote": true,
   "igual_a_evaluacion_F4": true,
-  "seg_por_dia_guardado": 0.0407,
-  "seg_reentrenamientos_12_meses": 1.3,
+  "seg_por_dia_guardado": 0.0397,
+  "seg_reentrenamientos_12_meses": 1.28,
   "alertas": 8,
   "fechas_alerta": [
    "2023-08-28",
@@ -455,7 +455,7 @@
    "scores_finitos": true
   },
   "LINEA L": {
-   "error": "ValueError: peak_shift requiere stats de entrenamiento"
+   "error": "ValueError: Historia insuficiente: no hay días completos con nivel disponible para ajustar el perfil."
   },
   "LINEA M": {
    "dias_puntuados": 145,
@@ -473,6 +473,6 @@
    "dias_puntuados": 182,
    "scores_finitos": true
   },
-  "_segundos_total_12_lineas": 1.85
+  "_segundos_total_12_lineas": 1.86
  }
 }

@@ -18,7 +18,7 @@ El sistema es **funcional de extremo a extremo**: datos validados, modelo causal
 | D4 | T5 ≥ 0,95 | 1,00 | ✔ | `reports/holdout.md` |
 | D5 | no peor que la mejor línea base; mejor que el AE original | no inferior; +0,207 [IC > 0] | ✔ | `reports/holdout.md` |
 | D6 | 2019 ≤ 15 % | 7,5 % | ✔ | `reports/externo.md` |
-| D7 | eventos reales ≥ 2/3 | 4/4 (poco discriminante: todos los modelos los detectan) | ✔ | `reports/externo.md` |
+| D7 | eventos reales ≥ 2/3 | 4/4 formal; **reinterpretado en F8**: las elecciones son un efecto de medición (no cobro); frente a incidentes operacionales verificados, 1/3 | ✔ formal / ✘ sustantivo | `reports/externo.md`, `F8_F9_produccion_y_ux.md` |
 | D8 | causalidad | tests en verde para los 8 detectores (6 sin TF + 2 AE) | ✔ | `tests/unit/test_detectors*.py` |
 | D9 | determinismo | dos ejecuciones aisladas: 8/8 salidas con SHA-256 idéntico | ✔ | `reports/determinismo.md` |
 
@@ -58,6 +58,9 @@ README, ficha del modelo, ficha de los datos, informes F0–F5 y este informe; a
 3. **F2.5 / P3 parcial**: sin acceso a fuentes oficiales del horario del Metro ni al texto de la Ley 51/1983 (DNS bloqueado en el entorno). Se compensó con un contraste empírico.
 4. **F4.5 (multilínea)** no se ejecutó: su condición previa (cumplir F4.3) no se dio.
 5. Se añadieron eventos electorales a D7 después de ver DEV. Solo cuentan los **prospectivos** (2019 y 2023, registrados antes de ver esos periodos).
+
+## 5b. Fase 2 (preparación para producción y UX)
+Ver `docs/validacion/F8_F9_produccion_y_ux.md` y `docs/validacion/DICTAMEN_PRODUCCION.md`: **no apto como detección temprana de incidentes; apto con condiciones como apoyo retrospectivo y de calidad de datos.**
 
 ## 6. Pendientes explícitos y trabajo futuro (no evaluado)
 - Mejorar la sensibilidad a aumentos por evento (T3) y a desplazamientos leves del día; candidatos: recalibración periódica del umbral, agregación por bloques (CUSUM), contexto multilínea.

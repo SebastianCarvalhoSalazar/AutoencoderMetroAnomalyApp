@@ -129,3 +129,55 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - **Solicitud:** validación end-to-end de producción (simulación cronológica, latencia, robustez, eventos reales en fuentes oficiales colombianas, protocolo de validación humana) y validación funcional, visual y de UX con navegador real.
 - **Decisión:** se pre-registran los criterios PR1–PR8 y UX1–UX7 en `docs/PLAN_MAESTRO.md` §9 antes de ejecutar cualquier prueba.
 - **Regla de fuentes:** los eventos se validan solo con plataformas oficiales colombianas (dominios `.gov.co` y el sitio del Metro). Todo contenido web se trata como dato no confiable y se revisa en busca de instrucciones incrustadas (prompt injection) antes de usarlo.
+
+## 2026-11-23 — [F9.1] Línea base de UX (antes de cambios)
+- **Ejecución:** `tests/e2e/ux_audit.js` sobre la app de F5, con 17 archivos de prueba (`tests/e2e/make_ux_fixtures.py`) y axe-core 4.10.2. Capturas en `docs/validacion/img/ux/antes/`.
+- **Hallazgo en las pruebas (T-01):** el primer intento mostró el mismo resultado en todas las fechas. Causa: `fill()` no aplica la fecha en el campo con máscara de Streamlit. Consecuencia: **la latencia publicada en F5 (p95 665 ms) medía reejecuciones sin cambio de fecha y no es evidencia válida**. Se corrigieron los dos scripts (escritura carácter a carácter + verificación).
+- **Resultado de la línea base:** 0 errores de JS, excepciones y peticiones fallidas; 16 defectos de UX documentados (comunicación de alertas, leyenda, banda, formato, accesibilidad, límite de carga, etc.).
+
+## 2026-11-23 — [F8.2–F8.5] Simulación cronológica y escenarios
+- **Cambio:** `src/metro_anomaly/simulation.py`, `scripts/production_validation.py` → `reports/produccion/validacion_produccion.json`.
+- **Resultados:** PR1 0 violaciones (idéntico a F4); PR2 0,04 s por día; PR5 99,7 %; intra-día con retardo mediano de 1 h y 3,6 % de falsas alarmas parciales; escalón −20 % absorbido en pocos días; recurrentes alertan siempre; estacional −15 % casi invisible; precisión en flujo mixto 0,35 (prevalencia 2 %) / 0,59 (5 %), con FP dominados por las 8 alertas reales sin etiqueta.
+- **Defecto corregido:** una línea sin días completos (Línea L) fallaba con un error opaco al puntuar → error explícito al ajustar (test de regresión).
+
+## 2026-11-23 — [F8.6] Eventos reales en fuentes oficiales
+- **Bloqueo y solución:** `telemedellin.tv` y `www.metrodemedellin.gov.co` no resolvían (DNS). Se propuso un entorno personal con solo 3 hosts oficiales (`telemedellin.tv`, `www.metrodemedellin.gov.co`, `www.medellin.gov.co`); el usuario lo aprobó.
+- **Control de prompt injection:** páginas descargadas a un directorio aislado y texto extraído con `python -I`. Coincidencias solo en código del sitio (WP Rocket, comentarios de plantilla, cookies, menú "Asistente virtual"). **Sin instrucciones incrustadas.**
+- **Resultados:** IN1 (05/02/2023, operación parcial) sin señal; IN2 (22/08/2023, 4 estaciones cerradas desde las 07:05) sin señal; IN3 (28/08/2023, suspensión total en hora pico) detectado. Con dato horario habría alertado al cierre de las 17 h, después del aviso oficial de las 17:30. **Sensibilidad a incidentes reales: 1/3.**
+- **Hallazgo:** jornadas electorales = **no cobro del pasaje** (comunicado oficial; desde 2006; el 29/10/2023 hasta las 17:00) → entradas ≈ 0 hasta las 16 h en todas las líneas. Las detecciones electorales de D7 son un **efecto de medición**. Se creó la categoría "Efecto de medición conocido" y se corrigió la interpretación de D7 en F4, el informe final y la ficha del modelo.
+
+## 2026-11-23 — [F8.7] Operación, auditoría y monitoreo
+- **Cambio:** `src/metro_anomaly/operations.py`, `scripts/run_daily.py`, `tests/integration/test_operations.py` (7).
+- **Ajustes motivados por evidencia:**
+  - Regla de valor implausible: la versión "> 5× lo esperado" marcaba el 08/12/2023 22 h, un patrón real de temporada dentro del rango histórico. Se cambió a "> 1,5 × máximo histórico de la hora". Esta regla **sí** detecta los conteos acumulados de 2019 (11 días, 10 en 2019).
+  - Aviso de monitoreo: "90 días sin alertas" tenía P ≈ 13 % de dispararse en falso con la tasa observada; pasó a 180 días (≈ 2 %).
+- **Severidad empírica:** el artefacto incluye los 456 scores de referencia de DEV (p95 = umbral exacto, p99 15,09, máx 43,57).
+
+## 2026-11-23 — [F9.2–F9.4] Correcciones de UX y nueva verificación
+- **Cambios en la app:** categorías honestas de alerta, severidad y frecuencia histórica, aviso de "no es un incidente confirmado", categoría de calidad de datos y de efecto de medición, leyenda/unidades/formato es-CO/horas sin dato/recorte de la banda, línea de tiempo del score, tabla accesible, descarga CSV, fechas dd/mm/aaaa, validación del rango de fechas, `.streamlit/config.toml` (20 MB, sin opciones de desarrollo, sin trazas, contraste AA).
+- **Incidencias en las pruebas:** (T-02) la máscara del campo de fecha conservaba un dígito y los pasos H11–H13 mostraban resultados obsoletos; se detectó con la bandera `applied` y se corrigió. El verificador UX3 marcaba como fallo la tabla dentro de un expansor cerrado y las horas en días de problema de datos; se corrigió para tratarlos como "no aplicable" sin relajar las demás comparaciones.
+- **Iteraciones visuales:** la leyenda en móvil requirió 3 iteraciones (3 columnas → 2 columnas con nombres largos → 2 columnas con nombres cortos) hasta quedar completa (`despues/M03`).
+- **Resultado final:** 35 pasos con 0/0/0/0; UX3 100 % (11 vistas + 3 CSV idénticos); axe con 0 violaciones atribuibles a la app; sin desbordamiento a 390 px; E2E p95 669–685 ms con cambio verificado.
+
+## 2026-11-23 — [F9.5] Dictamen y cierre de la fase 2
+- **Pruebas:** 160 en total (154 rápidas, 4 de autoencoders, 2 E2E con navegador), todas en verde; cobertura del 82 %.
+
+  | Archivo de pruebas | Cantidad |
+  |---|---|
+  | unit/legacy_utils | 29 |
+  | unit/detectors | 33 |
+  | unit/data | 16 |
+  | unit/injection | 10 |
+  | unit/calendar | 7 |
+  | unit/evaluation | 6 |
+  | unit/labels | 4 |
+  | unit/artifacts | 3 |
+  | unit/detectors_nn | 4 |
+  | integration/service | 21 |
+  | integration/operations | 7 |
+  | integration/app | 6 |
+  | integration/real_data | 6 |
+  | integration/demo_files | 1 |
+  | audit | 5 |
+  | e2e | 2 |
+- **Dictamen:** NO APTO como detección temprana de incidentes (bloqueantes B1–B3); APTO CON CONDICIONES como apoyo de revisión retrospectiva y control de calidad de datos (`docs/validacion/DICTAMEN_PRODUCCION.md`).

@@ -21,6 +21,11 @@ DAY_TYPES_EXT = DAY_TYPES + ("habil_temporada", "sabado_temporada")
 
 #: Jornadas electorales nacionales y territoriales (fechas verificadas en registraduria.gov.co; ver
 #: data/eventos_reales.csv). NO se usan como contexto del modelo: se anotan en las explicaciones.
+#: Según el comunicado oficial del Metro (elecciones del 29/10/2023), desde 2006 no se cobra el pasaje en metro,
+#: tranvía y cables durante las jornadas electorales (en 2023, hasta las 17:00). Como el dato cuenta entradas
+#: registradas por pago, esas horas aparecen casi en cero: es un EFECTO DE MEDICIÓN, no una caída de demanda.
+ELECTION_FARE_FREE_NOTE = ("Jornada electoral sin cobro de pasaje (comunicado oficial del Metro): las entradas no se "
+                           "registran mientras no se cobra, por lo que el dato no refleja la demanda real")
 ELECTION_DAYS = {"2019-10-27": "Elecciones de autoridades locales", "2022-03-13": "Elecciones de Congreso",
                  "2022-05-29": "Elecciones presidenciales (1.ª vuelta)", "2022-06-19": "Elecciones presidenciales (2.ª vuelta)",
                  "2023-10-29": "Elecciones territoriales"}

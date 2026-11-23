@@ -35,6 +35,9 @@ async function snapshot(p, id, extra = {}) {
     tables: await p.locator('[data-testid="stTable"] table').count(),
     tableText: await texts('[data-testid="stTable"] table'),
     downloads: await p.locator('[data-testid="stDownloadButton"]').count(),
+    metricLabels: await texts('[data-testid="stMetricLabel"]'),
+    metrics: await texts('[data-testid="stMetricValue"]'),
+    subheaders: await texts('[data-testid="stHeadingWithActionElements"] h3, h3'),
     consoleErrors: consoleErrors.splice(0), pageErrors: pageErrors.splice(0), failedRequests: failedRequests.splice(0),
   };
   results.steps.push(step);
@@ -49,10 +52,17 @@ async function setDate(p, iso) {
   const cur = await inp.inputValue();
   const [y, m, d] = iso.split('-');
   const val = /^\d{4}\//.test(cur) ? `${y}/${m}/${d}` : `${d}/${m}/${y}`;
-  await inp.click(); await inp.press('Control+A'); await inp.pressSequentially(val, { delay: 20 }); await inp.press('Enter');
-  await idle(p);
-  await p.keyboard.press('Escape');
-  await idle(p);
+  // La máscara puede conservar dígitos del valor previo: se vacía por completo y se reintenta hasta 3 veces.
+  for (let attempt = 0; attempt < 3; attempt++) {
+    await inp.click();
+    await inp.press('Control+A'); await inp.press('Backspace');
+    for (let i = 0; i < 12; i++) await inp.press('Backspace');
+    await inp.pressSequentially(val, { delay: 25 }); await inp.press('Enter');
+    await idle(p);
+    await p.keyboard.press('Escape');
+    await idle(p);
+    if ((await inp.inputValue()) === val) break;
+  }
   return { typed: val, applied: (await inp.inputValue()) === val, valueAfter: await inp.inputValue() };
 }
 

@@ -4,7 +4,9 @@
 
 Sistema que señala **días y horas cuya afluencia se desvía de lo esperado para su contexto de calendario** (día de la semana, festivo, Semana Santa, temporada de fin de año y nivel reciente de demanda), y explica qué horas se desvían, en qué dirección y con qué magnitud. Incluye una aplicación Streamlit, un pipeline reproducible y una evaluación con protocolo pre-registrado.
 
-> **Estado (2026-11-23):** funcional y validado de extremo a extremo, pero **no cumple todos los criterios pre-registrados**. Cumple la tasa de alertas, la detección de perfiles incoherentes con el calendario, la superioridad frente al sistema original, la generalización a 2019 y la detección de eventos reales. **No cumple** la sensibilidad mínima a anomalías moderadas y severas ni la tasa máxima de alertas en festivos. Detalle en [`docs/validacion/INFORME_FINAL.md`](docs/validacion/INFORME_FINAL.md).
+> **Dictamen de producción (2026-11-23):** **no apto como mecanismo de detección temprana de incidentes** (sin registro de incidentes para validar; detectó 1 de 3 incidentes reales verificados; no anticipa). **Apto con condiciones** como apoyo de revisión retrospectiva y control de calidad de los datos. Ver [`docs/validacion/DICTAMEN_PRODUCCION.md`](docs/validacion/DICTAMEN_PRODUCCION.md).
+>
+> **Estado del modelo (2026-11-23):** funcional y validado de extremo a extremo, pero **no cumple todos los criterios pre-registrados**. Cumple la tasa de alertas, la detección de perfiles incoherentes con el calendario, la superioridad frente al sistema original, la generalización a 2019 y la detección de eventos reales. **No cumple** la sensibilidad mínima a anomalías moderadas y severas ni la tasa máxima de alertas en festivos. Detalle en [`docs/validacion/INFORME_FINAL.md`](docs/validacion/INFORME_FINAL.md).
 
 ## Inicio rápido
 ```bash
@@ -15,6 +17,9 @@ make test               # tests (unitarios, integración, app, contraste de audi
 make reproduce          # pipeline completo: datos → selección → holdout → externo → artefacto (~10 min)
 make determinism        # D9: dos ejecuciones aisladas con hashes idénticos
 make install-research && make reproduce-research    # incluye las comparaciones con autoencoders (TensorFlow)
+python scripts/run_daily.py --fecha 2023-08-28 --monitor     # operación por lote con registro de auditoría
+python scripts/production_validation.py                     # simulación cronológica de producción (F8)
+make e2e                                                    # E2E y auditoría UX con navegador (node + playwright)
 ```
 
 ## Cómo funciona
@@ -25,7 +30,8 @@ make install-research && make reproduce-research    # incluye las comparaciones 
    - z por hora;
    - score diario `peak_shift`, que capta tanto picos localizados como desplazamientos de todo el día.
 4. **Umbral**: cuantil 95 % de los scores fuera de muestra de DEV (presupuesto de alertas del 5 %), congelado en `artifacts/modelo.json`.
-5. **App** (`app.py`, `service.py`): explorar cualquier fecha del histórico o cargar un `.xlsx`/`.csv` con el formato oficial (uno o varios días; para fechas futuras se necesitan ≥ 4 semanas previas en el archivo).
+5. **Categorías de salida:** *sin anomalía estadística*, *anomalía estadística* (con severidad empírica y frecuencia histórica), *posible problema de datos* y *efecto de medición conocido* (p. ej., no cobro electoral). Ninguna equivale a un incidente confirmado.
+6. **App** (`app.py`, `service.py`): explorar cualquier fecha del histórico o cargar un `.xlsx`/`.csv` con el formato oficial (uno o varios días; para fechas futuras se necesitan ≥ 4 semanas previas en el archivo).
 
 ## Validación (resumen)
 Protocolo:
@@ -71,6 +77,9 @@ dev/                    notebook y artefactos originales (solo referencia de la 
 audit/                  auditoría técnica y sus experimentos
 docs/                   PLAN_MAESTRO, BITACORA, MODEL_CARD, DATA_CARD, validacion/
 ```
+
+## Validación de producción y UX (fase 2)
+Simulación cronológica sin fuga, latencia intra-día, escenarios multi-día, robustez, eventos reales en fuentes oficiales, auditoría UX con navegador (35 pasos, axe, responsivo, UI = backend). Ver [`docs/validacion/F8_F9_produccion_y_ux.md`](docs/validacion/F8_F9_produccion_y_ux.md) y el protocolo de validación operacional [`docs/PROTOCOLO_VALIDACION_OPERACIONAL.md`](docs/PROTOCOLO_VALIDACION_OPERACIONAL.md).
 
 ## Trazabilidad
 [Auditoría](audit/AUDITORIA.md) → [Plan maestro](docs/PLAN_MAESTRO.md) → [Bitácora](docs/BITACORA.md) → informes por fase en [`docs/validacion/`](docs/validacion/).

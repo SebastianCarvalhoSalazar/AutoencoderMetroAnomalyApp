@@ -19,6 +19,9 @@ Archivos `data/Afluencia_Metro_{2019..2024}.xlsx`: conteos horarios de entradas 
 
 Detalle reproducible: `reports/calidad_datos.md` (`python scripts/data_quality.py`).
 
+## Qué mide el dato (hallazgo F8)
+Los conteos corresponden a **entradas registradas por validación de pago**, no a pasajeros físicos. En jornadas electorales el Metro no cobra el pasaje (comunicado oficial, desde 2006; el 29/10/2023 hasta las 17:00) y las entradas aparecen ≈ 0 durante esas horas en todas las líneas. En 2019 hay días en que las horas faltantes se **acumularon en la hora siguiente** (p. ej., 16/02/2019 a las 15 h: 254.265 entradas).
+
 ## Calendario
 - Festivos de Colombia: librería `holidays==0.58`. Contraste empírico: 40/40 festivos entre semana de 2022–2024S1 tienen perfil dominical, y no hay días hábiles con perfil festivo fuera de la lista. **No se contrastó** contra el texto oficial de la Ley 51 de 1983 (red bloqueada).
 - Semana Santa: lunes a sábado anteriores a la Pascua (cómputo `dateutil.easter`). Temporada de fin de año: 20/12–10/01. Días especiales: 24/12 y 31/12.

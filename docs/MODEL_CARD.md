@@ -13,7 +13,7 @@ Con eso calcula **z por hora** = (log1p(obs) − esperado) / sigma, y un **score
 - desplazamiento = |media z| / MAD;
 - las escalas se estiman en la historia de entrenamiento.
 
-Hay **alerta** si el score supera **7,388**, el cuantil 95 % de los scores fuera de muestra de DEV (presupuesto de alertas del 5 %).
+Además, reglas de calidad de datos (ceros sospechosos; valores > 1,5 × máximo histórico de la hora) y el contexto de jornadas electorales (no cobro) clasifican el día como *posible problema de datos* o *efecto de medición conocido*. Hay **alerta** si el score supera **7,388**, el cuantil 95 % de los scores fuera de muestra de DEV (presupuesto de alertas del 5 %).
 
 ## Uso previsto
 Apoyo a la revisión **retrospectiva o diaria** de la afluencia de la Línea A: señala días y horas con desviaciones respecto de lo esperado para su contexto de calendario y las explica (horas, dirección, magnitud, anotación de calendario).
@@ -36,7 +36,11 @@ HOLDOUT 2023-07-01…2024-06-30, umbral congelado en DEV, IC 95 % por bootstrap 
 | Perfil de festivo en día hábil | 1,00 | ≥ 0,95 | ✔ |
 | Frente al autoencoder original (recall moderado) | +0,207 | > 0 | ✔ |
 | Transferencia 2019 (tasa de alertas) | 7,5 % | ≤ 15 % | ✔ |
-| Eventos reales prospectivos | 4/4 | ≥ 2/3 | ✔ |
+| Eventos reales prospectivos | 4/4 (2 COVID + 2 elecciones; las elecciones son un **efecto de medición** por no cobro) | ≥ 2/3 | ✔ formal |
+| Incidentes operacionales verificados (fuentes oficiales, F8) | **1/3** (no detecta operaciones parciales) | — | ✘ |
+
+## Validación de producción (F8)
+No anticipa eventos (en el incidente real del 28/08/2023 habría alertado ~30 min después del aviso oficial, con dato horario hipotético). El dato cuenta validaciones de pago, por lo que la gratuidad lo distorsiona. Dictamen: `docs/validacion/DICTAMEN_PRODUCCION.md`.
 
 ## Limitaciones conocidas
 - **Sensibilidad moderada (~50 %)**. Recall en el holdout por escenario (`reports/holdout_metricas.csv`):

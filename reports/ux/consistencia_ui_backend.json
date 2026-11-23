@@ -1,0 +1,232 @@
+{
+ "todo_coincide": true,
+ "verificaciones": [
+  {
+   "vista": "H02_dia_normal",
+   "metricas_ui": [
+    "0,98",
+    "7,39",
+    "41,2 %",
+    "+1,7 %"
+   ],
+   "metricas_backend": [
+    "0,98",
+    "7,39",
+    "41,2 %",
+    "+1,7 %"
+   ],
+   "metricas_ok": true,
+   "categoria_ok": true,
+   "horas_ok": null,
+   "tabla_ok": null
+  },
+  {
+   "vista": "H03_anomalia_2023-08-28",
+   "metricas_ui": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "metricas_backend": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "metricas_ok": true,
+   "categoria_ok": true,
+   "horas_ok": true,
+   "tabla_ok": null
+  },
+  {
+   "vista": "H04_navidad",
+   "metricas_ui": [
+    "8,29",
+    "7,39",
+    "4,4 %",
+    "-36,6 %"
+   ],
+   "metricas_backend": [
+    "8,29",
+    "7,39",
+    "4,4 %",
+    "-36,6 %"
+   ],
+   "metricas_ok": true,
+   "categoria_ok": true,
+   "horas_ok": true,
+   "tabla_ok": null
+  },
+  {
+   "vista": "H05_elecciones",
+   "metricas_ui": [
+    "91,23",
+    "7,39",
+    "0,0 %",
+    "-99,0 %"
+   ],
+   "metricas_backend": [
+    "91,23",
+    "7,39",
+    "0,0 %",
+    "-99,0 %"
+   ],
+   "metricas_ok": true,
+   "categoria_ok": true,
+   "horas_ok": null,
+   "tabla_ok": null
+  },
+  {
+   "vista": "H06_hora_faltante_2023-12-24",
+   "metricas_ui": [
+    "18,36",
+    "7,39",
+    "0,7 %",
+    "-52,4 %"
+   ],
+   "metricas_backend": [
+    "18,36",
+    "7,39",
+    "0,7 %",
+    "-52,4 %"
+   ],
+   "metricas_ok": true,
+   "categoria_ok": true,
+   "horas_ok": true,
+   "tabla_ok": null
+  },
+  {
+   "vista": "H07_horas_faltantes_2019-02-16",
+   "metricas_ui": [
+    "73,33",
+    "7,39",
+    "0,0 %",
+    "-27,6 %"
+   ],
+   "metricas_backend": [
+    "73,33",
+    "7,39",
+    "0,0 %",
+    "-27,6 %"
+   ],
+   "metricas_ok": true,
+   "categoria_ok": true,
+   "horas_ok": null,
+   "tabla_ok": null
+  },
+  {
+   "vista": "H09_fecha_minima",
+   "metricas_ui": [
+    "4,77",
+    "7,39",
+    "8,6 %",
+    "+7,0 %"
+   ],
+   "metricas_backend": [
+    "4,77",
+    "7,39",
+    "8,6 %",
+    "+7,0 %"
+   ],
+   "metricas_ok": true,
+   "categoria_ok": true,
+   "horas_ok": null,
+   "tabla_ok": null
+  },
+  {
+   "vista": "H10_fecha_maxima",
+   "metricas_ui": [
+    "2,18",
+    "7,39",
+    "16,0 %",
+    "+18,6 %"
+   ],
+   "metricas_backend": [
+    "2,18",
+    "7,39",
+    "16,0 %",
+    "+18,6 %"
+   ],
+   "metricas_ok": true,
+   "categoria_ok": true,
+   "horas_ok": null,
+   "tabla_ok": null
+  },
+  {
+   "vista": "H11_semana_santa_2024-03-27",
+   "metricas_ui": [
+    "0,69",
+    "7,39",
+    "53,1 %",
+    "-7,9 %"
+   ],
+   "metricas_backend": [
+    "0,69",
+    "7,39",
+    "53,1 %",
+    "-7,9 %"
+   ],
+   "metricas_ok": true,
+   "categoria_ok": true,
+   "horas_ok": null,
+   "tabla_ok": null
+  },
+  {
+   "vista": "H12_aumento_2023-12-14",
+   "metricas_ui": [
+    "22,92",
+    "7,39",
+    "0,4 %",
+    "+102,7 %"
+   ],
+   "metricas_backend": [
+    "22,92",
+    "7,39",
+    "0,4 %",
+    "+102,7 %"
+   ],
+   "metricas_ok": true,
+   "categoria_ok": true,
+   "horas_ok": true,
+   "tabla_ok": null
+  },
+  {
+   "vista": "H14_detalle_por_hora_abierto",
+   "metricas_ui": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "metricas_backend": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "metricas_ok": true,
+   "categoria_ok": true,
+   "horas_ok": true,
+   "tabla_ok": true
+  },
+  {
+   "vista": "U_03_anomalia_inyectada_2024-06-12",
+   "csv_identico": true,
+   "filas": 61,
+   "diferencias": null
+  },
+  {
+   "vista": "U_05_futuro_con_contexto",
+   "csv_identico": true,
+   "filas": 90,
+   "diferencias": null
+  },
+  {
+   "vista": "U_16_archivo_oficial_2024_todas_las_lineas",
+   "csv_identico": true,
+   "filas": 182,
+   "diferencias": null
+  }
+ ]
+}

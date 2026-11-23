@@ -22,11 +22,13 @@ const fail = (m) => { console.error('FALLO: ' + m); process.exit(1); };
     const cur = await inp.inputValue();
     const [y, mo, da] = d.split('/');
     const val = /^\d{4}\//.test(cur) ? d : `${da}/${mo}/${y}`;
-    await inp.click(); await inp.press('Control+A'); await inp.pressSequentially(val, { delay: 10 });
+    await inp.click(); await inp.press('Control+A'); await inp.press('Backspace');
+    for (let i = 0; i < 12; i++) await inp.press('Backspace');
+    await inp.pressSequentially(val, { delay: 10 });
     const t0 = Date.now();
     await inp.press('Enter');
-    const iso = `${y}-${mo}-${da}`;
-    await p.waitForSelector(`[data-testid="stMain"] strong:has-text("${iso}")`, { timeout: 30000 });
+    // espera a que el encabezado del día muestre la nueva fecha (dd/mm/aaaa) y termine la ejecución
+    await p.waitForSelector(`[data-testid="stMain"] h3:has-text("${da}/${mo}/${y}")`, { timeout: 30000 });
     await p.waitForFunction(() => !document.querySelector('[data-testid="stStatusWidget"]'), null, { timeout: 30000 });
     lat.push(Date.now() - t0);
     await p.keyboard.press('Escape');
@@ -42,7 +44,7 @@ const fail = (m) => { console.error('FALLO: ' + m); process.exit(1); };
   const info = await p.locator('[data-testid="stAlert"]').allInnerTexts();
   console.log('INFO_CARGA', JSON.stringify(info.filter(t => t.includes('evaluados'))));
   if (!info.some(t => /evaluados · [1-9]\d* anomal/.test(t))) fail('no se detectó la anomalía inyectada');
-  if (!(await p.locator('text=2024-06-12').count())) fail('no aparece el día inyectado');
+  if (!(await p.locator('[data-testid="stMain"] h3:has-text("12/06/2024")').count())) fail('no aparece el detalle del día inyectado (12/06/2024)');
   await p.screenshot({ path: `${shots}/e2e_2_carga_valida.png`, fullPage: true });
 
   // Archivo inválido: mensaje controlado, sin traza
