@@ -129,8 +129,8 @@ Depende de: —
 | ID | Tarea | Archivos | Criterio de aceptación / evidencia | Estado |
 |---|---|---|---|---|
 | F0.1 | Plan maestro y bitácora | `docs/PLAN_MAESTRO.md`, `docs/BITACORA.md` | Archivos en el repositorio | COMPLETADA (este commit) |
-| F0.2 | Entorno reproducible: `requirements.txt` (runtime Linux), `requirements-dev.txt`, `requirements-research.txt`, `pyproject.toml` (paquete `src/`), `Makefile` | raíz | Instalación limpia en un venv 3.10 sin errores; `pytest` se ejecuta | PENDIENTE |
-| F0.3 | Tests de contraste de la auditoría: reimplementación **independiente** que confirme o refute C1 (IQR sobre crudos), C2 (scaler con 912 filas), A1 (23:00 excluida), A2 (MSE en unidades incompatibles), C6 (demos obsoletos) | `tests/audit/test_audit_claims.py` | Cada afirmación queda como test que pasa (confirmada) o falla (refutada, se documenta) | PENDIENTE |
+| F0.2 | Entorno reproducible: `requirements.txt` (runtime Linux), `requirements-dev.txt`, `requirements-research.txt`, `pyproject.toml` (paquete `src/`), `Makefile` | raíz | Instalación limpia en un venv 3.10 sin errores; `pytest` se ejecuta | COMPLETADA — venv limpio 3.10.5 + `requirements-dev.txt` instalado; `requirements-lock.txt` congelado (65 paquetes); ver bitácora |
+| F0.3 | Tests de contraste de la auditoría: reimplementación **independiente** que confirme o refute C1 (IQR sobre crudos), C2 (scaler con 912 filas), A1 (23:00 excluida), A2 (MSE en unidades incompatibles), C6 (demos obsoletos) | `tests/audit/test_audit_claims.py` | Cada afirmación queda como test que pasa (confirmada) o falla (refutada, se documenta) | COMPLETADA — 5/5 tests en verde (C1, C2, C5, A1, A2 confirmadas); C6 y C7 se verifican en F1 |
 | F0.4 | CI básica (GitHub Actions: instalar y ejecutar pytest) | `.github/workflows/ci.yml` | Workflow en el repositorio; estado verificado si Actions está habilitado | PENDIENTE |
 
 ### F1 — Mitigación inmediata de seguridad (app legacy)
