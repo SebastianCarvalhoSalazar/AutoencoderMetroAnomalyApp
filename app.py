@@ -32,7 +32,12 @@ with c30:
         info_box.info("🕒 Realizando la clasificación...")
 
         # Cargar el dato desde el archivo .pkl
-        dato = leer_dato(uploaded_file)
+        try:
+            dato = leer_dato(uploaded_file)
+        except ValueError as e:
+            info_box.empty()
+            st.error(f"❌ {e}")
+            st.stop()
 
         # Cargar el modelo preentrenado en formato .keras o .h5
         autoencoder, scaler = cargar_modelo_preentrenado('./dev/results/tf_modelo_77_81_78.keras', './dev/results/scaler_77_81_78.pkl')

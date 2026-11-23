@@ -131,15 +131,15 @@ Depende de: —
 | F0.1 | Plan maestro y bitácora | `docs/PLAN_MAESTRO.md`, `docs/BITACORA.md` | Archivos en el repositorio | COMPLETADA (este commit) |
 | F0.2 | Entorno reproducible: `requirements.txt` (runtime Linux), `requirements-dev.txt`, `requirements-research.txt`, `pyproject.toml` (paquete `src/`), `Makefile` | raíz | Instalación limpia en un venv 3.10 sin errores; `pytest` se ejecuta | COMPLETADA — venv limpio 3.10.5 + `requirements-dev.txt` instalado; `requirements-lock.txt` congelado (65 paquetes); ver bitácora |
 | F0.3 | Tests de contraste de la auditoría: reimplementación **independiente** que confirme o refute C1 (IQR sobre crudos), C2 (scaler con 912 filas), A1 (23:00 excluida), A2 (MSE en unidades incompatibles), C6 (demos obsoletos) | `tests/audit/test_audit_claims.py` | Cada afirmación queda como test que pasa (confirmada) o falla (refutada, se documenta) | COMPLETADA — 5/5 tests en verde (C1, C2, C5, A1, A2 confirmadas); C6 y C7 se verifican en F1 |
-| F0.4 | CI básica (GitHub Actions: instalar y ejecutar pytest) | `.github/workflows/ci.yml` | Workflow en el repositorio; estado verificado si Actions está habilitado | PENDIENTE |
+| F0.4 | CI básica (GitHub Actions: instalar y ejecutar pytest) | `.github/workflows/ci.yml` | Workflow en el repositorio; estado verificado si Actions está habilitado | EN PROGRESO — workflow creado; aún no se observa ninguna ejecución en Actions (se revisa en F6) |
 
 ### F1 — Mitigación inmediata de seguridad (app legacy)
 Depende de: F0.2
 
 | ID | Tarea | Archivos | Criterio | Estado |
 |---|---|---|---|---|
-| F1.1 | Sustituir `pickle.loads` por un *unpickler* restringido (solo `numpy.ndarray`/`dtype`) y validar forma (20,), tipo numérico y valores finitos | `utils.py` | Test: la PoC de RCE ya no ejecuta comandos; los demos válidos siguen cargando; los NaN y las formas inválidas dan un error controlado | PENDIENTE |
-| F1.2 | Retirar los 173 demos obsoletos (scaler distinto) | `dev/data_test/` | Test: el 100 % de los demos restantes coincide con una fila del dataset bajo el scaler desplegado | PENDIENTE |
+| F1.1 | Sustituir `pickle.loads` por un *unpickler* restringido (solo `numpy.ndarray`/`dtype`) y validar forma (20,), tipo numérico y valores finitos | `utils.py` | Test: la PoC de RCE ya no ejecuta comandos; los demos válidos siguen cargando; los NaN y las formas inválidas dan un error controlado | COMPLETADA — `tests/unit/test_legacy_utils.py` 29 passed; E2E Playwright: payload rechazado y no ejecutado ([F0_F1](validacion/F0_F1.md)) |
+| F1.2 | Retirar los 173 demos obsoletos (scaler distinto) | `dev/data_test/` | Test: el 100 % de los demos restantes coincide con una fila del dataset bajo el scaler desplegado | COMPLETADA — 173 eliminados; `tests/integration/test_demo_files.py` passed (216/216) |
 
 *(La app se reescribe por completo en F5; F1 cierra la exposición mientras tanto.)*
 
@@ -211,9 +211,9 @@ Depende de: todo
 ## 8. Estado global
 | Fase | Estado | Informe |
 |---|---|---|
-| F0 | EN PROGRESO | – |
-| F1 | PENDIENTE | – |
-| F2 | PENDIENTE | – |
+| F0 | COMPLETADA (CI pendiente de verificar en F6) | [F0_F1](validacion/F0_F1.md) |
+| F1 | COMPLETADA | [F0_F1](validacion/F0_F1.md) |
+| F2 | EN PROGRESO | – |
 | F3 | PENDIENTE | – |
 | F4 | PENDIENTE | – |
 | F5 | PENDIENTE | – |
