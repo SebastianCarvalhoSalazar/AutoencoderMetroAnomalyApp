@@ -159,18 +159,18 @@ Depende de: F2
 
 | ID | Tarea | Criterio | Estado |
 |---|---|---|---|
-| F3.1 | `labels.py`: heurística IQR corregida (residuos reales, incluye 23h) + análisis de calidad (variantes, kappa, sensibilidad a k, porcentaje explicado por calendario) | Informe `reports/etiquetas.md`; tests | PENDIENTE |
-| F3.2 | `injection.py`: catálogo §5 con su verdad de terreno (día y horas afectadas) | Tests: magnitudes exactas, determinismo por semilla, sin modificar el original | PENDIENTE |
-| F3.3 | Eventos reales: búsqueda en fuentes oficiales (Metro de Medellín, decretos nacionales o municipales) de fechas verificables en 2019–2024 | `data/eventos_reales.csv` con URL de la fuente; tarea BLOQUEADA si no hay fuentes verificables | PENDIENTE |
-| F3.4 | `evaluation.py`: splits, *rolling origin* mensual, métricas (tasa de alertas, recall por escenario y severidad, recall horario, tasa en festivos), bootstrap por semanas, comparación pareada | Tests de las métricas con casos conocidos; test de no-fuga | PENDIENTE |
-| F3.5 | `thresholds.py`: umbral por presupuesto de alertas, elegido en DEV | Tests | PENDIENTE |
+| F3.1 | `labels.py`: heurística IQR corregida (residuos reales, incluye 23h) + análisis de calidad (variantes, kappa, sensibilidad a k, porcentaje explicado por calendario) | Informe `reports/etiquetas.md`; tests | COMPLETADA — kappa 0,48–0,54; 95,5 % de festivos marcados en todas las variantes ([F3](validacion/F3.md)) |
+| F3.2 | `injection.py`: catálogo §5 con su verdad de terreno (día y horas afectadas) | Tests: magnitudes exactas, determinismo por semilla, sin modificar el original | COMPLETADA — `tests/unit/test_injection.py` |
+| F3.3 | Eventos reales: búsqueda en fuentes oficiales (Metro de Medellín, decretos nacionales o municipales) de fechas verificables en 2019–2024 | `data/eventos_reales.csv` con URL de la fuente; tarea BLOQUEADA si no hay fuentes verificables | COMPLETADA PARCIAL — 2 eventos oficiales (COVID 2020); ninguno en 2022–2024 → D7 = limitación explícita |
+| F3.4 | `evaluation.py`: splits, *rolling origin* mensual, métricas (tasa de alertas, recall por escenario y severidad, recall horario, tasa en festivos), bootstrap por semanas, comparación pareada | Tests de las métricas con casos conocidos; test de no-fuga | COMPLETADA — `tests/unit/test_evaluation.py` |
+| F3.5 | Umbral por presupuesto de alertas, elegido en DEV (implementado en `evaluation.budget_threshold`) | Tests | COMPLETADA — `test_budget_threshold` |
 
 ### F4 — Modelado, selección y evaluación final
 Depende de: F3
 
 | ID | Tarea | Criterio | Estado |
 |---|---|---|---|
-| F4.1 | Detectores con interfaz común: naive, perfil robusto, regresión de calendario, AE original sin fuga, AE condicionado, IsolationForest | Test de causalidad (D8) para cada detector; test de determinismo | PENDIENTE |
+| F4.1 | Detectores con interfaz común: naive, perfil robusto, regresión de calendario, AE original sin fuga, AE condicionado, IsolationForest | Test de causalidad (D8) para cada detector; test de determinismo | COMPLETADA — 6/6 detectores causales y deterministas |
 | F4.2 | Selección en DEV (rolling origin): criterio primario = recall medio en escenarios moderados con un 5 % de alertas, sujeto a tasa en festivos ≤ 10 %; desempate (diferencia < 0,02 con IC solapados) → el modelo más simple o rápido | `reports/seleccion_dev.md` con IC; decisión en la bitácora | PENDIENTE |
 | F4.3 | Congelar el modelo y el umbral; **una** evaluación en HOLDOUT (D1–D5) | `reports/holdout.md`; acceso registrado | PENDIENTE |
 | F4.4 | Evaluación externa: 2019 (D6), 2020–2021 (estrés), eventos reales (D7) | `reports/externo.md` | PENDIENTE |
@@ -214,8 +214,8 @@ Depende de: todo
 | F0 | COMPLETADA (CI pendiente de verificar en F6) | [F0_F1](validacion/F0_F1.md) |
 | F1 | COMPLETADA | [F0_F1](validacion/F0_F1.md) |
 | F2 | COMPLETADA (con limitaciones documentadas) | [F2](validacion/F2.md) |
-| F3 | EN PROGRESO | – |
-| F4 | PENDIENTE | – |
+| F3 | COMPLETADA (D7 → limitación) | [F3](validacion/F3.md) |
+| F4 | EN PROGRESO | – |
 | F5 | PENDIENTE | – |
 | F6 | PENDIENTE | – |
 | F7 | PENDIENTE | – |
