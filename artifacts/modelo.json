@@ -289,7 +289,7 @@
   "peak_mad": 1.1797290637491529,
   "shift_mad": 0.6671130065697827
  },
- "created_utc": "2026-11-23T03:16:49+00:00",
+ "created_utc": "2026-11-23T03:39:22+00:00",
  "line": "LINEA A",
  "trained_on": [
   "2023-07-02",
@@ -304,7 +304,7 @@
   "Afluencia_Metro_2023.xlsx": "ef092a6058ca523f039417ab6665a4a2775398adaaedae00f1db0b73024ce34a",
   "Afluencia_Metro_2024.xlsx": "7e2132ee0c14efa8fe6308cc8945020afe26e9878c910930f071158ce22a7002"
  },
- "git_commit_build": "7ad6527b6aaed10d2d13ca38fc703b78c0a6e70c",
+ "git_commit_build": "944f8d293afb76b9b8a8a36bfd31f6ee9e852f90",
  "holdout_metrics": {
   "tasa_alertas": 0.022,
   "tasa_alertas_festivos": 0.1111,
