@@ -171,7 +171,7 @@ Depende de: F3
 | ID | Tarea | Criterio | Estado |
 |---|---|---|---|
 | F4.1 | Detectores con interfaz común: naive, perfil robusto, regresión de calendario, AE original sin fuga, AE condicionado, IsolationForest | Test de causalidad (D8) para cada detector; test de determinismo | COMPLETADA — 6/6 detectores causales y deterministas |
-| F4.2 | Selección en DEV (rolling origin): criterio primario = recall medio en escenarios moderados con un 5 % de alertas, sujeto a tasa en festivos ≤ 10 %; desempate (diferencia < 0,02 con IC solapados) → el modelo más simple o rápido | `reports/seleccion_dev.md` con IC; decisión en la bitácora | PENDIENTE |
+| F4.2 | Selección en DEV (rolling origin): criterio primario = recall medio en escenarios moderados con un 5 % de alertas, sujeto a tasa en festivos ≤ 10 %; desempate (diferencia < 0,02 con IC solapados) → el modelo más simple o rápido | `reports/seleccion_dev.md` con IC; decisión en la bitácora | COMPLETADA — 2 rondas (la 2.ª declarada como desviación tras un resultado negativo); elegida `perfil_contextual/top2`, umbral 7,348; DEV no alcanza D2 |
 | F4.3 | Congelar el modelo y el umbral; **una** evaluación en HOLDOUT (D1–D5) | `reports/holdout.md`; acceso registrado | PENDIENTE |
 | F4.4 | Evaluación externa: 2019 (D6), 2020–2021 (estrés), eventos reales (D7) | `reports/externo.md` | PENDIENTE |
 | F4.5 | Contexto multilínea (opcional): clasificar una alerta como sistémica (varias líneas) o local | Solo si F4.3 cumple; se evalúa con eventos reales y festivos | PENDIENTE |

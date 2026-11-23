@@ -39,8 +39,16 @@ def month_starts(start, end):
 
 
 def rolling_evaluate(factory: Callable, W: pd.DataFrame, eval_start, eval_end, train_start,
-                     scenarios=SCENARIOS, seed: int = 0, train_end_cap=None) -> RollingResult:
-    """``factory()`` -> Detector nuevo. ``W``: serie real completa (contexto)."""
+                     scenarios=SCENARIOS, seed: int = 0, train_end_cap=None, fixed_train=None) -> RollingResult:
+    """``factory()`` -> Detector nuevo. ``W``: serie real completa (contexto).
+
+    ``fixed_train=(inicio, fin)``: modo **transferencia** (no causal en el calendario): el detector se ajusta
+    una sola vez con ese periodo y se aplica a otro año. El nivel y el día de referencia siguen siendo
+    causales respecto de cada día evaluado. Se usa solo para la evaluación externa en 2019.
+    """
+    fixed = None
+    if fixed_train is not None:
+        fixed = factory().fit(W.loc[fixed_train[0]:fixed_train[1]], W)
     real_rows, inj_rows, zs = [], [], []
     det_name, fit_s = None, 0.0
     for ms in month_starts(eval_start, eval_end):
@@ -49,13 +57,16 @@ def rolling_evaluate(factory: Callable, W: pd.DataFrame, eval_start, eval_end, t
         hist_end = ms_eff - pd.Timedelta(days=1)
         if train_end_cap is not None:
             hist_end = min(hist_end, pd.Timestamp(train_end_cap))
-        hist = W.loc[train_start:hist_end]
-        assert hist.index.max() < ms_eff, "fuga: historia incluye el periodo evaluado"
-        det = factory()
+        if fixed is not None:
+            det = fixed
+        else:
+            hist = W.loc[train_start:hist_end]
+            assert hist.index.max() < ms_eff, "fuga: historia incluye el periodo evaluado"
+            det = factory()
+            t0 = time.perf_counter()
+            det.fit(hist, W)
+            fit_s += time.perf_counter() - t0
         det_name = det.name
-        t0 = time.perf_counter()
-        det.fit(hist, W)
-        fit_s += time.perf_counter() - t0
         days = W.loc[ms_eff:me]
         days = days[days[SCORED_HOURS].notna().all(axis=1)]
         if days.empty:

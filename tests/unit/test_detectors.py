@@ -72,3 +72,18 @@ def test_aggregate():
     z = pd.DataFrame([[1.0, -4.0, 2.0], [np.nan, 1.0, -3.0]])
     assert aggregate(z, "max").tolist() == [4.0, 3.0]
     assert aggregate(z, "top2").tolist() == [3.0, 2.0]
+
+
+def test_peak_shift_detects_global_shift_better_than_max(synth):
+    from metro_anomaly.detectors import ProfileDetector
+    hist, days = synth.loc[:"2023-01-31"], synth.loc["2023-02-01":"2023-02-28"]
+    a = ProfileDetector(agg="max").fit(hist, synth)
+    b = ProfileDetector(agg="peak_shift").fit(hist, synth)
+    Xi = days * 0.95  # desplazamiento global pequeño (en la serie sintética T2_leve ya satura ambos: recall 1,0)
+    gain = lambda d: (d.score(Xi, synth).day.to_numpy() > np.quantile(d.score(days, synth).day, 0.95)).mean()  # noqa: E731
+    assert gain(b) > gain(a)
+
+
+def test_peak_shift_requires_stats():
+    with pytest.raises(ValueError):
+        aggregate(pd.DataFrame([[1.0]]), "peak_shift")

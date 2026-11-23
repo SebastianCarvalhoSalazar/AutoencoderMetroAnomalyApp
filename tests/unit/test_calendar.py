@@ -31,3 +31,18 @@ def test_calendar_features_shape_and_values():
 
 def test_holiday_name():
     assert C.holiday_name("2023-12-25") is not None and C.holiday_name("2023-12-26") is None
+
+
+def test_holy_week_and_season():
+    # Pascua 2023: 9 de abril -> Semana Santa (lunes a sábado) del 3 al 8 de abril
+    d = pd.to_datetime(["2023-04-02", "2023-04-03", "2023-04-08", "2023-04-09", "2023-12-19", "2023-12-20", "2024-01-10", "2024-01-11"])
+    assert C.is_holy_week(d).tolist() == [False, True, True, False, False, False, False, False]
+    assert C.is_season(d).tolist() == [False, True, True, False, False, True, True, False]
+    assert C.day_type_ext(pd.to_datetime(["2023-04-05", "2023-04-08", "2023-04-06", "2023-03-29"])).tolist() == [
+        "habil_temporada", "sabado_temporada", "domingo_festivo", "habil"]
+
+
+def test_event_note():
+    assert "Elecciones territoriales" in C.event_note("2023-10-29")
+    assert "Semana Santa" in C.event_note("2023-04-05")
+    assert C.event_note("2023-03-15") is None
