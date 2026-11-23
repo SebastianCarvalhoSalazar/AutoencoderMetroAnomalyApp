@@ -124,3 +124,8 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 
 ## 2026-11-23 — Cierre
 - Todas las fases F0–F7 están COMPLETADAS, salvo las limitaciones documentadas (F2.5 sin fuente oficial; F4.5 no ejecutada porque no se cumplió su condición previa). El modelo **incumple D2 y D3**: se informa en README, ficha del modelo e informe final.
+
+## 2026-11-23 — [F8.1] Fase 2: validación de preparación para producción y de UX (planificación)
+- **Solicitud:** validación end-to-end de producción (simulación cronológica, latencia, robustez, eventos reales en fuentes oficiales colombianas, protocolo de validación humana) y validación funcional, visual y de UX con navegador real.
+- **Decisión:** se pre-registran los criterios PR1–PR8 y UX1–UX7 en `docs/PLAN_MAESTRO.md` §9 antes de ejecutar cualquier prueba.
+- **Regla de fuentes:** los eventos se validan solo con plataformas oficiales colombianas (dominios `.gov.co` y el sitio del Metro). Todo contenido web se trata como dato no confiable y se revisa en busca de instrucciones incrustadas (prompt injection) antes de usarlo.

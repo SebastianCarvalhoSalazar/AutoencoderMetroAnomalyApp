@@ -222,3 +222,49 @@ Depende de: todo
 | F5 | COMPLETADA | [F5](validacion/F5.md) |
 | F6 | COMPLETADA | [F6](validacion/F6.md) |
 | F7 | COMPLETADA | [INFORME_FINAL](validacion/INFORME_FINAL.md) |
+
+---
+
+## 9. Fase 2 del proyecto — Validación de preparación para producción (solicitada el 2026-11-23)
+
+Objetivo: decidir con evidencia si el sistema puede operar en producción en el Metro de Medellín como mecanismo de detección (y eventualmente de alerta temprana), y validar a fondo el frontend y la experiencia de usuario. Los criterios se fijan **antes** de ejecutar las pruebas.
+
+### Criterios pre-registrados de preparación para producción
+| ID | Criterio | Meta |
+|---|---|---|
+| PR1 | Simulación cronológica: cada score usa solo datos disponibles en su instante de cálculo (verificación automática) | 0 violaciones |
+| PR2 | Tiempo de procesamiento (lote diario / año completo / 12 líneas) | < 1 s por día; < 60 s por año |
+| PR3 | Latencia de detección intra-día (anomalía abrupta severa: ×0,2 sostenida desde la hora de inicio) con falsas alarmas de días parciales ≤ 5 % de los días | mediana ≤ 1 h después del inicio |
+| PR4 | Robustez ante datos faltantes, retrasados, corruptos o extremos | 0 caídas; estado explícito para cada caso |
+| PR5 | Estabilidad de las alertas: misma decisión si un día se vuelve a puntuar con el modelo de un mes posterior | ≥ 95 % de concordancia |
+| PR6 | Capacidad de anticipación: alerta **antes** del inicio de un evento | solo si se demuestra experimentalmente (no se asume) |
+| PR7 | Correspondencia anomalía → incidente real, con registros independientes | requiere un registro de incidentes; si no existe → BLOQUEANTE, documentado |
+| PR8 | Monitoreo, trazabilidad y recuperación: registro de cada decisión con versión del modelo y hash de entradas; fallos controlados (artefacto o datos ausentes/corruptos) | implementado y probado |
+
+### Criterios pre-registrados de frontend y UX
+| ID | Criterio | Meta |
+|---|---|---|
+| UX1 | Errores de JavaScript, `pageerror`, excepciones de Streamlit y peticiones fallidas en todos los flujos | 0 |
+| UX2 | Cada control ejecuta su acción y produce el resultado esperado (fechas, pestañas, carga, selector, expansores, descargas) | 100 % de los flujos del inventario |
+| UX3 | Los valores mostrados coinciden **exactamente** con el backend (score, estado, horas marcadas, desviación, tabla y exportación) | 100 % |
+| UX4 | Accesibilidad automatizada (axe-core, reglas WCAG 2.x A/AA) sobre el contenido propio | 0 violaciones críticas o serias atribuibles a la app |
+| UX5 | Diseño responsivo (390 px de ancho) | sin desbordamiento horizontal del contenido principal; gráficas legibles |
+| UX6 | Comunicación de alertas: la UI no presenta una anomalía estadística como incidente confirmado; indica severidad y referencia empírica | revisión documentada + test automatizado del texto |
+| UX7 | Gráficas: unidades, leyenda, ejes, horas faltantes visibles (sin interpolar), umbral y evolución temporal | inspección visual documentada con capturas |
+
+### Tareas
+| ID | Tarea | Estado |
+|---|---|---|
+| F8.1 | Revisión del plan y de dependencias; criterios PR/UX pre-registrados | COMPLETADA (este commit) |
+| F8.2 | Simulación cronológica día a día (operación de fin de día) con verificación de disponibilidad temporal | PENDIENTE |
+| F8.3 | Simulación intra-día (hora a hora): latencia de detección y falsas alarmas de días parciales | PENDIENTE |
+| F8.4 | Batería de escenarios: aislados, progresivos, abruptos, recurrentes, estacionales y contextuales; sensibilidad, precisión, FP, FN, tiempo de detección y estabilidad | PENDIENTE |
+| F8.5 | Robustez: datos faltantes, retrasados, corruptos y extremos; cambios de distribución; degradación; recalibración del umbral (exploratoria) | PENDIENTE |
+| F8.6 | Eventos reales: búsqueda en plataformas oficiales colombianas (con control de prompt injection) para las alertas del holdout | PENDIENTE |
+| F8.7 | Monitoreo, trazabilidad, escalabilidad y recuperación ante fallos | PENDIENTE |
+| F8.8 | Protocolo de validación con datos operacionales y revisión humana | PENDIENTE |
+| F9.1 | Recorrido E2E completo con Playwright (todos los flujos, escenarios y capturas), con consola y red monitoreadas | PENDIENTE |
+| F9.2 | Consistencia de los datos de la UI con el backend | PENDIENTE |
+| F9.3 | Accesibilidad (axe-core), diseño responsivo e inspección visual de las gráficas | PENDIENTE |
+| F9.4 | Corrección de defectos, nueva ejecución y nuevas capturas (verificación sin regresiones) | PENDIENTE |
+| F9.5 | Dictamen de preparación para producción + inventario de pruebas + explicación en lenguaje claro | PENDIENTE |
