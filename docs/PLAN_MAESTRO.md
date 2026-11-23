@@ -131,7 +131,7 @@ Depende de: —
 | F0.1 | Plan maestro y bitácora | `docs/PLAN_MAESTRO.md`, `docs/BITACORA.md` | Archivos en el repositorio | COMPLETADA (este commit) |
 | F0.2 | Entorno reproducible: `requirements.txt` (runtime Linux), `requirements-dev.txt`, `requirements-research.txt`, `pyproject.toml` (paquete `src/`), `Makefile` | raíz | Instalación limpia en un venv 3.10 sin errores; `pytest` se ejecuta | COMPLETADA — venv limpio 3.10.5 + `requirements-dev.txt` instalado; `requirements-lock.txt` congelado (65 paquetes); ver bitácora |
 | F0.3 | Tests de contraste de la auditoría: reimplementación **independiente** que confirme o refute C1 (IQR sobre crudos), C2 (scaler con 912 filas), A1 (23:00 excluida), A2 (MSE en unidades incompatibles), C6 (demos obsoletos) | `tests/audit/test_audit_claims.py` | Cada afirmación queda como test que pasa (confirmada) o falla (refutada, se documenta) | COMPLETADA — 5/5 tests en verde (C1, C2, C5, A1, A2 confirmadas); C6 y C7 se verifican en F1 |
-| F0.4 | CI básica (GitHub Actions: instalar y ejecutar pytest) | `.github/workflows/ci.yml` | Workflow en el repositorio; estado verificado si Actions está habilitado | EN PROGRESO — workflow creado; aún no se observa ninguna ejecución en Actions (se revisa en F6) |
+| F0.4 | CI básica (GitHub Actions: instalar y ejecutar pytest) | `.github/workflows/ci.yml` | Workflow en el repositorio; estado verificado si Actions está habilitado | COMPLETADA — Actions activo; ejecuciones 2–5 en `success` (verificado con la API) |
 
 ### F1 — Mitigación inmediata de seguridad (app legacy)
 Depende de: F0.2
@@ -191,16 +191,16 @@ Depende de: F4, F5
 
 | ID | Tarea | Criterio | Estado |
 |---|---|---|---|
-| F6.1 | `make reproduce` de extremo a extremo + doble ejecución (D9) | Hashes o métricas idénticos | PENDIENTE |
-| F6.2 | CI completa (tests + cobertura ≥ 80 %) | Workflow; resultado registrado | PENDIENTE |
+| F6.1 | `make reproduce` de extremo a extremo + doble ejecución (D9) | Hashes o métricas idénticos | COMPLETADA — `reports/determinismo.md`: 8/8 SHA-256 idénticos; la copia limpia reproduce exactamente lo versionado ([F6](validacion/F6.md)) |
+| F6.2 | CI completa (tests + cobertura ≥ 80 %) | Workflow; resultado registrado | COMPLETADA — job `tests` con `--cov-fail-under=80` (cobertura local 85 %) + job `research` (TF); resultado de Actions en la bitácora |
 
 ### F7 — Documentación y cierre
 Depende de: todo
 
 | ID | Tarea | Criterio | Estado |
 |---|---|---|---|
-| F7.1 | README nuevo, ficha del modelo, ficha de los datos | Revisión de coherencia con los resultados | PENDIENTE |
-| F7.2 | Informe final de validación (D1–D9, P, A, R) con pendientes explícitos | `docs/validacion/INFORME_FINAL.md` | PENDIENTE |
+| F7.1 | README nuevo, ficha del modelo, ficha de los datos | Revisión de coherencia con los resultados | COMPLETADA — `README.md`, `docs/MODEL_CARD.md`, `docs/DATA_CARD.md` (cifras contrastadas con `reports/holdout_metricas.csv`) |
+| F7.2 | Informe final de validación (D1–D9, P, A, R) con pendientes explícitos | `docs/validacion/INFORME_FINAL.md` | COMPLETADA |
 
 ## 7. Riesgos y planes de contingencia
 - **Ningún detector cumple D2 moderado.** Se informa; se analizan los escenarios que fallan; se evalúa el score por bloques de horas (CUSUM) antes de relajar un criterio, y cualquier relajación se documenta como desviación.
@@ -209,6 +209,9 @@ Depende de: todo
 - **El AE resulta superior.** Se conserva, con TF en el runtime y la justificación correspondiente.
 
 ## 8. Estado global
+
+**Veredicto:** sistema funcional, reproducible y validado de extremo a extremo; el modelo supera al original, pero **incumple D2 (severas y moderadas) y D3** — ver [INFORME_FINAL](validacion/INFORME_FINAL.md).
+
 | Fase | Estado | Informe |
 |---|---|---|
 | F0 | COMPLETADA (CI pendiente de verificar en F6) | [F0_F1](validacion/F0_F1.md) |
@@ -217,5 +220,5 @@ Depende de: todo
 | F3 | COMPLETADA (D7 → limitación) | [F3](validacion/F3.md) |
 | F4 | COMPLETADA con criterios incumplidos (D2, D3) | [F4](validacion/F4.md) |
 | F5 | COMPLETADA | [F5](validacion/F5.md) |
-| F6 | EN PROGRESO | – |
-| F7 | PENDIENTE | – |
+| F6 | COMPLETADA | [F6](validacion/F6.md) |
+| F7 | COMPLETADA | [INFORME_FINAL](validacion/INFORME_FINAL.md) |

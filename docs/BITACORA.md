@@ -104,3 +104,13 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - **Resultado:** todo en verde; E2E p95 de 665 ms; la interrupción inyectada se detecta vía archivo; el archivo inválido da un error controlado.
 - **Incidencias:** (1) selector E2E débil que dio una captura en estado de carga → corregido; (2) un test mal nombrado → renombrado. Detalle en `docs/validacion/F5.md`.
 - **CI:** GitHub Actions activo; ejecuciones 2–5 en `success` (verificado con la API de Actions).
+
+## 2026-11-23 — [F6] Reproducibilidad
+- **Cambio:** `scripts/reproduce.py`, `scripts/check_determinism.py`, objetivos de Make (`reproduce`, `reproduce-research`, `determinism`, `e2e`), CI con `--cov-fail-under=80` y un job `research` con TensorFlow.
+- **Resultado D9:** 8/8 salidas con SHA-256 idéntico entre dos ejecuciones aisladas (`reports/determinismo.md`). La copia limpia sin TF reproduce exactamente la selección, el umbral y las métricas de las 15 configuraciones sin AE versionadas.
+- **Hallazgo menor:** `artifacts/modelo.json` registraba `git_commit_build = 7ad6527` porque se construyó antes de hacer commit de la corrección del nivel; el contenido era correcto (lo confirma la comparación de hashes). Se reconstruye desde un commit limpio.
+
+## 2026-11-23 — [F7] Documentación y cierre
+- **Cambio:** `README.md` reescrito, `docs/MODEL_CARD.md`, `docs/DATA_CARD.md`, `docs/validacion/INFORME_FINAL.md`, `legacy/README.md`.
+- **Corrección antes de publicar:** el primer borrador de la ficha del modelo citaba recall por escenario de `perfil_contextual/top2` (configuración anterior). Se reemplazó por las cifras del modelo final, tomadas de `reports/holdout_metricas.csv` (T3 moderado 0,253; T1 moderado 0,745; T2 moderado 0,522).
+- **Veredicto:** sistema funcional, reproducible y validado; el modelo incumple D2 y D3 (informado sin relajar criterios).
