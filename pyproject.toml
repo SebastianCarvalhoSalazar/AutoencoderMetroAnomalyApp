@@ -19,3 +19,4 @@ markers = [
   "e2e: requiere navegador/servidor",
 ]
 addopts = "-ra"
+filterwarnings = ["ignore:.*holidays.*:FutureWarning", "ignore::DeprecationWarning:holidays"]

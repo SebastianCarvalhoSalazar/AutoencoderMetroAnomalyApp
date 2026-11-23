@@ -148,11 +148,11 @@ Depende de: F0.2
 
 | ID | Tarea | Criterio | Estado |
 |---|---|---|---|
-| F2.1 | `data.py`: carga de los 6 archivos, normalización de nombres de línea (mayúsculas y tildes), validación de esquema, tabla ancha por línea | Tests unitarios con fixtures pequeños y con los archivos reales | PENDIENTE |
-| F2.2 | Duplicados entre archivos (2024-01-01 Línea B) y fechas faltantes (2020) | Regla determinista documentada; test | PENDIENTE |
-| F2.3 | Semántica de NaN 22h/23h: análisis de datos + fuente oficial de horarios si se puede verificar | Decisión documentada con evidencia | PENDIENTE |
-| F2.4 | Reporte de calidad de datos (por año y línea) | `reports/calidad_datos.md` generado por un script | PENDIENTE |
-| F2.5 | `calendar.py`: festivos de Colombia, días especiales (24/12, 31/12), tipo de día; contraste con una fuente oficial para al menos un año | Tests; registro de la verificación | PENDIENTE |
+| F2.1 | `data.py`: carga de los 6 archivos, normalización de nombres de línea (mayúsculas y tildes), validación de esquema, tabla ancha por línea | Tests unitarios con fixtures pequeños y con los archivos reales | COMPLETADA — 21 unit + 6 integración; cobertura 96–100 % ([F2](validacion/F2.md)) |
+| F2.2 | Duplicados entre archivos (2024-01-01 Línea B) y fechas faltantes (2020) | Regla determinista documentada; test | COMPLETADA — 1 duplicado (2024-01-01 Línea B, valores distintos) resuelto con la regla 'archivo del mismo año'; `test_known_cross_file_duplicate_resolved` |
+| F2.3 | Semántica de NaN 22h/23h: análisis de datos + fuente oficial de horarios si se puede verificar | Decisión documentada con evidencia | COMPLETADA (con limitación) — 23h excluida de la puntuación, sin imputación; horario oficial de domingos no verificable (red) |
+| F2.4 | Reporte de calidad de datos (por año y línea) | `reports/calidad_datos.md` generado por un script | COMPLETADA — `scripts/data_quality.py` |
+| F2.5 | `calendar.py`: festivos de Colombia, días especiales (24/12, 31/12), tipo de día; contraste con una fuente oficial para al menos un año | Tests; registro de la verificación | COMPLETADA PARCIAL / verificación oficial BLOQUEADA (dominios oficiales sin resolución DNS); contraste empírico 40/40 |
 
 ### F3 — Problema, etiquetas y marco de evaluación
 Depende de: F2
@@ -213,8 +213,8 @@ Depende de: todo
 |---|---|---|
 | F0 | COMPLETADA (CI pendiente de verificar en F6) | [F0_F1](validacion/F0_F1.md) |
 | F1 | COMPLETADA | [F0_F1](validacion/F0_F1.md) |
-| F2 | EN PROGRESO | – |
-| F3 | PENDIENTE | – |
+| F2 | COMPLETADA (con limitaciones documentadas) | [F2](validacion/F2.md) |
+| F3 | EN PROGRESO | – |
 | F4 | PENDIENTE | – |
 | F5 | PENDIENTE | – |
 | F6 | PENDIENTE | – |
