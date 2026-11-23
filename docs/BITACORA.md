@@ -181,3 +181,8 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
   | audit | 5 |
   | e2e | 2 |
 - **Dictamen:** NO APTO como detección temprana de incidentes (bloqueantes B1–B3); APTO CON CONDICIONES como apoyo de revisión retrospectiva y control de calidad de datos (`docs/validacion/DICTAMEN_PRODUCCION.md`).
+
+## 2026-11-23 — [F9.5] Verificaciones finales
+- El artefacto se reconstruyó desde un commit limpio (`git_commit_build = d40e14e`), corrigiendo otra vez el desfase de procedencia: se había construido antes de hacer commit del código de los scores de referencia.
+- `reports/determinismo.md` se regeneró con el código actual: 8/8 salidas idénticas. El SHA-256 normalizado del artefacto versionado (`ec9cf22f0678e164`) coincide con el de las dos ejecuciones aisladas.
+- CI de GitHub Actions: ejecuciones 12, 13 y 14 en `success`.

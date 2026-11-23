@@ -11,6 +11,6 @@ Dos ejecuciones completas de `scripts/reproduce.py` (sin TensorFlow) en copias a
 | `reports/externo.md` | `3a19e00e409de887` | `3a19e00e409de887` | ✔ |
 | `reports/calidad_datos.md` | `9bca8a56a6879f6e` | `9bca8a56a6879f6e` | ✔ |
 | `reports/etiquetas.md` | `7ca40272475310cf` | `7ca40272475310cf` | ✔ |
-| `artifacts/modelo.json` | `f2a0ca9bbfdeb408` | `f2a0ca9bbfdeb408` | ✔ |
+| `artifacts/modelo.json` | `ec9cf22f0678e164` | `ec9cf22f0678e164` | ✔ |
 
 **Resultado: DETERMINISTA ✔**
