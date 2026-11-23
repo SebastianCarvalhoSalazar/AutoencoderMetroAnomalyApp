@@ -28,6 +28,7 @@ from .data import SCORED_HOURS
 
 LEVEL_WINDOW_DAYS = 28
 LEVEL_MIN_DAYS = 10
+LEVEL_FALLBACK_DAYS = (56, 91)
 SIGMA_FLOOR = 0.02
 MAD_K = 1.4826
 
@@ -54,6 +55,12 @@ def level_series(context: pd.DataFrame, dates, exclude_season: bool = False) -> 
     full_idx = pd.date_range(min(context.index.min(), dates.min()), max(context.index.max(), dates.max()), freq="D")
     lt = lt.reindex(full_idx)
     lvl = lt.rolling(f"{LEVEL_WINDOW_DAYS}D", closed="left", min_periods=LEVEL_MIN_DAYS).median()
+    # Respaldo causal: si la ventana de 28 días no tiene suficientes días válidos (p. ej., principios de enero
+    # cuando se excluye la temporada), se amplía a 56 y luego a 91 días (corrección F4.3, docs/BITACORA.md).
+    for w in LEVEL_FALLBACK_DAYS:
+        if not lvl.isna().any():
+            break
+        lvl = lvl.fillna(lt.rolling(f"{w}D", closed="left", min_periods=LEVEL_MIN_DAYS).median())
     return lvl.reindex(dates)
 
 

@@ -75,3 +75,26 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - **Expectativa explícita:** el resultado de DEV **no alcanza** D2 (moderada 0,80; severa 0,95). Según el plan no hay más rondas: el holdout medirá el desempeño real y D2 se informará como incumplida si así resulta.
 - **Hallazgos de la ronda 2:** (a) la regresión contextual baja la tasa en festivos a 0 % pero tiene menor recall; (b) `ae_contextual` sigue sin detectar T5 (≤ 0,02) y viola la restricción de festivos; se descarta para producción; (c) T4_duplicada (una hora ×2) es el escenario severo más débil (0,60 con el elegido).
 - **Congelado:** `configs/seleccion.yaml` (detector, agregación, umbral y umbrales de todas las líneas base). Commit previo a cualquier ejecución sobre el holdout.
+
+## 2026-11-23 — [F4.3] Holdout abierto (1.ª vez) con el modelo congelado en `7ad6527`
+- **Ejecución:** `scripts/run_eval.py --period holdout` para las 18 configuraciones; `scripts/evaluate_holdout.py`. Resultado del modelo elegido (`perfil_contextual/top2`, umbral 7,3482), **tal como se ejecutó**: D1 0,025 ✔ · D2 severas 0,877 ✘ · D2 moderadas 0,603 ✘ · D3 0,111 ✘ (2/18: Navidad, Año Nuevo) · D4 0,955 ✔ · D5a ✔ (mejor que todas las líneas base, IC > 0) · D5b ✔ (+0,303 frente al AE original, IC 0,25–0,35).
+- **Externo (con el mismo código):** D6 2019 = 0,109 ✔ (AE original 0,167 ✘); D7 = 4/4 eventos prospectivos detectados (todos los detectores los detectan; poco discriminante); COVID: el perfil alerta ~100 % de abril a junio de 2020 y tarda unos 5 meses en readaptarse (limitación ante cambios de régimen).
+
+## 2026-11-23 — [F4.3] HALLAZGO: defecto de implementación en los detectores de la ronda 2 (descubierto después de abrir el holdout)
+- **Defecto:** con `exclude_season=True`, el nivel causal de [t-28, t-1] queda con menos de 10 días válidos a principios de enero (la temporada va del 20/12 al 10/01) → nivel NaN → score NaN. Afecta a `perfil_contextual` y `regresion_contextual`: 17 días de DEV (2023-01-05…), 18 del holdout (2024-01-05…) y 32 del periodo COVID.
+- **Defecto de medición asociado:** `metrics()` trataba un score NaN como "sin alerta" (`NaN > umbral` = False) y como inyección no detectada. Por eso **los resultados de la ronda 2 y del holdout anteriores están sesgados**: la tasa de alertas a la baja; el recall, en parte a la baja por los NaN.
+- **Cómo se detectó:** un diagnóstico post-hoc (`np.quantile` devolvió NaN). Los tests no lo cubrían: la serie sintética de los tests no tiene una temporada de ~3 semanas que vacíe la ventana.
+- **Decisión:**
+  1. Corrección mínima y determinista, sin parámetros ajustables: si la ventana de 28 días no alcanza el mínimo de días válidos, se amplía de forma causal a 56 y luego a 91 días. No se usa ningún dato del holdout para decidirla.
+  2. `metrics()` reporta la **cobertura** (fracción de días puntuados) y un test exige cobertura = 100 % en los días completos.
+  3. Se **repite la selección DEV con la misma regla**, sin otros cambios, y se re-evalúa el holdout. Se publican las dos versiones (con y sin el defecto) para que la desviación sea trazable.
+- **Riesgo reconocido:** es una segunda lectura del holdout. Se justifica porque se corrige un defecto de implementación, no un ajuste de modelado; el umbral y la configuración salen de DEV con la regla pre-registrada.
+
+## 2026-11-23 — [F4.3–F4.6] Resultado final y artefacto
+- **Corrección aplicada:** respaldo causal del nivel (56/91 días) + `metrics()` con cobertura y exclusión de NaN. El test `test_full_coverage_through_year_end_season` falla con el código anterior (2 detectores) y pasa con el corregido. Los detectores no afectados reproducen bit a bit DEV, holdout y COVID.
+- **Selección repetida (misma regla):** con la corrección, `perfil_contextual/top2` baja en DEV de 0,578 a 0,395. **La mejora de la ronda 2 estaba inflada por el defecto.** Elegido `perfil_contextual/peak_shift`, umbral 7,388.
+- **Holdout (2.ª lectura):** D1 0,022 ✔ · D2 severas 0,894 ✘ · moderadas 0,506 ✘ · D3 0,111 ✘ · D4 1,00 ✔ · D5a ✔ (no inferior) · D5b ✔ (+0,207). **Externo:** D6 0,075 ✔ · D7 4/4 ✔.
+- **Corrección de presentación:** la tabla de alertas del holdout comparaba |z| por hora con el umbral del score agregado (escalas distintas); ahora lista las 4 horas de mayor |z| y el z medio.
+- **Artefacto:** `artifacts/modelo.json` (perfil_contextual/peak_shift, entrenado con 2023-07-02…2024-06-30, umbral de DEV, hash SHA-256 de los 6 archivos, commit, métricas del holdout).
+- **Decisión:** se despliega exactamente la configuración evaluada (umbral de DEV), aunque en el holdout resultó conservadora (2,2 % de alertas). La recalibración periódica queda como trabajo futuro no evaluado.
+- **Estado:** el modelo es funcional y supera claramente al sistema original, pero **no cumple todos los criterios pre-registrados (D2, D3)**. Se informa así; no se declara éxito del modelo.

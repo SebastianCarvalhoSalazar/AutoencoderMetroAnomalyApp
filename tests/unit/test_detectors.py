@@ -87,3 +87,17 @@ def test_peak_shift_detects_global_shift_better_than_max(synth):
 def test_peak_shift_requires_stats():
     with pytest.raises(ValueError):
         aggregate(pd.DataFrame([[1.0]]), "peak_shift")
+
+
+@pytest.mark.parametrize("name", NAMES)
+def test_full_coverage_through_year_end_season(name):
+    """Regresión F4.3: ningún detector puede dejar días completos sin puntuar (antes, principios de enero
+    quedaban en NaN con exclude_season=True)."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from conftest import make_series
+    s = make_series("2021-01-01", "2023-02-28")
+    det = REGISTRY[name]().fit(s.loc[:"2022-11-30"], s)
+    sc = det.score(s.loc["2022-12-01":"2023-02-28"], s).day
+    assert sc.notna().all(), sc[sc.isna()].index[:5]

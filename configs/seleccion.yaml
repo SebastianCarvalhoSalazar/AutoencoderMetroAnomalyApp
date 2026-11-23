@@ -1,24 +1,24 @@
 detector: perfil_contextual
-agg: top2
-umbral: 7.34818333663163
+agg: peak_shift
+umbral: 7.3880478521949176
 presupuesto_alertas: 0.05
 procedencia_umbral: cuantil 0,95 de los scores fuera de muestra de los días reales
   de DEV (2022-04-01…2023-06-30), rolling mensual
-mejor_por_recall: perfil_contextual/top2 (0.578)
+mejor_por_recall: perfil_contextual/peak_shift (0.432)
 empatados:
-- perfil_contextual/top2
+- perfil_contextual/peak_shift
 baselines_umbral:
-  perfil_contextual/top2: 7.34818333663163
-  perfil_contextual/peak_shift: 7.470900805266398
   ae_contextual/top2: 9.528508684422558
-  perfil_contextual/max: 9.162096830935933
+  perfil_contextual/peak_shift: 7.3880478521949176
   ae_contextual/max: 11.294387644297686
+  regresion_contextual/peak_shift: 8.640934683575228
+  perfil_contextual/top2: 8.500872862356218
+  regresion_contextual/max: 9.119185921794596
+  perfil_contextual/max: 10.026503315298319
   perfil_robusto/peak_shift: 7.889039550726757
-  regresion_contextual/peak_shift: 10.354211698961887
-  regresion_contextual/max: 11.19873670222716
+  regresion_contextual/top2: 8.399006414198158
   ae_original/max: 3578.1333586040296
   perfil_robusto/max: 9.987028968095384
-  regresion_contextual/top2: 9.751643325018778
   naive_semanal/max: 11.998833043342628
   perfil_robusto/top2: 9.206665413302918
   naive_semanal/top2: 10.284851927378092

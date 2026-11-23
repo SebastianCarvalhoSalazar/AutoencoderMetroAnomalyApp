@@ -83,7 +83,10 @@ def main():
     alerts["festivo"] = [holiday_name(d) or "" for d in alerts.index]
     if r.z_real is not None:
         z = r.z_real.loc[alerts.index]
-        alerts["horas_|z|>umbral"] = [", ".join(f"{c[1:]}h({v:+.1f})" for c, v in row.items() if abs(v) > thr) for _, row in z.iterrows()]
+        # El umbral está en la escala del score agregado (no en z por hora): se listan las 4 horas de mayor |z|.
+        alerts["horas_principales (z)"] = [", ".join(f"{c[1:]}h({row[c]:+.1f})" for c in row.abs().sort_values(ascending=False).index[:4])
+                                           for _, row in z.iterrows()]
+        alerts["z_medio"] = z.mean(axis=1).round(2)
     alerts["dia"] = alerts.index.day_name()
 
     cols = ["umbral_dev", "n_semillas", "tasa_alertas", "tasa_alertas_festivos", "recall_severa", "recall_moderada", "recall_leve",

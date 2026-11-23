@@ -172,10 +172,10 @@ Depende de: F3
 |---|---|---|---|
 | F4.1 | Detectores con interfaz común: naive, perfil robusto, regresión de calendario, AE original sin fuga, AE condicionado, IsolationForest | Test de causalidad (D8) para cada detector; test de determinismo | COMPLETADA — 6/6 detectores causales y deterministas |
 | F4.2 | Selección en DEV (rolling origin): criterio primario = recall medio en escenarios moderados con un 5 % de alertas, sujeto a tasa en festivos ≤ 10 %; desempate (diferencia < 0,02 con IC solapados) → el modelo más simple o rápido | `reports/seleccion_dev.md` con IC; decisión en la bitácora | COMPLETADA — 2 rondas (la 2.ª declarada como desviación tras un resultado negativo); elegida `perfil_contextual/top2`, umbral 7,348; DEV no alcanza D2 |
-| F4.3 | Congelar el modelo y el umbral; **una** evaluación en HOLDOUT (D1–D5) | `reports/holdout.md`; acceso registrado | PENDIENTE |
-| F4.4 | Evaluación externa: 2019 (D6), 2020–2021 (estrés), eventos reales (D7) | `reports/externo.md` | PENDIENTE |
-| F4.5 | Contexto multilínea (opcional): clasificar una alerta como sistémica (varias líneas) o local | Solo si F4.3 cumple; se evalúa con eventos reales y festivos | PENDIENTE |
-| F4.6 | Artefacto final + metadatos (R3) | `artifacts/` | PENDIENTE |
+| F4.3 | Congelar el modelo y el umbral; **una** evaluación en HOLDOUT (D1–D5) | `reports/holdout.md`; acceso registrado | COMPLETADA — D1 ✔, D2 ✘ (0,894/0,506), D3 ✘ (11,1 %), D4 ✔, D5 ✔; 2 lecturas por corrección de un defecto (bitácora F4.3) ([F4](validacion/F4.md)) |
+| F4.4 | Evaluación externa: 2019 (D6), 2020–2021 (estrés), eventos reales (D7) | `reports/externo.md` | COMPLETADA — D6 7,5 % ✔; D7 4/4 ✔ (poco discriminante); COVID: readaptación lenta (limitación) |
+| F4.5 | Contexto multilínea (opcional): clasificar una alerta como sistémica (varias líneas) o local | Solo si F4.3 cumple; se evalúa con eventos reales y festivos | NO EJECUTADA — condición previa incumplida (F4.3 no cumple D2/D3); queda como trabajo futuro |
+| F4.6 | Artefacto final + metadatos (R3) | `artifacts/` | COMPLETADA — `artifacts/modelo.json` (JSON, sin pickle; hash de datos, commit, métricas); test de ida y vuelta |
 
 ### F5 — Aplicación
 Depende de: F4.6
@@ -215,7 +215,7 @@ Depende de: todo
 | F1 | COMPLETADA | [F0_F1](validacion/F0_F1.md) |
 | F2 | COMPLETADA (con limitaciones documentadas) | [F2](validacion/F2.md) |
 | F3 | COMPLETADA (D7 → limitación) | [F3](validacion/F3.md) |
-| F4 | EN PROGRESO | – |
-| F5 | PENDIENTE | – |
+| F4 | COMPLETADA con criterios incumplidos (D2, D3) | [F4](validacion/F4.md) |
+| F5 | EN PROGRESO | – |
 | F6 | PENDIENTE | – |
 | F7 | PENDIENTE | – |

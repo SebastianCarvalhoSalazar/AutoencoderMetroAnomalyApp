@@ -54,3 +54,10 @@ def test_rolling_no_leakage_and_shapes(synth):
     assert len(res.real) == 92 and set(res.injected["escenario"].nunique() for _ in [0]) == {13}
     m = metrics(res, budget_threshold(res.real["score"]))
     assert 0.0 <= m["tasa_alertas"] <= 0.1
+
+
+def test_metrics_excludes_nan_and_reports_coverage():
+    t = _toy()
+    t.real.loc[t.real.index[0], "score"] = np.nan
+    m = metrics(t, 1.0)
+    assert m["cobertura_real"] == pytest.approx(13 / 14) and m["tasa_alertas"] == pytest.approx(1 / 13)

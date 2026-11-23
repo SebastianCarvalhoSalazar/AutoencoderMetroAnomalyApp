@@ -106,12 +106,15 @@ def budget_threshold(real_scores: pd.Series, budget: float = ALERT_BUDGET) -> fl
 
 # --------------------------------------------------------------------------------------- métricas
 def metrics(res: RollingResult, thr: float) -> dict:
-    r = res.real
+    # Los días sin score (NaN) NO se cuentan como "sin alerta": se excluyen y se informa la cobertura.
+    cov_real = float(res.real["score"].notna().mean()) if len(res.real) else np.nan
+    cov_inj = float(res.injected.loc[res.injected["aplicable"], "score"].notna().mean()) if len(res.injected) else np.nan
+    r = res.real[res.real["score"].notna()]
     alert = r["score"] > thr
     out = {"tasa_alertas": float(alert.mean()),
            "tasa_alertas_festivos": float(alert[r["festivo"]].mean()) if r["festivo"].any() else np.nan,
-           "n_dias": int(len(r))}
-    inj = res.injected[res.injected["aplicable"]]
+           "n_dias": int(len(r)), "cobertura_real": cov_real, "cobertura_inyectada": cov_inj}
+    inj = res.injected[res.injected["aplicable"] & res.injected["score"].notna()]
     det = inj["score"] > thr
     for (sid), g in inj.groupby("escenario"):
         out[f"recall_{sid}"] = float((g["score"] > thr).mean())
