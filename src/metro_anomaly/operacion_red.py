@@ -123,7 +123,8 @@ def process_red(dates, red: PL.Red, manifest_path: str | Path, log_path: str | P
     with open(log, "a", encoding="utf-8") as fh:
         for r in ev.itertuples(index=False):
             d, ln = pd.Timestamp(r.fecha), r.linea
-            key = (str(d.date()), ln, man_sha, _row_hash(red.Ws[ln].loc[d, D.SCORED_HOURS]))
+            # reindex: una línea "sin registro" no tiene fila ese día (defecto D11 hallado por la simulación)
+            key = (str(d.date()), ln, man_sha, _row_hash(red.Ws[ln].reindex([d])[D.SCORED_HOURS].iloc[0]))
             if key in seen:
                 summary["omitidos_ya_registrados"] += 1
                 continue

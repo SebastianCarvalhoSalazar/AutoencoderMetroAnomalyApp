@@ -140,3 +140,13 @@ def test_cli_red_exit_codes(tmp_path):
     (tmp_path / "f.txt").write_text("x")
     inp = subprocess.run(base + ["--archivo", str(tmp_path / "f.txt")], capture_output=True, text=True)
     assert inp.returncode == 2 and "error_entrada" in inp.stdout
+
+
+def test_line_without_records_is_logged(red, tmp_path):
+    """Defecto D11: un día en que una línea habitual no tiene ninguna fila debe registrarse, no romper el lote."""
+    s = OR.process_red(["2024-06-27"], red, MAN, tmp_path / "d.jsonl")
+    assert "2024-06-27 LINEA K" in s.get("lineas_sin_registro", [])
+    recs = {json.loads(x)["linea"]: json.loads(x) for x in (tmp_path / "d.jsonl").read_text(encoding="utf-8").splitlines()}
+    assert recs["LINEA K"]["categoria"] == "linea_sin_registro" and recs["LINEA K"]["datos_sha256"]
+    s2 = OR.process_red(["2024-06-12"], red, MAN, tmp_path / "d2.jsonl")
+    assert s2["por_categoria"].get("cierre_programado") == 1  # Línea P en mantenimiento anunciado
