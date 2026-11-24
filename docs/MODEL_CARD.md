@@ -76,7 +76,16 @@ Evidencia completa en `docs/validacion/F10_fase3_plataforma.md`, `reports/fase3/
 | Día de alta demanda (H6) | ¿Superará mañana el p95 del último año? | Total diario del GBM base frente al p95 de los 365 días previos | AUC 0,84–0,97 y mejor que el naive en A, 2, J, M, O, P y T-A | Adoptado solo en esas 7 líneas |
 | Alcance (H2) | Local / multilínea / generalizada | Fracción de otras líneas con \|z\| > 3 en el mismo sentido y las mismas horas (cortes 0,2 y 0,5) | Exactitud 0,884 (< 0,90) | Solo orientativo |
 
-**Reglas, con prioridad:** efecto de medición (elecciones en metro, tranvía y cable) > ausencia simultánea de registro en ≥ 3 líneas habituales > problema de datos > anomalía > sin anomalía. Los días incompletos en horas que la línea no siempre reporta son "no evaluable".
+**Reglas, con prioridad:**
+1. Efecto de medición: elecciones en metro, tranvía y cable.
+2. Cierre programado anunciado: `data/cierres_programados.csv`, con mantenimientos verificados.
+3. Ausencia simultánea de registro en ≥ 3 líneas habituales.
+4. Línea sin registro en todo el día: la línea operó en ≥ 80 % de los 56 días previos.
+5. Problema de datos.
+6. Anomalía.
+7. Sin anomalía.
+
+Los días incompletos en horas que la línea no siempre reporta son "no evaluable". Los días de cierre programado se excluyen del ajuste de los modelos, y el pronóstico de un día con cierre anunciado es 0.
 
 **Usos no previstos:**
 - detección temprana o en tiempo real de incidentes;

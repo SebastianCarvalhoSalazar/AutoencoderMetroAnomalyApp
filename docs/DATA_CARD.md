@@ -50,4 +50,9 @@ Hay 14 eventos registrados, cada uno con su fuente y su nivel de verificación.
   - La precipitación es la suma de la hora precedente, así que la franja h toma el registro h+1.
   - No mejoró el pronóstico (H5b descartada). Se conserva para investigación.
 - **Fuentes evaluadas y descartadas:** demografía por comuna (DANE/Alcaldía), encuesta Origen-Destino (AMVA), amenaza por movimientos en masa y corredores del POT. Son anuales o estáticas, o no alineables con línea × hora. Ver `docs/fase3/FUENTES_EXTERNAS.md`.
+- **Cierres programados** (`data/cierres_programados.csv`): mantenimientos anuales de los metrocables anunciados por Telemedellín.
+  - 2022: P del 20 al 28/06, K del 29/06 al 09/07, M del 29/06 al 01/07.
+  - 2024: P del 08 al 13/06, M del 14 al 16/06, H del 17 al 19/06.
+  - Para 2023 no se halló un anuncio con año explícito. Los días sin registro de esos cierres se marcan como "línea sin registro".
+  - En los datos, una línea cerrada aparece sin filas (no con ceros) o con un registro residual (P en 2024: 300–680 entradas al día).
 - **Datos faltantes** para capacidades no viables: ver `docs/fase3/HOJA_DE_RUTA_DATOS.md`.
