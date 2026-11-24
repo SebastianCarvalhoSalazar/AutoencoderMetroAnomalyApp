@@ -1,0 +1,1545 @@
+{
+ "lineas": {},
+ "inventario": [
+  {
+   "línea": "LINEA 1",
+   "modo": "bus",
+   "año": 2019,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 106870,
+   "pct_celdas_nan_04_22": 0.5,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA 1",
+   "modo": "bus",
+   "año": 2020,
+   "días": 363,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 57080,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA 1",
+   "modo": "bus",
+   "año": 2021,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 71655,
+   "pct_celdas_nan_04_22": 0.3,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA 1",
+   "modo": "bus",
+   "año": 2022,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 98488,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA 1",
+   "modo": "bus",
+   "año": 2023,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 98183,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA 1",
+   "modo": "bus",
+   "año": 2024,
+   "días": 182,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 92115,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA 2",
+   "modo": "bus",
+   "año": 2019,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 13531,
+   "pct_celdas_nan_04_22": 1.4,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA 2",
+   "modo": "bus",
+   "año": 2020,
+   "días": 363,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 7507,
+   "pct_celdas_nan_04_22": 1.2,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA 2",
+   "modo": "bus",
+   "año": 2021,
+   "días": 362,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 10077,
+   "pct_celdas_nan_04_22": 4.1,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA 2",
+   "modo": "bus",
+   "año": 2022,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 16615,
+   "pct_celdas_nan_04_22": 0.3,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA 2",
+   "modo": "bus",
+   "año": 2023,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 17683,
+   "pct_celdas_nan_04_22": 0.4,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA 2",
+   "modo": "bus",
+   "año": 2024,
+   "días": 182,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 16955,
+   "pct_celdas_nan_04_22": 0.4,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA A",
+   "modo": "metro",
+   "año": 2019,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 635597,
+   "pct_celdas_nan_04_22": 0.4,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA A",
+   "modo": "metro",
+   "año": 2020,
+   "días": 363,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 332307,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA A",
+   "modo": "metro",
+   "año": 2021,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 423812,
+   "pct_celdas_nan_04_22": 0.2,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA A",
+   "modo": "metro",
+   "año": 2022,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 568281,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA A",
+   "modo": "metro",
+   "año": 2023,
+   "días": 365,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 595817,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA A",
+   "modo": "metro",
+   "año": 2024,
+   "días": 182,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 571320,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA B",
+   "modo": "metro",
+   "año": 2019,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 94812,
+   "pct_celdas_nan_04_22": 0.5,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA B",
+   "modo": "metro",
+   "año": 2020,
+   "días": 363,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 47856,
+   "pct_celdas_nan_04_22": 0.1,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA B",
+   "modo": "metro",
+   "año": 2021,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 62687,
+   "pct_celdas_nan_04_22": 0.2,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA B",
+   "modo": "metro",
+   "año": 2022,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 87038,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA B",
+   "modo": "metro",
+   "año": 2023,
+   "días": 364,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 89292,
+   "pct_celdas_nan_04_22": 0.1,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA B",
+   "modo": "metro",
+   "año": 2024,
+   "días": 182,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 84410,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA H",
+   "modo": "cable",
+   "año": 2019,
+   "días": 362,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 2286,
+   "pct_celdas_nan_04_22": 4.8,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA H",
+   "modo": "cable",
+   "año": 2020,
+   "días": 360,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 1328,
+   "pct_celdas_nan_04_22": 5.6,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA H",
+   "modo": "cable",
+   "año": 2021,
+   "días": 362,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 1598,
+   "pct_celdas_nan_04_22": 5.2,
+   "pct_ceros_04_22": 0.04
+  },
+  {
+   "línea": "LINEA H",
+   "modo": "cable",
+   "año": 2022,
+   "días": 357,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 2223,
+   "pct_celdas_nan_04_22": 5.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA H",
+   "modo": "cable",
+   "año": 2023,
+   "días": 362,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 2333,
+   "pct_celdas_nan_04_22": 4.6,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA H",
+   "modo": "cable",
+   "año": 2024,
+   "días": 179,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 2281,
+   "pct_celdas_nan_04_22": 5.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA J",
+   "modo": "cable",
+   "año": 2019,
+   "días": 355,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 15278,
+   "pct_celdas_nan_04_22": 4.3,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA J",
+   "modo": "cable",
+   "año": 2020,
+   "días": 354,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 8671,
+   "pct_celdas_nan_04_22": 4.5,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA J",
+   "modo": "cable",
+   "año": 2021,
+   "días": 359,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 11546,
+   "pct_celdas_nan_04_22": 4.4,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA J",
+   "modo": "cable",
+   "año": 2022,
+   "días": 357,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 15172,
+   "pct_celdas_nan_04_22": 4.5,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA J",
+   "modo": "cable",
+   "año": 2023,
+   "días": 358,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 15692,
+   "pct_celdas_nan_04_22": 4.5,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA J",
+   "modo": "cable",
+   "año": 2024,
+   "días": 182,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 15078,
+   "pct_celdas_nan_04_22": 4.1,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA K",
+   "modo": "cable",
+   "año": 2019,
+   "días": 350,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 22594,
+   "pct_celdas_nan_04_22": 4.2,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA K",
+   "modo": "cable",
+   "año": 2020,
+   "días": 351,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 12438,
+   "pct_celdas_nan_04_22": 4.4,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA K",
+   "modo": "cable",
+   "año": 2021,
+   "días": 354,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 17819,
+   "pct_celdas_nan_04_22": 4.7,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA K",
+   "modo": "cable",
+   "año": 2022,
+   "días": 354,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 21952,
+   "pct_celdas_nan_04_22": 3.9,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA K",
+   "modo": "cable",
+   "año": 2023,
+   "días": 352,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 22696,
+   "pct_celdas_nan_04_22": 4.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA K",
+   "modo": "cable",
+   "año": 2024,
+   "días": 173,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 21464,
+   "pct_celdas_nan_04_22": 4.5,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA L",
+   "modo": "cable (turístico)",
+   "año": 2019,
+   "días": 319,
+   "horas_con_dato_mediana": 10,
+   "entradas_diarias_media": 3183,
+   "pct_celdas_nan_04_22": 46.4,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA L",
+   "modo": "cable (turístico)",
+   "año": 2020,
+   "días": 164,
+   "horas_con_dato_mediana": 10,
+   "entradas_diarias_media": 1839,
+   "pct_celdas_nan_04_22": 48.5,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA L",
+   "modo": "cable (turístico)",
+   "año": 2021,
+   "días": 289,
+   "horas_con_dato_mediana": 10,
+   "entradas_diarias_media": 1539,
+   "pct_celdas_nan_04_22": 48.2,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA L",
+   "modo": "cable (turístico)",
+   "año": 2022,
+   "días": 316,
+   "horas_con_dato_mediana": 10,
+   "entradas_diarias_media": 2112,
+   "pct_celdas_nan_04_22": 49.2,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA L",
+   "modo": "cable (turístico)",
+   "año": 2023,
+   "días": 314,
+   "horas_con_dato_mediana": 10,
+   "entradas_diarias_media": 2270,
+   "pct_celdas_nan_04_22": 49.1,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA L",
+   "modo": "cable (turístico)",
+   "año": 2024,
+   "días": 158,
+   "horas_con_dato_mediana": 10,
+   "entradas_diarias_media": 1991,
+   "pct_celdas_nan_04_22": 48.9,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA M",
+   "modo": "cable",
+   "año": 2019,
+   "días": 321,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 6364,
+   "pct_celdas_nan_04_22": 9.5,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA M",
+   "modo": "cable",
+   "año": 2020,
+   "días": 357,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 4687,
+   "pct_celdas_nan_04_22": 6.3,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA M",
+   "modo": "cable",
+   "año": 2021,
+   "días": 363,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 6164,
+   "pct_celdas_nan_04_22": 4.5,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA M",
+   "modo": "cable",
+   "año": 2022,
+   "días": 362,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 8415,
+   "pct_celdas_nan_04_22": 4.7,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA M",
+   "modo": "cable",
+   "año": 2023,
+   "días": 364,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 9061,
+   "pct_celdas_nan_04_22": 4.9,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA M",
+   "modo": "cable",
+   "año": 2024,
+   "días": 179,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 9159,
+   "pct_celdas_nan_04_22": 4.5,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA O",
+   "modo": "bus",
+   "año": 2019,
+   "días": 31,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 3517,
+   "pct_celdas_nan_04_22": 3.2,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA O",
+   "modo": "bus",
+   "año": 2020,
+   "días": 363,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 5077,
+   "pct_celdas_nan_04_22": 0.1,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA O",
+   "modo": "bus",
+   "año": 2021,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 7766,
+   "pct_celdas_nan_04_22": 1.2,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA O",
+   "modo": "bus",
+   "año": 2022,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 14032,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA O",
+   "modo": "bus",
+   "año": 2023,
+   "días": 365,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 14974,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA O",
+   "modo": "bus",
+   "año": 2024,
+   "días": 182,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 15307,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA P",
+   "modo": "cable",
+   "año": 2021,
+   "días": 208,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 10608,
+   "pct_celdas_nan_04_22": 5.3,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA P",
+   "modo": "cable",
+   "año": 2022,
+   "días": 356,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 16044,
+   "pct_celdas_nan_04_22": 4.1,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA P",
+   "modo": "cable",
+   "año": 2023,
+   "días": 363,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 18426,
+   "pct_celdas_nan_04_22": 4.5,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA P",
+   "modo": "cable",
+   "año": 2024,
+   "días": 182,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 17649,
+   "pct_celdas_nan_04_22": 4.1,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA T-A",
+   "modo": "tranvía",
+   "año": 2019,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 49752,
+   "pct_celdas_nan_04_22": 0.5,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA T-A",
+   "modo": "tranvía",
+   "año": 2020,
+   "días": 363,
+   "horas_con_dato_mediana": 19,
+   "entradas_diarias_media": 27150,
+   "pct_celdas_nan_04_22": 0.1,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA T-A",
+   "modo": "tranvía",
+   "año": 2021,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 32972,
+   "pct_celdas_nan_04_22": 0.3,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA T-A",
+   "modo": "tranvía",
+   "año": 2022,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 48779,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA T-A",
+   "modo": "tranvía",
+   "año": 2023,
+   "días": 365,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 51006,
+   "pct_celdas_nan_04_22": 0.1,
+   "pct_ceros_04_22": 0.0
+  },
+  {
+   "línea": "LINEA T-A",
+   "modo": "tranvía",
+   "año": 2024,
+   "días": 182,
+   "horas_con_dato_mediana": 20,
+   "entradas_diarias_media": 50019,
+   "pct_celdas_nan_04_22": 0.0,
+   "pct_ceros_04_22": 0.0
+  }
+ ],
+ "participacion_2023_pct": {
+  "LINEA A": 63.68,
+  "LINEA 1": 10.49,
+  "LINEA B": 9.52,
+  "LINEA T-A": 5.45,
+  "LINEA K": 2.34,
+  "LINEA P": 1.96,
+  "LINEA 2": 1.89,
+  "LINEA J": 1.65,
+  "LINEA O": 1.6,
+  "LINEA M": 0.97,
+  "LINEA H": 0.25,
+  "LINEA L": 0.21
+ },
+ "corr_log_diaria": {
+  "LINEA 1": {
+   "LINEA 1": 1.0,
+   "LINEA 2": 0.99,
+   "LINEA A": 0.98,
+   "LINEA B": 0.97,
+   "LINEA H": 0.96,
+   "LINEA J": 0.96,
+   "LINEA K": 0.88,
+   "LINEA M": 0.97,
+   "LINEA O": 0.94,
+   "LINEA P": 0.78,
+   "LINEA T-A": 0.97
+  },
+  "LINEA 2": {
+   "LINEA 1": 0.99,
+   "LINEA 2": 1.0,
+   "LINEA A": 0.98,
+   "LINEA B": 0.96,
+   "LINEA H": 0.97,
+   "LINEA J": 0.96,
+   "LINEA K": 0.9,
+   "LINEA M": 0.98,
+   "LINEA O": 0.92,
+   "LINEA P": 0.77,
+   "LINEA T-A": 0.97
+  },
+  "LINEA A": {
+   "LINEA 1": 0.98,
+   "LINEA 2": 0.98,
+   "LINEA A": 1.0,
+   "LINEA B": 0.99,
+   "LINEA H": 0.97,
+   "LINEA J": 0.97,
+   "LINEA K": 0.92,
+   "LINEA M": 0.98,
+   "LINEA O": 0.93,
+   "LINEA P": 0.78,
+   "LINEA T-A": 0.98
+  },
+  "LINEA B": {
+   "LINEA 1": 0.97,
+   "LINEA 2": 0.96,
+   "LINEA A": 0.99,
+   "LINEA B": 1.0,
+   "LINEA H": 0.96,
+   "LINEA J": 0.95,
+   "LINEA K": 0.91,
+   "LINEA M": 0.97,
+   "LINEA O": 0.93,
+   "LINEA P": 0.78,
+   "LINEA T-A": 0.98
+  },
+  "LINEA H": {
+   "LINEA 1": 0.96,
+   "LINEA 2": 0.97,
+   "LINEA A": 0.97,
+   "LINEA B": 0.96,
+   "LINEA H": 1.0,
+   "LINEA J": 0.98,
+   "LINEA K": 0.96,
+   "LINEA M": 0.98,
+   "LINEA O": 0.89,
+   "LINEA P": 0.76,
+   "LINEA T-A": 0.97
+  },
+  "LINEA J": {
+   "LINEA 1": 0.96,
+   "LINEA 2": 0.96,
+   "LINEA A": 0.97,
+   "LINEA B": 0.95,
+   "LINEA H": 0.98,
+   "LINEA J": 1.0,
+   "LINEA K": 0.97,
+   "LINEA M": 0.98,
+   "LINEA O": 0.87,
+   "LINEA P": 0.77,
+   "LINEA T-A": 0.95
+  },
+  "LINEA K": {
+   "LINEA 1": 0.88,
+   "LINEA 2": 0.9,
+   "LINEA A": 0.92,
+   "LINEA B": 0.91,
+   "LINEA H": 0.96,
+   "LINEA J": 0.97,
+   "LINEA K": 1.0,
+   "LINEA M": 0.94,
+   "LINEA O": 0.78,
+   "LINEA P": 0.74,
+   "LINEA T-A": 0.91
+  },
+  "LINEA M": {
+   "LINEA 1": 0.97,
+   "LINEA 2": 0.98,
+   "LINEA A": 0.98,
+   "LINEA B": 0.97,
+   "LINEA H": 0.98,
+   "LINEA J": 0.98,
+   "LINEA K": 0.94,
+   "LINEA M": 1.0,
+   "LINEA O": 0.93,
+   "LINEA P": 0.77,
+   "LINEA T-A": 0.98
+  },
+  "LINEA O": {
+   "LINEA 1": 0.94,
+   "LINEA 2": 0.92,
+   "LINEA A": 0.93,
+   "LINEA B": 0.93,
+   "LINEA H": 0.89,
+   "LINEA J": 0.87,
+   "LINEA K": 0.78,
+   "LINEA M": 0.93,
+   "LINEA O": 1.0,
+   "LINEA P": 0.75,
+   "LINEA T-A": 0.95
+  },
+  "LINEA P": {
+   "LINEA 1": 0.78,
+   "LINEA 2": 0.77,
+   "LINEA A": 0.78,
+   "LINEA B": 0.78,
+   "LINEA H": 0.76,
+   "LINEA J": 0.77,
+   "LINEA K": 0.74,
+   "LINEA M": 0.77,
+   "LINEA O": 0.75,
+   "LINEA P": 1.0,
+   "LINEA T-A": 0.78
+  },
+  "LINEA T-A": {
+   "LINEA 1": 0.97,
+   "LINEA 2": 0.97,
+   "LINEA A": 0.98,
+   "LINEA B": 0.98,
+   "LINEA H": 0.97,
+   "LINEA J": 0.95,
+   "LINEA K": 0.91,
+   "LINEA M": 0.98,
+   "LINEA O": 0.95,
+   "LINEA P": 0.78,
+   "LINEA T-A": 1.0
+  }
+ },
+ "corr_residuo_diario": {
+  "LINEA 1": {
+   "LINEA 1": 1.0,
+   "LINEA 2": 0.96,
+   "LINEA A": 0.98,
+   "LINEA B": 0.97,
+   "LINEA H": 0.93,
+   "LINEA J": 0.93,
+   "LINEA K": 0.87,
+   "LINEA M": 0.96,
+   "LINEA O": 0.84,
+   "LINEA P": 0.62,
+   "LINEA T-A": 0.96
+  },
+  "LINEA 2": {
+   "LINEA 1": 0.96,
+   "LINEA 2": 1.0,
+   "LINEA A": 0.96,
+   "LINEA B": 0.93,
+   "LINEA H": 0.93,
+   "LINEA J": 0.93,
+   "LINEA K": 0.89,
+   "LINEA M": 0.95,
+   "LINEA O": 0.76,
+   "LINEA P": 0.59,
+   "LINEA T-A": 0.92
+  },
+  "LINEA A": {
+   "LINEA 1": 0.98,
+   "LINEA 2": 0.96,
+   "LINEA A": 1.0,
+   "LINEA B": 0.98,
+   "LINEA H": 0.95,
+   "LINEA J": 0.95,
+   "LINEA K": 0.91,
+   "LINEA M": 0.97,
+   "LINEA O": 0.81,
+   "LINEA P": 0.6,
+   "LINEA T-A": 0.95
+  },
+  "LINEA B": {
+   "LINEA 1": 0.97,
+   "LINEA 2": 0.93,
+   "LINEA A": 0.98,
+   "LINEA B": 1.0,
+   "LINEA H": 0.91,
+   "LINEA J": 0.91,
+   "LINEA K": 0.86,
+   "LINEA M": 0.95,
+   "LINEA O": 0.86,
+   "LINEA P": 0.61,
+   "LINEA T-A": 0.97
+  },
+  "LINEA H": {
+   "LINEA 1": 0.93,
+   "LINEA 2": 0.93,
+   "LINEA A": 0.95,
+   "LINEA B": 0.91,
+   "LINEA H": 1.0,
+   "LINEA J": 0.95,
+   "LINEA K": 0.92,
+   "LINEA M": 0.96,
+   "LINEA O": 0.73,
+   "LINEA P": 0.59,
+   "LINEA T-A": 0.91
+  },
+  "LINEA J": {
+   "LINEA 1": 0.93,
+   "LINEA 2": 0.93,
+   "LINEA A": 0.95,
+   "LINEA B": 0.91,
+   "LINEA H": 0.95,
+   "LINEA J": 1.0,
+   "LINEA K": 0.94,
+   "LINEA M": 0.95,
+   "LINEA O": 0.71,
+   "LINEA P": 0.58,
+   "LINEA T-A": 0.89
+  },
+  "LINEA K": {
+   "LINEA 1": 0.87,
+   "LINEA 2": 0.89,
+   "LINEA A": 0.91,
+   "LINEA B": 0.86,
+   "LINEA H": 0.92,
+   "LINEA J": 0.94,
+   "LINEA K": 1.0,
+   "LINEA M": 0.9,
+   "LINEA O": 0.64,
+   "LINEA P": 0.57,
+   "LINEA T-A": 0.83
+  },
+  "LINEA M": {
+   "LINEA 1": 0.96,
+   "LINEA 2": 0.95,
+   "LINEA A": 0.97,
+   "LINEA B": 0.95,
+   "LINEA H": 0.96,
+   "LINEA J": 0.95,
+   "LINEA K": 0.9,
+   "LINEA M": 1.0,
+   "LINEA O": 0.8,
+   "LINEA P": 0.61,
+   "LINEA T-A": 0.96
+  },
+  "LINEA O": {
+   "LINEA 1": 0.84,
+   "LINEA 2": 0.76,
+   "LINEA A": 0.81,
+   "LINEA B": 0.86,
+   "LINEA H": 0.73,
+   "LINEA J": 0.71,
+   "LINEA K": 0.64,
+   "LINEA M": 0.8,
+   "LINEA O": 1.0,
+   "LINEA P": 0.57,
+   "LINEA T-A": 0.92
+  },
+  "LINEA P": {
+   "LINEA 1": 0.62,
+   "LINEA 2": 0.59,
+   "LINEA A": 0.6,
+   "LINEA B": 0.61,
+   "LINEA H": 0.59,
+   "LINEA J": 0.58,
+   "LINEA K": 0.57,
+   "LINEA M": 0.61,
+   "LINEA O": 0.57,
+   "LINEA P": 1.0,
+   "LINEA T-A": 0.62
+  },
+  "LINEA T-A": {
+   "LINEA 1": 0.96,
+   "LINEA 2": 0.92,
+   "LINEA A": 0.95,
+   "LINEA B": 0.97,
+   "LINEA H": 0.91,
+   "LINEA J": 0.89,
+   "LINEA K": 0.83,
+   "LINEA M": 0.96,
+   "LINEA O": 0.92,
+   "LINEA P": 0.62,
+   "LINEA T-A": 1.0
+  }
+ },
+ "pca_residuo_varianza_explicada": [
+  0.87,
+  0.055,
+  0.043,
+  0.011
+ ],
+ "huecos_simultaneos_>=3_lineas": {
+  "2019-01-15": {
+   "h12": 3,
+   "h13": 5,
+   "h14": 6
+  },
+  "2019-01-24": {
+   "h15": 8
+  },
+  "2019-02-16": {
+   "h08": 4,
+   "h09": 6,
+   "h11": 7,
+   "h12": 7,
+   "h13": 7,
+   "h14": 7
+  },
+  "2019-03-04": {
+   "h10": 8
+  },
+  "2019-03-13": {
+   "h07": 3,
+   "h08": 4,
+   "h10": 7
+  },
+  "2019-04-02": {
+   "h09": 9
+  },
+  "2019-04-26": {
+   "h04": 4,
+   "h05": 4,
+   "h06": 4,
+   "h08": 6
+  },
+  "2019-05-02": {
+   "h15": 7,
+   "h16": 7
+  },
+  "2019-05-13": {
+   "h10": 8,
+   "h11": 8,
+   "h12": 8
+  },
+  "2019-07-17": {
+   "h09": 8
+  },
+  "2019-09-04": {
+   "h11": 4,
+   "h12": 3
+  },
+  "2019-09-05": {
+   "h04": 4,
+   "h05": 5,
+   "h06": 4
+  },
+  "2019-09-23": {
+   "h10": 9
+  },
+  "2019-10-19": {
+   "h04": 5,
+   "h05": 5,
+   "h06": 5,
+   "h07": 5
+  },
+  "2019-10-27": {
+   "h14": 3,
+   "h15": 3,
+   "h16": 3
+  },
+  "2019-11-10": {
+   "h08": 3
+  },
+  "2019-11-20": {
+   "h09": 8,
+   "h10": 8
+  },
+  "2019-12-30": {
+   "h13": 8
+  },
+  "2019-12-31": {
+   "h22": 10
+  },
+  "2020-01-01": {
+   "h04": 4
+  },
+  "2020-03-15": {
+   "h08": 3
+  },
+  "2020-03-23": {
+   "h22": 3
+  },
+  "2020-06-13": {
+   "h04": 6,
+   "h05": 6,
+   "h06": 6,
+   "h07": 6,
+   "h08": 8,
+   "h09": 10,
+   "h10": 10,
+   "h11": 10,
+   "h12": 10,
+   "h13": 10,
+   "h14": 10,
+   "h15": 10,
+   "h16": 10,
+   "h17": 10,
+   "h18": 10,
+   "h19": 10,
+   "h20": 10,
+   "h21": 10,
+   "h22": 8
+  },
+  "2020-08-08": {
+   "h04": 5,
+   "h05": 6,
+   "h06": 6,
+   "h07": 6,
+   "h08": 8,
+   "h09": 10,
+   "h10": 10,
+   "h11": 10,
+   "h12": 10,
+   "h13": 10,
+   "h14": 10,
+   "h15": 10,
+   "h16": 10,
+   "h17": 10,
+   "h18": 10,
+   "h19": 10,
+   "h20": 10,
+   "h21": 10,
+   "h22": 10
+  },
+  "2020-11-12": {
+   "h04": 5,
+   "h05": 6,
+   "h06": 6,
+   "h07": 6,
+   "h08": 6,
+   "h09": 6,
+   "h10": 6,
+   "h11": 6,
+   "h12": 6,
+   "h13": 6,
+   "h14": 6,
+   "h15": 6,
+   "h16": 6,
+   "h17": 6,
+   "h18": 6,
+   "h19": 6,
+   "h20": 6,
+   "h21": 6,
+   "h22": 6
+  },
+  "2020-12-24": {
+   "h22": 9
+  },
+  "2020-12-25": {
+   "h22": 10
+  },
+  "2020-12-31": {
+   "h22": 9
+  },
+  "2021-01-01": {
+   "h04": 5,
+   "h21": 4
+  },
+  "2021-01-02": {
+   "h04": 5
+  },
+  "2021-04-28": {
+   "h17": 5
+  },
+  "2021-05-01": {
+   "h08": 3,
+   "h11": 3,
+   "h16": 4,
+   "h18": 7,
+   "h19": 9,
+   "h20": 10,
+   "h21": 10,
+   "h22": 9
+  },
+  "2021-05-02": {
+   "h15": 4,
+   "h20": 3,
+   "h21": 3,
+   "h22": 4
+  },
+  "2021-05-05": {
+   "h20": 3,
+   "h21": 7,
+   "h22": 6
+  },
+  "2021-11-28": {
+   "h04": 6
+  },
+  "2022-03-30": {
+   "h14": 3
+  },
+  "2022-06-19": {
+   "h08": 3,
+   "h09": 3,
+   "h10": 4,
+   "h11": 4,
+   "h12": 3,
+   "h13": 4,
+   "h14": 4,
+   "h15": 4,
+   "h16": 3
+  },
+  "2023-08-28": {
+   "h19": 3
+  },
+  "2023-10-29": {
+   "h08": 6,
+   "h09": 5,
+   "h10": 5,
+   "h11": 5,
+   "h12": 5,
+   "h13": 3,
+   "h14": 3,
+   "h15": 5,
+   "h16": 3
+  },
+  "2023-12-24": {
+   "h22": 11
+  },
+  "2023-12-31": {
+   "h22": 11
+  }
+ },
+ "eventos_z": {
+  "IN3_2023-08-28": {
+   "LINEA 1": {
+    "h16": 1.1,
+    "h17": -1.8,
+    "h18": -8.1,
+    "h19": -0.9,
+    "h20": 0.7
+   },
+   "LINEA 2": {
+    "h16": -0.9,
+    "h17": 1.4,
+    "h18": 2.8,
+    "h19": 7.6,
+    "h20": 8.9
+   },
+   "LINEA A": {
+    "h16": 1.7,
+    "h17": -13.6,
+    "h18": -61.2,
+    "h19": -136.6,
+    "h20": 3.5
+   },
+   "LINEA B": {
+    "h16": 0.8,
+    "h17": 0.5,
+    "h18": -10.7,
+    "h19": NaN,
+    "h20": 3.0
+   },
+   "LINEA H": {
+    "h16": 6.5,
+    "h17": 3.8,
+    "h18": -6.1,
+    "h19": -7.6,
+    "h20": -0.7
+   },
+   "LINEA J": {
+    "h16": 0.4,
+    "h17": 1.2,
+    "h18": -1.9,
+    "h19": NaN,
+    "h20": -14.4
+   },
+   "LINEA K": {
+    "h16": 2.2,
+    "h17": 0.2,
+    "h18": -2.7,
+    "h19": NaN,
+    "h20": -6.8
+   },
+   "LINEA M": {
+    "h16": 0.9,
+    "h17": -2.4,
+    "h18": -7.2,
+    "h19": -5.5,
+    "h20": -1.4
+   },
+   "LINEA O": {
+    "h16": 1.2,
+    "h17": 7.9,
+    "h18": 4.4,
+    "h19": 11.1,
+    "h20": 6.7
+   },
+   "LINEA P": {
+    "h16": 2.9,
+    "h17": -2.1,
+    "h18": -12.9,
+    "h19": NaN,
+    "h20": -11.0
+   },
+   "LINEA T-A": {
+    "h16": 1.6,
+    "h17": -4.9,
+    "h18": -12.4,
+    "h19": -7.0,
+    "h20": 2.0
+   }
+  },
+  "IN2_2023-08-22": {
+   "LINEA 1": {
+    "h06": -0.1,
+    "h07": 1.0,
+    "h08": 3.3,
+    "h09": 1.6
+   },
+   "LINEA 2": {
+    "h06": -1.6,
+    "h07": 2.3,
+    "h08": 1.7,
+    "h09": 2.2
+   },
+   "LINEA A": {
+    "h06": 1.0,
+    "h07": -2.3,
+    "h08": 2.6,
+    "h09": 1.9
+   },
+   "LINEA B": {
+    "h06": 0.0,
+    "h07": 0.3,
+    "h08": 1.4,
+    "h09": 0.9
+   },
+   "LINEA H": {
+    "h06": -1.3,
+    "h07": -0.4,
+    "h08": -0.3,
+    "h09": 1.6
+   },
+   "LINEA J": {
+    "h06": -0.3,
+    "h07": 0.8,
+    "h08": 0.2,
+    "h09": 0.6
+   },
+   "LINEA K": {
+    "h06": 0.2,
+    "h07": -3.4,
+    "h08": -0.6,
+    "h09": -0.2
+   },
+   "LINEA M": {
+    "h06": -0.5,
+    "h07": -0.6,
+    "h08": 1.3,
+    "h09": -1.9
+   },
+   "LINEA O": {
+    "h06": 1.2,
+    "h07": 1.1,
+    "h08": 3.1,
+    "h09": 5.2
+   },
+   "LINEA P": {
+    "h06": NaN,
+    "h07": NaN,
+    "h08": NaN,
+    "h09": NaN
+   },
+   "LINEA T-A": {
+    "h06": 0.2,
+    "h07": 0.3,
+    "h08": 3.2,
+    "h09": 3.2
+   }
+  },
+  "IN1_2023-02-05": {
+   "LINEA 1": {
+    "h17": -0.4,
+    "h18": -0.8,
+    "h19": -0.2,
+    "h20": -0.4
+   },
+   "LINEA 2": {
+    "h17": -0.1,
+    "h18": -0.5,
+    "h19": 0.2,
+    "h20": 0.2
+   },
+   "LINEA A": {
+    "h17": 0.3,
+    "h18": -1.2,
+    "h19": -1.1,
+    "h20": -1.0
+   },
+   "LINEA B": {
+    "h17": -1.1,
+    "h18": -2.5,
+    "h19": -0.8,
+    "h20": -1.4
+   },
+   "LINEA H": {
+    "h17": -0.1,
+    "h18": -1.8,
+    "h19": -0.8,
+    "h20": -3.7
+   },
+   "LINEA J": {
+    "h17": -0.5,
+    "h18": -0.5,
+    "h19": -0.3,
+    "h20": 0.2
+   },
+   "LINEA K": {
+    "h17": -0.1,
+    "h18": -0.4,
+    "h19": 0.1,
+    "h20": -0.3
+   },
+   "LINEA M": {
+    "h17": -0.2,
+    "h18": -0.5,
+    "h19": 0.3,
+    "h20": 3.5
+   },
+   "LINEA O": {
+    "h17": 0.7,
+    "h18": 0.3,
+    "h19": 3.0,
+    "h20": 1.7
+   },
+   "LINEA P": {
+    "h17": -0.7,
+    "h18": -0.7,
+    "h19": -0.3,
+    "h20": -0.2
+   },
+   "LINEA T-A": {
+    "h17": 0.6,
+    "h18": -0.3,
+    "h19": 1.6,
+    "h20": -0.2
+   }
+  },
+  "MED1_2023-10-29": {
+   "LINEA 1": {
+    "h08": 4.4,
+    "h12": 9.7,
+    "h16": 3.4,
+    "h17": -1.0
+   },
+   "LINEA 2": {
+    "h08": 4.3,
+    "h12": 2.6,
+    "h16": -1.3,
+    "h17": -2.5
+   },
+   "LINEA A": {
+    "h08": -157.9,
+    "h12": -236.9,
+    "h16": -244.3,
+    "h17": -5.3
+   },
+   "LINEA B": {
+    "h08": NaN,
+    "h12": NaN,
+    "h16": -169.0,
+    "h17": -3.5
+   },
+   "LINEA H": {
+    "h08": NaN,
+    "h12": NaN,
+    "h16": NaN,
+    "h17": -0.7
+   },
+   "LINEA J": {
+    "h08": NaN,
+    "h12": NaN,
+    "h16": NaN,
+    "h17": -6.8
+   },
+   "LINEA K": {
+    "h08": NaN,
+    "h12": -212.8,
+    "h16": -55.7,
+    "h17": -2.9
+   },
+   "LINEA M": {
+    "h08": NaN,
+    "h12": NaN,
+    "h16": NaN,
+    "h17": 3.1
+   },
+   "LINEA O": {
+    "h08": 1.8,
+    "h12": 1.5,
+    "h16": -0.8,
+    "h17": -0.7
+   },
+   "LINEA P": {
+    "h08": NaN,
+    "h12": NaN,
+    "h16": -139.4,
+    "h17": -15.0
+   },
+   "LINEA T-A": {
+    "h08": -79.0,
+    "h12": -117.0,
+    "h16": -172.8,
+    "h17": -3.8
+   }
+  }
+ },
+ "lineas_principales": [
+  "LINEA 1",
+  "LINEA 2",
+  "LINEA A",
+  "LINEA B",
+  "LINEA H",
+  "LINEA J",
+  "LINEA K",
+  "LINEA M",
+  "LINEA O",
+  "LINEA P",
+  "LINEA T-A"
+ ]
+}

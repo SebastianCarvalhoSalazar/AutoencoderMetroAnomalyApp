@@ -306,12 +306,24 @@ Objetivo: aprovechar todas las líneas y fuentes externas alineables de forma co
 | H6 | Se pueden **anticipar días de alta demanda** (> p95 de la línea) con un día de antelación | AUC > 0,80 y mejor que el naive |
 | H7 | Las fuentes de **demografía y suelos** del Valle de Aburrá aportan a modelos línea × hora | solo si son alineables temporal y espacialmente; si no, se documentan para una fase con datos por estación |
 
+### Resultados frente a los criterios pre-registrados
+| ID | Resultado | Veredicto |
+|---|---|---|
+| H1 | Línea A, holdout: recall moderado 0,702 → 0,900, diferencia +0,198 con IC 95 % [0,177; 0,216]; alertas en festivos 0,222 → 0,111. B: +0,052 y 1: +0,091 (IC > 0); T-A: sin mejora | **CUMPLE** (adoptado en A, B y 1) |
+| H2 | Exactitud 0,884 con inyecciones locales y generalizadas; elecciones = generalizada; 28/08 = multilínea (no ciego) | **NO CUMPLE**: solo descriptivo |
+| H3 | 28/08/2023, 19 h: la Línea 2 sube con z = 6,8; la O sube con un método y no con el otro; n = 1 | Cumple el criterio descriptivo; sin generalización ni causalidad |
+| H4 | Recall 1,0 (fallas simuladas en 3–6 líneas); 4 de 731 días reales (0,55 %), todos explicados por operación o calendario | **CUMPLE**. Se reinterpreta como "ausencia simultánea de registro", no como falla de recaudo |
+| H5 | Híbrido elegido en DEV: WAPE 11,5–27,6 % menor que el naive en 11 de 11 líneas (A: 24,9 %). Cobertura del intervalo sin calibrar en A: 0,723 | Pronóstico puntual: **CUMPLE**. Intervalo pre-registrado: **NO CUMPLE**; con calibración conformal posterior, 0,79–0,82 (evidencia más débil) |
+| H5b | La lluvia observada (oráculo) empeora el WAPE en las 11 líneas | **DESCARTADA** |
+| H6 | GBM: AUC > 0,80 y mejor que el naive en A, 2, J, M, O, P y T-A; no en B, K ni H; la 1 tiene 3 positivos | **CUMPLE PARCIALMENTE** (7 de 11 líneas) |
+| H7 | Fuentes anuales o estáticas, no alineables con línea × hora | **DESCARTADA** |
+
 ### Tareas
 | ID | Tarea | Estado |
 |---|---|---|
-| F10.1 | Inventario y análisis exploratorio multilínea (cobertura, calidad, correlaciones, patrones compartidos, topología) | PENDIENTE |
-| F10.2 | Exploración de fuentes externas (demografía, suelos, clima) con evaluación de alineabilidad | PENDIENTE |
-| F10.3 | Experimentos H1–H6 con reproducción cronológica, inyección controlada y validación fuera de muestra | PENDIENTE |
+| F10.1 | Inventario y análisis exploratorio multilínea (cobertura, calidad, correlaciones, patrones compartidos, topología) | COMPLETADA — `reports/fase3/eda_multilinea.md`, `data/lineas.csv`, `data/topologia_red.csv` |
+| F10.2 | Exploración de fuentes externas (demografía, suelos, clima) con evaluación de alineabilidad | COMPLETADA — `docs/fase3/FUENTES_EXTERNAS.md` (clima integrado; demografía, suelos y SIG descartados con motivo) |
+| F10.3 | Experimentos H1–H6 con reproducción cronológica, inyección controlada y validación fuera de muestra | COMPLETADA — `reports/fase3/red.md`, `reports/fase3/pronostico_{dev,holdout}.md`; resultados en la tabla siguiente |
 | F10.4 | Arquitectura modular (fuentes, modelos especializados, motor de reglas, grafo de red, orquestador de evaluaciones, registro y versionado) | PENDIENTE |
 | F10.5 | Experiencia visual (red, mapas de calor, series comparadas, reproducción histórica, pronóstico y riesgo) | PENDIENTE |
 | F10.6 | Pruebas (unitarias, integración, E2E, coherencia visual-datos, rendimiento, robustez y regresión) | PENDIENTE |

@@ -1,0 +1,303 @@
+{
+ "periodo": "holdout",
+ "n_filas_total": 74080,
+ "n_filas_comunes": 69252,
+ "wape_global": {
+  "naive": 0.0725,
+  "perfil": 0.0685,
+  "gbm": 0.0564,
+  "gbm_v2": 0.0559,
+  "combo": 0.0558,
+  "combo_v2": 0.0557,
+  "gbm_clima": 0.0581,
+  "seleccion_dev": 0.0555
+ },
+ "wape_por_linea": {
+  "LINEA 1": {
+   "naive": 0.0654,
+   "perfil": 0.0645,
+   "gbm": 0.0511,
+   "gbm_v2": 0.0503,
+   "combo": 0.051,
+   "combo_v2": 0.0508,
+   "gbm_clima": 0.0524,
+   "seleccion_dev": 0.0508
+  },
+  "LINEA 2": {
+   "naive": 0.086,
+   "perfil": 0.0729,
+   "gbm": 0.0718,
+   "gbm_v2": 0.0715,
+   "combo": 0.066,
+   "combo_v2": 0.0658,
+   "gbm_clima": 0.0725,
+   "seleccion_dev": 0.0658
+  },
+  "LINEA A": {
+   "naive": 0.0682,
+   "perfil": 0.0635,
+   "gbm": 0.0517,
+   "gbm_v2": 0.0511,
+   "combo": 0.0513,
+   "combo_v2": 0.0512,
+   "gbm_clima": 0.0536,
+   "seleccion_dev": 0.0512
+  },
+  "LINEA B": {
+   "naive": 0.0809,
+   "perfil": 0.0764,
+   "gbm": 0.0627,
+   "gbm_v2": 0.0628,
+   "combo": 0.0624,
+   "combo_v2": 0.0626,
+   "gbm_clima": 0.0647,
+   "seleccion_dev": 0.0626
+  },
+  "LINEA H": {
+   "naive": 0.1277,
+   "perfil": 0.1045,
+   "gbm": 0.1154,
+   "gbm_v2": 0.1137,
+   "combo": 0.1041,
+   "combo_v2": 0.1034,
+   "gbm_clima": 0.1158,
+   "seleccion_dev": 0.1034
+  },
+  "LINEA J": {
+   "naive": 0.0822,
+   "perfil": 0.0707,
+   "gbm": 0.0703,
+   "gbm_v2": 0.0693,
+   "combo": 0.0637,
+   "combo_v2": 0.0633,
+   "gbm_clima": 0.0704,
+   "seleccion_dev": 0.0633
+  },
+  "LINEA K": {
+   "naive": 0.0845,
+   "perfil": 0.066,
+   "gbm": 0.0691,
+   "gbm_v2": 0.0684,
+   "combo": 0.0615,
+   "combo_v2": 0.0612,
+   "gbm_clima": 0.0699,
+   "seleccion_dev": 0.0612
+  },
+  "LINEA M": {
+   "naive": 0.1007,
+   "perfil": 0.0805,
+   "gbm": 0.0893,
+   "gbm_v2": 0.0882,
+   "combo": 0.0782,
+   "combo_v2": 0.0778,
+   "gbm_clima": 0.0898,
+   "seleccion_dev": 0.0782
+  },
+  "LINEA O": {
+   "naive": 0.0977,
+   "perfil": 0.1317,
+   "gbm": 0.0841,
+   "gbm_v2": 0.0819,
+   "combo": 0.0978,
+   "combo_v2": 0.0966,
+   "gbm_clima": 0.0856,
+   "seleccion_dev": 0.0819
+  },
+  "LINEA P": {
+   "naive": 0.0958,
+   "perfil": 0.1025,
+   "gbm": 0.0879,
+   "gbm_v2": 0.0867,
+   "combo": 0.0853,
+   "combo_v2": 0.0848,
+   "gbm_clima": 0.0884,
+   "seleccion_dev": 0.0848
+  },
+  "LINEA T-A": {
+   "naive": 0.0878,
+   "perfil": 0.0868,
+   "gbm": 0.0701,
+   "gbm_v2": 0.0702,
+   "combo": 0.0707,
+   "combo_v2": 0.0708,
+   "gbm_clima": 0.0716,
+   "seleccion_dev": 0.0708
+  }
+ },
+ "cobertura_intervalo_80": {
+  "LINEA 1": 0.774,
+  "LINEA 2": 0.781,
+  "LINEA A": 0.723,
+  "LINEA B": 0.758,
+  "LINEA H": 0.76,
+  "LINEA J": 0.772,
+  "LINEA K": 0.777,
+  "LINEA M": 0.79,
+  "LINEA O": 0.803,
+  "LINEA P": 0.772,
+  "LINEA T-A": 0.76
+ },
+ "cobertura_80_calibrada_desde_mes_2": {
+  "LINEA 1": 0.804,
+  "LINEA 2": 0.802,
+  "LINEA A": 0.807,
+  "LINEA B": 0.816,
+  "LINEA H": 0.812,
+  "LINEA J": 0.792,
+  "LINEA K": 0.813,
+  "LINEA M": 0.806,
+  "LINEA O": 0.818,
+  "LINEA P": 0.802,
+  "LINEA T-A": 0.814
+ },
+ "ancho_relativo_mediano_calibrado": {
+  "LINEA 1": 0.147,
+  "LINEA 2": 0.202,
+  "LINEA A": 0.144,
+  "LINEA B": 0.173,
+  "LINEA H": 0.519,
+  "LINEA J": 0.235,
+  "LINEA K": 0.23,
+  "LINEA M": 0.261,
+  "LINEA O": 0.275,
+  "LINEA P": 0.26,
+  "LINEA T-A": 0.186
+ },
+ "seleccion_por_linea": {
+  "LINEA 1": "combo_v2",
+  "LINEA 2": "combo_v2",
+  "LINEA A": "combo_v2",
+  "LINEA B": "combo_v2",
+  "LINEA H": "combo_v2",
+  "LINEA J": "combo_v2",
+  "LINEA K": "combo_v2",
+  "LINEA M": "combo",
+  "LINEA O": "gbm_v2",
+  "LINEA P": "combo_v2",
+  "LINEA T-A": "combo_v2"
+ },
+ "wape_lluvia": {
+  "naive": {
+   "lluviosos": 0.0918,
+   "resto": 0.0701
+  },
+  "perfil": {
+   "lluviosos": 0.0535,
+   "resto": 0.0704
+  },
+  "gbm": {
+   "lluviosos": 0.0702,
+   "resto": 0.0547
+  },
+  "gbm_v2": {
+   "lluviosos": 0.0708,
+   "resto": 0.054
+  },
+  "combo": {
+   "lluviosos": 0.0544,
+   "resto": 0.056
+  },
+  "combo_v2": {
+   "lluviosos": 0.0547,
+   "resto": 0.0558
+  },
+  "gbm_clima": {
+   "lluviosos": 0.0754,
+   "resto": 0.056
+  },
+  "seleccion_dev": {
+   "lluviosos": 0.0548,
+   "resto": 0.0555
+  }
+ },
+ "dias_lluviosos_por_mes": {
+  "2023-08": 2,
+  "2023-09": 1,
+  "2023-10": 6,
+  "2023-11": 4,
+  "2023-12": 2,
+  "2024-02": 1,
+  "2024-04": 7,
+  "2024-05": 9,
+  "2024-06": 5
+ },
+ "H6_alta_demanda": {
+  "LINEA 1": {
+   "positivos": 3,
+   "dias": 366,
+   "auc_gbm": 0.903,
+   "auc_naive": 0.877,
+   "auc_seleccion_dev": 0.861
+  },
+  "LINEA 2": {
+   "positivos": 17,
+   "dias": 366,
+   "auc_gbm": 0.914,
+   "auc_naive": 0.885,
+   "auc_seleccion_dev": 0.934
+  },
+  "LINEA A": {
+   "positivos": 33,
+   "dias": 366,
+   "auc_gbm": 0.971,
+   "auc_naive": 0.942,
+   "auc_seleccion_dev": 0.936
+  },
+  "LINEA B": {
+   "positivos": 13,
+   "dias": 366,
+   "auc_gbm": 0.927,
+   "auc_naive": 0.935,
+   "auc_seleccion_dev": 0.903
+  },
+  "LINEA H": {
+   "positivos": 14,
+   "dias": 291,
+   "auc_gbm": 0.711,
+   "auc_naive": 0.618,
+   "auc_seleccion_dev": 0.797
+  },
+  "LINEA J": {
+   "positivos": 16,
+   "dias": 298,
+   "auc_gbm": 0.91,
+   "auc_naive": 0.843,
+   "auc_seleccion_dev": 0.751
+  },
+  "LINEA K": {
+   "positivos": 13,
+   "dias": 281,
+   "auc_gbm": 0.844,
+   "auc_naive": 0.859,
+   "auc_seleccion_dev": 0.866
+  },
+  "LINEA M": {
+   "positivos": 42,
+   "dias": 294,
+   "auc_gbm": 0.843,
+   "auc_naive": 0.781,
+   "auc_seleccion_dev": 0.819
+  },
+  "LINEA O": {
+   "positivos": 42,
+   "dias": 366,
+   "auc_gbm": 0.949,
+   "auc_naive": 0.892,
+   "auc_seleccion_dev": 0.951
+  },
+  "LINEA P": {
+   "positivos": 23,
+   "dias": 297,
+   "auc_gbm": 0.923,
+   "auc_naive": 0.851,
+   "auc_seleccion_dev": 0.847
+  },
+  "LINEA T-A": {
+   "positivos": 15,
+   "dias": 366,
+   "auc_gbm": 0.923,
+   "auc_naive": 0.846,
+   "auc_seleccion_dev": 0.76
+  }
+ }
+}

@@ -194,3 +194,92 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 
 ## 2026-11-24 — [F10] Fase 3: plataforma multilínea (planificación)
 - **Decisión:** se pre-registran las hipótesis H1–H7 con sus criterios en `docs/PLAN_MAESTRO.md` §10, antes de cualquier experimento.
+
+## 2026-11-24 — [F10.1] Inventario y EDA multilínea
+- **Artefactos:** `scripts/eda_multilinea.py` → `reports/fase3/eda_multilinea.{md,json}`; `data/lineas.csv` (modo, extremos, km y estaciones por línea) y `data/topologia_red.csv` (conexiones entre líneas en estaciones de integración). Ambos tienen una URL oficial del Metro por fila; las páginas descargadas se revisaron en busca de instrucciones inyectadas (no se hallaron).
+- **Hallazgos:**
+  - En 2023, la Línea A concentra el 63,7 % de las entradas registradas, seguida de la Línea 1 con 10,5 %, la B con 9,5 % y la T-A con 5,45 %; las demás líneas tienen menos del 2,4 %.
+  - El primer componente principal del residuo diario desestacionalizado explica el 87 % de la varianza: las líneas se mueven juntas. La Línea P es la menos correlacionada (≈ 0,6 con el resto).
+  - Hay 41 días con ≥ 3 líneas sin dato a la misma hora: 19 en 2019, 9 en 2020, 7 en 2021, 2 en 2022 y 4 en 2023.
+  - El 28/08/2023 (IN3), la Línea A cae con z de −13,6, −61 y −137 entre las 17 y las 19 h, mientras que la O y la 2 suben.
+  - La Línea L se excluye del modelado por hora: no opera en todas las franjas, así que no tiene días completos.
+- **Defecto propio:** un `KeyError` en líneas cuya serie termina antes del 30/06/2024; se corrigió con `reindex`.
+
+## 2026-11-24 — [F10.2] Fuentes externas
+- **Decisión:** la alineabilidad se evaluó solo con portales oficiales (`docs/fase3/FUENTES_EXTERNAS.md`).
+  - Se descartan para modelos línea × hora (H7): proyecciones de población por comuna (anuales y solo de Medellín), la Encuesta Origen-Destino (estática y sin microdatos públicos), la amenaza por movimientos en masa del POT (estática) y los corredores del POT (dominio de `tipo_sistema` no publicado). **H7 se descarta**; esas fuentes quedan para una fase con datos por estación.
+  - Se integra la lluvia horaria de Open-Meteo (reanálisis, CC BY 4.0) con `data/clima_open_meteo_medellin.csv`, sus metadatos y `src/metro_anomaly/fuentes/clima.py`. Alineación: la precipitación es la suma de la hora precedente, así que la franja h toma el registro h+1 (cubierto por una prueba).
+- **Cambio de entorno (aprobado por el usuario):** se permitió el host `archive-api.open-meteo.com`.
+- **Limitación:** una sola celda de reanálisis para todo el valle. Las series de pluviómetros del SIATA no tienen descarga pública.
+
+## 2026-11-24 — [F10.3] H1–H4: experimentos de red (`scripts/fase3/exp_red.py` → `reports/fase3/red.{md,json}`)
+- **H1 — detector de coherencia entre líneas** (`src/metro_anomaly/red.py::CoherenceDetector`): residuo del z de la línea frente a la mediana de z de las otras 10 líneas en la misma hora, con un ajuste Huber por hora. Mismo presupuesto de alertas (5 % de días reales) que `perfil_contextual/peak_shift`.
+
+  | Línea, periodo | Recall moderado (perfil → coherencia) | Diferencia, IC 95 % | Alertas en festivos (perfil → coherencia) |
+  |---|---|---|---|
+  | A, holdout | 0,702 → 0,900 | +0,198 [0,177; 0,216] | 0,222 → 0,111 |
+  | A, DEV | — | +0,253 [0,207; 0,293] | — |
+  | B, holdout | — | +0,052 [0,026; 0,077] | — |
+  | 1, holdout | — | +0,091 [0,067; 0,110] | — |
+  | T-A, holdout | — | −0,001 [−0,011; 0,010] | — |
+
+  - **Criterio pre-registrado (Línea A): CUMPLE.**
+  - **Límites:** las inyecciones son locales por construcción, que es justo el caso que este detector favorece. En días reales del holdout, la coherencia deja de alertar el 25/12/2023 y el 29/03/2024 (Viernes Santo), ambos sistémicos, y añade 31/10, 16/11, 15/12/2023, 20/01 y 30/03/2024. Mantiene IN3 (score 127,9; umbral 6,37) y las elecciones.
+  - **Ni este detector ni el anterior** ven IN1 (05/02/2023) ni IN2 (22/08/2023), con scores 1,0 y 0,5: las interrupciones parciales siguen siendo invisibles con datos línea × hora.
+- **H2 — alcance local / multilínea / generalizado** (`classify_scope`; umbrales fijados antes de evaluar: |z| > 3, fracciones 0,2 y 0,5): exactitud con inyecciones de **0,884 < 0,90**. **NO CUMPLE.**
+  - La mayoría de los errores caen en la clase intermedia "multilínea".
+  - Las elecciones del 29/10/2023 salen "generalizada" y el 28/08/2023 sale "multilínea" (fracción 0,40: 1, B, M, T-A).
+  - **Advertencia:** la lectura de "multilínea" para el 28/08 como "no local" se fijó después de ver los z del EDA, así que no es una prueba ciega.
+  - Uso permitido: solo como **indicador descriptivo** con su exactitud declarada, no como clasificador validado.
+- **H3 — redistribución el 28/08/2023, 17–19 h:** la Línea 2 sube con z = 6,8 a las 19 h (perfil contextual por línea), lo que **cumple** el criterio descriptivo.
+  - La Línea O sube con z = 11,1 frente al mismo día de las 8 semanas previas (EDA), pero solo con z = 2,1 frente al perfil contextual: la señal **depende del método de referencia**.
+  - Con n = 1 no se puede afirmar un patrón de redistribución ni una causalidad.
+- **H4 — ausencia simultánea de registro en ≥ 3 líneas habituales:**
+  - Recall de 1,0 en 200 fallas simuladas en 3–6 líneas, y alertas en 4 de 731 días reales (0,55 %). **CUMPLE** los criterios numéricos.
+  - **Hallazgo que cambia la interpretación:** ninguno de los 4 días reales es una falla de recaudo.
+    - 28/08/2023, 19 h: la suspensión IN3.
+    - 29/10/2023: las elecciones, sin cobro en metro y cables, es decir, un efecto de medición.
+    - 24 y 31/12/2023, 22 h: un cierre anticipado que se repite en los datos de 2019, 2022 y 2023. No se verificó el comunicado oficial de 2023.
+  - Por eso la regla se adopta como "ausencia simultánea de registro: causa por determinar (operación, calendario o datos)", **no** como "falla de recaudo".
+  - El 3,5 % de "alertas con 1–2 líneas simuladas" se debe a celdas que ya tenían 1–2 líneas reales sin dato (5 % de las celdas); la regla cuenta el total, como fue diseñada.
+
+## 2026-11-24 — [F10.3] H5, H5b y H6: pronóstico del día siguiente (`scripts/fase3/exp_pronostico.py`)
+- **Primera ejecución (v1, holdout 2023-07…2024-06).** Modelos: GBM global con rezago, nivel causal y calendario, más regresión cuantílica p10/p90.
+  - Un primer cálculo comparaba modelos sobre filas distintas: el naive no tiene referencia en días incompletos de los cables. Se **corrigió** para usar solo las filas comunes (69 252 de 74 080).
+  - **H5:**
+    - El WAPE global baja de 0,0725 con el naive a 0,0564 con el GBM. En la Línea A baja de 0,0682 a 0,0517 (−24 %).
+    - El GBM mejora al naive en ≥ 10 % en 9 de 11 líneas; las excepciones son H (9,6 %) y P (8,2 %).
+    - La cobertura del intervalo del 80 % de la Línea A es **0,723 < 0,75: NO CUMPLE**. Las demás líneas están entre 0,758 y 0,803.
+    - En los cables H, K y M, el perfil contextual supera al GBM.
+  - **H5b — lluvia, como oráculo con la lluvia observada:** empeora el WAPE en las 11 líneas (−0,1 % a −3,7 %). **SE DESCARTA.**
+    - La comparación "días lluviosos" está confundida con el mes: 16 de los 37 días lluviosos caen en abril–mayo de 2024, justo después de Semana Santa, cuando el rezago del GBM toma días de temporada.
+  - **H6:**
+    - El AUC del GBM es > 0,80 y supera al naive en A (0,971 frente a 0,942), 2, J, M, O, P y T-A.
+    - **No cumple** en B (0,927 frente a 0,935) ni en K (0,844 frente a 0,859), ni en H (0,711).
+    - La Línea 1 solo tiene 3 positivos.
+- **Ajustes posteriores a ver el holdout v1** (declarados aquí antes de su ejecución; la evidencia que aportan es más débil):
+  1. **Intervalo:** calibración conformal en línea y causal, con los meses anteriores de cada línea.
+  2. **Variante `gbm_v2`:** rezago por tipo de día extendido, para que un día normal no tome como referencia un día de temporada.
+  3. **Combinaciones `combo` y `combo_v2`:** media en escala log de GBM y perfil.
+  4. **Regla de selección (pre-registrada ahora):** para cada línea se elige el candidato con menor WAPE en DEV (2022-07…2023-06), entre `perfil`, `gbm`, `gbm_v2`, `combo` y `combo_v2`. Luego se informa el holdout del híbrido elegido sin modificarlo. Los candidatos `perfil` y `combo` se añadieron por lo observado en v1, lo que se declara como sesgo de selección de candidatos.
+
+## 2026-11-24 — [F10.4] Arquitectura de la plataforma y defecto hallado por las pruebas
+- **Cambio:** `src/metro_anomaly/plataforma.py` orquesta las fuentes, los modelos y las reglas, y escribe un manifiesto de procedencia. Lo complementan `scripts/fase3/build_plataforma.py`, que genera los artefactos en `artifacts/plataforma/`, y `tests/unit/test_plataforma.py`, que prueba el motor de reglas sobre una red sintética.
+  - Reproducción cronológica mensual causal sobre 11 líneas: perfil contextual y coherencia (A, B, 1).
+  - Umbral por línea = p95 de su score en DEV.
+  - Prioridad de reglas: efecto de medición (elecciones, solo metro, tranvía y cable, según el comunicado oficial) > ausencia simultánea en la red > problema de datos (solo en horas que la línea suele reportar) > anomalía con alcance orientativo > sin anomalía. Una categoría "no evaluable" cubre los días incompletos en horas que la línea no siempre reporta.
+- **Defecto (propio):** en el índice de red, un **cero** en otra línea (falla de datos) producía un z muy negativo que arrastraba la mediana. El resultado era una "anomalía local" falsa en una línea sana; la prueba `test_simultaneous_absence_and_single_line_data_problem` lo detectó en la Línea 1.
+  - **Corrección:** los ceros se tratan como ausencia de registro en `network_z` y en el clasificador de alcance.
+  - Como esto cambia el detector evaluado en H1, **se re-ejecuta `exp_red.py`**. La versión anterior del informe se conserva en el historial de la bitácora (entrada H1–H4).
+
+## 2026-11-24 — [F10.3] Re-ejecución de H1–H4 y resultado final de H5/H6
+- **H1–H4 tras corregir el tratamiento de los ceros:** `reports/fase3/red.md` es idéntico a la versión anterior. En las 11 líneas principales no hubo ceros que afectaran el índice de red en los periodos evaluados.
+- **H5, DEV (2022-07…2023-06):** el GBM solo es **peor** que el naive en varias líneas (A: −14,5 %; K: −18,2 %; P: −20,9 %), porque en los primeros meses solo había 6 meses de historia. `combo_v2` (media de `gbm_v2` y perfil) es el mejor en 10 líneas y `gbm_v2` en la O.
+  - Las conclusiones de un solo periodo de evaluación habrían sido opuestas en DEV y en el holdout: la ventaja del GBM depende de la cantidad de historia.
+- **H5, holdout, con el híbrido elegido en DEV sin tocar:**
+  - WAPE global 0,0555 frente a 0,0725 del naive.
+  - Mejora frente al naive de 11,5 % a 27,6 % en las 11 líneas; en la A, 24,9 % (0,0512 frente a 0,0682).
+  - Cobertura del intervalo del 80 % calibrado (banda del GBM): 0,79–0,82. En DEV la calibración quedó conservadora (0,89–0,93), porque el error baja a medida que crece la historia.
+- **H6:** el híbrido elegido por WAPE no es mejor para H6. Por ejemplo, en J el AUC es 0,751 frente a 0,910 del GBM. El indicador de día de alta demanda usa el **GBM base pre-registrado** solo en las 7 líneas que cumplieron: A, 2, J, M, O, P y T-A.
+  - La exclusión de la Línea 1 por tener menos de 10 positivos es una regla añadida ahora.
+- **H5b:** la lluvia sigue descartada. Los días lluviosos favorecen a los modelos con perfil, pero se concentran en abril–mayo de 2024: confusión con el mes, sin efecto atribuible a la lluvia.

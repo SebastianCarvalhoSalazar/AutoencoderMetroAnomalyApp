@@ -1,0 +1,1882 @@
+{
+ "H4": {
+  "dias_reales_con_alerta": 4,
+  "dias_evaluados": 731,
+  "tasa_dias_reales": 0.0055,
+  "recall_inyeccion_red": 1.0,
+  "n_inyeccion_red": 200,
+  "falsas_alertas_red_con_1_2_lineas": 0.035,
+  "n_inyeccion_1_2": 200,
+  "alertas_reales": [
+   {
+    "fecha": "2023-08-28",
+    "hora": "h19",
+    "n": 3,
+    "lineas": "LINEA B,LINEA J,LINEA K"
+   },
+   {
+    "fecha": "2023-10-29",
+    "hora": "h08",
+    "n": 6,
+    "lineas": "LINEA B,LINEA H,LINEA J,LINEA K,LINEA M,LINEA P"
+   },
+   {
+    "fecha": "2023-10-29",
+    "hora": "h09",
+    "n": 5,
+    "lineas": "LINEA H,LINEA J,LINEA K,LINEA M,LINEA P"
+   },
+   {
+    "fecha": "2023-10-29",
+    "hora": "h10",
+    "n": 5,
+    "lineas": "LINEA H,LINEA J,LINEA K,LINEA M,LINEA P"
+   },
+   {
+    "fecha": "2023-10-29",
+    "hora": "h11",
+    "n": 5,
+    "lineas": "LINEA B,LINEA H,LINEA J,LINEA K,LINEA M"
+   },
+   {
+    "fecha": "2023-10-29",
+    "hora": "h12",
+    "n": 5,
+    "lineas": "LINEA B,LINEA H,LINEA J,LINEA M,LINEA P"
+   },
+   {
+    "fecha": "2023-10-29",
+    "hora": "h15",
+    "n": 4,
+    "lineas": "LINEA B,LINEA J,LINEA M,LINEA P"
+   },
+   {
+    "fecha": "2023-12-24",
+    "hora": "h22",
+    "n": 9,
+    "lineas": "LINEA 1,LINEA 2,LINEA A,LINEA B,LINEA K,LINEA M,LINEA O,LINEA P,LINEA T-A"
+   },
+   {
+    "fecha": "2023-12-31",
+    "hora": "h22",
+    "n": 9,
+    "lineas": "LINEA 1,LINEA 2,LINEA A,LINEA B,LINEA K,LINEA M,LINEA O,LINEA P,LINEA T-A"
+   }
+  ]
+ },
+ "H2": {
+  "exactitud": 0.884,
+  "n": 4344,
+  "confusion": {
+   "generalizada": {
+    "generalizada": 1898,
+    "local": 43
+   },
+   "local": {
+    "generalizada": 103,
+    "local": 1942
+   },
+   "multilinea": {
+    "generalizada": 171,
+    "local": 187
+   }
+  },
+  "exactitud_por_escenario": {
+   "generalizada": {
+    "T1_moderada": 0.92,
+    "T1_severa": 0.973,
+    "T2_moderada": 0.786,
+    "T2_severa": 0.989,
+    "T3_moderada": 0.684,
+    "T3_severa": 0.887
+   },
+   "local": {
+    "T1_moderada": 0.871,
+    "T1_severa": 0.893,
+    "T2_moderada": 0.891,
+    "T2_severa": 0.81,
+    "T3_moderada": 0.944,
+    "T3_severa": 0.956
+   }
+  },
+  "dias_reales_alcance": {
+   "local": 62,
+   "multilinea": 33,
+   "generalizada": 11
+  },
+  "dias_reales_detalle": [
+   {
+    "fecha": "2023-07-02",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-07-20",
+    "alcance": "generalizada",
+    "fraccion": 0.6,
+    "lineas": [
+     "LINEA 1",
+     "LINEA B",
+     "LINEA T-A"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-07-21",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-08-04",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA B",
+     "LINEA O"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-08-05",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA B",
+     "LINEA T-A"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-08-06",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA B",
+     "LINEA T-A"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-08-07",
+    "alcance": "local",
+    "fraccion": 0.1,
+    "lineas": [
+     "LINEA B"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-08-08",
+    "alcance": "multilinea",
+    "fraccion": 0.3,
+    "lineas": [
+     "LINEA B",
+     "LINEA O",
+     "LINEA T-A"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-08-09",
+    "alcance": "local",
+    "fraccion": 0.1,
+    "lineas": [
+     "LINEA B"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-08-11",
+    "alcance": "local",
+    "fraccion": 0.1,
+    "lineas": [
+     "LINEA T-A"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-08-18",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-08-19",
+    "alcance": "local",
+    "fraccion": 0.1,
+    "lineas": [
+     "LINEA P"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-08-26",
+    "alcance": "multilinea",
+    "fraccion": 0.3,
+    "lineas": [
+     "LINEA K",
+     "LINEA M",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-08-28",
+    "alcance": "multilinea",
+    "fraccion": 0.4,
+    "lineas": [
+     "LINEA 1",
+     "LINEA B",
+     "LINEA M",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-09-01",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-09-12",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-09-22",
+    "alcance": "multilinea",
+    "fraccion": 0.4,
+    "lineas": [
+     "LINEA B",
+     "LINEA M",
+     "LINEA P",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-09-23",
+    "alcance": "multilinea",
+    "fraccion": 0.4,
+    "lineas": [
+     "LINEA B",
+     "LINEA H",
+     "LINEA M",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-09-27",
+    "alcance": "multilinea",
+    "fraccion": 0.3,
+    "lineas": [
+     "LINEA B",
+     "LINEA H",
+     "LINEA M"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-09-28",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA B",
+     "LINEA M"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-09-29",
+    "alcance": "local",
+    "fraccion": 0.1,
+    "lineas": [
+     "LINEA B"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-10-14",
+    "alcance": "local",
+    "fraccion": 0.1,
+    "lineas": [
+     "LINEA B"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-10-17",
+    "alcance": "local",
+    "fraccion": 0.1,
+    "lineas": [
+     "LINEA K"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-10-28",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-10-29",
+    "alcance": "generalizada",
+    "fraccion": 0.62,
+    "lineas": [
+     "LINEA B",
+     "LINEA K",
+     "LINEA M",
+     "LINEA P",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-10-31",
+    "alcance": "multilinea",
+    "fraccion": 0.33,
+    "lineas": [
+     "LINEA K",
+     "LINEA M",
+     "LINEA P"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-11-03",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-11-05",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-11-06",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-11-07",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-11-09",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-11-10",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-11-14",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-11-16",
+    "alcance": "multilinea",
+    "fraccion": 0.4,
+    "lineas": [
+     "LINEA B",
+     "LINEA J",
+     "LINEA K",
+     "LINEA P"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-12-01",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-02",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-03",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-07",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-08",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-09",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-12-10",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-14",
+    "alcance": "generalizada",
+    "fraccion": 1.0,
+    "lineas": [
+     "LINEA 1",
+     "LINEA 2",
+     "LINEA B",
+     "LINEA H",
+     "LINEA J",
+     "LINEA K",
+     "LINEA M",
+     "LINEA O",
+     "LINEA P",
+     "LINEA T-A"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-15",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-16",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-17",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-18",
+    "alcance": "multilinea",
+    "fraccion": 0.3,
+    "lineas": [
+     "LINEA 1",
+     "LINEA B",
+     "LINEA M"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-12-19",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-12-20",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-21",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-22",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-23",
+    "alcance": "multilinea",
+    "fraccion": 0.4,
+    "lineas": [
+     "LINEA 1",
+     "LINEA 2",
+     "LINEA B",
+     "LINEA T-A"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2023-12-25",
+    "alcance": "generalizada",
+    "fraccion": 0.9,
+    "lineas": [
+     "LINEA 1",
+     "LINEA 2",
+     "LINEA B",
+     "LINEA H",
+     "LINEA J",
+     "LINEA K",
+     "LINEA M",
+     "LINEA P",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2023-12-30",
+    "alcance": "multilinea",
+    "fraccion": 0.3,
+    "lineas": [
+     "LINEA 1",
+     "LINEA B",
+     "LINEA T-A"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-01-01",
+    "alcance": "generalizada",
+    "fraccion": 0.8,
+    "lineas": [
+     "LINEA 1",
+     "LINEA 2",
+     "LINEA B",
+     "LINEA J",
+     "LINEA K",
+     "LINEA M",
+     "LINEA P",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-01-02",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-01-07",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-01-08",
+    "alcance": "generalizada",
+    "fraccion": 0.56,
+    "lineas": [
+     "LINEA 1",
+     "LINEA J",
+     "LINEA K",
+     "LINEA M",
+     "LINEA P"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-01-11",
+    "alcance": "multilinea",
+    "fraccion": 0.4,
+    "lineas": [
+     "LINEA 1",
+     "LINEA 2",
+     "LINEA B",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-01-12",
+    "alcance": "multilinea",
+    "fraccion": 0.4,
+    "lineas": [
+     "LINEA 1",
+     "LINEA 2",
+     "LINEA B",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-01-13",
+    "alcance": "multilinea",
+    "fraccion": 0.4,
+    "lineas": [
+     "LINEA 1",
+     "LINEA B",
+     "LINEA J",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-01-15",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA 1",
+     "LINEA B"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-01-16",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-01-17",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA 1",
+     "LINEA J"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-01-18",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-01-19",
+    "alcance": "local",
+    "fraccion": 0.1,
+    "lineas": [
+     "LINEA 1"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-01-20",
+    "alcance": "generalizada",
+    "fraccion": 0.5,
+    "lineas": [
+     "LINEA H",
+     "LINEA J",
+     "LINEA K",
+     "LINEA M",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-01-22",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-01-27",
+    "alcance": "local",
+    "fraccion": 0.11,
+    "lineas": [
+     "LINEA 1"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-01-29",
+    "alcance": "multilinea",
+    "fraccion": 0.33,
+    "lineas": [
+     "LINEA 1",
+     "LINEA P",
+     "LINEA T-A"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-01-30",
+    "alcance": "local",
+    "fraccion": 0.11,
+    "lineas": [
+     "LINEA 1"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-01-31",
+    "alcance": "local",
+    "fraccion": 0.11,
+    "lineas": [
+     "LINEA 1"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-02-02",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA 1",
+     "LINEA B"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-02-04",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-02-05",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA 1",
+     "LINEA T-A"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-02-06",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA 1",
+     "LINEA B"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-02-07",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA B",
+     "LINEA O"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-02-08",
+    "alcance": "local",
+    "fraccion": 0.1,
+    "lineas": [
+     "LINEA O"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-02-09",
+    "alcance": "multilinea",
+    "fraccion": 0.3,
+    "lineas": [
+     "LINEA B",
+     "LINEA O",
+     "LINEA T-A"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-02-12",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA K",
+     "LINEA P"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-02-16",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA B",
+     "LINEA T-A"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-02-17",
+    "alcance": "local",
+    "fraccion": 0.1,
+    "lineas": [
+     "LINEA 1"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-03-06",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-03-09",
+    "alcance": "multilinea",
+    "fraccion": 0.3,
+    "lineas": [
+     "LINEA B",
+     "LINEA M",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-03-15",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-03-22",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-03-25",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA 2"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-03-28",
+    "alcance": "local",
+    "fraccion": 0.1,
+    "lineas": [
+     "LINEA M"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-03-29",
+    "alcance": "generalizada",
+    "fraccion": 0.6,
+    "lineas": [
+     "LINEA 1",
+     "LINEA 2",
+     "LINEA J",
+     "LINEA M",
+     "LINEA P",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-03-30",
+    "alcance": "multilinea",
+    "fraccion": 0.2,
+    "lineas": [
+     "LINEA B",
+     "LINEA M"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-03-31",
+    "alcance": "generalizada",
+    "fraccion": 0.6,
+    "lineas": [
+     "LINEA 1",
+     "LINEA B",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-04-08",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-04-12",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-04-18",
+    "alcance": "generalizada",
+    "fraccion": 0.5,
+    "lineas": [
+     "LINEA H",
+     "LINEA J",
+     "LINEA K",
+     "LINEA M",
+     "LINEA P"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-04-19",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-04-21",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-05-01",
+    "alcance": "multilinea",
+    "fraccion": 0.4,
+    "lineas": [
+     "LINEA 1",
+     "LINEA 2"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-05-03",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-05-04",
+    "alcance": "generalizada",
+    "fraccion": 0.6,
+    "lineas": [
+     "LINEA 1",
+     "LINEA B",
+     "LINEA J",
+     "LINEA K",
+     "LINEA M",
+     "LINEA T-A"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-05-10",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-05-17",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-05-21",
+    "alcance": "local",
+    "fraccion": 0.1,
+    "lineas": [
+     "LINEA B"
+    ],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-05-27",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-05-31",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "aumento"
+   },
+   {
+    "fecha": "2024-06-24",
+    "alcance": "multilinea",
+    "fraccion": 0.3,
+    "lineas": [
+     "LINEA 1",
+     "LINEA B",
+     "LINEA K"
+    ],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-06-28",
+    "alcance": "local",
+    "fraccion": 0.0,
+    "lineas": [],
+    "sentido": "caida"
+   },
+   {
+    "fecha": "2024-06-30",
+    "alcance": "local",
+    "fraccion": 0.11,
+    "lineas": [
+     "LINEA B"
+    ],
+    "sentido": "aumento"
+   }
+  ],
+  "casos": {
+   "2023-10-29": {
+    "alcance": "generalizada",
+    "fraccion_lineas": 0.625,
+    "lineas_acompanan": [
+     "LINEA B",
+     "LINEA K",
+     "LINEA M",
+     "LINEA P",
+     "LINEA T-A"
+    ],
+    "horas": [
+     "h04",
+     "h05",
+     "h06",
+     "h07",
+     "h08",
+     "h09",
+     "h10",
+     "h11",
+     "h12",
+     "h13",
+     "h14",
+     "h15",
+     "h16"
+    ],
+    "sentido": "caida",
+    "z_por_linea": {
+     "LINEA 1": {
+      "h04": -0.9,
+      "h05": -1.9,
+      "h06": -0.1,
+      "h07": -0.5,
+      "h08": 2.7,
+      "h09": 2.7,
+      "h10": 4.1,
+      "h11": 3.2,
+      "h12": 4.2,
+      "h13": 3.9,
+      "h14": 5.0,
+      "h15": 3.6,
+      "h16": 1.1,
+      "h17": -0.4,
+      "h18": -0.8,
+      "h19": -1.0,
+      "h20": -0.5,
+      "h21": -0.6,
+      "h22": -0.4
+     },
+     "LINEA 2": {
+      "h04": -1.5,
+      "h05": -0.9,
+      "h06": 0.2,
+      "h07": 1.4,
+      "h08": 3.0,
+      "h09": 3.2,
+      "h10": 1.1,
+      "h11": 1.0,
+      "h12": 0.7,
+      "h13": 1.2,
+      "h14": 1.0,
+      "h15": 0.3,
+      "h16": -0.6,
+      "h17": -0.3,
+      "h18": -1.8,
+      "h19": -0.8,
+      "h20": 0.3,
+      "h21": -1.1,
+      "h22": 0.2
+     },
+     "LINEA A": {
+      "h04": -73.9,
+      "h05": -72.6,
+      "h06": -110.9,
+      "h07": -86.2,
+      "h08": -62.9,
+      "h09": -59.4,
+      "h10": -64.1,
+      "h11": -62.0,
+      "h12": -71.8,
+      "h13": -70.3,
+      "h14": -80.7,
+      "h15": -89.1,
+      "h16": -98.0,
+      "h17": -2.8,
+      "h18": -2.3,
+      "h19": -1.8,
+      "h20": -1.3,
+      "h21": -1.5,
+      "h22": -1.5
+     },
+     "LINEA B": {
+      "h04": -48.3,
+      "h05": -58.4,
+      "h06": -75.7,
+      "h07": -66.3,
+      "h08": null,
+      "h09": -46.2,
+      "h10": -64.6,
+      "h11": null,
+      "h12": null,
+      "h13": -56.4,
+      "h14": -68.7,
+      "h15": null,
+      "h16": -68.6,
+      "h17": -2.7,
+      "h18": -1.4,
+      "h19": -0.8,
+      "h20": -0.8,
+      "h21": -1.2,
+      "h22": -1.6
+     },
+     "LINEA H": {
+      "h04": null,
+      "h05": null,
+      "h06": null,
+      "h07": null,
+      "h08": null,
+      "h09": null,
+      "h10": null,
+      "h11": null,
+      "h12": null,
+      "h13": null,
+      "h14": null,
+      "h15": null,
+      "h16": null,
+      "h17": -0.3,
+      "h18": -1.3,
+      "h19": 0.7,
+      "h20": -0.2,
+      "h21": -0.8,
+      "h22": -3.2
+     },
+     "LINEA J": {
+      "h04": null,
+      "h05": null,
+      "h06": null,
+      "h07": null,
+      "h08": null,
+      "h09": null,
+      "h10": null,
+      "h11": null,
+      "h12": null,
+      "h13": null,
+      "h14": null,
+      "h15": null,
+      "h16": null,
+      "h17": -1.2,
+      "h18": -0.3,
+      "h19": -0.4,
+      "h20": -0.2,
+      "h21": -1.3,
+      "h22": -8.3
+     },
+     "LINEA K": {
+      "h04": null,
+      "h05": null,
+      "h06": null,
+      "h07": null,
+      "h08": null,
+      "h09": null,
+      "h10": null,
+      "h11": null,
+      "h12": -63.9,
+      "h13": -47.7,
+      "h14": -35.8,
+      "h15": -35.6,
+      "h16": -42.6,
+      "h17": -0.6,
+      "h18": -0.1,
+      "h19": -0.8,
+      "h20": 0.5,
+      "h21": -0.9,
+      "h22": -8.2
+     },
+     "LINEA M": {
+      "h04": null,
+      "h05": null,
+      "h06": null,
+      "h07": null,
+      "h08": null,
+      "h09": null,
+      "h10": null,
+      "h11": null,
+      "h12": null,
+      "h13": null,
+      "h14": -52.9,
+      "h15": null,
+      "h16": null,
+      "h17": -1.7,
+      "h18": -3.5,
+      "h19": -2.8,
+      "h20": -2.5,
+      "h21": -1.7,
+      "h22": -5.8
+     },
+     "LINEA O": {
+      "h04": -1.8,
+      "h05": -0.5,
+      "h06": -1.7,
+      "h07": -1.1,
+      "h08": 0.8,
+      "h09": 1.1,
+      "h10": 0.8,
+      "h11": 1.0,
+      "h12": 1.1,
+      "h13": 1.9,
+      "h14": 1.1,
+      "h15": 0.1,
+      "h16": -0.5,
+      "h17": -0.6,
+      "h18": -1.4,
+      "h19": -0.4,
+      "h20": -1.0,
+      "h21": -0.9,
+      "h22": -1.6
+     },
+     "LINEA P": {
+      "h04": null,
+      "h05": null,
+      "h06": null,
+      "h07": null,
+      "h08": null,
+      "h09": null,
+      "h10": null,
+      "h11": -48.3,
+      "h12": null,
+      "h13": -34.1,
+      "h14": null,
+      "h15": null,
+      "h16": -33.9,
+      "h17": -6.2,
+      "h18": -0.9,
+      "h19": -0.6,
+      "h20": -0.7,
+      "h21": -2.3,
+      "h22": -10.1
+     },
+     "LINEA T-A": {
+      "h04": null,
+      "h05": -70.6,
+      "h06": -54.4,
+      "h07": -40.5,
+      "h08": -30.1,
+      "h09": -38.6,
+      "h10": -37.0,
+      "h11": -43.5,
+      "h12": -35.9,
+      "h13": -38.9,
+      "h14": -44.4,
+      "h15": -55.6,
+      "h16": -43.2,
+      "h17": -2.1,
+      "h18": -2.1,
+      "h19": -0.7,
+      "h20": -0.9,
+      "h21": -1.6,
+      "h22": -0.9
+     }
+    }
+   },
+   "2023-08-28": {
+    "alcance": "multilinea",
+    "fraccion_lineas": 0.4,
+    "lineas_acompanan": [
+     "LINEA 1",
+     "LINEA B",
+     "LINEA M",
+     "LINEA T-A"
+    ],
+    "horas": [
+     "h17",
+     "h18",
+     "h19"
+    ],
+    "sentido": "caida",
+    "z_por_linea": {
+     "LINEA 1": {
+      "h17": -1.9,
+      "h18": -6.1,
+      "h19": -2.6
+     },
+     "LINEA 2": {
+      "h17": 0.5,
+      "h18": 1.2,
+      "h19": 6.8
+     },
+     "LINEA A": {
+      "h17": -12.6,
+      "h18": -45.2,
+      "h19": -66.4
+     },
+     "LINEA B": {
+      "h17": -1.3,
+      "h18": -8.7,
+      "h19": null
+     },
+     "LINEA H": {
+      "h17": 0.9,
+      "h18": -1.3,
+      "h19": -1.0
+     },
+     "LINEA J": {
+      "h17": -1.2,
+      "h18": -1.8,
+      "h19": null
+     },
+     "LINEA K": {
+      "h17": -1.4,
+      "h18": -2.8,
+      "h19": null
+     },
+     "LINEA M": {
+      "h17": -2.9,
+      "h18": -7.5,
+      "h19": -2.9
+     },
+     "LINEA O": {
+      "h17": 0.1,
+      "h18": 0.9,
+      "h19": 2.1
+     },
+     "LINEA P": {
+      "h17": -0.6,
+      "h18": -3.8,
+      "h19": null
+     },
+     "LINEA T-A": {
+      "h17": -3.9,
+      "h18": -6.4,
+      "h19": -6.5
+     }
+    }
+   },
+   "2023-08-22": {
+    "alcance": "local",
+    "fraccion_lineas": 0.1111111111111111,
+    "lineas_acompanan": [
+     "LINEA T-A"
+    ],
+    "horas": [
+     "h08"
+    ],
+    "sentido": "aumento",
+    "z_por_linea": {
+     "LINEA 1": {
+      "h07": 1.2,
+      "h08": 2.1,
+      "h09": 0.5
+     },
+     "LINEA 2": {
+      "h07": 1.7,
+      "h08": 1.9,
+      "h09": 1.5
+     },
+     "LINEA A": {
+      "h07": -2.6,
+      "h08": 2.6,
+      "h09": 0.3
+     },
+     "LINEA B": {
+      "h07": -0.7,
+      "h08": -0.3,
+      "h09": -0.7
+     },
+     "LINEA H": {
+      "h07": -1.1,
+      "h08": -0.6,
+      "h09": 0.4
+     },
+     "LINEA J": {
+      "h07": 0.2,
+      "h08": -0.4,
+      "h09": 0.3
+     },
+     "LINEA K": {
+      "h07": -2.7,
+      "h08": -0.1,
+      "h09": -0.7
+     },
+     "LINEA M": {
+      "h07": -1.1,
+      "h08": 1.6,
+      "h09": -0.9
+     },
+     "LINEA O": {
+      "h07": -0.3,
+      "h08": 2.2,
+      "h09": 0.5
+     },
+     "LINEA P": {
+      "h07": null,
+      "h08": null,
+      "h09": null
+     },
+     "LINEA T-A": {
+      "h07": -1.1,
+      "h08": 3.2,
+      "h09": 0.6
+     }
+    }
+   }
+  }
+ },
+ "H3": {
+  "lineas_con_aumento_z>3_17_19h": {
+   "LINEA 2": {
+    "h17": 0.5,
+    "h18": 1.2,
+    "h19": 6.8
+   }
+  }
+ },
+ "H1": {
+  "LINEA A|dev": {
+   "perfil_contextual": {
+    "tasa_alertas": 0.05,
+    "tasa_alertas_festivos": 0.083,
+    "recall_moderada": 0.432,
+    "recall_severa": 0.886,
+    "recall_leve": 0.164,
+    "recall_moderada_media": 0.432,
+    "localizacion_hora": 0.964,
+    "recall_T1_moderada": 0.765,
+    "recall_T2_moderada": 0.279,
+    "recall_T3_moderada": 0.252
+   },
+   "coherencia_red": {
+    "tasa_alertas": 0.05,
+    "tasa_alertas_festivos": 0.042,
+    "recall_moderada": 0.685,
+    "recall_severa": 0.943,
+    "recall_leve": 0.175,
+    "recall_moderada_media": 0.685,
+    "localizacion_hora": 0.969,
+    "recall_T1_moderada": 0.825,
+    "recall_T2_moderada": 0.779,
+    "recall_T3_moderada": 0.452
+   },
+   "diferencia_recall_moderada": {
+    "diferencia": 0.253,
+    "ic_inf": 0.207,
+    "ic_sup": 0.293,
+    "n": 1368
+   },
+   "dias_alerta_solo_perfil": [
+    "2022-04-12",
+    "2022-11-08",
+    "2022-12-17",
+    "2022-12-25",
+    "2023-01-01"
+   ],
+   "dias_alerta_solo_coherencia": [
+    "2022-04-13",
+    "2022-06-17",
+    "2022-06-18",
+    "2022-06-21",
+    "2022-12-08"
+   ]
+  },
+  "LINEA A|holdout": {
+   "perfil_contextual": {
+    "tasa_alertas": 0.052,
+    "tasa_alertas_festivos": 0.222,
+    "recall_moderada": 0.702,
+    "recall_severa": 0.945,
+    "recall_leve": 0.258,
+    "recall_moderada_media": 0.702,
+    "localizacion_hora": 0.977,
+    "recall_T1_moderada": 0.86,
+    "recall_T2_moderada": 0.772,
+    "recall_T3_moderada": 0.475
+   },
+   "coherencia_red": {
+    "tasa_alertas": 0.052,
+    "tasa_alertas_festivos": 0.111,
+    "recall_moderada": 0.9,
+    "recall_severa": 0.986,
+    "recall_leve": 0.582,
+    "recall_moderada_media": 0.9,
+    "localizacion_hora": 0.982,
+    "recall_T1_moderada": 0.956,
+    "recall_T2_moderada": 0.915,
+    "recall_T3_moderada": 0.83
+   },
+   "diferencia_recall_moderada": {
+    "diferencia": 0.198,
+    "ic_inf": 0.177,
+    "ic_sup": 0.216,
+    "n": 1092
+   },
+   "dias_alerta_solo_perfil": [
+    "2023-08-05",
+    "2023-12-09",
+    "2023-12-25",
+    "2024-01-13",
+    "2024-03-29"
+   ],
+   "dias_alerta_solo_coherencia": [
+    "2023-10-31",
+    "2023-11-16",
+    "2023-12-15",
+    "2024-01-20",
+    "2024-03-30"
+   ]
+  },
+  "LINEA B|dev": {
+   "perfil_contextual": {
+    "tasa_alertas": 0.051,
+    "tasa_alertas_festivos": 0.087,
+    "recall_moderada": 0.423,
+    "recall_severa": 0.831,
+    "recall_leve": 0.083,
+    "recall_moderada_media": 0.423,
+    "localizacion_hora": 0.959,
+    "recall_T1_moderada": 0.701,
+    "recall_T2_moderada": 0.451,
+    "recall_T3_moderada": 0.119
+   },
+   "coherencia_red": {
+    "tasa_alertas": 0.051,
+    "tasa_alertas_festivos": 0.043,
+    "recall_moderada": 0.582,
+    "recall_severa": 0.902,
+    "recall_leve": 0.103,
+    "recall_moderada_media": 0.582,
+    "localizacion_hora": 0.957,
+    "recall_T1_moderada": 0.769,
+    "recall_T2_moderada": 0.754,
+    "recall_T3_moderada": 0.222
+   },
+   "diferencia_recall_moderada": {
+    "diferencia": 0.158,
+    "ic_inf": 0.13,
+    "ic_sup": 0.189,
+    "n": 1365
+   },
+   "dias_alerta_solo_perfil": [
+    "2022-04-11",
+    "2022-04-12",
+    "2022-04-13",
+    "2022-12-11",
+    "2022-12-20",
+    "2022-12-21",
+    "2022-12-22",
+    "2022-12-23",
+    "2022-12-24",
+    "2022-12-25"
+   ],
+   "dias_alerta_solo_coherencia": [
+    "2022-06-15",
+    "2022-06-22",
+    "2022-10-02",
+    "2022-10-22",
+    "2023-02-12",
+    "2023-03-04",
+    "2023-03-11",
+    "2023-03-19",
+    "2023-05-20",
+    "2023-06-21"
+   ]
+  },
+  "LINEA B|holdout": {
+   "perfil_contextual": {
+    "tasa_alertas": 0.052,
+    "tasa_alertas_festivos": 0.167,
+    "recall_moderada": 0.638,
+    "recall_severa": 0.918,
+    "recall_leve": 0.181,
+    "recall_moderada_media": 0.638,
+    "localizacion_hora": 0.967,
+    "recall_T1_moderada": 0.807,
+    "recall_T2_moderada": 0.713,
+    "recall_T3_moderada": 0.395
+   },
+   "coherencia_red": {
+    "tasa_alertas": 0.052,
+    "tasa_alertas_festivos": 0.111,
+    "recall_moderada": 0.691,
+    "recall_severa": 0.941,
+    "recall_leve": 0.197,
+    "recall_moderada_media": 0.691,
+    "localizacion_hora": 0.967,
+    "recall_T1_moderada": 0.831,
+    "recall_T2_moderada": 0.771,
+    "recall_T3_moderada": 0.47
+   },
+   "diferencia_recall_moderada": {
+    "diferencia": 0.052,
+    "ic_inf": 0.026,
+    "ic_sup": 0.077,
+    "n": 1086
+   },
+   "dias_alerta_solo_perfil": [
+    "2023-08-05",
+    "2023-09-28",
+    "2023-12-09",
+    "2023-12-25",
+    "2024-01-11",
+    "2024-01-12"
+   ],
+   "dias_alerta_solo_coherencia": [
+    "2023-08-03",
+    "2023-08-13",
+    "2023-09-09",
+    "2023-10-31",
+    "2023-12-13",
+    "2024-05-29"
+   ]
+  },
+  "LINEA 1|dev": {
+   "perfil_contextual": {
+    "tasa_alertas": 0.05,
+    "tasa_alertas_festivos": 0.208,
+    "recall_moderada": 0.548,
+    "recall_severa": 0.934,
+    "recall_leve": 0.156,
+    "recall_moderada_media": 0.548,
+    "localizacion_hora": 0.972,
+    "recall_T1_moderada": 0.838,
+    "recall_T2_moderada": 0.581,
+    "recall_T3_moderada": 0.224
+   },
+   "coherencia_red": {
+    "tasa_alertas": 0.05,
+    "tasa_alertas_festivos": 0.083,
+    "recall_moderada": 0.671,
+    "recall_severa": 0.96,
+    "recall_leve": 0.24,
+    "recall_moderada_media": 0.671,
+    "localizacion_hora": 0.968,
+    "recall_T1_moderada": 0.877,
+    "recall_T2_moderada": 0.814,
+    "recall_T3_moderada": 0.322
+   },
+   "diferencia_recall_moderada": {
+    "diferencia": 0.124,
+    "ic_inf": 0.094,
+    "ic_sup": 0.151,
+    "n": 1368
+   },
+   "dias_alerta_solo_perfil": [
+    "2022-04-15",
+    "2022-12-09",
+    "2022-12-20",
+    "2022-12-22",
+    "2022-12-23",
+    "2022-12-25",
+    "2023-01-01",
+    "2023-01-11",
+    "2023-04-07",
+    "2023-06-20"
+   ],
+   "dias_alerta_solo_coherencia": [
+    "2022-04-09",
+    "2022-05-03",
+    "2022-05-29",
+    "2022-06-19",
+    "2022-07-30",
+    "2022-08-10",
+    "2022-10-02",
+    "2022-10-31",
+    "2022-12-04",
+    "2022-12-08"
+   ]
+  },
+  "LINEA 1|holdout": {
+   "perfil_contextual": {
+    "tasa_alertas": 0.052,
+    "tasa_alertas_festivos": 0.222,
+    "recall_moderada": 0.703,
+    "recall_severa": 0.946,
+    "recall_leve": 0.245,
+    "recall_moderada_media": 0.703,
+    "localizacion_hora": 0.971,
+    "recall_T1_moderada": 0.882,
+    "recall_T2_moderada": 0.766,
+    "recall_T3_moderada": 0.462
+   },
+   "coherencia_red": {
+    "tasa_alertas": 0.052,
+    "tasa_alertas_festivos": 0.111,
+    "recall_moderada": 0.794,
+    "recall_severa": 0.971,
+    "recall_leve": 0.369,
+    "recall_moderada_media": 0.794,
+    "localizacion_hora": 0.975,
+    "recall_T1_moderada": 0.909,
+    "recall_T2_moderada": 0.824,
+    "recall_T3_moderada": 0.648
+   },
+   "diferencia_recall_moderada": {
+    "diferencia": 0.091,
+    "ic_inf": 0.067,
+    "ic_sup": 0.11,
+    "n": 1092
+   },
+   "dias_alerta_solo_perfil": [
+    "2023-12-25",
+    "2024-01-11",
+    "2024-01-12",
+    "2024-01-13",
+    "2024-01-15",
+    "2024-03-29",
+    "2024-03-30"
+   ],
+   "dias_alerta_solo_coherencia": [
+    "2023-09-22",
+    "2023-09-23",
+    "2023-10-07",
+    "2023-10-29",
+    "2023-12-30",
+    "2024-04-27",
+    "2024-06-25"
+   ]
+  },
+  "LINEA T-A|dev": {
+   "perfil_contextual": {
+    "tasa_alertas": 0.051,
+    "tasa_alertas_festivos": 0.042,
+    "recall_moderada": 0.078,
+    "recall_severa": 0.524,
+    "recall_leve": 0.054,
+    "recall_moderada_media": 0.078,
+    "localizacion_hora": 0.904,
+    "recall_T1_moderada": 0.099,
+    "recall_T2_moderada": 0.062,
+    "recall_T3_moderada": 0.073
+   },
+   "coherencia_red": {
+    "tasa_alertas": 0.051,
+    "tasa_alertas_festivos": 0.042,
+    "recall_moderada": 0.1,
+    "recall_severa": 0.664,
+    "recall_leve": 0.065,
+    "recall_moderada_media": 0.1,
+    "localizacion_hora": 0.917,
+    "recall_T1_moderada": 0.137,
+    "recall_T2_moderada": 0.088,
+    "recall_T3_moderada": 0.075
+   },
+   "diferencia_recall_moderada": {
+    "diferencia": 0.022,
+    "ic_inf": 0.007,
+    "ic_sup": 0.034,
+    "n": 1362
+   },
+   "dias_alerta_solo_perfil": [
+    "2022-04-24",
+    "2022-12-22",
+    "2023-03-07",
+    "2023-05-31"
+   ],
+   "dias_alerta_solo_coherencia": [
+    "2022-07-12",
+    "2022-10-15",
+    "2022-11-10",
+    "2023-06-21"
+   ]
+  },
+  "LINEA T-A|holdout": {
+   "perfil_contextual": {
+    "tasa_alertas": 0.052,
+    "tasa_alertas_festivos": 0.111,
+    "recall_moderada": 0.078,
+    "recall_severa": 0.505,
+    "recall_leve": 0.056,
+    "recall_moderada_media": 0.078,
+    "localizacion_hora": 0.875,
+    "recall_T1_moderada": 0.108,
+    "recall_T2_moderada": 0.077,
+    "recall_T3_moderada": 0.05
+   },
+   "coherencia_red": {
+    "tasa_alertas": 0.052,
+    "tasa_alertas_festivos": 0.167,
+    "recall_moderada": 0.077,
+    "recall_severa": 0.577,
+    "recall_leve": 0.055,
+    "recall_moderada_media": 0.077,
+    "localizacion_hora": 0.879,
+    "recall_T1_moderada": 0.108,
+    "recall_T2_moderada": 0.075,
+    "recall_T3_moderada": 0.05
+   },
+   "diferencia_recall_moderada": {
+    "diferencia": -0.001,
+    "ic_inf": -0.011,
+    "ic_sup": 0.01,
+    "n": 1086
+   },
+   "dias_alerta_solo_perfil": [
+    "2023-12-14"
+   ],
+   "dias_alerta_solo_coherencia": [
+    "2023-12-08"
+   ]
+  }
+ }
+}

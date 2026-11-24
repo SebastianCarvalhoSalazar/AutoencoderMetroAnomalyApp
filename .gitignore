@@ -162,3 +162,4 @@ cython_debug/
 #.idea/
 reports/runs/
 reports/operacion/
+reports/fase3/*.pkl
