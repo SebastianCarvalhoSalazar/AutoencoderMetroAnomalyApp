@@ -56,9 +56,15 @@ def main(argv=None):
     F["fecha"] = pd.to_datetime(F["fecha"])
     M = F.merge(hold[["fecha", "linea", "hora", "observado", "pred", "p10", "p90"]], on=["fecha", "linea", "hora"], suffixes=("_dia", "_mes"))
     comp = {}
+    closed_rows = M["modelo"] == "cierre_programado"
+    # WAPE con todos los días (incluye cierres anunciados: el diario pronostica 0, el mensual no los conoce)
+    wape_all = {ln: (round(float((g["observado"] - g["pred_dia"]).abs().sum() / g["observado"].sum()), 4),
+                     round(float((g["observado"] - g["pred_mes"]).abs().sum() / g["observado"].sum()), 4)) for ln, g in M.groupby("linea")}
+    M = M[~closed_rows]  # el resto de métricas, sin los días de cierre programado
     for ln, g in M.groupby("linea"):
         y = g["observado"]
-        comp[ln] = {"wape_diario": round(float((y - g["pred_dia"]).abs().sum() / y.sum()), 4),
+        comp[ln] = {"wape_diario_con_cierres": wape_all[ln][0], "wape_mensual_con_cierres": wape_all[ln][1],
+                    "wape_diario": round(float((y - g["pred_dia"]).abs().sum() / y.sum()), 4),
                     "wape_mensual": round(float((y - g["pred_mes"]).abs().sum() / y.sum()), 4),
                     "cobertura_diario": round(float(((y >= g["p10_dia"]) & (y <= g["p90_dia"])).mean()), 3),
                     "cobertura_mensual": round(float(((y >= g["p10_mes"]) & (y <= g["p90_mes"])).mean()), 3) if g["p10_mes"].notna().any() else None}
@@ -77,7 +83,9 @@ def main(argv=None):
           f"- Alertas del periodo: {', '.join(alertas) or 'ninguna'}",
           f"- Advertencias del monitor: {mon['advertencias'] or 'ninguna'}", "",
           "## Pronóstico con reajuste diario (operación) frente a reajuste mensual (reproducción del holdout)", "",
-          "Mismos días y franjas; el intervalo del reajuste diario usa el factor conformal del manifiesto.", "", t.to_markdown(), ""]
+          "Mismos días y franjas; el intervalo del reajuste diario usa el factor conformal del manifiesto. Las columnas "
+          "`*_con_cierres` incluyen los días de cierre programado anunciado (el reajuste diario los pronostica 0 usando el anuncio; "
+          "el mensual no los conoce); las demás columnas los excluyen.", "", t.to_markdown(), ""]
     (OUT / "operacion_red.md").write_text("\n".join(md), encoding="utf-8")
     print("\n".join(md))
 

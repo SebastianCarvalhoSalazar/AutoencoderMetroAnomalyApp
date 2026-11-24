@@ -233,7 +233,13 @@ def forecast_coverage(forecasts_log: str | Path, red: PL.Red) -> dict:
         obs.append(W.at[r.fecha, col] if W is not None and r.fecha in W.index else np.nan)
     F["observado"] = obs
     F = F.dropna(subset=["observado"])
-    res = {"filas_con_dato": int(len(F)), "lineas_dañadas": bad, "por_linea": {}}
+    # Los días de cierre programado se pronostican 0 por regla (no es un pronóstico probabilístico): se informan aparte
+    # y no entran en la cobertura del intervalo ni en el WAPE del modelo.
+    closed = F["modelo"] == "cierre_programado"
+    C, F = F[closed], F[~closed]
+    res = {"filas_con_dato": int(len(F)), "lineas_dañadas": bad, "por_linea": {},
+           "cierres_programados": {ln: {"dias": int(g["fecha"].nunique()), "entradas_residuales": int(g["observado"].sum())}
+                                   for ln, g in C.groupby("linea")}}
     for ln, g in F.groupby("linea"):
         res["por_linea"][ln] = {"dias": int(g["fecha"].nunique()),
                                 "cobertura_80": round(float(((g["observado"] >= g["p10"]) & (g["observado"] <= g["p90"])).mean()), 3),
