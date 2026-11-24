@@ -31,4 +31,23 @@ Los conteos corresponden a **entradas registradas por validación de pago**, no 
 DEV 2022-01-01…2023-06-30 (selección) · HOLDOUT 2023-07-01…2024-06-30 (evaluación única; ver la bitácora sobre la segunda lectura) · EXTERNO 2019 (transferencia) y 2020–2021 (estrés COVID).
 
 ## Eventos reales (`data/eventos_reales.csv`)
-7 eventos con fuente. Prospectivos (cuentan para D7): EV1–EV4 (COVID 2020; elecciones 2019 y 2023). A posteriori (no cuentan): EV5–EV7 (elecciones de 2022). No se hallaron incidentes de la Línea A en 2022–2024 con fuente oficial.
+Hay 14 eventos registrados, cada uno con su fuente y su nivel de verificación.
+- **EV1–EV7:** COVID 2020 y elecciones de 2019, 2022 y 2023. Los prospectivos para D7 son EV1–EV4.
+- **IN1–IN3:** incidentes operacionales de 2023 (Telemedellín citando a @metrodemedellin). Solo IN3 (suspensión del 28/08/2023) deja señal en los datos línea × hora.
+- **MED1:** no cobro electoral del 29/10/2023, según el comunicado oficial del Metro.
+- **OP1–OP3 (fase 3):** cierre anticipado del 24 y 31 de diciembre.
+  - 22:00 según fuentes oficiales: Telemedellín citando al Metro en 2022 y el comunicado N.° 2152 del Metro en 2024.
+  - **2023: solo prensa** (21:00). Es coherente con los datos: h21 reducida y h22 sin registro en todas las líneas.
+
+## Datos multilínea y fuentes externas (fase 3)
+- **Líneas modeladas:** 11 (A, B, T-A, H, J, K, M, P, 1, 2 y O).
+  - La L (cable turístico) no opera todas las franjas y se excluye.
+  - En 2023, la A concentra el 63,7 % de las entradas registradas.
+  - Los cables tienen días incompletos frecuentes: unos 50 al año, que se marcan como "no evaluable".
+- **Topología:** `data/topologia_red.csv` (14 conexiones entre líneas en estaciones de integración) y `data/lineas.csv` (modo, extremos, km y estaciones). Cada fila tiene la URL de la página oficial del Metro. El esquema de la app **no es geográfico**.
+- **Clima:** `data/clima_open_meteo_medellin.csv`, lluvia y temperatura horarias 2019–2024 de Open-Meteo.
+  - Reanálisis con licencia CC BY 4.0, una sola celda (6,22; −75,55).
+  - La precipitación es la suma de la hora precedente, así que la franja h toma el registro h+1.
+  - No mejoró el pronóstico (H5b descartada). Se conserva para investigación.
+- **Fuentes evaluadas y descartadas:** demografía por comuna (DANE/Alcaldía), encuesta Origen-Destino (AMVA), amenaza por movimientos en masa y corredores del POT. Son anuales o estáticas, o no alineables con línea × hora. Ver `docs/fase3/FUENTES_EXTERNAS.md`.
+- **Datos faltantes** para capacidades no viables: ver `docs/fase3/HOJA_DE_RUTA_DATOS.md`.

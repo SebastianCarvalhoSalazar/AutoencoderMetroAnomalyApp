@@ -82,6 +82,23 @@ async function checkPage(p, tag, res) {
     await p.screenshot({ path: path.join(out, `R_red_hora_${h}.png`), clip: { x: box.x, y: box.y, width: box.width, height: box.height + 40 } });
   }
   res.reproduccion_marcas = colors;
+  // Animación (botón ▶): se capturan fotogramas del esquema mientras avanza; deben ser distintos entre sí.
+  const crypto = require('crypto');
+  await p.getByRole('button', { name: /Reproducir el día/ }).click();
+  const frames = [];
+  for (let i = 0; i < 5; i++) {
+    await p.waitForTimeout(1300);
+    const el = p.locator('.vega-embed').first();
+    if (await el.count()) {
+      const buf = await el.screenshot();
+      frames.push(crypto.createHash('sha256').update(buf).digest('hex').slice(0, 12));
+      if (i === 2) fs.writeFileSync(path.join(out, 'R_animacion_fotograma.png'), buf);
+    }
+  }
+  await idle(p);
+  res.animacion = { fotogramas: frames, distintos: new Set(frames).size };
+  res.checks.push({ tag: 'animacion', excepciones: await p.locator('[data-testid="stException"]').count(),
+                    desbordamiento_horizontal: false, animacion_ok: new Set(frames).size >= 3 });
   // Pestañas
   for (const [tab, name] of [[/Pronóstico/, 'pronostico'], [/Simulación/, 'simulacion'], [/Modelos y datos/, 'catalogo']]) {
     t0 = Date.now();

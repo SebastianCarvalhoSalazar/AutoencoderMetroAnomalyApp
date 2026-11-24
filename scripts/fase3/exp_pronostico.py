@@ -15,6 +15,7 @@ from sklearn.metrics import roc_auc_score
 from metro_anomaly import data as D
 from metro_anomaly.fuentes import clima
 from metro_anomaly.pronostico import FEATURES_BASE, FEATURES_CLIMA, FEATURES_V2, GBMForecaster, build_rows, profile_predict, wape
+from metro_anomaly.pronostico import conformal_online as conformal
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "reports" / "fase3"
@@ -22,6 +23,7 @@ LINES_EXCLUDED = {"LINEA L"}  # no opera todas las franjas (sin días completos)
 
 
 PERIODS = {"holdout": ("2023-07-01", "2024-06-01"), "dev": ("2022-07-01", "2023-06-01")}
+OOS_COLS = ["fecha", "linea", "hora", "y", "naive", "perfil", "gbm", "gbm_p10", "gbm_p90", "gbm_v2", "combo", "combo_v2"]
 CANDIDATES = ["perfil", "gbm", "gbm_v2", "combo", "combo_v2"]  # regla de selección por línea (pre-registrada): menor WAPE en DEV
 
 
@@ -56,33 +58,9 @@ def main(period="holdout"):
     P["y"] = np.expm1(P["y_log"])
     P = P.dropna(subset=["y"])
     P.to_pickle(OUT / f"pronostico_predicciones_{period}.pkl")
+    if period == "holdout":  # versión compacta y versionada: insumo de scripts/fase3/build_plataforma.py
+        P[OOS_COLS].to_csv(OUT / "pronostico_oos_holdout.csv.gz", index=False, float_format="%.6g")
     return P
-
-
-def conformal(P: pd.DataFrame, target=0.80) -> pd.DataFrame:
-    """Calibración en línea (causal) del intervalo: para el mes M y cada línea, el factor c que ensancha o
-    estrecha la banda (en escala log) se elige con las predicciones fuera de muestra de los meses < M.
-    El primer mes queda sin calibrar (c = 1). Ajuste añadido DESPUÉS de ver que la cobertura de la Línea A
-    no cumplía (docs/BITACORA.md); se evalúa en el mismo periodo, así que es una evidencia más débil."""
-    P = P.copy()
-    lp, l10, l90 = np.log1p(P["gbm"]), np.log1p(P["gbm_p10"]), np.log1p(P["gbm_p90"])
-    P["_mes"] = P["fecha"].dt.to_period("M")
-    cs = np.linspace(0.5, 3.0, 51)
-    P["c_conformal"] = 1.0
-    for ln, g in P.groupby("linea"):
-        for m in sorted(g["_mes"].unique()):
-            prev = g[g["_mes"] < m]
-            if prev.empty:
-                continue
-            ly = np.log1p(prev["y"])
-            a, lo, hi = lp[prev.index], l10[prev.index], l90[prev.index]
-            cov = [((ly >= a - c * (a - lo)) & (ly <= a + c * (hi - a))).mean() for c in cs]
-            c = cs[np.argmax(np.array(cov) >= target)] if max(cov) >= target else cs[-1]
-            P.loc[(P["linea"] == ln) & (P["_mes"] == m), "c_conformal"] = c
-    c = P["c_conformal"]
-    P["gbm_p10c"] = np.expm1(lp - c * (lp - l10))
-    P["gbm_p90c"] = np.expm1(lp + c * (l90 - lp))
-    return P.drop(columns="_mes")
 
 
 def evaluate(P: pd.DataFrame, Ws: dict, period: str, selection: dict | None = None):

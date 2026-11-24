@@ -26,6 +26,10 @@ DAY_TYPES_EXT = DAY_TYPES + ("habil_temporada", "sabado_temporada")
 #: registradas por pago, esas horas aparecen casi en cero: es un EFECTO DE MEDICIÓN, no una caída de demanda.
 ELECTION_FARE_FREE_NOTE = ("Jornada electoral sin cobro de pasaje (comunicado oficial del Metro): las entradas no se "
                            "registran mientras no se cobra, por lo que el dato no refleja la demanda real")
+#: Cierre anticipado del servicio comercial el 24 y el 31 de diciembre: 22:00 según comunicados oficiales de 2022
+#: (Telemedellín, citando al Metro) y 2024 (metrodemedellin.gov.co); para 2023 solo hay prensa (21:00). Ver
+#: data/eventos_reales.csv (OP1–OP3). Explica la ausencia simultánea de registro en las últimas franjas.
+EARLY_CLOSURE_NOTE = "Cierre anticipado habitual del servicio (24 y 31 de diciembre; ~21–22 h)"
 ELECTION_DAYS = {"2019-10-27": "Elecciones de autoridades locales", "2022-03-13": "Elecciones de Congreso",
                  "2022-05-29": "Elecciones presidenciales (1.ª vuelta)", "2022-06-19": "Elecciones presidenciales (2.ª vuelta)",
                  "2023-10-29": "Elecciones territoriales"}
@@ -97,6 +101,8 @@ def event_note(date) -> str | None:
         parts.append("Temporada de fin de año")
     if (d.month, d.day) in SPECIAL_DAYS:
         parts.append("Víspera de Navidad/Año Nuevo")
+    if (d.month, d.day) in ((12, 24), (12, 31)):
+        parts.append(EARLY_CLOSURE_NOTE)
     return "; ".join(parts) or None
 
 

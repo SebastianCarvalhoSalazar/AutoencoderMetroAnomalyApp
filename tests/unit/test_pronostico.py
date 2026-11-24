@@ -48,3 +48,32 @@ def test_clima_alignment(tmp_path):
     h = clima.load_hourly(tmp_path / "c.csv")
     assert h.loc["2023-01-01 02:00", "lluvia_mm"] == 5.0  # llovió entre 02:00 y 03:00
     assert h.loc["2023-01-01 03:00", "lluvia_mm"] == 0.0
+
+
+def test_conformal_factor_reaches_target():
+    from metro_anomaly.pronostico import conformal_factor
+    rng = np.random.default_rng(0)
+    center = np.full(2000, 1000.0)
+    y = np.expm1(np.log1p(center) + rng.normal(0, 0.1, 2000))
+    lo, hi = np.expm1(np.log1p(center) - 0.05), np.expm1(np.log1p(center) + 0.05)  # banda demasiado estrecha
+    c = conformal_factor(y, center, lo, hi, target=0.8)
+    ly, a = np.log1p(y), np.log1p(center)
+    cov = ((ly >= a - c * 0.05) & (ly <= a + c * 0.05)).mean()
+    assert c > 1 and 0.8 <= cov <= 0.83
+    assert conformal_factor([np.nan], [1], [1], [1]) == 1.0
+
+
+def test_forecast_day_is_causal(Ws):
+    """El pronóstico del día t no cambia si se alteran datos con fecha ≥ t."""
+    from metro_anomaly.pronostico import forecast_day
+    sel, c = {"A": "combo_v2", "B": "gbm"}, {"A": 1.2, "B": 1.0}
+    t = pd.Timestamp("2023-06-15")
+    Wc = {k: W.loc[:"2023-06-30"] for k, W in Ws.items()}
+    f1 = forecast_day(Wc, t, sel, c)
+    poisoned = {k: W.copy() for k, W in Wc.items()}
+    for W in poisoned.values():
+        W.loc[t:] *= 5
+    f2 = forecast_day(poisoned, t, sel, c)
+    pd.testing.assert_frame_equal(f1, f2)
+    assert len(f1) == 2 * 19 and (f1["p10"] <= f1["pred"]).all() and (f1["pred"] <= f1["p90"]).all()
+    assert set(f1["modelo"]) == {"combo_v2", "gbm"}

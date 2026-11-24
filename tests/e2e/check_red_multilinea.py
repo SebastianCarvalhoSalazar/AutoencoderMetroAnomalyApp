@@ -53,8 +53,11 @@ def check(out_dir: Path) -> dict:
             if r[i_sc] != want:
                 report["discrepancias"].append(f"{d} {ln}: score mostrado '{r[i_sc]}' ≠ '{want}'")
     for c in res["checks"]:
-        if c["excepciones"] or c["desbordamiento_horizontal"]:
+        if c["excepciones"] or c["desbordamiento_horizontal"] or c.get("animacion_ok") is False:
             report["problemas_pagina"].append(c)
+    report["animacion"] = res.get("animacion")
+    if not res.get("animacion") or res["animacion"]["distintos"] < 3:
+        report["problemas_pagina"].append({"animacion": res.get("animacion"), "motivo": "menos de 3 fotogramas distintos"})
     if res.get("errores_js"):
         report["problemas_pagina"].append({"errores_js": res["errores_js"]})
     marks = res.get("reproduccion_marcas", {})

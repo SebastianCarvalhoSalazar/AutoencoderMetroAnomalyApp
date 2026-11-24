@@ -16,30 +16,30 @@ Ajuste con DEV (2022-01…2023-06); nivel y referencia causales sobre 2019; eval
 
 Alertas del modelo elegido en 2019 (22):
 
-|            | día       |   score | calendario                                            |
-|:-----------|:----------|--------:|:------------------------------------------------------|
-| 2019-03-08 | Friday    |   64.87 |                                                       |
-| 2019-03-29 | Friday    |    8.4  |                                                       |
-| 2019-04-08 | Monday    |   38.07 |                                                       |
-| 2019-04-25 | Thursday  |  150.66 |                                                       |
-| 2019-04-27 | Saturday  |   27.26 |                                                       |
-| 2019-05-17 | Friday    |    8.08 |                                                       |
-| 2019-08-10 | Saturday  |    9.11 |                                                       |
-| 2019-08-21 | Wednesday |   13.5  |                                                       |
-| 2019-08-22 | Thursday  |    8.43 |                                                       |
-| 2019-09-04 | Wednesday |  151.65 |                                                       |
-| 2019-09-16 | Monday    |  110.46 |                                                       |
-| 2019-10-23 | Wednesday |  111.7  |                                                       |
-| 2019-10-27 | Sunday    |   57.63 | Elecciones de autoridades locales                     |
-| 2019-11-12 | Tuesday   |    9.56 |                                                       |
-| 2019-11-21 | Thursday  |   40.57 |                                                       |
-| 2019-11-27 | Wednesday |   11.89 |                                                       |
-| 2019-12-17 | Tuesday   |    8.43 |                                                       |
-| 2019-12-18 | Wednesday |    8.35 |                                                       |
-| 2019-12-19 | Thursday  |    7.89 |                                                       |
-| 2019-12-24 | Tuesday   |   10.58 | Temporada de fin de año; Víspera de Navidad/Año Nuevo |
-| 2019-12-25 | Wednesday |   50.97 | Navidad; Temporada de fin de año                      |
-| 2019-12-30 | Monday    |   79.06 | Temporada de fin de año                               |
+|            | día       |   score | calendario                                                                                                                      |
+|:-----------|:----------|--------:|:--------------------------------------------------------------------------------------------------------------------------------|
+| 2019-03-08 | Friday    |   64.87 |                                                                                                                                 |
+| 2019-03-29 | Friday    |    8.4  |                                                                                                                                 |
+| 2019-04-08 | Monday    |   38.07 |                                                                                                                                 |
+| 2019-04-25 | Thursday  |  150.66 |                                                                                                                                 |
+| 2019-04-27 | Saturday  |   27.26 |                                                                                                                                 |
+| 2019-05-17 | Friday    |    8.08 |                                                                                                                                 |
+| 2019-08-10 | Saturday  |    9.11 |                                                                                                                                 |
+| 2019-08-21 | Wednesday |   13.5  |                                                                                                                                 |
+| 2019-08-22 | Thursday  |    8.43 |                                                                                                                                 |
+| 2019-09-04 | Wednesday |  151.65 |                                                                                                                                 |
+| 2019-09-16 | Monday    |  110.46 |                                                                                                                                 |
+| 2019-10-23 | Wednesday |  111.7  |                                                                                                                                 |
+| 2019-10-27 | Sunday    |   57.63 | Elecciones de autoridades locales                                                                                               |
+| 2019-11-12 | Tuesday   |    9.56 |                                                                                                                                 |
+| 2019-11-21 | Thursday  |   40.57 |                                                                                                                                 |
+| 2019-11-27 | Wednesday |   11.89 |                                                                                                                                 |
+| 2019-12-17 | Tuesday   |    8.43 |                                                                                                                                 |
+| 2019-12-18 | Wednesday |    8.35 |                                                                                                                                 |
+| 2019-12-19 | Thursday  |    7.89 |                                                                                                                                 |
+| 2019-12-24 | Tuesday   |   10.58 | Temporada de fin de año; Víspera de Navidad/Año Nuevo; Cierre anticipado habitual del servicio (24 y 31 de diciembre; ~21–22 h) |
+| 2019-12-25 | Wednesday |   50.97 | Navidad; Temporada de fin de año                                                                                                |
+| 2019-12-30 | Monday    |   79.06 | Temporada de fin de año                                                                                                         |
 
 ## 2020–2021 — estrés COVID (causal, rolling mensual desde 2019)
 

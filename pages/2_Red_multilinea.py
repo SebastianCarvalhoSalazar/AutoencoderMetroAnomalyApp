@@ -5,6 +5,7 @@ Lee artefactos precalculados por `scripts/fase3/build_plataforma.py` (reproducci
 from __future__ import annotations
 
 import json
+import time
 from pathlib import Path
 
 import altair as alt
@@ -74,7 +75,8 @@ def detalle(horas: str, acomp: str, opuesto: str) -> str:
     return " · ".join(parts) or "—"
 
 
-def network_chart(h_day: pd.DataFrame, lineas: pd.DataFrame, topo: pd.DataFrame, modeled: set):
+def network_chart(h_day: pd.DataFrame, lineas: pd.DataFrame, topo: pd.DataFrame, modeled: set, hour_fixed: int | None = None):
+    """Esquema de la red. Sin ``hour_fixed``: control deslizante en el navegador. Con ``hour_fixed``: fotograma de la animación."""
     nodes = pd.DataFrame([{"linea": ln, "x": x, "y": y} for ln, (x, y) in POS.items()])
     nodes = nodes.merge(lineas[["linea", "modo"]], on="linea", how="left")
     rows = []
@@ -96,7 +98,10 @@ def network_chart(h_day: pd.DataFrame, lineas: pd.DataFrame, topo: pd.DataFrame,
             E.append({"x": x1, "y": y1, "x2": x2, "y2": y2, "estacion": e["estacion_transferencia"],
                       "par": f"{short(e['linea_origen'])}–{short(e['linea_destino'])}"})
     E = pd.DataFrame(E)
-    hour = alt.param(name="hora_sel", value=17, bind=alt.binding_range(min=4, max=22, step=1, name="Hora (reproducción) "))
+    if hour_fixed is None:
+        hour = alt.param(name="hora_sel", value=17, bind=alt.binding_range(min=4, max=22, step=1, name="Hora (reproducción) "))
+    else:
+        hour = alt.param(name="hora_sel", value=int(hour_fixed))
     ax = alt.Axis(labels=False, ticks=False, grid=False, domain=False, title=None)
     edges = alt.Chart(E).mark_rule(color="#8a8a85", strokeWidth=2).encode(
         x=alt.X("x:Q", axis=ax, scale=alt.Scale(domain=[-5, 5])), y=alt.Y("y:Q", axis=ax, scale=alt.Scale(domain=[-2.2, 3.8])),
@@ -115,7 +120,8 @@ def network_chart(h_day: pd.DataFrame, lineas: pd.DataFrame, topo: pd.DataFrame,
                         legend=alt.Legend(orient="bottom", direction="horizontal", gradientLength=260)),
         tooltip=tips)
     lab = base.mark_text(fontSize=15, fontWeight="bold", color="#111111").encode(x="x:Q", y="y:Q", text="etiqueta:N")
-    return (edges + under + pts + lab).add_params(hour).properties(height=420, title="Relaciones entre líneas (esquema, no geográfico)")
+    title = "Relaciones entre líneas (esquema, no geográfico)" + ("" if hour_fixed is None else f" — {int(hour_fixed):02d}:00")
+    return (edges + under + pts + lab).add_params(hour).properties(height=420, title=title)
 
 
 def heatmap(h_day: pd.DataFrame, order):
@@ -200,7 +206,12 @@ def main():
         a, b = st.columns([1.15, 1])
         with a:
             badge("estimacion", "Color = z de cada línea en la hora elegida con el control deslizante (reproducción hora a hora).")
-            st.altair_chart(network_chart(h_day, lineas, topo, set(lines)), use_container_width=True)
+            ph = st.empty()
+            if st.button("▶ Reproducir el día hora a hora (04–22 h)", key="play"):
+                for h in range(4, 23):  # animación: un fotograma por hora
+                    ph.altair_chart(network_chart(h_day, lineas, topo, set(lines), hour_fixed=h), use_container_width=True)
+                    time.sleep(0.6)
+            ph.altair_chart(network_chart(h_day, lineas, topo, set(lines)), use_container_width=True)
             st.caption("Aristas = estaciones de integración verificadas en las páginas oficiales del Metro (archivo data/topologia_red.csv). "
                        "La Línea L (gris) no se modela: no opera todas las horas.")
         with b:

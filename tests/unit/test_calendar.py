@@ -46,3 +46,9 @@ def test_event_note():
     assert "Elecciones territoriales" in C.event_note("2023-10-29")
     assert "Semana Santa" in C.event_note("2023-04-05")
     assert C.event_note("2023-03-15") is None
+
+
+def test_event_note_early_closure():
+    assert C.EARLY_CLOSURE_NOTE in C.event_note("2023-12-24")
+    assert C.EARLY_CLOSURE_NOTE in C.event_note("2022-12-31")
+    assert C.EARLY_CLOSURE_NOTE not in (C.event_note("2023-12-25") or "")
