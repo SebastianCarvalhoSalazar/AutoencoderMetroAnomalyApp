@@ -24,7 +24,7 @@ Y_FMT = "replace(format(datum.value, ',.0f'), ',', '.')"  # miles con punto (es-
 KIND = {"real": ("Dato real", "#0b6e4f"), "estimacion": ("Estimación", "#5b4bb7"),
         "simulacion": ("Simulación", "#9a5b00"), "prediccion": ("Predicción", "#1f4e9a")}
 CAT_ICON = {"anomalia_local": "🔴", "anomalia_multilinea": "🟠", "anomalia_generalizada": "🟣", "problema_de_datos": "⚠️",
-            "ausencia_simultanea_red": "⛔", "efecto_de_medicion": "🗳️", "sin_anomalia": "✅", "no_evaluable": "◻️", "sin_datos": "—"}
+            "ausencia_simultanea_red": "⛔", "cierre_programado": "🛠️", "linea_sin_registro": "🚫", "efecto_de_medicion": "🗳️", "sin_anomalia": "✅", "no_evaluable": "◻️", "sin_datos": "—"}
 # Posiciones del esquema de relaciones entre líneas (NO geográfico): nodos = líneas, aristas = estaciones de integración.
 POS = {"LINEA A": (0, 0), "LINEA B": (-2, 0), "LINEA J": (-4, 0.4), "LINEA T-A": (2, -0.6), "LINEA H": (4, -0.2),
        "LINEA M": (4, -1.4), "LINEA K": (0.9, 2.0), "LINEA P": (-0.9, 2.0), "LINEA L": (1.8, 3.2), "LINEA O": (-2.2, 1.6),
@@ -218,7 +218,7 @@ def main():
             badge("estimacion", "Desviación por línea y hora (z) del día")
             st.altair_chart(heatmap(h_day, lines), use_container_width=True)
         st.subheader("Evaluación del día por línea")
-        badge("estimacion", "Motor de reglas: medición > ausencia simultánea > datos > anomalía > normal")
+        badge("estimacion", "Motor de reglas: medición > cierre programado > ausencia simultánea > línea sin registro > datos > anomalía > normal")
         cats = man["categorias"]
         tbl = pd.DataFrame({
             "Línea": [short(x) for x in d_day.index],

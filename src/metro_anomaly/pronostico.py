@@ -178,15 +178,24 @@ def conformal_online(P: pd.DataFrame, target=0.80) -> pd.DataFrame:
     return P.drop(columns="_mes")
 
 
-def forecast_day(Ws: dict, target, selection: dict, c_by_line: dict, train_start="2022-01-01") -> pd.DataFrame:
+def forecast_day(Ws: dict, target, selection: dict, c_by_line: dict, train_start="2022-01-01",
+                 cierres: set | None = None) -> pd.DataFrame:
     """Pronóstico de ``target`` por línea y franja con el modelo elegido en DEV para cada línea (``selection``) y la
     banda del 80 % calibrada con ``c_by_line``. Solo usa datos con fecha < ``target`` (reajuste diario).
 
     Columnas: fecha, linea, hora, pred, p10, p90, modelo, ratio_p95_gbm (total diario del GBM base frente al p95
-    de los 365 días previos; indicador H6)."""
+    de los 365 días previos; indicador H6).
+
+    ``cierres``: {(línea, fecha)} cierres programados anunciados. Esos días se excluyen del ajuste y de los rezagos, y si
+    la fecha objetivo es un cierre de la línea, el pronóstico es 0 (información anunciada de antemano, sin fuga)."""
     target = pd.Timestamp(target)
     last = target - pd.Timedelta(days=1)
     Wc = {ln: W.loc[:last] for ln, W in Ws.items()}
+    if cierres:
+        Wc = {ln: W.copy() for ln, W in Wc.items()}
+        for ln, d in cierres:
+            if ln in Wc and d in Wc[ln].index:
+                Wc[ln].loc[d] = np.nan
     R = build_rows(Wc, pd.date_range(train_start, target), include_future=True)
     tr, te = R[R["fecha"] <= last], R[R["fecha"] == target].copy()
     if te.empty:
@@ -211,4 +220,7 @@ def forecast_day(Ws: dict, target, selection: dict, c_by_line: dict, train_start
     p95 = {ln: Wc[ln].sum(axis=1, min_count=len(SCORED_HOURS)).loc[last - pd.Timedelta(days=364): last].quantile(0.95)
            for ln in tot.index}
     te["ratio_p95_gbm"] = te["linea"].map(lambda ln: tot[ln] / p95[ln])
+    closed = te["linea"].map(lambda ln: (ln, target) in (cierres or set()))
+    te.loc[closed, ["pred", "p10", "p90", "ratio_p95_gbm"]] = 0.0
+    te.loc[closed, "modelo"] = "cierre_programado"
     return te[["fecha", "linea", "hora", "pred", "p10", "p90", "modelo", "ratio_p95_gbm"]].reset_index(drop=True)

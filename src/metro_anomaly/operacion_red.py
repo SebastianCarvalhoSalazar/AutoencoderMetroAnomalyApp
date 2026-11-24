@@ -78,7 +78,7 @@ def merge_red(red: PL.Red, new: dict | None) -> PL.Red:
         if ln in new:
             W = pd.concat([W[~W.index.isin(new[ln].index)], new[ln]]).sort_index()
         Ws[ln] = W
-    return PL.Red(Ws, red.lineas, red.topologia)
+    return PL.Red(Ws, red.lineas, red.topologia, red.cierres)
 
 
 def _row_hash(row: pd.Series) -> str:
@@ -141,6 +141,8 @@ def process_red(dates, red: PL.Red, manifest_path: str | Path, log_path: str | P
                 summary["alertas"].append(f"{key[0]} {ln}")
             elif r.categoria == "ausencia_simultanea_red":
                 summary["ausencias_simultaneas"].append(f"{key[0]} {ln}")
+            elif r.categoria == "linea_sin_registro":
+                summary.setdefault("lineas_sin_registro", []).append(f"{key[0]} {ln}")
     return summary
 
 
@@ -154,7 +156,7 @@ def forecast_red(target, red: PL.Red, manifest_path: str | Path, log_path: str |
     log = Path(log_path); log.parent.mkdir(parents=True, exist_ok=True)
     if (str(target.date()), man_sha, data_sha) in _keys(log, ("fecha", "manifiesto_sha256", "datos_sha256")):
         return {"fecha": str(target.date()), "emitido": False, "motivo": "ya registrado"}
-    F = forecast_day(red.Ws, target, doc["seleccion_pronostico"], doc.get("factor_conformal", {}))
+    F = forecast_day(red.Ws, target, doc["seleccion_pronostico"], doc.get("factor_conformal", {}), cierres=red.cierres)
     with open(log, "a", encoding="utf-8") as fh:
         for r in F.itertuples(index=False):
             fh.write(json.dumps({"fecha": str(target.date()), "linea": r.linea, "hora": int(r.hora), "pred": round(float(r.pred), 1),
@@ -192,7 +194,9 @@ def monitor_red(decisions_log: str | Path, forecasts_log: str | Path | None = No
             rate = float(last90["alerta"].mean())
             out["por_linea"][ln] = {"dias": int(len(g)), "tasa_alertas_90d": round(rate, 4),
                                     "problemas_datos_90d": int((last90["categoria"] == "problema_de_datos").sum()),
-                                    "ausencias_simultaneas_90d": int((last90["categoria"] == "ausencia_simultanea_red").sum())}
+                                    "ausencias_simultaneas_90d": int((last90["categoria"] == "ausencia_simultanea_red").sum()),
+                                    "dias_sin_registro_90d": int((last90["categoria"] == "linea_sin_registro").sum()),
+                                    "cierres_programados_90d": int((last90["categoria"] == "cierre_programado").sum())}
             if len(last90) >= 60 and rate > ALERT_RATE_RANGE[1]:
                 out["advertencias"].append(f"{ln}: tasa de alertas de 90 días {rate:.1%} > {ALERT_RATE_RANGE[1]:.0%} "
                                            "(posible cambio de régimen; revisar y considerar reconstruir los artefactos).")

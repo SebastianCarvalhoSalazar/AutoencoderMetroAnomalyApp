@@ -86,3 +86,28 @@ def test_mid_month_start_matches_full_month(evaluated):
     pd.testing.assert_series_equal(h1["z"].reset_index(drop=True), full_h["z"], check_names=False)
     full_d = dias[dias["fecha"] == "2022-03-22"].reset_index(drop=True)
     pd.testing.assert_series_equal(d1["score_coherencia"].reset_index(drop=True), full_d["score_coherencia"], check_names=False)
+
+
+def test_closed_line_is_not_silent(series_factory):
+    """Una línea que suele operar y no registra nada en el día genera una fila 'línea sin registro' (antes no aparecía);
+    un cierre anunciado se clasifica como 'cierre programado' aunque haya algún registro residual."""
+    Ws = {ln: series_factory(start="2022-01-01", end="2022-04-30", seed=i, noise=0.02) for i, ln in enumerate(LINES)}
+    Ws["LINEA K"] = Ws["LINEA K"].drop(pd.date_range("2022-03-14", "2022-03-18"))  # cierre de 5 días sin anunciar
+    Ws["LINEA 2"].loc["2022-03-21":"2022-03-22"] = 3.0  # cierre anunciado con registro residual
+    cierres = {("LINEA 2", pd.Timestamp("2022-03-21")), ("LINEA 2", pd.Timestamp("2022-03-22"))}
+    red = PL.Red(Ws, pd.DataFrame({"linea": list(LINES), "modo": list(LINES.values())}), pd.DataFrame(), cierres)
+    horas, dias = PL.build_history(red, "2022-03-01", "2022-03-31")
+    thr = {ln: {"score": "score_coherencia" if ln in PL.COHERENCE_LINES else "score_perfil", "umbral": 6.0} for ln in LINES}
+    ev = PL.evaluate_days(red, horas, dias, thr).set_index(["fecha", "linea"])
+    for d in pd.date_range("2022-03-14", "2022-03-18"):
+        assert ev.loc[(d, "LINEA K"), "categoria"] == "linea_sin_registro"
+    for d in ("2022-03-21", "2022-03-22"):
+        assert ev.loc[(pd.Timestamp(d), "LINEA 2"), "categoria"] == "cierre_programado"
+    assert ev.loc[(pd.Timestamp("2022-03-23"), "LINEA 2"), "categoria"] == "sin_anomalia"  # el cierre no contamina el día siguiente
+
+
+def test_load_closures_from_official_calendar():
+    from pathlib import Path
+    c = PL.load_closures(Path(__file__).resolve().parents[2] / "data" / "cierres_programados.csv")
+    assert ("LINEA P", pd.Timestamp("2024-06-08")) in c and ("LINEA P", pd.Timestamp("2024-06-14")) not in c
+    assert ("LINEA K", pd.Timestamp("2022-07-09")) in c and len(c) == 9 + 11 + 3 + 6 + 3 + 3

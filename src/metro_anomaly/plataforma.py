@@ -5,7 +5,8 @@ Componentes:
   metadatos de líneas (`data/lineas.csv`), calendario y lluvia (solo para investigación; H5b se descartó).
 - Modelos: perfil contextual por línea (z por hora), detector de coherencia entre líneas (H1, adoptado en las
   líneas donde mejoró con IC > 0), pronóstico del día siguiente (H5, híbrido elegido en DEV).
-- Motor de reglas: prioriza efecto de medición (calendario) > ausencia simultánea en la red > problema de datos > anomalía
+- Motor de reglas: prioriza efecto de medición (calendario) > cierre programado anunciado > ausencia simultánea en la
+  red > línea sin registro en todo el día > problema de datos > anomalía
   (con alcance descriptivo local / multilínea / generalizada) > sin anomalía.
 - Trazabilidad: cada salida lleva el tipo de dato (real, estimación, simulación, predicción) y la versión del modelo.
 
@@ -16,7 +17,7 @@ from __future__ import annotations
 import hashlib
 import json
 import subprocess
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import numpy as np
@@ -46,6 +47,8 @@ TIPOS_DATO = {
 }
 
 CATEGORIAS = {
+    "cierre_programado": "Cierre programado anunciado (mantenimiento verificado)",
+    "linea_sin_registro": "Línea sin registro en todo el día (cierre, interrupción o falla de captura)",
     "problema_de_datos": "Posible problema de datos",
     "ausencia_simultanea_red": "Ausencia simultánea de registro en varias líneas (causa por determinar)",
     "efecto_de_medicion": "Efecto de medición (jornada sin cobro)",
@@ -88,13 +91,52 @@ class Red:
     Ws: dict  # línea -> DataFrame (fechas × SCORED_HOURS), dato real
     lineas: pd.DataFrame
     topologia: pd.DataFrame
+    cierres: set = field(default_factory=set)  # {(línea, fecha)} cierres programados anunciados (data/cierres_programados.csv)
+
+
+#: Una línea "suele operar" un día si tuvo registro en ≥ 80 % de los 56 días previos (tolera cierres de ~10 días).
+HABITUAL_WINDOW, HABITUAL_MIN = 56, 0.8
+
+
+def load_closures(path: str | Path) -> set:
+    """Cierres programados verificados -> {(línea, fecha)}. Son información anunciada de antemano (no hay fuga)."""
+    p = Path(path)
+    if not p.exists():
+        return set()
+    c = pd.read_csv(p)
+    return {(r.linea, d) for r in c.itertuples() for d in pd.date_range(r.desde, r.hasta)}
 
 
 def load_network(data_dir: str | Path) -> Red:
     data_dir = Path(data_dir)
     df, _ = D.load_all(data_dir)
     Ws = {ln: D.line_series(df, ln)[D.SCORED_HOURS] for ln in MAIN_LINES}
-    return Red(Ws, pd.read_csv(data_dir / "lineas.csv"), pd.read_csv(data_dir / "topologia_red.csv"))
+    return Red(Ws, pd.read_csv(data_dir / "lineas.csv"), pd.read_csv(data_dir / "topologia_red.csv"),
+               load_closures(data_dir / "cierres_programados.csv"))
+
+
+def mask_closures(Ws: dict, cierres: set) -> dict:
+    """Copia de las series con los días de cierre programado en NaN, para que no contaminen el ajuste de los modelos
+    (nivel, perfil, rezagos). La evaluación sigue mostrando el dato real."""
+    if not cierres:
+        return Ws
+    out = {}
+    for ln, W in Ws.items():
+        days = [d for (l2, d) in cierres if l2 == ln and d in W.index]
+        if days:
+            W = W.copy()
+            W.loc[days] = np.nan
+        out[ln] = W
+    return out
+
+
+def habitual_days(W: pd.DataFrame, dates) -> pd.Series:
+    """True si la línea tuvo registro en ≥ HABITUAL_MIN de los HABITUAL_WINDOW días previos a cada fecha."""
+    dates = pd.DatetimeIndex(dates)
+    idx = pd.date_range(min(W.index.min(), dates.min()) - pd.Timedelta(days=HABITUAL_WINDOW), max(W.index.max(), dates.max()))
+    has = W.notna().any(axis=1).reindex(idx, fill_value=False).astype(float)
+    frac = has.rolling(HABITUAL_WINDOW, min_periods=HABITUAL_WINDOW).mean().shift(1)
+    return (frac >= HABITUAL_MIN).reindex(dates).fillna(False)
 
 
 # ------------------------------------------------------------------------------------------ historia
@@ -106,6 +148,7 @@ def build_history(red: Red, start, end, train_start="2022-01-01") -> tuple[pd.Da
     - dias: fecha, linea, completo, score_perfil, score_coherencia.
     """
     Ws = red.Ws
+    Wfit = mask_closures(Ws, red.cierres)  # los modelos se ajustan sin los días de cierre programado
     hrows, drows = [], []
     for ms in pd.date_range(pd.Timestamp(start).to_period("M").to_timestamp(), end, freq="MS"):
         me = min(ms + pd.offsets.MonthEnd(0), pd.Timestamp(end))
@@ -114,19 +157,23 @@ def build_history(red: Red, start, end, train_start="2022-01-01") -> tuple[pd.Da
         # operación diaria (que evalúa un solo día a mitad de mes) reproduzca exactamente la reproducción histórica y
         # los umbrales calibrados con ella (defecto D9 corregido; docs/BITACORA.md).
         hist_end = ms - pd.Timedelta(days=1)
-        dets = fit_line_profiles(Ws, train_start, hist_end)
+        dets = fit_line_profiles(Wfit, train_start, hist_end)
         coh = {}
         for ln in COHERENCE_LINES:
-            W = Ws[ln]
-            coh[ln] = CoherenceDetector(ln, Ws, train_start=train_start, agg="peak_shift").fit(W.loc[train_start:hist_end], W)
+            Wf = Wfit[ln]
+            coh[ln] = CoherenceDetector(ln, Wfit, train_start=train_start, agg="peak_shift").fit(Wf.loc[train_start:hist_end], Wf)
         for ln, det in dets.items():
-            W = Ws[ln]
-            X = W.loc[ms_eff:me]
-            X = X[X.notna().any(axis=1)]
+            W, Wf = Ws[ln], Wfit[ln]
+            rng = pd.date_range(ms_eff, me)
+            X = W.reindex(rng)
+            # Días con dato, más los días sin ningún registro en que la línea suele operar o tiene un cierre anunciado
+            # (antes quedaban sin fila: la plataforma no decía nada de una línea cerrada; defecto D10).
+            keep = X.notna().any(axis=1) | habitual_days(W, rng) | pd.Series([(ln, d) in red.cierres for d in rng], index=rng)
+            X = X[keep.to_numpy()]
             if X.empty:
                 continue
-            z = det._z(X, W)
-            esp = np.expm1(det.expected_log(X.index, W))
+            z = det._z(X, Wf)
+            esp = np.expm1(det.expected_log(X.index, Wf))
             sig = det._sigma(X.index)
             complete = X.notna().all(axis=1)
             sp = pd.Series(np.nan, index=X.index)
@@ -135,7 +182,7 @@ def build_history(red: Red, start, end, train_start="2022-01-01") -> tuple[pd.Da
             sc = pd.Series(np.nan, index=X.index)
             zc = pd.DataFrame(np.nan, index=X.index, columns=D.SCORED_HOURS)
             if ln in coh and complete.any():
-                s = coh[ln].score(X[complete], W)
+                s = coh[ln].score(X[complete], Wf)
                 sc[complete] = s.day
                 zc.loc[complete] = s.z
             for t in X.index:
@@ -162,7 +209,8 @@ def thresholds_from_dev(dias: pd.DataFrame, budget=0.05) -> dict:
 
 # ------------------------------------------------------------------------------------------ reglas
 def evaluate_days(red: Red, horas: pd.DataFrame, dias: pd.DataFrame, thr: dict, z_thr: float = 3.0) -> pd.DataFrame:
-    """Motor de reglas por línea y día (prioridad: medición > red > datos > anomalía > normal)."""
+    """Motor de reglas por línea y día (prioridad: medición > cierre programado > ausencia simultánea en la red >
+    línea sin registro > datos > anomalía > normal)."""
     mon = NetworkDataMonitor(red.Ws, dias["fecha"].min(), dias["fecha"].max())
     modes = red.lineas.set_index("linea")["modo"].to_dict()
     zpiv = {ln: g.pivot(index="fecha", columns="hora", values="z") for ln, g in horas.groupby("linea")}
@@ -189,12 +237,16 @@ def evaluate_days(red: Red, horas: pd.DataFrame, dias: pd.DataFrame, thr: dict, 
         election = str(t.date()) in ELECTION_DAYS and modes.get(ln) in FARE_FREE_MODES
         if election:
             cat = "efecto_de_medicion"
+        elif (ln, t) in red.cierres:
+            cat = "cierre_programado"
         elif in_net:
             cat = "ausencia_simultanea_red"
+        elif o.isna().all():
+            cat = "linea_sin_registro"  # solo hay fila si la línea suele operar ese día (habitual_days)
         elif zero or missing:
             cat = "problema_de_datos"
         elif cfg is None or np.isnan(info["score"]):
-            cat = "sin_datos" if o.isna().all() else ("no_evaluable" if o.isna().any() else "sin_anomalia")
+            cat = "no_evaluable" if o.isna().any() else "sin_anomalia"
         elif info["score"] > cfg["umbral"]:
             # en las otras líneas, un cero es ausencia de registro y no cuenta como desviación de demanda
             others = {l2: zpiv[l2].loc[t].where(obs[l2].loc[t] > 0) if t in zpiv[l2].index else pd.Series(np.nan, index=z.index)

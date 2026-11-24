@@ -46,7 +46,7 @@ def forecast_artifacts(red, selection):
     # Factor conformal para pronósticos nuevos: todas las predicciones fuera de muestra disponibles de cada línea.
     c_next = {ln: conformal_factor(g["y"], g["gbm"], g["gbm_p10"], g["gbm_p90"]) for ln, g in P.groupby("linea")}
     last = max(W.index.max() for W in red.Ws.values())
-    nxt = forecast_day(red.Ws, last + pd.Timedelta(days=1), selection, c_next)
+    nxt = forecast_day(red.Ws, last + pd.Timedelta(days=1), selection, c_next, cierres=red.cierres)
     return hold, nxt, cov, c_next
 
 
@@ -64,7 +64,7 @@ def main():
     hold, nxt, cov, c_next = forecast_artifacts(red, sel)
     hold.to_csv(OUT / "pronostico_holdout.csv.gz", index=False, float_format="%.6g", compression=GZ)
     nxt.to_csv(OUT / "pronostico_siguiente.csv", index=False, float_format="%.6g")
-    data_files = sorted((ROOT / "data").glob("*.xlsx")) + [ROOT / "data" / "lineas.csv", ROOT / "data" / "topologia_red.csv"]
+    data_files = sorted((ROOT / "data").glob("*.xlsx")) + [ROOT / "data" / f for f in ("lineas.csv", "topologia_red.csv", "cierres_programados.csv")]
     PL.write_manifest(OUT, ROOT, data_files, {"periodo": [START, END], "umbrales": thr, "seleccion_pronostico": sel,
                                                "lineas_coherencia": list(PL.COHERENCE_LINES),
                                                "cobertura_intervalo_seleccion_2023_08_2024_06": cov,

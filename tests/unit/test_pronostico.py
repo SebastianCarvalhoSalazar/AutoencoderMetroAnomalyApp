@@ -77,3 +77,21 @@ def test_forecast_day_is_causal(Ws):
     pd.testing.assert_frame_equal(f1, f2)
     assert len(f1) == 2 * 19 and (f1["p10"] <= f1["pred"]).all() and (f1["pred"] <= f1["p90"]).all()
     assert set(f1["modelo"]) == {"combo_v2", "gbm"}
+
+
+def test_forecast_day_closure_is_zero_and_not_contaminating(Ws):
+    from metro_anomaly.pronostico import forecast_day
+    sel, c = {"A": "combo_v2", "B": "gbm"}, {"A": 1.0, "B": 1.0}
+    Wc = {k: W.loc[:"2023-06-30"].copy() for k, W in Ws.items()}
+    t = pd.Timestamp("2023-06-15")
+    f = forecast_day(Wc, t, sel, c, cierres={("B", t)})
+    b = f[f["linea"] == "B"]
+    assert (b[["pred", "p10", "p90"]] == 0).all().all() and set(b["modelo"]) == {"cierre_programado"}
+    # Días de cierre pasados con registro residual no arrastran el pronóstico del día siguiente.
+    Wc["B"].loc["2023-06-12":"2023-06-14"] = 5.0
+    clo = {("B", pd.Timestamp(d)) for d in pd.date_range("2023-06-12", "2023-06-14")}
+    g_mask = forecast_day(Wc, t, sel, c, cierres=clo)
+    g_raw = forecast_day(Wc, t, sel, c)
+    ref = forecast_day({k: W.loc[:"2023-06-30"] for k, W in Ws.items()}, t, sel, c)
+    err = lambda g: float((g[g.linea == "B"]["pred"].to_numpy() / ref[ref.linea == "B"]["pred"].to_numpy() - 1).__abs__().mean())
+    assert err(g_mask) < 0.05 < err(g_raw)

@@ -37,7 +37,7 @@ def main(argv=None):
     lat_eval, lat_fc, alertas = [], [], []
     for t in pd.date_range(a.desde, a.hasta):
         # Solo se conocen datos ≤ t (la red se recorta para que nada posterior pueda filtrarse).
-        red_t = PL.Red({ln: W.loc[:t] for ln, W in red.Ws.items()}, red.lineas, red.topologia)
+        red_t = PL.Red({ln: W.loc[:t] for ln, W in red.Ws.items()}, red.lineas, red.topologia, red.cierres)
         t0 = time.perf_counter()
         s = OR.process_red([t], red_t, MAN, dlog)
         lat_eval.append(time.perf_counter() - t0)
