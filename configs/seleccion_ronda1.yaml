@@ -1,0 +1,21 @@
+detector: perfil_robusto
+agg: max
+umbral: 9.987028968095384
+presupuesto_alertas: 0.05
+procedencia_umbral: cuantil 0,95 de los scores fuera de muestra de los días reales
+  de DEV (2022-04-01…2023-06-30), rolling mensual
+mejor_por_recall: ae_original/max (0.346)
+empatados:
+- ae_original/max
+- perfil_robusto/max
+baselines_umbral:
+  ae_contextual/top2: 9.528508684422558
+  ae_contextual/max: 11.294387644297686
+  ae_original/max: 3578.1333586040296
+  perfil_robusto/max: 9.987028968095384
+  naive_semanal/max: 11.998833043342628
+  perfil_robusto/top2: 9.206665413302918
+  naive_semanal/top2: 10.284851927378092
+  regresion_calendario/max: 9.826641016406805
+  regresion_calendario/top2: 9.433055726531396
+  isolation_forest/max: 0.5513176490003855

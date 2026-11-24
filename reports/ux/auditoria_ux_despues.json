@@ -1,0 +1,2683 @@
+{
+ "steps": [
+  {
+   "id": "H01_carga_inicial",
+   "loadMs": 1968,
+   "screenshot": "docs/validacion/img/ux/despues/H01_carga_inicial.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H02_dia_normal",
+   "date": "2024-03-06",
+   "dateInput": {
+    "typed": "06/03/2024",
+    "applied": true,
+    "valueAfter": "06/03/2024"
+   },
+   "screenshot": "docs/validacion/img/ux/despues/H02_dia_normal.png",
+   "alerts": [
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Miércoles 06/03/2024 · Día hábil",
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (07/01/2024 – 06/03/2024)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "0,98",
+    "7,39",
+    "41,2 %",
+    "+1,7 %"
+   ],
+   "subheaders": [
+    "Miércoles 06/03/2024 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H03_anomalia_2023-08-28",
+   "date": "2023-08-28",
+   "dateInput": {
+    "typed": "28/08/2023",
+    "applied": true,
+    "valueAfter": "28/08/2023"
+   },
+   "screenshot": "docs/validacion/img/ux/despues/H03_anomalia_2023-08-28.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H04_navidad",
+   "date": "2023-12-25",
+   "dateInput": {
+    "typed": "25/12/2023",
+    "applied": true,
+    "valueAfter": "25/12/2023"
+   },
+   "screenshot": "docs/validacion/img/ux/despues/H04_navidad.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad moderada. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 04 h, 06 h, 07 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "📅 Contexto de calendario conocido: Navidad; Temporada de fin de año. Una desviación puede explicarse por este evento.",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 25/12/2023 · Domingo o festivo",
+    "⚠️ Anomalía estadística detectada · severidad moderada. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 04 h, 06 h, 07 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "📅 Contexto de calendario conocido: Navidad; Temporada de fin de año. Una desviación puede explicarse por este evento.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (27/10/2023 – 25/12/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "8,29",
+    "7,39",
+    "4,4 %",
+    "-36,6 %"
+   ],
+   "subheaders": [
+    "Lunes 25/12/2023 · Domingo o festivo"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H05_elecciones",
+   "date": "2023-10-29",
+   "dateInput": {
+    "typed": "29/10/2023",
+    "applied": true,
+    "valueAfter": "29/10/2023"
+   },
+   "screenshot": "docs/validacion/img/ux/despues/H05_elecciones.png",
+   "alerts": [
+    "🗳️ Efecto de medición conocido — Jornada electoral sin cobro de pasaje (comunicado oficial del Metro): las entradas no se registran mientras no se cobra, por lo que el dato no refleja la demanda real. La desviación (score 91,23) no debe interpretarse como un incidente ni como una caída de afluencia.",
+    "📅 Contexto de calendario conocido: Elecciones territoriales. Una desviación puede explicarse por este evento.",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Domingo 29/10/2023 · Domingo o festivo",
+    "🗳️ Efecto de medición conocido — Jornada electoral sin cobro de pasaje (comunicado oficial del Metro): las entradas no se registran mientras no se cobra, por lo que el dato no refleja la demanda real. La desviación (score 91,23) no debe interpretarse como un incidente ni como una caída de afluencia.",
+    "📅 Contexto de calendario conocido: Elecciones territoriales. Una desviación puede explicarse por este evento.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (31/08/2023 – 29/10/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "91,23",
+    "7,39",
+    "0,0 %",
+    "-99,0 %"
+   ],
+   "subheaders": [
+    "Domingo 29/10/2023 · Domingo o festivo"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H06_hora_faltante_2023-12-24",
+   "date": "2023-12-24",
+   "dateInput": {
+    "typed": "24/12/2023",
+    "applied": true,
+    "valueAfter": "24/12/2023"
+   },
+   "screenshot": "docs/validacion/img/ux/despues/H06_hora_faltante_2023-12-24.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad alta. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 04 h, 05 h, 06 h, 07 h, 12 h, 13 h, 21 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "📅 Contexto de calendario conocido: Temporada de fin de año; Víspera de Navidad/Año Nuevo. Una desviación puede explicarse por este evento.",
+    "ℹ️ Calidad de datos: Sin dato a las 22 h. No se imputan; el día se evalúa con las horas disponibles.",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Domingo 24/12/2023 · Víspera de Navidad/Año Nuevo",
+    "⚠️ Anomalía estadística detectada · severidad alta. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 04 h, 05 h, 06 h, 07 h, 12 h, 13 h, 21 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "📅 Contexto de calendario conocido: Temporada de fin de año; Víspera de Navidad/Año Nuevo. Una desviación puede explicarse por este evento.",
+    "ℹ️ Calidad de datos: Sin dato a las 22 h. No se imputan; el día se evalúa con las horas disponibles.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (26/10/2023 – 24/12/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "18,36",
+    "7,39",
+    "0,7 %",
+    "-52,4 %"
+   ],
+   "subheaders": [
+    "Domingo 24/12/2023 · Víspera de Navidad/Año Nuevo"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H07_horas_faltantes_2019-02-16",
+   "date": "2019-02-16",
+   "dateInput": {
+    "typed": "16/02/2019",
+    "applied": true,
+    "valueAfter": "16/02/2019"
+   },
+   "screenshot": "docs/validacion/img/ux/despues/H07_horas_faltantes_2019-02-16.png",
+   "alerts": [
+    "🛠️ Posible problema de datos — Valor implausible (más de 1,5 veces el máximo histórico de la hora; posible error de registro o de unidad) a las 15 h. Antes de interpretar la afluencia, verifique la captura/registro de los datos.",
+    "ℹ️ Calidad de datos: Sin dato a las 11 h; Sin dato a las 12 h; Sin dato a las 13 h; Sin dato a las 14 h. No se imputan; el día se evalúa con las horas disponibles.",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Sábado 16/02/2019 · Sábado",
+    "🛠️ Posible problema de datos — Valor implausible (más de 1,5 veces el máximo histórico de la hora; posible error de registro o de unidad) a las 15 h. Antes de interpretar la afluencia, verifique la captura/registro de los datos.",
+    "ℹ️ Calidad de datos: Sin dato a las 11 h; Sin dato a las 12 h; Sin dato a las 13 h; Sin dato a las 14 h. No se imputan; el día se evalúa con las horas disponibles.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Evolución del score diario (23/01/2019 – 16/02/2019)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "73,33",
+    "7,39",
+    "0,0 %",
+    "-27,6 %"
+   ],
+   "subheaders": [
+    "Sábado 16/02/2019 · Sábado"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H08_sin_datos_2020-06-13",
+   "date": "2020-06-13",
+   "dateInput": {
+    "typed": "13/06/2020",
+    "applied": true,
+    "valueAfter": "13/06/2020"
+   },
+   "screenshot": "docs/validacion/img/ux/despues/H08_sin_datos_2020-06-13.png",
+   "alerts": [
+    "❌ No hay datos para: 2020-06-13.",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "❌ No hay datos para: 2020-06-13.",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 0,
+   "dataframes": 0,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "metricLabels": [],
+   "metrics": [],
+   "subheaders": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H09_fecha_minima",
+   "date": "2019-03-01",
+   "dateInput": {
+    "typed": "01/03/2019",
+    "applied": true,
+    "valueAfter": "01/03/2019"
+   },
+   "screenshot": "docs/validacion/img/ux/despues/H09_fecha_minima.png",
+   "alerts": [
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Viernes 01/03/2019 · Día hábil",
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (23/01/2019 – 01/03/2019)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "4,77",
+    "7,39",
+    "8,6 %",
+    "+7,0 %"
+   ],
+   "subheaders": [
+    "Viernes 01/03/2019 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H10_fecha_maxima",
+   "date": "2024-06-30",
+   "dateInput": {
+    "typed": "30/06/2024",
+    "applied": true,
+    "valueAfter": "30/06/2024"
+   },
+   "screenshot": "docs/validacion/img/ux/despues/H10_fecha_maxima.png",
+   "alerts": [
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Domingo 30/06/2024 · Domingo o festivo",
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (02/05/2024 – 30/06/2024)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "2,18",
+    "7,39",
+    "16,0 %",
+    "+18,6 %"
+   ],
+   "subheaders": [
+    "Domingo 30/06/2024 · Domingo o festivo"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H11_semana_santa_2024-03-27",
+   "date": "2024-03-27",
+   "dateInput": {
+    "typed": "27/03/2024",
+    "applied": true,
+    "valueAfter": "27/03/2024"
+   },
+   "screenshot": "docs/validacion/img/ux/despues/H11_semana_santa_2024-03-27.png",
+   "alerts": [
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "📅 Contexto de calendario conocido: Semana Santa. Una desviación puede explicarse por este evento.",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Miércoles 27/03/2024 · Día hábil en temporada",
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "📅 Contexto de calendario conocido: Semana Santa. Una desviación puede explicarse por este evento.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (28/01/2024 – 27/03/2024)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "0,69",
+    "7,39",
+    "53,1 %",
+    "-7,9 %"
+   ],
+   "subheaders": [
+    "Miércoles 27/03/2024 · Día hábil en temporada"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H12_aumento_2023-12-14",
+   "date": "2023-12-14",
+   "dateInput": {
+    "typed": "14/12/2023",
+    "applied": true,
+    "valueAfter": "14/12/2023"
+   },
+   "screenshot": "docs/validacion/img/ux/despues/H12_aumento_2023-12-14.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad alta. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 04 h, 06 h, 07 h, 08 h, 09 h, 10 h, 11 h, 12 h, 13 h, 14 h, 15 h, 16 h, 17 h, 18 h, 19 h, 20 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Jueves 14/12/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad alta. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 04 h, 06 h, 07 h, 08 h, 09 h, 10 h, 11 h, 12 h, 13 h, 14 h, 15 h, 16 h, 17 h, 18 h, 19 h, 20 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Evolución del score diario (16/10/2023 – 14/12/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "22,92",
+    "7,39",
+    "0,4 %",
+    "+102,7 %"
+   ],
+   "subheaders": [
+    "Jueves 14/12/2023 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H13_fecha_fuera_de_rango",
+   "dateInput": {
+    "typed": "01/01/2018",
+    "applied": true,
+    "valueAfter": "01/01/2018"
+   },
+   "screenshot": "docs/validacion/img/ux/despues/H13_fecha_fuera_de_rango.png",
+   "alerts": [
+    "❌ La fecha 01/01/2018 está fuera del rango con datos (29/01/2019 – 30/06/2024).",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "❌ La fecha 01/01/2018 está fuera del rango con datos (29/01/2019 – 30/06/2024).",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 0,
+   "dataframes": 0,
+   "tables": 0,
+   "tableText": [],
+   "downloads": 0,
+   "metricLabels": [],
+   "metrics": [],
+   "subheaders": [],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "H14_detalle_por_hora_abierto",
+   "date": "2023-08-28",
+   "screenshot": "docs/validacion/img/ux/despues/H14_detalle_por_hora_abierto.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [
+    "Observado\tEsperado\tRango normal\tz\tFuera de rango\n04 h\t17.762\t17.319\t12.207 – 24.572\t0,77\t\n05 h\t50.087\t50.538\t29.606 – 86.269\t-0,18\t\n06 h\t64.208\t65.386\t46.374 – 92.192\t-0,57\t\n07 h\t51.718\t54.910\t35.579 – 84.746\t-1,48\t\n08 h\t31.942\t34.220\t23.762 – 49.280\t-2,02\t\n09 h\t27.912\t29.321\t19.900 – 43.201\t-1,36\t\n10 h\t24.875\t25.767\t16.709 – 39.733\t-0,87\t\n11 h\t25.804\t27.156\t18.509 – 39.841\t-1,43\t\n12 h\t29.450\t30.787\t21.666 – 43.748\t-1,35\t\n13 h\t28.615\t30.025\t18.969 – 47.523\t-1,12\t\n14 h\t35.159\t35.525\t20.260 – 62.290\t-0,20\t\n15 h\t38.550\t38.764\t22.508 – 66.760\t-0,11\t\n16 h\t61.605\t63.732\t39.971 – 101.618\t-0,78\t\n17 h\t53.738\t84.922\t52.395 – 137.640\t-10,16\t\n18 h\t8.991\t59.616\t35.452 – 100.248\t-39,01\tsí\n19 h\t526\t34.667\t16.867 – 71.248\t-62,29\tsí\n20 h\t24.328\t22.974\t11.015 – 47.915\t0,83\t\n21 h\t15.448\t18.278\t6.975 – 47.897\t-1,87\t\n22 h\t7.148\t9.614\t2.672 – 34.581\t-2,48"
+   ],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U00_pestana_carga_vacia",
+   "screenshot": "docs/validacion/img/ux/despues/U00_pestana_carga_vacia.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Aún no se ha cargado ningún archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_01_normal_may_jun_2024",
+   "file": "01_normal_may_jun_2024.xlsx",
+   "screenshot": "docs/validacion/img/ux/despues/U_01_normal_may_jun_2024.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "61 día(s) evaluados · 0 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "📅 Contexto de calendario conocido: Día del Trabajo. Una desviación puede explicarse por este evento."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Resultados de «01_normal_may_jun_2024.xlsx»",
+    "61 día(s) evaluados · 0 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⬇️ Descargar resultados (CSV)",
+    "Ver detalle del día",
+    "Miércoles 01/05/2024 · Domingo o festivo",
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "📅 Contexto de calendario conocido: Día del Trabajo. Una desviación puede explicarse por este evento.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (01/05/2024 – 30/06/2024)",
+    "Detalle por hora (tabla)"
+   ],
+   "exceptions": 0,
+   "charts": 4,
+   "dataframes": 1,
+   "tables": 2,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 1,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %",
+    "1,78",
+    "7,39",
+    "21,9 %",
+    "+8,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil",
+    "Resultados de «01_normal_may_jun_2024.xlsx»",
+    "Miércoles 01/05/2024 · Domingo o festivo"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_02_normal_may_jun_2024",
+   "file": "02_normal_may_jun_2024.csv",
+   "screenshot": "docs/validacion/img/ux/despues/U_02_normal_may_jun_2024.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "61 día(s) evaluados · 0 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "📅 Contexto de calendario conocido: Día del Trabajo. Una desviación puede explicarse por este evento."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Resultados de «02_normal_may_jun_2024.csv»",
+    "61 día(s) evaluados · 0 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⬇️ Descargar resultados (CSV)",
+    "Ver detalle del día",
+    "Miércoles 01/05/2024 · Domingo o festivo",
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "📅 Contexto de calendario conocido: Día del Trabajo. Una desviación puede explicarse por este evento.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (01/05/2024 – 30/06/2024)",
+    "Detalle por hora (tabla)"
+   ],
+   "exceptions": 0,
+   "charts": 4,
+   "dataframes": 1,
+   "tables": 2,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 1,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %",
+    "1,78",
+    "7,39",
+    "21,9 %",
+    "+8,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil",
+    "Resultados de «02_normal_may_jun_2024.csv»",
+    "Miércoles 01/05/2024 · Domingo o festivo"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_03_anomalia_inyectada_2024-06-12",
+   "file": "03_anomalia_inyectada_2024-06-12.xlsx",
+   "screenshot": "docs/validacion/img/ux/despues/U_03_anomalia_inyectada_2024-06-12.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "61 día(s) evaluados · 1 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⚠️ Anomalía estadística detectada · severidad alta. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 17 h, 18 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Resultados de «03_anomalia_inyectada_2024-06-12.xlsx»",
+    "61 día(s) evaluados · 1 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⬇️ Descargar resultados (CSV)",
+    "Ver detalle del día",
+    "Miércoles 12/06/2024 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad alta. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 17 h, 18 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (01/05/2024 – 30/06/2024)",
+    "Detalle por hora (tabla)"
+   ],
+   "exceptions": 0,
+   "charts": 4,
+   "dataframes": 1,
+   "tables": 2,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 1,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %",
+    "41,52",
+    "7,39",
+    "0,2 %",
+    "-22,2 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil",
+    "Resultados de «03_anomalia_inyectada_2024-06-12.xlsx»",
+    "Miércoles 12/06/2024 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": [],
+   "download": "docs/validacion/img/ux/despues/descarga_03_anomalia_inyectada_2024-06-12.xlsx.csv"
+  },
+  {
+   "id": "U_03_anomalia_inyectada_2024-06-12_otro_dia",
+   "file": "03_anomalia_inyectada_2024-06-12.xlsx",
+   "selectedOption": 1,
+   "screenshot": "docs/validacion/img/ux/despues/U_03_anomalia_inyectada_2024-06-12_otro_dia.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "61 día(s) evaluados · 1 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "📅 Contexto de calendario conocido: Día del Trabajo. Una desviación puede explicarse por este evento."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Resultados de «03_anomalia_inyectada_2024-06-12.xlsx»",
+    "61 día(s) evaluados · 1 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⬇️ Descargar resultados (CSV)",
+    "Ver detalle del día",
+    "Miércoles 01/05/2024 · Domingo o festivo",
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "📅 Contexto de calendario conocido: Día del Trabajo. Una desviación puede explicarse por este evento.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (01/05/2024 – 30/06/2024)",
+    "Detalle por hora (tabla)"
+   ],
+   "exceptions": 0,
+   "charts": 4,
+   "dataframes": 1,
+   "tables": 2,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 1,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %",
+    "1,78",
+    "7,39",
+    "21,9 %",
+    "+8,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil",
+    "Resultados de «03_anomalia_inyectada_2024-06-12.xlsx»",
+    "Miércoles 01/05/2024 · Domingo o festivo"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_04_horas_faltantes_2024-06-12",
+   "file": "04_horas_faltantes_2024-06-12.xlsx",
+   "screenshot": "docs/validacion/img/ux/despues/U_04_horas_faltantes_2024-06-12.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "61 día(s) evaluados · 0 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 1 día(s) con horas sin dato.",
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "📅 Contexto de calendario conocido: Día del Trabajo. Una desviación puede explicarse por este evento."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Resultados de «04_horas_faltantes_2024-06-12.xlsx»",
+    "61 día(s) evaluados · 0 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 1 día(s) con horas sin dato.",
+    "⬇️ Descargar resultados (CSV)",
+    "Ver detalle del día",
+    "Miércoles 01/05/2024 · Domingo o festivo",
+    "✅ Sin anomalía estadística — la afluencia está dentro de lo esperado para este contexto. Esto no descarta incidentes que no alteren las entradas de la línea (p. ej., interrupciones parciales).",
+    "📅 Contexto de calendario conocido: Día del Trabajo. Una desviación puede explicarse por este evento.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (01/05/2024 – 30/06/2024)",
+    "Detalle por hora (tabla)"
+   ],
+   "exceptions": 0,
+   "charts": 4,
+   "dataframes": 1,
+   "tables": 2,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 1,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %",
+    "1,78",
+    "7,39",
+    "21,9 %",
+    "+8,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil",
+    "Resultados de «04_horas_faltantes_2024-06-12.xlsx»",
+    "Miércoles 01/05/2024 · Domingo o festivo"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_05_futuro_con_contexto",
+   "file": "05_futuro_con_contexto.xlsx",
+   "screenshot": "docs/validacion/img/ux/despues/U_05_futuro_con_contexto.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "90 día(s) evaluados · 7 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⚠️ Anomalía estadística detectada · severidad alta. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 04 h, 05 h, 06 h, 07 h, 08 h, 09 h, 10 h, 11 h, 12 h, 15 h, 16 h, 17 h, 18 h, 22 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Resultados de «05_futuro_con_contexto.xlsx»",
+    "90 día(s) evaluados · 7 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⬇️ Descargar resultados (CSV)",
+    "Ver detalle del día",
+    "Jueves 18/07/2024 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad alta. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 04 h, 05 h, 06 h, 07 h, 08 h, 09 h, 10 h, 11 h, 12 h, 15 h, 16 h, 17 h, 18 h, 22 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (01/07/2024 – 28/09/2024)",
+    "Detalle por hora (tabla)"
+   ],
+   "exceptions": 0,
+   "charts": 4,
+   "dataframes": 1,
+   "tables": 2,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 1,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %",
+    "29,95",
+    "7,39",
+    "0,4 %",
+    "-56,5 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil",
+    "Resultados de «05_futuro_con_contexto.xlsx»",
+    "Jueves 18/07/2024 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": [],
+   "download": "docs/validacion/img/ux/despues/descarga_05_futuro_con_contexto.xlsx.csv"
+  },
+  {
+   "id": "U_05_futuro_con_contexto_otro_dia",
+   "file": "05_futuro_con_contexto.xlsx",
+   "selectedOption": 1,
+   "screenshot": "docs/validacion/img/ux/despues/U_05_futuro_con_contexto_otro_dia.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "90 día(s) evaluados · 7 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⚠️ Anomalía estadística detectada · severidad moderada. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 04 h, 05 h, 06 h, 07 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "📅 Contexto de calendario conocido: Día de la Independencia. Una desviación puede explicarse por este evento."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Resultados de «05_futuro_con_contexto.xlsx»",
+    "90 día(s) evaluados · 7 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⬇️ Descargar resultados (CSV)",
+    "Ver detalle del día",
+    "Sábado 20/07/2024 · Domingo o festivo",
+    "⚠️ Anomalía estadística detectada · severidad moderada. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 04 h, 05 h, 06 h, 07 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "📅 Contexto de calendario conocido: Día de la Independencia. Una desviación puede explicarse por este evento.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Evolución del score diario (01/07/2024 – 28/09/2024)",
+    "Detalle por hora (tabla)"
+   ],
+   "exceptions": 0,
+   "charts": 4,
+   "dataframes": 1,
+   "tables": 2,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 1,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %",
+    "12,60",
+    "7,39",
+    "1,8 %",
+    "+125,7 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil",
+    "Resultados de «05_futuro_con_contexto.xlsx»",
+    "Sábado 20/07/2024 · Domingo o festivo"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_06_historia_insuficiente",
+   "file": "06_historia_insuficiente.xlsx",
+   "screenshot": "docs/validacion/img/ux/despues/U_06_historia_insuficiente.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "⚠️ 3 día(s) no evaluables: Historia insuficiente para 2025-06-30: se requieren al menos 10 días hábiles/sábados completos en los 91 días previos. Incluya en el archivo las semanas anteriores.; Historia insuficiente para 2025-07-01: se requieren al menos 10 días hábiles/sábados completos en los 91 días previos. Incluya en el archivo las semanas anteriores.; Historia insuficiente para 2025-07-02: se requieren al menos 10 días hábiles/sábados completos en los 91 días previos. Incluya en el archivo las semanas anteriores.",
+    "No hay días evaluables en el archivo."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Resultados de «06_historia_insuficiente.xlsx»",
+    "⚠️ 3 día(s) no evaluables: Historia insuficiente para 2025-06-30: se requieren al menos 10 días hábiles/sábados completos en los 91 días previos. Incluya en el archivo las semanas anteriores.; Historia insuficiente para 2025-07-01: se requieren al menos 10 días hábiles/sábados completos en los 91 días previos. Incluya en el archivo las semanas anteriores.; Historia insuficiente para 2025-07-02: se requieren al menos 10 días hábiles/sábados completos en los 91 días previos. Incluya en el archivo las semanas anteriores.",
+    "No hay días evaluables en el archivo."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil",
+    "Resultados de «06_historia_insuficiente.xlsx»"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_07_otra_linea",
+   "file": "07_otra_linea.xlsx",
+   "screenshot": "docs/validacion/img/ux/despues/U_07_otra_linea.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "❌ No se pudo procesar «07_otra_linea.xlsx»: El archivo no contiene la línea LINEA A. Líneas presentes: ['LINEA B']."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "❌ No se pudo procesar «07_otra_linea.xlsx»: El archivo no contiene la línea LINEA A. Líneas presentes: ['LINEA B']."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_08_valores_negativos",
+   "file": "08_valores_negativos.xlsx",
+   "screenshot": "docs/validacion/img/ux/despues/U_08_valores_negativos.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "❌ No se pudo procesar «08_valores_negativos.xlsx»: 08_valores_negativos.xlsx: hay conteos negativos"
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "❌ No se pudo procesar «08_valores_negativos.xlsx»: 08_valores_negativos.xlsx: hay conteos negativos"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_09_esquema_invalido",
+   "file": "09_esquema_invalido.csv",
+   "screenshot": "docs/validacion/img/ux/despues/U_09_esquema_invalido.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "❌ No se pudo procesar «09_esquema_invalido.csv»: 09_esquema_invalido.csv: faltan columnas obligatorias ['Día', 'Línea de Servicio']"
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "❌ No se pudo procesar «09_esquema_invalido.csv»: 09_esquema_invalido.csv: faltan columnas obligatorias ['Día', 'Línea de Servicio']"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_10_corrupto",
+   "file": "10_corrupto.xlsx",
+   "screenshot": "docs/validacion/img/ux/despues/U_10_corrupto.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "❌ No se pudo procesar «10_corrupto.xlsx»: No se pudo leer el archivo: ValueError."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "❌ No se pudo procesar «10_corrupto.xlsx»: No se pudo leer el archivo: ValueError."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_11_vacio",
+   "file": "11_vacio.csv",
+   "screenshot": "docs/validacion/img/ux/despues/U_11_vacio.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "❌ No se pudo procesar «11_vacio.csv»: El archivo está vacío."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "❌ No se pudo procesar «11_vacio.csv»: El archivo está vacío."
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_12_valores_extremos",
+   "file": "12_valores_extremos.xlsx",
+   "screenshot": "docs/validacion/img/ux/despues/U_12_valores_extremos.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "61 día(s) evaluados · 0 anomalía(s) estadística(s) · 1 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "🛠️ Posible problema de datos — Valor implausible (más de 1,5 veces el máximo histórico de la hora; posible error de registro o de unidad) a las 04 h, 05 h, 06 h, 07 h, 08 h, 09 h, 10 h, 11 h, 12 h, 13 h, 14 h, 15 h, 16 h, 17 h, 18 h, 19 h, 20 h, 21 h, 22 h. Antes de interpretar la afluencia, verifique la captura/registro de los datos."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Resultados de «12_valores_extremos.xlsx»",
+    "61 día(s) evaluados · 0 anomalía(s) estadística(s) · 1 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⬇️ Descargar resultados (CSV)",
+    "Ver detalle del día",
+    "Miércoles 12/06/2024 · Día hábil",
+    "🛠️ Posible problema de datos — Valor implausible (más de 1,5 veces el máximo histórico de la hora; posible error de registro o de unidad) a las 04 h, 05 h, 06 h, 07 h, 08 h, 09 h, 10 h, 11 h, 12 h, 13 h, 14 h, 15 h, 16 h, 17 h, 18 h, 19 h, 20 h, 21 h, 22 h. Antes de interpretar la afluencia, verifique la captura/registro de los datos.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Evolución del score diario (01/05/2024 – 30/06/2024)",
+    "Detalle por hora (tabla)"
+   ],
+   "exceptions": 0,
+   "charts": 4,
+   "dataframes": 1,
+   "tables": 2,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 1,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %",
+    "230,85",
+    "7,39",
+    "0,0 %",
+    "+99.083,9 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil",
+    "Resultados de «12_valores_extremos.xlsx»",
+    "Miércoles 12/06/2024 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_13_dia_en_ceros",
+   "file": "13_dia_en_ceros.xlsx",
+   "screenshot": "docs/validacion/img/ux/despues/U_13_dia_en_ceros.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "61 día(s) evaluados · 0 anomalía(s) estadística(s) · 1 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "🛠️ Posible problema de datos — Cero sospechoso (posible falla de captura o cierre total) a las 04 h, 05 h, 06 h, 07 h, 08 h, 09 h, 10 h, 11 h, 12 h, 13 h, 14 h, 15 h, 16 h, 17 h, 18 h, 19 h, 20 h, 21 h, 22 h. Antes de interpretar la afluencia, verifique la captura/registro de los datos."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Resultados de «13_dia_en_ceros.xlsx»",
+    "61 día(s) evaluados · 0 anomalía(s) estadística(s) · 1 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⬇️ Descargar resultados (CSV)",
+    "Ver detalle del día",
+    "Miércoles 12/06/2024 · Día hábil",
+    "🛠️ Posible problema de datos — Cero sospechoso (posible falla de captura o cierre total) a las 04 h, 05 h, 06 h, 07 h, 08 h, 09 h, 10 h, 11 h, 12 h, 13 h, 14 h, 15 h, 16 h, 17 h, 18 h, 19 h, 20 h, 21 h, 22 h. Antes de interpretar la afluencia, verifique la captura/registro de los datos.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (01/05/2024 – 30/06/2024)",
+    "Detalle por hora (tabla)"
+   ],
+   "exceptions": 0,
+   "charts": 4,
+   "dataframes": 1,
+   "tables": 2,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 1,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %",
+    "348,82",
+    "7,39",
+    "0,0 %",
+    "-100,0 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil",
+    "Resultados de «13_dia_en_ceros.xlsx»",
+    "Miércoles 12/06/2024 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_14_texto_en_numeros",
+   "file": "14_texto_en_numeros.xlsx",
+   "screenshot": "docs/validacion/img/ux/despues/U_14_texto_en_numeros.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "❌ No se pudo procesar «14_texto_en_numeros.xlsx»: 14_texto_en_numeros.xlsx: valores no numéricos en 09:00 (filas [3])"
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "❌ No se pudo procesar «14_texto_en_numeros.xlsx»: 14_texto_en_numeros.xlsx: valores no numéricos en 09:00 (filas [3])"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_15_filas_duplicadas",
+   "file": "15_filas_duplicadas.xlsx",
+   "screenshot": "docs/validacion/img/ux/despues/U_15_filas_duplicadas.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "❌ No se pudo procesar «15_filas_duplicadas.xlsx»: 15_filas_duplicadas.xlsx: filas duplicadas para (fecha, línea): [[Timestamp('2024-05-01 00:00:00'), 'LINEA A'], [Timestamp('2024-05-01 00:00:00'), 'LINEA A']]"
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "❌ No se pudo procesar «15_filas_duplicadas.xlsx»: 15_filas_duplicadas.xlsx: filas duplicadas para (fecha, línea): [[Timestamp('2024-05-01 00:00:00'), 'LINEA A'], [Timestamp('2024-05-01 00:00:00'), 'LINEA A']]"
+   ],
+   "exceptions": 0,
+   "charts": 2,
+   "dataframes": 0,
+   "tables": 1,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 0,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_16_archivo_oficial_2024_todas_las_lineas",
+   "file": "16_archivo_oficial_2024_todas_las_lineas.xlsx",
+   "screenshot": "docs/validacion/img/ux/despues/U_16_archivo_oficial_2024_todas_las_lineas.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "182 día(s) evaluados · 3 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⚠️ Anomalía estadística detectada · severidad moderada. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 04 h, 05 h, 06 h, 07 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "📅 Contexto de calendario conocido: Año Nuevo; Temporada de fin de año. Una desviación puede explicarse por este evento."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Resultados de «16_archivo_oficial_2024_todas_las_lineas.xlsx»",
+    "182 día(s) evaluados · 3 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⬇️ Descargar resultados (CSV)",
+    "Ver detalle del día",
+    "Lunes 01/01/2024 · Domingo o festivo",
+    "⚠️ Anomalía estadística detectada · severidad moderada. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 04 h, 05 h, 06 h, 07 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "📅 Contexto de calendario conocido: Año Nuevo; Temporada de fin de año. Una desviación puede explicarse por este evento.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (01/01/2024 – 30/06/2024)",
+    "Detalle por hora (tabla)"
+   ],
+   "exceptions": 0,
+   "charts": 4,
+   "dataframes": 1,
+   "tables": 2,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 1,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %",
+    "10,32",
+    "7,39",
+    "2,9 %",
+    "-45,4 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil",
+    "Resultados de «16_archivo_oficial_2024_todas_las_lineas.xlsx»",
+    "Lunes 01/01/2024 · Domingo o festivo"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": [],
+   "download": "docs/validacion/img/ux/despues/descarga_16_archivo_oficial_2024_todas_las_lineas.xlsx.csv"
+  },
+  {
+   "id": "U_16_archivo_oficial_2024_todas_las_lineas_otro_dia",
+   "file": "16_archivo_oficial_2024_todas_las_lineas.xlsx",
+   "selectedOption": 1,
+   "screenshot": "docs/validacion/img/ux/despues/U_16_archivo_oficial_2024_todas_las_lineas_otro_dia.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "182 día(s) evaluados · 3 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⚠️ Anomalía estadística detectada · severidad moderada. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: ninguna hora aislada (desplazamiento de todo el día). No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Resultados de «16_archivo_oficial_2024_todas_las_lineas.xlsx»",
+    "182 día(s) evaluados · 3 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⬇️ Descargar resultados (CSV)",
+    "Ver detalle del día",
+    "Jueves 11/01/2024 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad moderada. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: ninguna hora aislada (desplazamiento de todo el día). No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (01/01/2024 – 30/06/2024)",
+    "Detalle por hora (tabla)"
+   ],
+   "exceptions": 0,
+   "charts": 4,
+   "dataframes": 1,
+   "tables": 2,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 1,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %",
+    "7,81",
+    "7,39",
+    "4,8 %",
+    "-20,5 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil",
+    "Resultados de «16_archivo_oficial_2024_todas_las_lineas.xlsx»",
+    "Jueves 11/01/2024 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  },
+  {
+   "id": "U_17_extension_no_soportada",
+   "file": "17_extension_no_soportada.txt",
+   "screenshot": "docs/validacion/img/ux/despues/U_17_extension_no_soportada.png",
+   "alerts": [
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "182 día(s) evaluados · 3 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⚠️ Anomalía estadística detectada · severidad moderada. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: ninguna hora aislada (desplazamiento de todo el día). No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión."
+   ],
+   "markdown": [
+    "Acerca del modelo",
+    "Método: perfil esperado por tipo de día y hora, con nivel reciente (sin datos futuros).\nUmbral: 7,39 (≈ 5 % de días de referencia con alerta).\nEntrenado con: 02/07/2023 – 30/06/2024.\nLínea: A.",
+    "Validación (2023-07 → 2024-06)",
+    "Días con alerta: 2,2 %\nAnomalías simuladas severas detectadas: 89 %\nAnomalías simuladas moderadas detectadas: 51 %\nAlertas en festivos: 11,1 %",
+    "Limitaciones importantes",
+    "Una alerta es una anomalía estadística, no un incidente confirmado.\nDe 3 incidentes reales verificados, solo 1 (suspensión total en hora pico) dejó señal en estos datos; las interrupciones parciales pueden pasar desapercibidas.\nNo anticipa eventos: detecta desviaciones después de que ocurren (con datos por hora, ~1 h después).\nDatos agregados por línea: no localiza estaciones ni causas.",
+    "🚆 Anomalías de afluencia — Línea A del Metro de Medellín",
+    "Detecta desviaciones estadísticas de las entradas por hora respecto de lo esperado para el contexto (día de la semana, festivos, temporada y nivel reciente). Una alerta indica que algo merece revisión; no confirma un incidente.",
+    "📆 Explorar histórico",
+    "📤 Cargar archivo",
+    "Fecha a analizar",
+    "Lunes 28/08/2023 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad extrema. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: 18 h, 19 h. No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (30/06/2023 – 28/08/2023)",
+    "Detalle por hora (tabla)",
+    "Suba un archivo .xlsx o .csv con el formato oficial de afluencia (columnas «Día», «Línea de Servicio» y 04:00:00 … 23:00:00; máximo 20 MB). Se evalúa la Línea A. Si las fechas son posteriores al histórico, incluya al menos 4 semanas previas en el mismo archivo.",
+    "Archivo de afluencia",
+    "Resultados de «16_archivo_oficial_2024_todas_las_lineas.xlsx»",
+    "182 día(s) evaluados · 3 anomalía(s) estadística(s) · 0 posible(s) problema(s) de datos o de medición · 0 día(s) con horas sin dato.",
+    "⬇️ Descargar resultados (CSV)",
+    "Ver detalle del día",
+    "Jueves 11/01/2024 · Día hábil",
+    "⚠️ Anomalía estadística detectada · severidad moderada. La afluencia se aparta de lo esperado para este contexto. Horas fuera de rango: ninguna hora aislada (desplazamiento de todo el día). No es un incidente confirmado: requiere verificación con los registros operativos del Metro (Centro de Control) antes de cualquier decisión.",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Entradas por hora: observado frente a lo esperado",
+    "Nota: la banda del rango normal se recorta en la parte superior del gráfico para conservar la legibilidad; los valores completos están en la tabla de detalle.",
+    "Evolución del score diario (01/01/2024 – 30/06/2024)",
+    "Detalle por hora (tabla)"
+   ],
+   "exceptions": 0,
+   "charts": 4,
+   "dataframes": 1,
+   "tables": 2,
+   "tableText": [
+    "ObservadoEsperadoRango normalzFuera de rango04 h17.76217.31912.207 – 24.5720,7705 h50.08750.53829.606 – 86.269-0,1806 h64.20865.38646.374 – 92.192-0,5707 h51.71854.91035.579 – 84.746-1,4808 h31.94234.22023.762 – 49.280-2,0209 h27.91229.32119.900 – 43.201-1,3610 h24.87525.76716.709 – 39.733-0,8711 h25.80427.15618.509 – 39.841-1,4312 h29.45030.78721.666 – 43.748-1,3513 h28.61530.02518.969 – 47.523-1,1214 h35.15935.52520.260 – 62.290-0,2015 h38.55038.76422.508 – 66.760-0,1116 h61.60563.73239.971 – 101.618-0,7817 h53.73884.92252.395 – 137.640-10,1618 h8.99159.61635.452 – 100.248-39,01sí19 h52634.66716.867 – 71.248-62,29sí20 h24.32822.97411.015 – 47.9150,8321 h15.44818.2786.975 – 47.897-1,8722 h7.1489.6142.672 – 34.581-2,48"
+   ],
+   "downloads": 1,
+   "metricLabels": [
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día",
+    "Score del día",
+    "Umbral",
+    "Frecuencia histórica",
+    "Desviación media del día"
+   ],
+   "metrics": [
+    "51,10",
+    "7,39",
+    "0,0 %",
+    "-32,1 %",
+    "7,81",
+    "7,39",
+    "4,8 %",
+    "-20,5 %"
+   ],
+   "subheaders": [
+    "Lunes 28/08/2023 · Día hábil",
+    "Resultados de «16_archivo_oficial_2024_todas_las_lineas.xlsx»",
+    "Jueves 11/01/2024 · Día hábil"
+   ],
+   "consoleErrors": [],
+   "pageErrors": [],
+   "failedRequests": []
+  }
+ ],
+ "axe": {
+  "H01_carga_inicial": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu",
+     ".stSidebar"
+    ]
+   },
+   {
+    "id": "button-name",
+    "impact": "critical",
+    "help": "Buttons must have discernible text",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu > .st-emotion-cache-4nevif.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-1cs1bmp > .st-emotion-cache-4nevif.ef3psqc5[kind=\"headerNoPadding\"]"
+    ]
+   },
+   {
+    "id": "summary-name",
+    "impact": "serious",
+    "help": "Summary elements must have discernible text",
+    "nodes": 2,
+    "targets": [
+     ".st-emotion-cache-6oloea.stElementContainer[width=\"944\"]:nth-child(6) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-vmfiw.egd2k5h0 > details[title=\"Click to view actions\"] > summary",
+     ".st-emotion-cache-6oloea.stElementContainer[width=\"944\"]:nth-child(9) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-vmfiw.egd2k5h0 > details[title=\"Click to view actions\"] > summary"
+    ]
+   }
+  ],
+  "H14_detalle_por_hora": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu",
+     ".stSidebar"
+    ]
+   },
+   {
+    "id": "button-name",
+    "impact": "critical",
+    "help": "Buttons must have discernible text",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu > .st-emotion-cache-4nevif.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-1cs1bmp > .st-emotion-cache-4nevif.ef3psqc5[kind=\"headerNoPadding\"]"
+    ]
+   },
+   {
+    "id": "summary-name",
+    "impact": "serious",
+    "help": "Summary elements must have discernible text",
+    "nodes": 2,
+    "targets": [
+     ".st-emotion-cache-6oloea.stElementContainer[width=\"944\"]:nth-child(6) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-vmfiw.egd2k5h0 > details[title=\"Click to view actions\"] > summary",
+     ".st-emotion-cache-6oloea.stElementContainer[width=\"944\"]:nth-child(9) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-vmfiw.egd2k5h0 > details[title=\"Click to view actions\"] > summary"
+    ]
+   }
+  ],
+  "U_03_anomalia_inyectada_2024-06-12.xlsx": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu",
+     ".stSidebar"
+    ]
+   },
+   {
+    "id": "button-name",
+    "impact": "critical",
+    "help": "Buttons must have discernible text",
+    "nodes": 3,
+    "targets": [
+     "#MainMenu > .st-emotion-cache-4nevif.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-1cs1bmp > .st-emotion-cache-4nevif.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-e84ez9"
+    ]
+   },
+   {
+    "id": "nested-interactive",
+    "impact": "serious",
+    "help": "Interactive controls must not be nested",
+    "nodes": 1,
+    "targets": [
+     ".st-emotion-cache-gvcqws"
+    ]
+   },
+   {
+    "id": "summary-name",
+    "impact": "serious",
+    "help": "Summary elements must have discernible text",
+    "nodes": 2,
+    "targets": [
+     ".st-emotion-cache-6oloea.stElementContainer[width=\"944\"]:nth-child(13) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-vmfiw.egd2k5h0 > details[title=\"Click to view actions\"] > summary",
+     ".st-emotion-cache-6oloea.stElementContainer[width=\"944\"]:nth-child(16) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-vmfiw.egd2k5h0 > details[title=\"Click to view actions\"] > summary"
+    ]
+   }
+  ],
+  "U_05_futuro_con_contexto.xlsx": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu",
+     ".stSidebar"
+    ]
+   },
+   {
+    "id": "button-name",
+    "impact": "critical",
+    "help": "Buttons must have discernible text",
+    "nodes": 3,
+    "targets": [
+     "#MainMenu > .st-emotion-cache-4nevif.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-1cs1bmp > .st-emotion-cache-4nevif.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-e84ez9"
+    ]
+   },
+   {
+    "id": "nested-interactive",
+    "impact": "serious",
+    "help": "Interactive controls must not be nested",
+    "nodes": 1,
+    "targets": [
+     ".st-emotion-cache-gvcqws"
+    ]
+   },
+   {
+    "id": "summary-name",
+    "impact": "serious",
+    "help": "Summary elements must have discernible text",
+    "nodes": 2,
+    "targets": [
+     ".st-emotion-cache-6oloea.stElementContainer[width=\"944\"]:nth-child(13) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-vmfiw.egd2k5h0 > details[title=\"Click to view actions\"] > summary",
+     ".st-emotion-cache-6oloea.stElementContainer[width=\"944\"]:nth-child(16) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-vmfiw.egd2k5h0 > details[title=\"Click to view actions\"] > summary"
+    ]
+   }
+  ],
+  "U_16_archivo_oficial_2024_todas_las_lineas.xlsx": [
+   {
+    "id": "aria-allowed-attr",
+    "impact": "critical",
+    "help": "Elements must only use supported ARIA attributes",
+    "nodes": 2,
+    "targets": [
+     "#MainMenu",
+     ".stSidebar"
+    ]
+   },
+   {
+    "id": "button-name",
+    "impact": "critical",
+    "help": "Buttons must have discernible text",
+    "nodes": 3,
+    "targets": [
+     "#MainMenu > .st-emotion-cache-4nevif.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-1cs1bmp > .st-emotion-cache-4nevif.ef3psqc5[kind=\"headerNoPadding\"]",
+     ".st-emotion-cache-e84ez9"
+    ]
+   },
+   {
+    "id": "nested-interactive",
+    "impact": "serious",
+    "help": "Interactive controls must not be nested",
+    "nodes": 1,
+    "targets": [
+     ".st-emotion-cache-gvcqws"
+    ]
+   },
+   {
+    "id": "summary-name",
+    "impact": "serious",
+    "help": "Summary elements must have discernible text",
+    "nodes": 2,
+    "targets": [
+     ".st-emotion-cache-6oloea.stElementContainer[width=\"944\"]:nth-child(14) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-vmfiw.egd2k5h0 > details[title=\"Click to view actions\"] > summary",
+     ".st-emotion-cache-6oloea.stElementContainer[width=\"944\"]:nth-child(17) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-vmfiw.egd2k5h0 > details[title=\"Click to view actions\"] > summary"
+    ]
+   }
+  ]
+ },
+ "responsive": {
+  "H03": {
+   "docScroll": 390,
+   "docClient": 390,
+   "mainScroll": 390,
+   "mainClient": 390
+  },
+  "U03": {
+   "docScroll": 390,
+   "docClient": 390,
+   "mainScroll": 390,
+   "mainClient": 390
+  }
+ },
+ "keyboard": {
+  "tabOrder": [
+   "BUTTON:",
+   "BUTTON:",
+   "SECTION:🚆 Anomalías de afluencia — Lí",
+   "BUTTON[tab]:📆 Explorar histórico",
+   "INPUT:Select a date.",
+   "BUTTON:",
+   "SUMMARY:",
+   "BUTTON:",
+   "SUMMARY:",
+   "SUMMARY:Detalle por hora (tabla)",
+   "BODY:Acerca del modelo\nMétodo: perf",
+   "BUTTON:",
+   "BUTTON:",
+   "SECTION:🚆 Anomalías de afluencia — Lí",
+   "BUTTON[tab]:📆 Explorar histórico",
+   "INPUT:Select a date.",
+   "BUTTON:",
+   "SUMMARY:",
+   "BUTTON:",
+   "SUMMARY:",
+   "SUMMARY:Detalle por hora (tabla)",
+   "BODY:Acerca del modelo\nMétodo: perf",
+   "BUTTON:",
+   "BUTTON:",
+   "SECTION:🚆 Anomalías de afluencia — Lí"
+  ]
+ },
+ "timeline": 1
+}

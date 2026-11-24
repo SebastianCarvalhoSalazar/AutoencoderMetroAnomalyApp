@@ -1,0 +1,13 @@
+linea,modo,extremos,longitud_km,estaciones,fuente
+LINEA A,metro,La Estrella – Niquía,25.6,21,https://www.metrodemedellin.gov.co/en/users/integrated-system/line-a
+LINEA B,metro,San Javier – San Antonio,5.5,7,https://www.metrodemedellin.gov.co/en/users/integrated-system/line-b
+LINEA T-A,tranvía,Oriente – San Antonio,4.2,9,https://www.metrodemedellin.gov.co/en/users/integrated-system/line-t
+LINEA H,cable,Villa Sierra – Oriente,1.4,3,https://www.metrodemedellin.gov.co/en/users/integrated-system/line-h
+LINEA J,cable,La Aurora – San Javier,2.7,4,https://www.metrodemedellin.gov.co/en/users/integrated-system/line-j
+LINEA K,cable,Santo Domingo – Acevedo,2.0,4,https://www.metrodemedellin.gov.co/en/users/integrated-system/line-k
+LINEA L,cable (turístico),Arví – Santo Domingo,4.6,2,https://www.metrodemedellin.gov.co/en/users/integrated-system/line-l
+LINEA M,cable,Trece de Noviembre – Miraflores,1.05,3,https://www.metrodemedellin.gov.co/en/users/integrated-system/line-m
+LINEA P,cable,El Progreso – Acevedo,2.7,4,https://www.metrodemedellin.gov.co/en/users/integrated-system/line-p
+LINEA 1,bus,Parque Aranjuez – U. de M.,12.5,21,https://www.metrodemedellin.gov.co/en/users/integrated-system/line-1
+LINEA 2,bus,Parque Aranjuez – U. de M. (Av. Oriental),13.5,19,https://www.metrodemedellin.gov.co/en/users/integrated-system/line-2
+LINEA O,bus,Caribe – La Palma,9.2,,https://www.metrodemedellin.gov.co/en/users/integrated-system/line-o

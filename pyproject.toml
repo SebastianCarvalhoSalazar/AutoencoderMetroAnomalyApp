@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "metro-anomaly"
+version = "1.0.0"
+description = "Detección contextual de anomalías en la afluencia horaria de la Línea A del Metro de Medellín"
+requires-python = ">=3.10,<3.13"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "slow: pruebas que leen todos los archivos reales o entrenan modelos",
+  "research: requiere TensorFlow (requirements-research.txt)",
+  "e2e: requiere navegador/servidor",
+]
+addopts = "-ra"
+filterwarnings = ["ignore:.*holidays.*:FutureWarning", "ignore::DeprecationWarning:holidays"]

@@ -1,0 +1,9 @@
+{
+ "fuente": "Open-Meteo Historical Weather API (archive-api.open-meteo.com/v1/archive)",
+ "consulta": "latitude=6.2518&longitude=-75.5636&start_date=2019-01-01&end_date=2024-06-30&hourly=precipitation,rain,temperature_2m&timezone=America/Bogota",
+ "celda_devuelta": {"latitud": 6.2214413, "longitud": -75.55185, "elevacion_m": 1493.0},
+ "licencia": "CC BY 4.0 (Open-Meteo); datos de reanálisis",
+ "descargado": "2026-11-24",
+ "semantica_tiempo": "Precipitación = suma de la hora PRECEDENTE (documentación de Open-Meteo). La lluvia de la franja de afluencia h (h:00–h:59) corresponde al registro con hora h+1.",
+ "limitaciones": "Una sola celda de reanálisis para todo el Valle de Aburrá (resolución de kilómetros); no reemplaza los pluviómetros locales del SIATA, cuyos datos no se encontraron en descarga pública."
+}

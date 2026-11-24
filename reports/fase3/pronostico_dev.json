@@ -1,0 +1,143 @@
+{
+ "periodo": "dev",
+ "n_filas_total": 74339,
+ "n_filas_comunes": 69649,
+ "wape_global": {
+  "naive": 0.0623,
+  "perfil": 0.0608,
+  "gbm": 0.0684,
+  "gbm_v2": 0.0617,
+  "combo": 0.056,
+  "combo_v2": 0.0534
+ },
+ "wape_por_linea": {
+  "LINEA 1": {
+   "naive": 0.0608,
+   "perfil": 0.0621,
+   "gbm": 0.0605,
+   "gbm_v2": 0.0585,
+   "combo": 0.0529,
+   "combo_v2": 0.0521
+  },
+  "LINEA 2": {
+   "naive": 0.084,
+   "perfil": 0.0758,
+   "gbm": 0.0814,
+   "gbm_v2": 0.0794,
+   "combo": 0.07,
+   "combo_v2": 0.0692
+  },
+  "LINEA A": {
+   "naive": 0.056,
+   "perfil": 0.0546,
+   "gbm": 0.0641,
+   "gbm_v2": 0.0571,
+   "combo": 0.0512,
+   "combo_v2": 0.0485
+  },
+  "LINEA B": {
+   "naive": 0.0749,
+   "perfil": 0.0658,
+   "gbm": 0.0779,
+   "gbm_v2": 0.0697,
+   "combo": 0.0628,
+   "combo_v2": 0.0597
+  },
+  "LINEA H": {
+   "naive": 0.1175,
+   "perfil": 0.1072,
+   "gbm": 0.1086,
+   "gbm_v2": 0.1079,
+   "combo": 0.1004,
+   "combo_v2": 0.1003
+  },
+  "LINEA J": {
+   "naive": 0.0757,
+   "perfil": 0.0697,
+   "gbm": 0.0777,
+   "gbm_v2": 0.071,
+   "combo": 0.066,
+   "combo_v2": 0.0629
+  },
+  "LINEA K": {
+   "naive": 0.0753,
+   "perfil": 0.0665,
+   "gbm": 0.089,
+   "gbm_v2": 0.0717,
+   "combo": 0.0702,
+   "combo_v2": 0.0632
+  },
+  "LINEA M": {
+   "naive": 0.0946,
+   "perfil": 0.0796,
+   "gbm": 0.0894,
+   "gbm_v2": 0.0905,
+   "combo": 0.0771,
+   "combo_v2": 0.0776
+  },
+  "LINEA O": {
+   "naive": 0.1042,
+   "perfil": 0.1274,
+   "gbm": 0.1026,
+   "gbm_v2": 0.0959,
+   "combo": 0.1005,
+   "combo_v2": 0.0982
+  },
+  "LINEA P": {
+   "naive": 0.0788,
+   "perfil": 0.0928,
+   "gbm": 0.0953,
+   "gbm_v2": 0.0796,
+   "combo": 0.0815,
+   "combo_v2": 0.0757
+  },
+  "LINEA T-A": {
+   "naive": 0.076,
+   "perfil": 0.0764,
+   "gbm": 0.0792,
+   "gbm_v2": 0.0737,
+   "combo": 0.067,
+   "combo_v2": 0.0653
+  }
+ },
+ "cobertura_intervalo_80": {
+  "LINEA 1": 0.695,
+  "LINEA 2": 0.702,
+  "LINEA A": 0.688,
+  "LINEA B": 0.699,
+  "LINEA H": 0.741,
+  "LINEA J": 0.721,
+  "LINEA K": 0.735,
+  "LINEA M": 0.76,
+  "LINEA O": 0.731,
+  "LINEA P": 0.75,
+  "LINEA T-A": 0.721
+ },
+ "cobertura_80_calibrada_desde_mes_2": {
+  "LINEA 1": 0.9,
+  "LINEA 2": 0.922,
+  "LINEA A": 0.905,
+  "LINEA B": 0.908,
+  "LINEA H": 0.9,
+  "LINEA J": 0.908,
+  "LINEA K": 0.899,
+  "LINEA M": 0.933,
+  "LINEA O": 0.929,
+  "LINEA P": 0.89,
+  "LINEA T-A": 0.91
+ },
+ "ancho_relativo_mediano_calibrado": {
+  "LINEA 1": 0.276,
+  "LINEA 2": 0.404,
+  "LINEA A": 0.247,
+  "LINEA B": 0.306,
+  "LINEA H": 0.646,
+  "LINEA J": 0.388,
+  "LINEA K": 0.364,
+  "LINEA M": 0.437,
+  "LINEA O": 0.505,
+  "LINEA P": 0.37,
+  "LINEA T-A": 0.314
+ },
+ "seleccion_por_linea": null
+}

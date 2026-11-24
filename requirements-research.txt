@@ -1,0 +1,4 @@
+# Solo para experimentos comparativos con autoencoders y para la app legacy (TensorFlow).
+-r requirements-dev.txt
+tensorflow==2.17.0
+keras==3.5.0

@@ -1,0 +1,478 @@
+{
+ "meta": {
+  "umbral": 7.3880478521949176,
+  "detector": "perfil_contextual",
+  "agg": "peak_shift",
+  "periodo": [
+   "2023-07-01",
+   "2024-06-30"
+  ]
+ },
+ "E1_fin_de_dia": {
+  "dias": 364,
+  "violaciones_guarda": 0,
+  "guardado_igual_a_lote": true,
+  "igual_a_evaluacion_F4": true,
+  "seg_por_dia_guardado": 0.0397,
+  "seg_reentrenamientos_12_meses": 1.28,
+  "alertas": 8,
+  "fechas_alerta": [
+   "2023-08-28",
+   "2023-09-23",
+   "2023-10-29",
+   "2023-12-09",
+   "2023-12-14",
+   "2023-12-25",
+   "2024-01-01",
+   "2024-01-11"
+  ],
+  "alertas_por_mes": {
+   "2023-07": "0",
+   "2023-08": "1",
+   "2023-09": "1",
+   "2023-10": "1",
+   "2023-11": "0",
+   "2023-12": "3",
+   "2024-01": "2",
+   "2024-02": "0",
+   "2024-03": "0",
+   "2024-04": "0",
+   "2024-05": "0",
+   "2024-06": "0"
+  }
+ },
+ "E2_estabilidad": {
+  "dias": 364,
+  "concordancia_decision": 0.9973,
+  "alertas_originales": 8,
+  "alertas_reevaluadas": 9,
+  "cambian_de_decision": [
+   "2024-01-12"
+  ],
+  "corr_scores": 0.9971
+ },
+ "E3a_falsas_alarmas_dia_parcial": {
+  "dias": 364,
+  "pct_dias_con_alerta_al_cierre_de_hora": {
+   "4": 2.7,
+   "5": 3.3,
+   "6": 3.3,
+   "7": 3.3,
+   "8": 3.3,
+   "9": 3.3,
+   "10": 3.3,
+   "11": 3.3,
+   "12": 3.3,
+   "13": 3.3,
+   "14": 3.3,
+   "15": 3.3,
+   "16": 3.3,
+   "17": 3.6,
+   "18": 3.6,
+   "19": 3.6,
+   "20": 3.6,
+   "21": 3.6,
+   "22": 3.6
+  },
+  "pct_dias_alerta_fin_de_dia": 2.2,
+  "pct_dias_alerta_intradia_que_no_persiste_al_cierre": 1.4
+ },
+ "E3b_latencia_intradia": {
+  "abrupta_severa": {
+   "deteccion_en_el_dia": 0.989,
+   "deteccion_fin_de_dia": 0.989,
+   "retardo_mediana_h": 1.0,
+   "retardo_p90_h": 1.0,
+   "pct_detectadas_en_<=1h": 0.992,
+   "alarmas_antes_del_inicio(falsas)": 0.036
+  },
+  "abrupta_moderada": {
+   "deteccion_en_el_dia": 0.83,
+   "deteccion_fin_de_dia": 0.827,
+   "retardo_mediana_h": 1.0,
+   "retardo_p90_h": 1.0,
+   "pct_detectadas_en_<=1h": 0.917,
+   "alarmas_antes_del_inicio(falsas)": 0.033
+  },
+  "aislada_severa": {
+   "deteccion_en_el_dia": 0.986,
+   "deteccion_fin_de_dia": 0.986,
+   "retardo_mediana_h": 1.0,
+   "retardo_p90_h": 1.0,
+   "pct_detectadas_en_<=1h": 1.0,
+   "alarmas_antes_del_inicio(falsas)": 0.033
+  },
+  "aislada_moderada": {
+   "deteccion_en_el_dia": 0.745,
+   "deteccion_fin_de_dia": 0.745,
+   "retardo_mediana_h": 1.0,
+   "retardo_p90_h": 1.0,
+   "pct_detectadas_en_<=1h": 1.0,
+   "alarmas_antes_del_inicio(falsas)": 0.036
+  },
+  "progresiva_intradia": {
+   "deteccion_en_el_dia": 0.736,
+   "deteccion_fin_de_dia": 0.736,
+   "retardo_mediana_h": 7.0,
+   "retardo_p90_h": 10.0,
+   "pct_detectadas_en_<=1h": 0.03,
+   "alarmas_antes_del_inicio(falsas)": 0.033,
+   "pct_detectadas_antes_de_alcanzar_-50%": 0.429
+  },
+  "aumento_evento_x1.5": {
+   "deteccion_en_el_dia": 0.459,
+   "deteccion_fin_de_dia": 0.451,
+   "retardo_mediana_h": 1.0,
+   "retardo_p90_h": 2.0,
+   "pct_detectadas_en_<=1h": 0.737,
+   "alarmas_antes_del_inicio(falsas)": 0.033
+  },
+  "aumento_evento_x2": {
+   "deteccion_en_el_dia": 0.777,
+   "deteccion_fin_de_dia": 0.772,
+   "retardo_mediana_h": 1.0,
+   "retardo_p90_h": 1.0,
+   "pct_detectadas_en_<=1h": 0.961,
+   "alarmas_antes_del_inicio(falsas)": 0.036
+  }
+ },
+ "E4_progresiva_multidia_-2.5%_dia": {
+  "deteccion": 1.0,
+  "mediana_primer_dia": 7.0,
+  "media_pct_dias_alertados": 0.246
+ },
+ "E4_escalon_sostenido_-20%": {
+  "deteccion": 0.8333333333333334,
+  "mediana_primer_dia": 0.0,
+  "media_pct_dias_alertados": 0.083
+ },
+ "E4_escalon_sostenido_+20%": {
+  "deteccion": 0.6666666666666666,
+  "mediana_primer_dia": 10.0,
+  "media_pct_dias_alertados": 0.061
+ },
+ "E4_recurrente_lunes_17-18h_x0.5": {
+  "deteccion": 1.0,
+  "mediana_primer_dia": 0.0,
+  "media_pct_dias_alertados": 1.0
+ },
+ "E4_estacional_no_modelada_-15%_21d": {
+  "deteccion": 0.3333333333333333,
+  "mediana_primer_dia": 6.5,
+  "media_pct_dias_alertados": 0.024
+ },
+ "E4_contextuales": {
+  "perfil_festivo_en_dia_habil": {
+   "dias": 242,
+   "deteccion": 1.0
+  },
+  "perfil_habil_en_festivo_o_domingo": {
+   "dias": 69,
+   "deteccion": 1.0
+  },
+  "perfil_sabado_en_dia_habil": {
+   "dias": 242,
+   "deteccion": 0.938
+  }
+ },
+ "E5_precision_flujo_mixto": {
+  "prevalencia_0.02": {
+   "inyectados": 35,
+   "tp": 23,
+   "fp": 43,
+   "fn": 12,
+   "sensibilidad": 0.657,
+   "precision": 0.348,
+   "precision_si_las_8_alertas_reales_fueran_eventos": 0.885,
+   "fp_por_mes": 0.72
+  },
+  "prevalencia_0.05": {
+   "inyectados": 90,
+   "tp": 60,
+   "fp": 41,
+   "fn": 30,
+   "sensibilidad": 0.667,
+   "precision": 0.594,
+   "precision_si_las_8_alertas_reales_fueran_eventos": 0.968,
+   "fp_por_mes": 0.68
+  }
+ },
+ "E6_robustez": {
+  "faltan_1_horas_aleatorias": {
+   "tasa_alertas": 0.022,
+   "tasa_alertas_sin_faltantes": 0.022,
+   "scores_finitos": true
+  },
+  "faltan_3_horas_aleatorias": {
+   "tasa_alertas": 0.022,
+   "tasa_alertas_sin_faltantes": 0.022,
+   "scores_finitos": true
+  },
+  "faltan_6_horas_aleatorias": {
+   "tasa_alertas": 0.0165,
+   "tasa_alertas_sin_faltantes": 0.022,
+   "scores_finitos": true
+  },
+  "retraso_1_dias_previos": {
+   "dif_abs_media_score": 0.0416,
+   "cambios_de_decision": 0,
+   "dias": 324
+  },
+  "retraso_3_dias_previos": {
+   "dif_abs_media_score": 0.0933,
+   "cambios_de_decision": 0,
+   "dias": 324
+  },
+  "retraso_7_dias_previos": {
+   "dif_abs_media_score": 0.1546,
+   "cambios_de_decision": 0,
+   "dias": 324
+  },
+  "corrupcion_unidad_x10": [
+   {
+    "alerta_dia_corrupto": true,
+    "alertas_extra_28d": 0
+   },
+   {
+    "alerta_dia_corrupto": true,
+    "alertas_extra_28d": 0
+   },
+   {
+    "alerta_dia_corrupto": true,
+    "alertas_extra_28d": 0
+   },
+   {
+    "alerta_dia_corrupto": true,
+    "alertas_extra_28d": 0
+   }
+  ],
+  "corrupcion_dia_en_ceros": [
+   {
+    "alerta_dia_corrupto": true,
+    "alertas_extra_28d": 0
+   },
+   {
+    "alerta_dia_corrupto": true,
+    "alertas_extra_28d": 0
+   },
+   {
+    "alerta_dia_corrupto": true,
+    "alertas_extra_28d": 0
+   },
+   {
+    "alerta_dia_corrupto": true,
+    "alertas_extra_28d": 0
+   }
+  ],
+  "corrupcion_extremo_x1e4": [
+   {
+    "alerta_dia_corrupto": true,
+    "alertas_extra_28d": 0
+   },
+   {
+    "alerta_dia_corrupto": true,
+    "alertas_extra_28d": 0
+   },
+   {
+    "alerta_dia_corrupto": true,
+    "alertas_extra_28d": 0
+   },
+   {
+    "alerta_dia_corrupto": true,
+    "alertas_extra_28d": 0
+   }
+  ],
+  "envejecimiento_modelo": {
+   "por_mes": {
+    "2023-07": {
+     "alertas_congelado": "0.0",
+     "alertas_mensual": "0.0",
+     "recall_T1mod_congelado": "0.806",
+     "recall_T1mod_mensual": "0.806"
+    },
+    "2023-08": {
+     "alertas_congelado": "0.032",
+     "alertas_mensual": "0.032",
+     "recall_T1mod_congelado": "0.839",
+     "recall_T1mod_mensual": "0.839"
+    },
+    "2023-09": {
+     "alertas_congelado": "0.033",
+     "alertas_mensual": "0.033",
+     "recall_T1mod_congelado": "0.867",
+     "recall_T1mod_mensual": "0.867"
+    },
+    "2023-10": {
+     "alertas_congelado": "0.032",
+     "alertas_mensual": "0.032",
+     "recall_T1mod_congelado": "0.871",
+     "recall_T1mod_mensual": "0.839"
+    },
+    "2023-11": {
+     "alertas_congelado": "0.0",
+     "alertas_mensual": "0.0",
+     "recall_T1mod_congelado": "0.833",
+     "recall_T1mod_mensual": "0.7"
+    },
+    "2023-12": {
+     "alertas_congelado": "0.103",
+     "alertas_mensual": "0.103",
+     "recall_T1mod_congelado": "0.552",
+     "recall_T1mod_mensual": "0.517"
+    },
+    "2024-01": {
+     "alertas_congelado": "0.097",
+     "alertas_mensual": "0.065",
+     "recall_T1mod_congelado": "0.742",
+     "recall_T1mod_mensual": "0.71"
+    },
+    "2024-02": {
+     "alertas_congelado": "0.0",
+     "alertas_mensual": "0.0",
+     "recall_T1mod_congelado": "0.793",
+     "recall_T1mod_mensual": "0.793"
+    },
+    "2024-03": {
+     "alertas_congelado": "0.032",
+     "alertas_mensual": "0.0",
+     "recall_T1mod_congelado": "0.774",
+     "recall_T1mod_mensual": "0.677"
+    },
+    "2024-04": {
+     "alertas_congelado": "0.0",
+     "alertas_mensual": "0.0",
+     "recall_T1mod_congelado": "0.9",
+     "recall_T1mod_mensual": "0.867"
+    },
+    "2024-05": {
+     "alertas_congelado": "0.0",
+     "alertas_mensual": "0.0",
+     "recall_T1mod_congelado": "0.839",
+     "recall_T1mod_mensual": "0.677"
+    },
+    "2024-06": {
+     "alertas_congelado": "0.0",
+     "alertas_mensual": "0.0",
+     "recall_T1mod_congelado": "0.8",
+     "recall_T1mod_mensual": "0.733"
+    }
+   },
+   "tasa_alertas_congelado": 0.0275,
+   "tasa_alertas_mensual": 0.022,
+   "recall_T1mod_congelado": 0.802,
+   "recall_T1mod_mensual": 0.753
+  }
+ },
+ "E6b_recalibracion_exploratoria": {
+  "2023-07": {
+   "umbral": 5.622,
+   "tasa_alertas": 0.0,
+   "tasa_alertas_umbral_fijo": 0.0
+  },
+  "2023-08": {
+   "umbral": 5.622,
+   "tasa_alertas": 0.065,
+   "tasa_alertas_umbral_fijo": 0.032
+  },
+  "2023-09": {
+   "umbral": 5.862,
+   "tasa_alertas": 0.067,
+   "tasa_alertas_umbral_fijo": 0.033
+  },
+  "2023-10": {
+   "umbral": 6.733,
+   "tasa_alertas": 0.032,
+   "tasa_alertas_umbral_fijo": 0.032
+  },
+  "2023-11": {
+   "umbral": 7.583,
+   "tasa_alertas": 0.0,
+   "tasa_alertas_umbral_fijo": 0.0
+  },
+  "2023-12": {
+   "umbral": 5.862,
+   "tasa_alertas": 0.207,
+   "tasa_alertas_umbral_fijo": 0.103
+  },
+  "2024-01": {
+   "umbral": 5.252,
+   "tasa_alertas": 0.129,
+   "tasa_alertas_umbral_fijo": 0.065
+  },
+  "2024-02": {
+   "umbral": 5.335,
+   "tasa_alertas": 0.0,
+   "tasa_alertas_umbral_fijo": 0.0
+  },
+  "2024-03": {
+   "umbral": 5.335,
+   "tasa_alertas": 0.065,
+   "tasa_alertas_umbral_fijo": 0.0
+  },
+  "2024-04": {
+   "umbral": 5.525,
+   "tasa_alertas": 0.0,
+   "tasa_alertas_umbral_fijo": 0.0
+  },
+  "2024-05": {
+   "umbral": 5.335,
+   "tasa_alertas": 0.0,
+   "tasa_alertas_umbral_fijo": 0.0
+  },
+  "2024-06": {
+   "umbral": 5.335,
+   "tasa_alertas": 0.0,
+   "tasa_alertas_umbral_fijo": 0.0
+  }
+ },
+ "E7_escalabilidad_multilinea(viabilidad tecnica, NO validez)": {
+  "LINEA 1": {
+   "dias_puntuados": 182,
+   "scores_finitos": true
+  },
+  "LINEA 2": {
+   "dias_puntuados": 175,
+   "scores_finitos": true
+  },
+  "LINEA A": {
+   "dias_puntuados": 182,
+   "scores_finitos": true
+  },
+  "LINEA B": {
+   "dias_puntuados": 182,
+   "scores_finitos": true
+  },
+  "LINEA H": {
+   "dias_puntuados": 141,
+   "scores_finitos": true
+  },
+  "LINEA J": {
+   "dias_puntuados": 146,
+   "scores_finitos": true
+  },
+  "LINEA K": {
+   "dias_puntuados": 139,
+   "scores_finitos": true
+  },
+  "LINEA L": {
+   "error": "ValueError: Historia insuficiente: no hay días completos con nivel disponible para ajustar el perfil."
+  },
+  "LINEA M": {
+   "dias_puntuados": 145,
+   "scores_finitos": true
+  },
+  "LINEA O": {
+   "dias_puntuados": 182,
+   "scores_finitos": true
+  },
+  "LINEA P": {
+   "dias_puntuados": 147,
+   "scores_finitos": true
+  },
+  "LINEA T-A": {
+   "dias_puntuados": 182,
+   "scores_finitos": true
+  },
+  "_segundos_total_12_lineas": 1.86
+ }
+}

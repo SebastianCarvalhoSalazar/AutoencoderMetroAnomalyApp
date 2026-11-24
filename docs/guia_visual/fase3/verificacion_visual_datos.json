@@ -1,0 +1,31 @@
+{
+ "comparaciones": 44,
+ "discrepancias": [],
+ "problemas_pagina": [],
+ "animacion": {
+  "fotogramas": [
+   "9da8b0757b36",
+   "1b942470e8e7",
+   "f17a245982d1",
+   "4a2382e090c3",
+   "7a664bf933fb"
+  ],
+  "distintos": 5
+ },
+ "reproduccion_marcas": {
+  "8": 3,
+  "17": 3,
+  "19": 3
+ },
+ "axe": null,
+ "tiempos_ms": {
+  "carga_inicial": 5210,
+  "cambio_fecha_in3": 4323,
+  "cambio_fecha_elecciones": 4008,
+  "cambio_fecha_normal": 3954,
+  "cambio_fecha_nochebuena": 4216,
+  "pestana_pronostico": 1550,
+  "pestana_simulacion": 1558,
+  "pestana_catalogo": 1609
+ }
+}

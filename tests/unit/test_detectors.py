@@ -1,0 +1,111 @@
+import numpy as np
+import pandas as pd
+import pytest
+
+from metro_anomaly.data import SCORED_HOURS
+from metro_anomaly.detectors import REGISTRY, aggregate, level_series
+from metro_anomaly.injection import inject
+
+NAMES = list(REGISTRY)
+
+
+def test_level_is_causal_and_correct(synth):
+    t = pd.Timestamp("2023-02-15")
+    full = level_series(synth, [t]).iloc[0]
+    trunc = level_series(synth.loc[:t - pd.Timedelta(days=1)], [t]).iloc[0]
+    assert full == trunc
+    poisoned = synth.copy(); poisoned.loc[t:] *= 10  # el futuro (incluido t) no debe afectar
+    assert level_series(poisoned, [t]).iloc[0] == full
+
+
+@pytest.mark.parametrize("name", NAMES)
+def test_causality_D8(synth, name):
+    """D8: el score de un día no cambia si se alteran o eliminan datos posteriores a ese día."""
+    hist = synth.loc[:"2023-01-31"]
+    days = synth.loc["2023-02-01":"2023-02-28"]
+    det = REGISTRY[name]().fit(hist, synth)
+    s_full = det.score(days, synth).day
+    for t in days.index[[3, 15, 27]]:
+        poisoned = synth.copy(); poisoned.loc[t + pd.Timedelta(days=1):] *= 5
+        truncated = synth.loc[:t]
+        assert det.score(days.loc[[t]], poisoned).day.iloc[0] == s_full.loc[t]
+        assert det.score(days.loc[[t]], truncated).day.iloc[0] == s_full.loc[t]
+
+
+@pytest.mark.parametrize("name", NAMES)
+def test_determinism_D9(synth, name):
+    hist, days = synth.loc[:"2023-01-31"], synth.loc["2023-02-01":"2023-02-28"]
+    a = REGISTRY[name]().fit(hist, synth).score(days, synth).day
+    b = REGISTRY[name]().fit(hist, synth).score(days, synth).day
+    pd.testing.assert_series_equal(a, b)
+
+
+@pytest.mark.parametrize("name", NAMES)
+def test_severe_injection_scores_higher(synth, name):
+    hist, days = synth.loc[:"2023-01-31"], synth.loc["2023-02-01":"2023-02-28"]
+    det = REGISTRY[name]().fit(hist, synth)
+    real = det.score(days, synth).day
+    inj = det.score(inject(days, "T1_severa", 0, synth)[0], synth).day
+    assert (inj.to_numpy() > real.to_numpy()).mean() > 0.9
+
+
+@pytest.mark.parametrize("name", ["perfil_robusto", "regresion_calendario", "naive_semanal"])
+def test_z_sign_and_localization(synth, name):
+    hist, days = synth.loc[:"2023-01-31"], synth.loc["2023-02-01":"2023-02-28"]
+    det = REGISTRY[name]().fit(hist, synth)
+    Xi, m, _ = inject(days, "T1_severa", 0, synth)
+    z = det.score(Xi, synth).z
+    arg = z.abs().to_numpy().argmax(1)
+    assert m.to_numpy()[np.arange(len(days)), arg].mean() > 0.9
+    assert (z.to_numpy()[m.to_numpy()] < 0).mean() > 0.95  # caídas -> z negativos
+
+
+def test_missing_hour_is_ignored_not_crash(synth):
+    hist, days = synth.loc[:"2023-01-31"], synth.loc["2023-02-01":"2023-02-03"].copy()
+    days.iloc[0, 3] = np.nan
+    det = REGISTRY["perfil_robusto"]().fit(hist, synth)
+    s = det.score(days, synth)
+    assert np.isfinite(s.day).all() and np.isnan(s.z.iloc[0, 3])
+
+
+def test_aggregate():
+    z = pd.DataFrame([[1.0, -4.0, 2.0], [np.nan, 1.0, -3.0]])
+    assert aggregate(z, "max").tolist() == [4.0, 3.0]
+    assert aggregate(z, "top2").tolist() == [3.0, 2.0]
+
+
+def test_peak_shift_detects_global_shift_better_than_max(synth):
+    from metro_anomaly.detectors import ProfileDetector
+    hist, days = synth.loc[:"2023-01-31"], synth.loc["2023-02-01":"2023-02-28"]
+    a = ProfileDetector(agg="max").fit(hist, synth)
+    b = ProfileDetector(agg="peak_shift").fit(hist, synth)
+    Xi = days * 0.95  # desplazamiento global pequeño (en la serie sintética T2_leve ya satura ambos: recall 1,0)
+    gain = lambda d: (d.score(Xi, synth).day.to_numpy() > np.quantile(d.score(days, synth).day, 0.95)).mean()  # noqa: E731
+    assert gain(b) > gain(a)
+
+
+def test_peak_shift_requires_stats():
+    with pytest.raises(ValueError):
+        aggregate(pd.DataFrame([[1.0]]), "peak_shift")
+
+
+@pytest.mark.parametrize("name", NAMES)
+def test_full_coverage_through_year_end_season(name):
+    """Regresión F4.3: ningún detector puede dejar días completos sin puntuar (antes, principios de enero
+    quedaban en NaN con exclude_season=True)."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from conftest import make_series
+    s = make_series("2021-01-01", "2023-02-28")
+    det = REGISTRY[name]().fit(s.loc[:"2022-11-30"], s)
+    sc = det.score(s.loc["2022-12-01":"2023-02-28"], s).day
+    assert sc.notna().all(), sc[sc.isna()].index[:5]
+
+
+def test_fit_without_complete_days_raises_clear_error(synth):
+    """Regresión F8 (E7): una línea sin días completos (p. ej., Línea L) fallaba al puntuar con un error opaco."""
+    from metro_anomaly.detectors import ProfileContextDetector
+    s = synth.copy(); s["h05"] = np.nan
+    with pytest.raises(ValueError, match="Historia insuficiente"):
+        ProfileContextDetector(agg="peak_shift").fit(s.loc[:"2023-01-31"], s)
