@@ -1,0 +1,253 @@
+{
+ "periodo": [
+  "2024-06-01",
+  "2024-06-29"
+ ],
+ "dias": 29,
+ "linea_dias_registrados": 319,
+ "coinciden_con_reproduccion_historica": 319,
+ "latencia_evaluacion_s": {
+  "mediana": 8.01,
+  "p95": 8.38
+ },
+ "latencia_pronostico_s": {
+  "mediana": 50.83,
+  "p95": 52.23
+ },
+ "alertas": [
+  "2024-06-04 LINEA O",
+  "2024-06-06 LINEA M",
+  "2024-06-08 LINEA 1",
+  "2024-06-12 LINEA T-A",
+  "2024-06-12 LINEA M",
+  "2024-06-17 LINEA 2",
+  "2024-06-25 LINEA J",
+  "2024-06-25 LINEA 1"
+ ],
+ "monitor": {
+  "registros": 319,
+  "lineas_dañadas": 0,
+  "por_linea": {
+   "LINEA 1": {
+    "dias": 29,
+    "tasa_alertas_90d": 0.069,
+    "problemas_datos_90d": 0,
+    "ausencias_simultaneas_90d": 0,
+    "dias_sin_registro_90d": 0,
+    "cierres_programados_90d": 0
+   },
+   "LINEA 2": {
+    "dias": 29,
+    "tasa_alertas_90d": 0.0345,
+    "problemas_datos_90d": 1,
+    "ausencias_simultaneas_90d": 0,
+    "dias_sin_registro_90d": 0,
+    "cierres_programados_90d": 0
+   },
+   "LINEA A": {
+    "dias": 29,
+    "tasa_alertas_90d": 0.0,
+    "problemas_datos_90d": 0,
+    "ausencias_simultaneas_90d": 0,
+    "dias_sin_registro_90d": 0,
+    "cierres_programados_90d": 0
+   },
+   "LINEA B": {
+    "dias": 29,
+    "tasa_alertas_90d": 0.0,
+    "problemas_datos_90d": 0,
+    "ausencias_simultaneas_90d": 0,
+    "dias_sin_registro_90d": 0,
+    "cierres_programados_90d": 0
+   },
+   "LINEA H": {
+    "dias": 29,
+    "tasa_alertas_90d": 0.0,
+    "problemas_datos_90d": 0,
+    "ausencias_simultaneas_90d": 0,
+    "dias_sin_registro_90d": 0,
+    "cierres_programados_90d": 3
+   },
+   "LINEA J": {
+    "dias": 29,
+    "tasa_alertas_90d": 0.0345,
+    "problemas_datos_90d": 1,
+    "ausencias_simultaneas_90d": 0,
+    "dias_sin_registro_90d": 0,
+    "cierres_programados_90d": 0
+   },
+   "LINEA K": {
+    "dias": 29,
+    "tasa_alertas_90d": 0.0,
+    "problemas_datos_90d": 1,
+    "ausencias_simultaneas_90d": 0,
+    "dias_sin_registro_90d": 3,
+    "cierres_programados_90d": 0
+   },
+   "LINEA M": {
+    "dias": 29,
+    "tasa_alertas_90d": 0.069,
+    "problemas_datos_90d": 0,
+    "ausencias_simultaneas_90d": 0,
+    "dias_sin_registro_90d": 0,
+    "cierres_programados_90d": 3
+   },
+   "LINEA O": {
+    "dias": 29,
+    "tasa_alertas_90d": 0.0345,
+    "problemas_datos_90d": 0,
+    "ausencias_simultaneas_90d": 0,
+    "dias_sin_registro_90d": 0,
+    "cierres_programados_90d": 0
+   },
+   "LINEA P": {
+    "dias": 29,
+    "tasa_alertas_90d": 0.0,
+    "problemas_datos_90d": 0,
+    "ausencias_simultaneas_90d": 0,
+    "dias_sin_registro_90d": 0,
+    "cierres_programados_90d": 6
+   },
+   "LINEA T-A": {
+    "dias": 29,
+    "tasa_alertas_90d": 0.0345,
+    "problemas_datos_90d": 0,
+    "ausencias_simultaneas_90d": 0,
+    "dias_sin_registro_90d": 0,
+    "cierres_programados_90d": 0
+   }
+  },
+  "advertencias": [
+   "LINEA P: cobertura del intervalo del 80 % = 0.63 fuera de [0.7, 0.9] en 29 días; recalibrar."
+  ],
+  "pronostico": {
+   "filas_con_dato": 5710,
+   "lineas_dañadas": 0,
+   "por_linea": {
+    "LINEA 1": {
+     "dias": 29,
+     "cobertura_80": 0.819,
+     "wape": 0.0397
+    },
+    "LINEA 2": {
+     "dias": 29,
+     "cobertura_80": 0.856,
+     "wape": 0.0612
+    },
+    "LINEA A": {
+     "dias": 29,
+     "cobertura_80": 0.84,
+     "wape": 0.0347
+    },
+    "LINEA B": {
+     "dias": 29,
+     "cobertura_80": 0.813,
+     "wape": 0.0524
+    },
+    "LINEA H": {
+     "dias": 26,
+     "cobertura_80": 0.85,
+     "wape": 0.1029
+    },
+    "LINEA J": {
+     "dias": 29,
+     "cobertura_80": 0.785,
+     "wape": 0.0707
+    },
+    "LINEA K": {
+     "dias": 25,
+     "cobertura_80": 0.838,
+     "wape": 0.0667
+    },
+    "LINEA M": {
+     "dias": 26,
+     "cobertura_80": 0.789,
+     "wape": 0.0978
+    },
+    "LINEA O": {
+     "dias": 29,
+     "cobertura_80": 0.857,
+     "wape": 0.0727
+    },
+    "LINEA P": {
+     "dias": 29,
+     "cobertura_80": 0.628,
+     "wape": 0.1059
+    },
+    "LINEA T-A": {
+     "dias": 29,
+     "cobertura_80": 0.797,
+     "wape": 0.0648
+    }
+   }
+  }
+ },
+ "pronostico_diario_vs_mensual": {
+  "LINEA 1": {
+   "wape_diario": 0.0397,
+   "wape_mensual": 0.04,
+   "cobertura_diario": 0.819,
+   "cobertura_mensual": 0.82
+  },
+  "LINEA 2": {
+   "wape_diario": 0.0612,
+   "wape_mensual": 0.0615,
+   "cobertura_diario": 0.856,
+   "cobertura_mensual": 0.84
+  },
+  "LINEA A": {
+   "wape_diario": 0.0347,
+   "wape_mensual": 0.0346,
+   "cobertura_diario": 0.84,
+   "cobertura_mensual": 0.858
+  },
+  "LINEA B": {
+   "wape_diario": 0.0524,
+   "wape_mensual": 0.0539,
+   "cobertura_diario": 0.813,
+   "cobertura_mensual": 0.831
+  },
+  "LINEA H": {
+   "wape_diario": 0.0896,
+   "wape_mensual": 0.0902,
+   "cobertura_diario": 0.867,
+   "cobertura_mensual": 0.853
+  },
+  "LINEA J": {
+   "wape_diario": 0.0579,
+   "wape_mensual": 0.0587,
+   "cobertura_diario": 0.824,
+   "cobertura_mensual": 0.808
+  },
+  "LINEA K": {
+   "wape_diario": 0.0471,
+   "wape_mensual": 0.0468,
+   "cobertura_diario": 0.901,
+   "cobertura_mensual": 0.883
+  },
+  "LINEA M": {
+   "wape_diario": 0.0702,
+   "wape_mensual": 0.0697,
+   "cobertura_diario": 0.845,
+   "cobertura_mensual": 0.832
+  },
+  "LINEA O": {
+   "wape_diario": 0.0727,
+   "wape_mensual": 0.0729,
+   "cobertura_diario": 0.857,
+   "cobertura_mensual": 0.858
+  },
+  "LINEA P": {
+   "wape_diario": 0.0919,
+   "wape_mensual": 0.276,
+   "cobertura_diario": 0.644,
+   "cobertura_mensual": 0.677
+  },
+  "LINEA T-A": {
+   "wape_diario": 0.0648,
+   "wape_mensual": 0.0669,
+   "cobertura_diario": 0.797,
+   "cobertura_mensual": 0.813
+  }
+ }
+}
