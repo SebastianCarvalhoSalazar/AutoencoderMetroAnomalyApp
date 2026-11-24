@@ -110,7 +110,10 @@ def build_history(red: Red, start, end, train_start="2022-01-01") -> tuple[pd.Da
     for ms in pd.date_range(pd.Timestamp(start).to_period("M").to_timestamp(), end, freq="MS"):
         me = min(ms + pd.offsets.MonthEnd(0), pd.Timestamp(end))
         ms_eff = max(ms, pd.Timestamp(start))
-        hist_end = ms_eff - pd.Timedelta(days=1)
+        # Los modelos se ajustan SIEMPRE con datos anteriores al inicio del mes (no al primer día pedido), para que la
+        # operación diaria (que evalúa un solo día a mitad de mes) reproduzca exactamente la reproducción histórica y
+        # los umbrales calibrados con ella (defecto D9 corregido; docs/BITACORA.md).
+        hist_end = ms - pd.Timedelta(days=1)
         dets = fit_line_profiles(Ws, train_start, hist_end)
         coh = {}
         for ln in COHERENCE_LINES:

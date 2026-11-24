@@ -5,6 +5,7 @@ import pytest
 from metro_anomaly import plataforma as PL
 
 LINES = {"LINEA A": "metro", "LINEA B": "metro", "LINEA K": "cable", "LINEA 1": "bus", "LINEA 2": "bus"}
+evaluated_red_cache = {}
 
 
 @pytest.fixture(scope="module")
@@ -20,6 +21,7 @@ def evaluated(series_factory):
         Ws[ln].loc["2022-03-24", ["h07", "h08"]] *= 0.3
     red = PL.Red(Ws, pd.DataFrame({"linea": list(LINES), "modo": list(LINES.values())}),
                  pd.DataFrame(columns=["linea_origen", "linea_destino", "estacion_transferencia"]))
+    evaluated_red_cache["red"] = red
     horas, dias = PL.build_history(red, "2022-03-01", "2022-03-31")
     thr = {ln: {"score": "score_coherencia" if ln in PL.COHERENCE_LINES else "score_perfil", "umbral": 6.0} for ln in LINES}
     ev = PL.evaluate_days(red, horas, dias, thr).set_index(["fecha", "linea"])
@@ -73,3 +75,14 @@ def test_history_is_causal(evaluated, series_factory):
 def test_catalog_and_data_kinds_complete():
     assert set(PL.TIPOS_DATO) == {"real", "estimacion", "simulacion", "prediccion"}
     assert {m["estado"].split(" ")[0] for m in PL.CATALOGO_MODELOS} >= {"adoptado", "descriptivo", "descartado"}
+
+
+def test_mid_month_start_matches_full_month(evaluated):
+    """Evaluar un solo día a mitad de mes da exactamente el mismo z y score que la reproducción del mes completo."""
+    horas, dias, _ = evaluated
+    red = evaluated_red_cache["red"]
+    h1, d1 = PL.build_history(red, "2022-03-22", "2022-03-22")
+    full_h = horas[horas["fecha"] == "2022-03-22"].reset_index(drop=True)
+    pd.testing.assert_series_equal(h1["z"].reset_index(drop=True), full_h["z"], check_names=False)
+    full_d = dias[dias["fecha"] == "2022-03-22"].reset_index(drop=True)
+    pd.testing.assert_series_equal(d1["score_coherencia"].reset_index(drop=True), full_d["score_coherencia"], check_names=False)
