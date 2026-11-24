@@ -1,8 +1,8 @@
 {
  "schema_version": 1,
- "creado": "2026-11-24T03:21:24",
- "git_commit_build": "221e1ea",
- "sha256_datos": "a6d683dcf5d56c25201a6c3f6c3326166d141ed16b7909e69d61fdb52d4c7b6f",
+ "creado": "2026-11-24T04:10:41",
+ "git_commit_build": "02d9247",
+ "sha256_datos": "fe52b75a2b1a9c41499c17431bc73245df8351ddebab9b04c42e772d3e4ec5d6",
  "tipos_de_dato": {
   "real": "Dato real: entradas registradas (validaciones pagas) por línea y hora",
   "estimacion": "Estimación: valor esperado y desviación (z) calculados por un modelo con datos anteriores",
@@ -10,6 +10,8 @@
   "prediccion": "Predicción: pronóstico emitido sin conocer el dato del día"
  },
  "categorias": {
+  "cierre_programado": "Cierre programado anunciado (mantenimiento verificado)",
+  "linea_sin_registro": "Línea sin registro en todo el día (cierre, interrupción o falla de captura)",
   "problema_de_datos": "Posible problema de datos",
   "ausencia_simultanea_red": "Ausencia simultánea de registro en varias líneas (causa por determinar)",
   "efecto_de_medicion": "Efecto de medición (jornada sin cobro)",
@@ -92,7 +94,7 @@
  "umbrales": {
   "LINEA 1": {
    "score": "score_coherencia",
-   "umbral": 5.652962173640969,
+   "umbral": 5.652774227257608,
    "n_dev": 456
   },
   "LINEA 2": {
@@ -102,7 +104,7 @@
   },
   "LINEA A": {
    "score": "score_coherencia",
-   "umbral": 9.380171992891468,
+   "umbral": 9.380875840038541,
    "n_dev": 456
   },
   "LINEA B": {
@@ -202,12 +204,14 @@
  "dias_por_categoria": {
   "sin_anomalia": 7684,
   "no_evaluable": 690,
-  "anomalia_local": 187,
+  "anomalia_local": 183,
   "anomalia_multilinea": 153,
-  "problema_de_datos": 113,
+  "problema_de_datos": 110,
   "anomalia_generalizada": 89,
+  "linea_sin_registro": 52,
+  "cierre_programado": 35,
   "efecto_de_medicion": 24,
   "ausencia_simultanea_red": 21
  },
- "segundos_construccion": 269.5
+ "segundos_construccion": 275.1
 }
