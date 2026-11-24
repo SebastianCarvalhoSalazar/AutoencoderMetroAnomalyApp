@@ -324,7 +324,7 @@ Objetivo: aprovechar todas las líneas y fuentes externas alineables de forma co
 | F10.1 | Inventario y análisis exploratorio multilínea (cobertura, calidad, correlaciones, patrones compartidos, topología) | COMPLETADA — `reports/fase3/eda_multilinea.md`, `data/lineas.csv`, `data/topologia_red.csv` |
 | F10.2 | Exploración de fuentes externas (demografía, suelos, clima) con evaluación de alineabilidad | COMPLETADA — `docs/fase3/FUENTES_EXTERNAS.md` (clima integrado; demografía, suelos y SIG descartados con motivo) |
 | F10.3 | Experimentos H1–H6 con reproducción cronológica, inyección controlada y validación fuera de muestra | COMPLETADA — `reports/fase3/red.md`, `reports/fase3/pronostico_{dev,holdout}.md`; resultados en la tabla siguiente |
-| F10.4 | Arquitectura modular (fuentes, modelos especializados, motor de reglas, grafo de red, orquestador de evaluaciones, registro y versionado) | PENDIENTE |
-| F10.5 | Experiencia visual (red, mapas de calor, series comparadas, reproducción histórica, pronóstico y riesgo) | PENDIENTE |
-| F10.6 | Pruebas (unitarias, integración, E2E, coherencia visual-datos, rendimiento, robustez y regresión) | PENDIENTE |
-| F10.7 | Catálogo de oportunidades, hoja de ruta de datos y validación final | PENDIENTE |
+| F10.4 | Arquitectura modular (fuentes, modelos especializados, motor de reglas, grafo de red, orquestador de evaluaciones, registro y versionado) | COMPLETADA — `src/metro_anomaly/plataforma.py`, `scripts/fase3/build_plataforma.py`, `artifacts/plataforma/manifiesto.json` |
+| F10.5 | Experiencia visual (red, mapas de calor, series comparadas, reproducción histórica, pronóstico y riesgo) | COMPLETADA — `pages/2_Red_multilinea.py`; capturas en `docs/guia_visual/fase3/` |
+| F10.6 | Pruebas (unitarias, integración, E2E, coherencia visual-datos, rendimiento, robustez y regresión) | COMPLETADA — 174 rápidas y 2 E2E en verde; verificación visual-datos con 44/44 celdas idénticas (`docs/validacion/F10_fase3_plataforma.md`) |
+| F10.7 | Catálogo de oportunidades, hoja de ruta de datos y validación final | COMPLETADA — `docs/fase3/HOJA_DE_RUTA_DATOS.md`, `docs/validacion/F10_fase3_plataforma.md` |

@@ -1,0 +1,200 @@
+{
+ "schema_version": 1,
+ "creado": "2026-11-24T02:29:34",
+ "git_commit_build": "c1e0481",
+ "sha256_datos": "a6d683dcf5d56c25201a6c3f6c3326166d141ed16b7909e69d61fdb52d4c7b6f",
+ "tipos_de_dato": {
+  "real": "Dato real: entradas registradas (validaciones pagas) por línea y hora",
+  "estimacion": "Estimación: valor esperado y desviación (z) calculados por un modelo con datos anteriores",
+  "simulacion": "Simulación: escenario sintético aplicado a datos reales; no ocurrió",
+  "prediccion": "Predicción: pronóstico emitido sin conocer el dato del día"
+ },
+ "categorias": {
+  "problema_de_datos": "Posible problema de datos",
+  "ausencia_simultanea_red": "Ausencia simultánea de registro en varias líneas (causa por determinar)",
+  "efecto_de_medicion": "Efecto de medición (jornada sin cobro)",
+  "anomalia_local": "Anomalía estadística local",
+  "anomalia_multilinea": "Anomalía estadística en varias líneas",
+  "anomalia_generalizada": "Anomalía estadística generalizada en la red",
+  "sin_anomalia": "Sin anomalía estadística",
+  "no_evaluable": "No evaluable (día incompleto en horas que la línea no siempre reporta)",
+  "sin_datos": "Sin datos"
+ },
+ "catalogo_modelos": [
+  {
+   "id": "perfil_contextual",
+   "capacidad": "Desviación por línea y hora (z)",
+   "estado": "adoptado",
+   "evidencia": "docs/validacion/INFORME_FINAL.md",
+   "nota": "Modelo base de fases 1–2, ahora aplicado a 11 líneas"
+  },
+  {
+   "id": "coherencia_red (H1)",
+   "capacidad": "Anomalía propia de la línea descontando lo que mueve a toda la red",
+   "estado": "adoptado (A, B, 1)",
+   "evidencia": "reports/fase3/red.md",
+   "nota": "Línea A: +0,198 de recall moderado [0,177; 0,216] con igual presupuesto; T-A sin mejora"
+  },
+  {
+   "id": "alcance (H2)",
+   "capacidad": "Local / multilínea / generalizada",
+   "estado": "descriptivo",
+   "evidencia": "reports/fase3/red.md",
+   "nota": "Exactitud 0,884 < 0,90 pre-registrado: orientativo, no validado"
+  },
+  {
+   "id": "redistribución (H3)",
+   "capacidad": "Líneas que suben cuando otra cae",
+   "estado": "descriptivo",
+   "evidencia": "reports/fase3/red.md",
+   "nota": "n = 1 (28/08/2023); sensible al método de referencia; no causal"
+  },
+  {
+   "id": "ausencia simultánea (H4)",
+   "capacidad": "≥ 3 líneas habituales sin registro a la vez",
+   "estado": "adoptado",
+   "evidencia": "reports/fase3/red.md",
+   "nota": "Recall 1,0 simulado; 4/731 días reales, todos explicados por operación o calendario"
+  },
+  {
+   "id": "pronóstico (H5)",
+   "capacidad": "Entradas del día siguiente por línea y hora con intervalo 80 %",
+   "estado": "adoptado",
+   "evidencia": "reports/fase3/pronostico_holdout.md",
+   "nota": "Híbrido elegido en DEV: WAPE 11,5–27,6 % menor que el naive en las 11 líneas (A: 24,9 %). Intervalo: sin calibrar falla en A (0,723); con calibración conformal posterior, 0,79–0,82"
+  },
+  {
+   "id": "lluvia (H5b)",
+   "capacidad": "Mejorar el pronóstico con lluvia",
+   "estado": "descartado",
+   "evidencia": "reports/fase3/pronostico_holdout.md",
+   "nota": "Ni con la lluvia observada (oráculo) mejora el WAPE"
+  },
+  {
+   "id": "días de alta demanda (H6)",
+   "capacidad": "Anticipar días > p95 con un día de antelación",
+   "estado": "adoptado (7 líneas)",
+   "evidencia": "reports/fase3/pronostico_holdout.md",
+   "nota": "AUC > 0,80 y mejor que el naive en A, 2, J, M, O, P, T-A; no en B, K, H; la Línea 1 tiene solo 3 positivos"
+  },
+  {
+   "id": "demografía y suelos (H7)",
+   "capacidad": "Contexto territorial",
+   "estado": "descartado",
+   "evidencia": "docs/fase3/FUENTES_EXTERNAS.md",
+   "nota": "Anual o estático; no alineable con línea × hora"
+  }
+ ],
+ "periodo": [
+  "2022-04-01",
+  "2024-06-30"
+ ],
+ "umbrales": {
+  "LINEA 1": {
+   "score": "score_coherencia",
+   "umbral": 5.652962173640969,
+   "n_dev": 456
+  },
+  "LINEA 2": {
+   "score": "score_perfil",
+   "umbral": 5.909038323313191,
+   "n_dev": 443
+  },
+  "LINEA A": {
+   "score": "score_coherencia",
+   "umbral": 9.380171992891468,
+   "n_dev": 456
+  },
+  "LINEA B": {
+   "score": "score_coherencia",
+   "umbral": 7.0284817073565815,
+   "n_dev": 455
+  },
+  "LINEA H": {
+   "score": "score_perfil",
+   "umbral": 5.854957341513159,
+   "n_dev": 353
+  },
+  "LINEA J": {
+   "score": "score_perfil",
+   "umbral": 8.641915644428288,
+   "n_dev": 362
+  },
+  "LINEA K": {
+   "score": "score_perfil",
+   "umbral": 7.949756993604955,
+   "n_dev": 361
+  },
+  "LINEA M": {
+   "score": "score_perfil",
+   "umbral": 7.002867076251279,
+   "n_dev": 366
+  },
+  "LINEA O": {
+   "score": "score_perfil",
+   "umbral": 4.186472043465639,
+   "n_dev": 456
+  },
+  "LINEA P": {
+   "score": "score_perfil",
+   "umbral": 6.708856458956085,
+   "n_dev": 365
+  },
+  "LINEA T-A": {
+   "score": "score_perfil",
+   "umbral": 8.988923564443047,
+   "n_dev": 454
+  }
+ },
+ "seleccion_pronostico": {
+  "LINEA 1": "combo_v2",
+  "LINEA 2": "combo_v2",
+  "LINEA A": "combo_v2",
+  "LINEA B": "combo_v2",
+  "LINEA H": "combo_v2",
+  "LINEA J": "combo_v2",
+  "LINEA K": "combo_v2",
+  "LINEA M": "combo",
+  "LINEA O": "gbm_v2",
+  "LINEA P": "combo_v2",
+  "LINEA T-A": "combo_v2"
+ },
+ "lineas_coherencia": [
+  "LINEA A",
+  "LINEA B",
+  "LINEA 1"
+ ],
+ "cobertura_intervalo_seleccion_2023_08_2024_06": {
+  "LINEA 1": 0.756,
+  "LINEA 2": 0.813,
+  "LINEA A": 0.751,
+  "LINEA B": 0.766,
+  "LINEA H": 0.831,
+  "LINEA J": 0.806,
+  "LINEA K": 0.825,
+  "LINEA M": 0.83,
+  "LINEA O": 0.814,
+  "LINEA P": 0.778,
+  "LINEA T-A": 0.756
+ },
+ "lineas_h6_validadas": [
+  "LINEA A",
+  "LINEA 2",
+  "LINEA J",
+  "LINEA M",
+  "LINEA O",
+  "LINEA P",
+  "LINEA T-A"
+ ],
+ "dias_por_categoria": {
+  "sin_anomalia": 7684,
+  "no_evaluable": 690,
+  "anomalia_local": 187,
+  "anomalia_multilinea": 153,
+  "problema_de_datos": 113,
+  "anomalia_generalizada": 89,
+  "efecto_de_medicion": 24,
+  "ausencia_simultanea_red": 21
+ },
+ "segundos_construccion": 271.0
+}

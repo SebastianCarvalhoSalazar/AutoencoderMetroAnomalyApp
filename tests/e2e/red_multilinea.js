@@ -35,7 +35,15 @@ async function tableRows(p) {
 
 async function checkPage(p, tag, res) {
   const err = await p.locator('[data-testid="stException"]').count();
-  const overflow = await p.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
+  const overflow = await p.evaluate(() => {
+    if (document.documentElement.scrollWidth > window.innerWidth + 1) return 'pagina';
+    // contenido recortado a la derecha dentro de tablas o gráficos
+    for (const el of document.querySelectorAll('[data-testid="stTable"], .vega-embed')) {
+      const r = el.getBoundingClientRect();
+      if (r.width > 0 && (r.right > window.innerWidth + 1 || el.scrollWidth > el.clientWidth + 1)) return el.className || 'stTable';
+    }
+    return false;
+  });
   res.checks.push({ tag, excepciones: err, desbordamiento_horizontal: overflow });
 }
 
@@ -98,6 +106,12 @@ async function checkPage(p, tag, res) {
   await idle(pm);
   await checkPage(pm, 'movil', res);
   await pm.screenshot({ path: path.join(out, 'R_movil.png'), fullPage: true });
+  // Streamlit desplaza un contenedor interno: se capturan los elementos clave por separado.
+  for (const [sel, name] of [['.vega-embed', 'R_movil_red.png'], ['[data-testid="stTable"]', 'R_movil_tabla.png']]) {
+    const el = pm.locator(sel).first();
+    await el.scrollIntoViewIfNeeded(); await pm.waitForTimeout(400);
+    await el.screenshot({ path: path.join(out, name) });
+  }
   res.errores_js = errors;
   fs.writeFileSync(path.join(out, 'red_multilinea.json'), JSON.stringify(res, null, 1));
   await b.close();

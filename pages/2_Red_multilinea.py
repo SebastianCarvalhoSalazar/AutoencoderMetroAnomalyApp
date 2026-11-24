@@ -19,6 +19,7 @@ st.set_page_config(page_icon="🚆", page_title="Red multilínea — Metro de Me
 # Paleta divergente (validada en la guía de visualización): caída = rojo, aumento = azul, neutro gris.
 DIV = ["#b3261e", "#e34948", "#f3a6a0", "#f0efec", "#9cc3f0", "#2a78d6", "#174f94"]
 Z_CLIP = 8
+Y_FMT = "replace(format(datum.value, ',.0f'), ',', '.')"  # miles con punto (es-CO)
 KIND = {"real": ("Dato real", "#0b6e4f"), "estimacion": ("Estimación", "#5b4bb7"),
         "simulacion": ("Simulación", "#9a5b00"), "prediccion": ("Predicción", "#1f4e9a")}
 CAT_ICON = {"anomalia_local": "🔴", "anomalia_multilinea": "🟠", "anomalia_generalizada": "🟣", "problema_de_datos": "⚠️",
@@ -45,7 +46,8 @@ def badge(kind: str, extra: str = ""):
 def load():
     man = json.loads((ART / "manifiesto.json").read_text(encoding="utf-8"))
     horas = pd.read_csv(ART / "horas.csv.gz", parse_dates=["fecha"])
-    dias = pd.read_csv(ART / "dias.csv.gz", parse_dates=["fecha"]).fillna({"lineas_acompanan": "", "lineas_sentido_opuesto": "",
+    dias = pd.read_csv(ART / "dias.csv.gz", parse_dates=["fecha"], dtype={"horas_fuera": str, "lineas_acompanan": str,
+                                                                          "lineas_sentido_opuesto": str}).fillna({"lineas_acompanan": "", "lineas_sentido_opuesto": "",
                                                                             "horas_fuera": "", "nota_calendario": "", "alcance": ""})
     fc = pd.read_csv(ART / "pronostico_holdout.csv.gz", parse_dates=["fecha"])
     nxt = pd.read_csv(ART / "pronostico_siguiente.csv", parse_dates=["fecha"])
@@ -56,6 +58,20 @@ def load():
 
 def short(ln: str) -> str:
     return ln.replace("LINEA ", "")
+
+
+def detalle(horas: str, acomp: str, opuesto: str) -> str:
+    """Una sola columna de detalle (la tabla debe caber en 390 px de ancho)."""
+    def lst(x):
+        return ", ".join(short(y) for y in x.split(",") if y)
+    parts = []
+    if horas:
+        parts.append(f"Horas con |z| > 3: {horas.replace(',', ', ')}")
+    if acomp:
+        parts.append(f"Acompañan: {lst(acomp)}")
+    if opuesto:
+        parts.append(f"Sentido opuesto: {lst(opuesto)}")
+    return " · ".join(parts) or "—"
 
 
 def network_chart(h_day: pd.DataFrame, lineas: pd.DataFrame, topo: pd.DataFrame, modeled: set):
@@ -86,17 +102,20 @@ def network_chart(h_day: pd.DataFrame, lineas: pd.DataFrame, topo: pd.DataFrame,
         x=alt.X("x:Q", axis=ax, scale=alt.Scale(domain=[-5, 5])), y=alt.Y("y:Q", axis=ax, scale=alt.Scale(domain=[-2.2, 3.8])),
         x2="x2", y2="y2", tooltip=[alt.Tooltip("par:N", title="Conexión"), alt.Tooltip("estacion:N", title="Estación de integración")])
     base = alt.Chart(N).transform_filter("datum.hora == hora_sel")
-    pts = base.mark_circle(size=1500, stroke="#1a1a19", strokeWidth=1.5, opacity=1).encode(
+    tips = [alt.Tooltip("linea:N", title="Línea"), alt.Tooltip("modo:N", title="Modo"), alt.Tooltip("hora:Q", title="Hora"),
+            alt.Tooltip("observado:Q", title="Entradas registradas (real)", format=",.0f"),
+            alt.Tooltip("esperado:Q", title="Esperado (estimación)", format=",.0f"),
+            alt.Tooltip("z:Q", title="z", format=".1f"), alt.Tooltip("estado:N", title="Estado")]
+    # Capa base gris para todos los nodos (incluidos los sin dato o sin modelar) y capa de color con z encima.
+    under = base.mark_circle(size=1500, stroke="#1a1a19", strokeWidth=1.5, opacity=1, color="#c9c9c4").encode(
+        x="x:Q", y="y:Q", tooltip=tips)
+    pts = base.transform_filter("isValid(datum.zc)").mark_circle(size=1500, stroke="#1a1a19", strokeWidth=1.5, opacity=1).encode(
         x="x:Q", y="y:Q",
-        color=alt.condition("isValid(datum.zc)", alt.Color("zc:Q", title="z (desviación)", scale=alt.Scale(domain=[-Z_CLIP, Z_CLIP], range=DIV),
-                                                           legend=alt.Legend(orient="bottom", direction="horizontal", gradientLength=260)),
-                            alt.value("#ffffff")),
-        tooltip=[alt.Tooltip("linea:N", title="Línea"), alt.Tooltip("modo:N", title="Modo"), alt.Tooltip("hora:Q", title="Hora"),
-                 alt.Tooltip("observado:Q", title="Entradas registradas (real)", format=",.0f"),
-                 alt.Tooltip("esperado:Q", title="Esperado (estimación)", format=",.0f"),
-                 alt.Tooltip("z:Q", title="z", format=".1f"), alt.Tooltip("estado:N", title="Estado")])
+        color=alt.Color("zc:Q", title="z (desviación)", scale=alt.Scale(domain=[-Z_CLIP, Z_CLIP], range=DIV),
+                        legend=alt.Legend(orient="bottom", direction="horizontal", gradientLength=260)),
+        tooltip=tips)
     lab = base.mark_text(fontSize=15, fontWeight="bold", color="#111111").encode(x="x:Q", y="y:Q", text="etiqueta:N")
-    return (edges + pts + lab).add_params(hour).properties(height=420, title="Relaciones entre líneas (esquema, no geográfico)")
+    return (edges + under + pts + lab).add_params(hour).properties(height=420, title="Relaciones entre líneas (esquema, no geográfico)")
 
 
 def heatmap(h_day: pd.DataFrame, order):
@@ -111,28 +130,28 @@ def heatmap(h_day: pd.DataFrame, order):
                  alt.Tooltip("z:Q", title="z", format=".1f")]).properties(height=330)
 
 
-def compare_chart(h_day: pd.DataFrame, sel):
-    H = h_day[h_day["linea"].isin(sel)].copy()
-    H["linea_c"] = H["linea"].map(short)
-    L = H.melt(id_vars=["linea_c", "hora"], value_vars=["observado", "esperado"], var_name="serie", value_name="entradas")
-    L["serie"] = L["serie"].map({"observado": "Real", "esperado": "Esperado (estimación)"})
+def compare_chart(h_day: pd.DataFrame, ln: str):
+    """Real frente a esperado para una línea (un gráfico por línea, ancho del contenedor: se adapta al móvil)."""
+    H = h_day[h_day["linea"] == ln]
+    L = H.melt(id_vars=["hora"], value_vars=["observado", "esperado"], var_name="serie", value_name="entradas")
+    L["serie"] = L["serie"].map({"observado": "Real", "esperado": "Esperado"})
+    dom = ["Real", "Esperado"]
     ch = alt.Chart(L).mark_line(strokeWidth=2, point=alt.OverlayMarkDef(size=36)).encode(
-        x=alt.X("hora:O", title="Hora"), y=alt.Y("entradas:Q", title="Entradas por hora"),
-        color=alt.Color("serie:N", title=None, scale=alt.Scale(domain=["Real", "Esperado (estimación)"], range=["#2a78d6", "#8a8a85"]),
-                        legend=alt.Legend(orient="top")),
-        strokeDash=alt.StrokeDash("serie:N", legend=None, scale=alt.Scale(domain=["Real", "Esperado (estimación)"], range=[[1, 0], [6, 4]])),
-        tooltip=[alt.Tooltip("linea_c:N", title="Línea"), alt.Tooltip("hora:O", title="Hora"), alt.Tooltip("serie:N", title="Serie"),
+        x=alt.X("hora:O", title="Hora"), y=alt.Y("entradas:Q", title="Entradas por hora", axis=alt.Axis(labelExpr=Y_FMT)),
+        color=alt.Color("serie:N", title=None, scale=alt.Scale(domain=dom, range=["#2a78d6", "#8a8a85"]), legend=alt.Legend(orient="top")),
+        strokeDash=alt.StrokeDash("serie:N", legend=None, scale=alt.Scale(domain=dom, range=[[1, 0], [6, 4]])),
+        tooltip=[alt.Tooltip("hora:O", title="Hora"), alt.Tooltip("serie:N", title="Serie"),
                  alt.Tooltip("entradas:Q", title="Entradas", format=",.0f")])
-    return ch.properties(width=260, height=180).facet(facet=alt.Facet("linea_c:N", title=None), columns=3).resolve_scale(y="independent")
+    return ch.properties(height=200, title=f"Línea {short(ln)}")
 
 
 def forecast_chart(F: pd.DataFrame, kind: str):
     base = alt.Chart(F).encode(x=alt.X("hora:O", title="Hora"))
     band = base.mark_area(opacity=0.25, color="#2a78d6").encode(
-        y=alt.Y("p10:Q", title="Entradas por hora"), y2="p90:Q",
+        y=alt.Y("p10:Q", title="Entradas por hora", axis=alt.Axis(labelExpr=Y_FMT)), y2="p90:Q",
         tooltip=[alt.Tooltip("hora:O", title="Hora"), alt.Tooltip("p10:Q", title="p10", format=",.0f"), alt.Tooltip("p90:Q", title="p90", format=",.0f")])
     pred = base.mark_line(strokeWidth=2, strokeDash=[6, 4], color="#1f4e9a").encode(
-        y="pred:Q", tooltip=[alt.Tooltip("hora:O", title="Hora"), alt.Tooltip("pred:Q", title="Predicción", format=",.0f")])
+        y=alt.Y("pred:Q", title="Entradas por hora", axis=alt.Axis(labelExpr=Y_FMT)), tooltip=[alt.Tooltip("hora:O", title="Hora"), alt.Tooltip("pred:Q", title="Predicción", format=",.0f")])
     layers = [band, pred] if F["p10"].notna().any() else [pred]
     if kind == "replay":
         obs = base.mark_line(strokeWidth=2, color="#111111", point=alt.OverlayMarkDef(size=30, color="#111111")).encode(
@@ -157,7 +176,8 @@ def main():
                         f"{man['tipos_de_dato'][k].split(': ', 1)[1]}", unsafe_allow_html=True)
         st.markdown("**z**: desviación frente a lo esperado para ese tipo de día y hora (rojo = menos entradas, azul = más). "
                     "|z| > 3 es inusual.")
-        st.caption(f"Artefactos: commit `{man.get('git_commit_build')}` · datos SHA-256 `{man['sha256_datos'][:12]}` · creado {man['creado']}")
+        st.markdown(f"<small>Artefactos: commit {man.get('git_commit_build')} · datos SHA-256 {man['sha256_datos'][:12]} · "
+                    f"creado {man['creado']}</small>", unsafe_allow_html=True)
 
     dmin, dmax = dias["fecha"].min().date(), dias["fecha"].max().date()
     c1, c2 = st.columns([1, 3])
@@ -181,8 +201,8 @@ def main():
         with a:
             badge("estimacion", "Color = z de cada línea en la hora elegida con el control deslizante (reproducción hora a hora).")
             st.altair_chart(network_chart(h_day, lineas, topo, set(lines)), use_container_width=True)
-            st.caption("Aristas = estaciones de integración verificadas en las páginas oficiales del Metro (`data/topologia_red.csv`). "
-                       "La Línea L no se modela (no opera todas las horas).")
+            st.caption("Aristas = estaciones de integración verificadas en las páginas oficiales del Metro (archivo data/topologia_red.csv). "
+                       "La Línea L (gris) no se modela: no opera todas las horas.")
         with b:
             badge("estimacion", "Desviación por línea y hora (z) del día")
             st.altair_chart(heatmap(h_day, lines), use_container_width=True)
@@ -193,9 +213,8 @@ def main():
             "Línea": [short(x) for x in d_day.index],
             "Resultado": [f"{CAT_ICON.get(c, '')} {cats.get(c, c)}" for c in d_day["categoria"].astype(str)],
             "Score / umbral": [f"{num(s, 1)} / {num(u, 1)}" for s, u in zip(d_day["score"], d_day["umbral"])],
-            "Horas |z|>3": [x or "—" for x in d_day["horas_fuera"].astype(str)],
-            "Líneas que acompañan": [", ".join(short(y) for y in x.split(",") if y) or "—" for x in d_day["lineas_acompanan"].astype(str)],
-            "Líneas en sentido opuesto": [", ".join(short(y) for y in x.split(",") if y) or "—" for x in d_day["lineas_sentido_opuesto"].astype(str)],
+            "Detalle": [detalle(h, a, o) for h, a, o in zip(d_day["horas_fuera"].astype(str), d_day["lineas_acompanan"].astype(str),
+                                                           d_day["lineas_sentido_opuesto"].astype(str))],
         })
         st.table(tbl.set_index("Línea"))
         st.caption("El alcance (local / varias líneas / generalizada) es **orientativo**: su exactitud con anomalías simuladas fue 0,884, "
@@ -205,14 +224,17 @@ def main():
         if sel:
             badge("real", "línea continua · ")
             badge("estimacion", "línea discontinua")
-            st.altair_chart(compare_chart(h_day, sel), use_container_width=False)
+            cols = st.columns(min(3, len(sel)))
+            for i, ln_c in enumerate(sel):
+                with cols[i % len(cols)]:
+                    st.altair_chart(compare_chart(h_day, ln_c), use_container_width=True)
 
     with tab2:
         st.subheader("Pronóstico del día siguiente por línea y hora")
         ln = st.selectbox("Línea", lines, format_func=short, key="fc_line")
         F = fc[(fc["linea"] == ln) & (fc["fecha"] == t)].sort_values("hora")
         if len(F):
-            badge("prediccion", f"emitida al cierre del {(t - pd.Timedelta(days=1)).strftime('%d/%m/%Y')} sin conocer el día (reproducción fuera de muestra)")
+            badge("prediccion", f"línea discontinua y banda del 80 %, emitida al cierre del {(t - pd.Timedelta(days=1)).strftime('%d/%m/%Y')} sin conocer el día (reproducción fuera de muestra)")
             badge("real", "línea negra continua")
             st.altair_chart(forecast_chart(F, "replay"), use_container_width=True)
             w = float(np.abs(F["observado"] - F["pred"]).sum() / F["observado"].sum())
@@ -230,7 +252,7 @@ def main():
             st.subheader(f"Próximo día sin datos: {nd.strftime('%d/%m/%Y')}")
             if event_note(nd):
                 st.caption(f"Calendario: {event_note(nd)}")
-            badge("prediccion", "aún no hay dato real para compararla")
+            badge("prediccion", "línea discontinua y banda del 80 %; aún no hay dato real para compararla")
             st.altair_chart(forecast_chart(N, "next"), use_container_width=True)
             r = float(N["ratio_p95_gbm"].iloc[0])
             if ln in man.get("lineas_h6_validadas", []):
@@ -240,7 +262,7 @@ def main():
                 st.caption(f"Riesgo de alta demanda: **{nivel}** · {'⬆️' if r > 1 else '➖'}")
             else:
                 st.caption("El indicador de día de alta demanda no se muestra para esta línea: no superó la validación (H6).")
-        st.caption("Banda = intervalo del 80 % con calibración conformal en línea. Evidencia y limitaciones: `reports/fase3/pronostico_holdout.md`.")
+        st.caption("Banda = intervalo del 80 % con calibración conformal en línea. Evidencia y limitaciones: reports/fase3/pronostico_holdout.md.")
 
     with tab3:
         st.subheader("¿Cómo se clasificaría una caída hipotética?")

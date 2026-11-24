@@ -283,3 +283,26 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - **H6:** el híbrido elegido por WAPE no es mejor para H6. Por ejemplo, en J el AUC es 0,751 frente a 0,910 del GBM. El indicador de día de alta demanda usa el **GBM base pre-registrado** solo en las 7 líneas que cumplieron: A, 2, J, M, O, P y T-A.
   - La exclusión de la Línea 1 por tener menos de 10 positivos es una regla añadida ahora.
 - **H5b:** la lluvia sigue descartada. Los días lluviosos favorecen a los modelos con perfil, pero se concentran en abril–mayo de 2024: confusión con el mes, sin efecto atribuible a la lluvia.
+
+## 2026-11-24 — [F10.5–F10.7] Página multilínea, pruebas y cierre de la fase 3
+- **Artefactos reconstruidos desde un commit limpio** (`git_commit_build = c1e0481`; el manifiesto ahora marca `+cambios_sin_commit` si el árbol no está limpio).
+  - Categorías sobre 8 961 días-línea: anomalías local, multilínea y generalizada = 429 (4,8 %, coherente con el presupuesto del 5 %); no evaluable = 690 (días incompletos de los cables); problema de datos = 113; efecto de medición = 24; ausencia simultánea = 21.
+  - Cobertura de la banda que muestra la plataforma (calibrada y centrada en el modelo elegido, 2023-08…2024-06): 0,751–0,831.
+- **Página `pages/2_Red_multilinea.py`:**
+  - pestaña de red con esquema de relaciones entre líneas (no geográfico), reproducción por hora en el navegador, mapa de calor línea × hora, tabla del motor de reglas y comparación de real frente a esperado;
+  - pestaña de pronóstico, con reproducción fuera de muestra y el próximo día (01/07/2024, festivo de San Pedro y San Pablo);
+  - pestaña de simulación, etiquetada como tal;
+  - pestaña de catálogo, con estados adoptado, descriptivo y descartado, umbrales y lo que no se puede hacer.
+  - Cada bloque lleva una etiqueta de dato real, estimación, simulación o predicción.
+- **Defectos de UI hallados y corregidos (ver `docs/validacion/F10_fase3_plataforma.md` §4, D4–D7):**
+  - contraste de los textos secundarios (axe);
+  - la Línea L desaparecía del esquema;
+  - un gráfico de 1 051 px quedaba recortado. Lo detectó un verificador E2E endurecido, que ahora también mide el recorte dentro de gráficos y tablas; antes solo medía el desbordamiento de la página;
+  - la tabla no cabía en móvil.
+- **Pruebas:**
+  - 174 rápidas aprobadas, 1 omitida (TensorFlow), cobertura del 83 %;
+  - 2 E2E aprobadas: la app original y la página nueva;
+  - verificación visual-datos: 44 de 44 celdas idénticas a `dias.csv.gz` en 4 fechas;
+  - rendimiento con AppTest: cambio de fecha con p95 de 0,48 s.
+- **Incidencia de entorno:** una prueba tardó 606 s por sobresuscripción de hilos mientras corría la construcción de artefactos. En solitario tarda 3 s.
+- **Cierre:** `docs/validacion/F10_fase3_plataforma.md` (dictamen) y `docs/fase3/HOJA_DE_RUTA_DATOS.md` (capacidades viables y no viables, y fuentes necesarias en orden de valor).

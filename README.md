@@ -8,6 +8,15 @@ Sistema que señala **días y horas cuya afluencia se desvía de lo esperado par
 >
 > **Estado del modelo (2026-11-23):** funcional y validado de extremo a extremo, pero **no cumple todos los criterios pre-registrados**. Cumple la tasa de alertas, la detección de perfiles incoherentes con el calendario, la superioridad frente al sistema original, la generalización a 2019 y la detección de eventos reales. **No cumple** la sensibilidad mínima a anomalías moderadas y severas ni la tasa máxima de alertas en festivos. Detalle en [`docs/validacion/INFORME_FINAL.md`](docs/validacion/INFORME_FINAL.md).
 
+> **Fase 3 (2026-11-24): plataforma multilínea.** Página `Red multilinea` (en el menú lateral de la app) con:
+> - un esquema de relaciones entre las 11 líneas;
+> - reproducción por hora;
+> - un detector de coherencia de red (recall moderado de la Línea A de 0,70 a 0,90 con el mismo presupuesto de alertas);
+> - pronóstico del día siguiente por línea y hora (WAPE 11–28 % menor que el naive);
+> - un catálogo de lo validado y lo descartado.
+>
+> La plataforma sigue sin servir para detección temprana ni localización de fallas: para eso faltan datos por estación y telemetría. Ver [`docs/validacion/F10_fase3_plataforma.md`](docs/validacion/F10_fase3_plataforma.md) y [`docs/fase3/HOJA_DE_RUTA_DATOS.md`](docs/fase3/HOJA_DE_RUTA_DATOS.md). Para reconstruir los artefactos: `python scripts/fase3/build_plataforma.py` (~12 min).
+
 ## Inicio rápido
 ```bash
 python -m venv .venv && source .venv/bin/activate   # Python 3.10
