@@ -27,6 +27,9 @@ make reproduce          # pipeline completo: datos → selección → holdout �
 make determinism        # D9: dos ejecuciones aisladas con hashes idénticos
 make install-research && make reproduce-research    # incluye las comparaciones con autoencoders (TensorFlow)
 python scripts/run_daily.py --fecha 2023-08-28 --monitor     # operación por lote con registro de auditoría
+python scripts/run_daily.py --red --fecha 2023-08-28 --pronostico --monitor   # 11 líneas + pronóstico del día siguiente
+python scripts/fase3/build_plataforma.py                     # reconstruye los artefactos de la plataforma (~5–12 min)
+python scripts/fase3/check_determinism_plataforma.py         # dos construcciones aisladas con hashes idénticos
 python scripts/production_validation.py                     # simulación cronológica de producción (F8)
 make e2e                                                    # E2E y auditoría UX con navegador (node + playwright)
 ```
