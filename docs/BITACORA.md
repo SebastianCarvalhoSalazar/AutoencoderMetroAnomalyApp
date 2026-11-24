@@ -191,3 +191,6 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - **Cambio:** `tests/e2e/guia_visual.js` genera 7 capturas anotadas de los flujos principales (`docs/guia_visual/`).
 - **Hallazgo:** el defecto V2 (eje del score de la línea de tiempo con solo 0 y 50), registrado como corregido en F9, **no lo estaba**. Causa: las capas del umbral usaban un eje por defecto que, al fusionarse con el de las demás, anulaba las marcas configuradas. Un primer intento (`axis=None` en esas capas) eliminó el eje completo. Corrección: todas las capas comparten la misma escala y el mismo eje. Verificado visualmente (`docs/guia_visual/02_*`, `03_*`: marcas 0, 1, 2, 5, 10 y 50).
 - **Pruebas:** suite rápida en verde.
+
+## 2026-11-24 — [F10] Fase 3: plataforma multilínea (planificación)
+- **Decisión:** se pre-registran las hipótesis H1–H7 con sus criterios en `docs/PLAN_MAESTRO.md` §10, antes de cualquier experimento.

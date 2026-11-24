@@ -281,3 +281,38 @@ Objetivo: decidir con evidencia si el sistema puede operar en producción en el 
 | PR7 | **BLOQUEANTE** | sin registro de incidentes; 1/3 incidentes verificados con señal |
 | PR8 | parcial | auditoría, idempotencia y monitoreo ✔; sin orquestación, notificación ni autenticación |
 | UX1–UX7 | ✔ | `docs/validacion/F8_F9_produccion_y_ux.md` §4 |
+
+---
+
+## 10. Fase 3 — Plataforma de analítica operacional multilínea (solicitada el 2026-11-24)
+
+Objetivo: aprovechar todas las líneas y fuentes externas alineables de forma confiable para pasar de un detector de la Línea A a una plataforma modular de analítica descriptiva, diagnóstica, predictiva y de soporte preventivo. Solo se adopta lo que demuestre mejora real y reproducible. Hipótesis y criterios pre-registrados **antes** de experimentar.
+
+### Principios
+- La granularidad disponible es **línea × hora** (export diario). No se afirmará localización por estación, identificación de fallas técnicas ni anticipación de incidentes específicos.
+- Una fuente externa solo se integra si se alinea de forma verificable en tiempo y espacio con la granularidad objetivo.
+- Selección de configuraciones solo en DEV (2022-01…2023-06); evaluación en 2023-07…2024-06. Advertencia: ese periodo ya se inspeccionó para la Línea A (fases 1–2), pero no para el modelado multilínea ni el pronóstico. También hay evaluación externa en 2019.
+- Toda visualización distingue entre **dato real**, **estimación**, **simulación** y **predicción**.
+
+### Hipótesis y criterios de aceptación
+| ID | Hipótesis | Criterio (pre-registrado) |
+|---|---|---|
+| H1 | Un modelo de **coherencia entre líneas** (residuo de la línea frente a lo explicado por las otras líneas en la misma hora) detecta mejor anomalías locales que el perfil por línea | recall moderado local ≥ +0,05 frente a `perfil_contextual` con el mismo presupuesto de alertas (IC pareado > 0) y tasa de alertas en festivos no peor |
+| H2 | Se puede clasificar una desviación como **local** o **sistémica** | exactitud ≥ 0,90 con inyecciones; elecciones clasificadas como sistémicas; el 28/08/2023 como multilínea |
+| H3 | Existe **redistribución** de demanda hacia otras líneas cuando una falla | en el 28/08/2023 (17–19 h), alguna línea alternativa con z > 3 positivo; si no, se descarta (n = 1: solo descriptivo) |
+| H4 | Las fallas de **recaudo a nivel de red** (ceros o huecos simultáneos en varias líneas) se distinguen de las de una línea | recall ≥ 0,95 en inyecciones; tasa en días reales ≤ 1 % |
+| H5 | Un modelo de **pronóstico** por línea y hora (día siguiente) supera a líneas base | WAPE ≥ 10 % menor (relativo) que el naive estacional en la Línea A y en la mayoría de las líneas; cobertura del intervalo del 80 % entre 0,75 y 0,85 |
+| H5b | La **lluvia** (fuente externa alineada por hora) mejora el pronóstico o reduce falsas alarmas | WAPE ≥ 2 % menor (relativo) o menos alertas en días lluviosos sin perder recall; si no, se descarta |
+| H6 | Se pueden **anticipar días de alta demanda** (> p95 de la línea) con un día de antelación | AUC > 0,80 y mejor que el naive |
+| H7 | Las fuentes de **demografía y suelos** del Valle de Aburrá aportan a modelos línea × hora | solo si son alineables temporal y espacialmente; si no, se documentan para una fase con datos por estación |
+
+### Tareas
+| ID | Tarea | Estado |
+|---|---|---|
+| F10.1 | Inventario y análisis exploratorio multilínea (cobertura, calidad, correlaciones, patrones compartidos, topología) | PENDIENTE |
+| F10.2 | Exploración de fuentes externas (demografía, suelos, clima) con evaluación de alineabilidad | PENDIENTE |
+| F10.3 | Experimentos H1–H6 con reproducción cronológica, inyección controlada y validación fuera de muestra | PENDIENTE |
+| F10.4 | Arquitectura modular (fuentes, modelos especializados, motor de reglas, grafo de red, orquestador de evaluaciones, registro y versionado) | PENDIENTE |
+| F10.5 | Experiencia visual (red, mapas de calor, series comparadas, reproducción histórica, pronóstico y riesgo) | PENDIENTE |
+| F10.6 | Pruebas (unitarias, integración, E2E, coherencia visual-datos, rendimiento, robustez y regresión) | PENDIENTE |
+| F10.7 | Catálogo de oportunidades, hoja de ruta de datos y validación final | PENDIENTE |
