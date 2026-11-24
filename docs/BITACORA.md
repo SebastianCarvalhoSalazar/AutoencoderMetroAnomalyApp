@@ -341,3 +341,17 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - **Animación:** botón "▶ Reproducir el día hora a hora" que dibuja un fotograma por hora (04–22) con la hora en el título. El E2E verifica 5 de 5 fotogramas distintos.
 - **Fichas:** `MODEL_CARD.md` (modelos de la fase 3, usos no previstos, operación y mantenimiento) y `DATA_CARD.md` (eventos actualizados, datos multilínea y fuentes externas).
   - Se corrigió una afirmación desactualizada: "no se hallaron incidentes de la Línea A en 2022–2024" ya no era cierta desde F8 (IN1–IN3).
+
+## 2026-11-24 — [F10.8] Simulación de la operación diaria: dos defectos hallados (D9, D10) y un hallazgo operativo
+- **Primera simulación de junio de 2024** (`scripts/fase3/simulacion_operacion_red.py`): 309 de 310 línea-días coincidían con la reproducción histórica.
+  - **D9:** con una evaluación que empezaba a mitad de mes, `build_history` ajustaba los modelos con datos hasta t−1 y no hasta el inicio del mes, en contra de su propio docstring. El score de la Línea 1 del 08/06/2024 pasó de 5,80 a 4,66 y perdió la alerta.
+  - **Corrección:** el ajuste usa siempre datos anteriores al inicio del mes. Los artefactos no cambian, porque siempre se construyen desde el día 1.
+  - **Prueba:** `test_mid_month_start_matches_full_month` falla sin la corrección y pasa con ella (verificado).
+- **Hallazgo operativo:** la Línea P registró 300–680 entradas diarias del 8 al 13/06/2024, frente a ~22 000 habituales; su WAPE de pronóstico en junio fue de 0,28.
+  - **Verificado:** Telemedellín (06/06/2024) anunció el mantenimiento anual de los metrocables: P del 8 al 13, M del 14 al 16 y H del 17 al 19 de junio de 2024.
+  - La plataforma había marcado los 6 días de P como anomalía o problema de datos.
+- **D10 (falla silenciosa):** las líneas **sin ningún registro** en el día (M del 14 al 16 y H del 17 al 19 de junio de 2024; cierres de 2022) no generaban fila, así que la plataforma no decía nada de una línea cerrada.
+  - **Corrección:** se crea una fila cuando la línea suele operar (registro en ≥ 80 % de los 56 días previos; con 90 % de 28 días se dejaba de marcar al tercer día de cierre) y se clasifica "línea sin registro".
+  - **Calendario de cierres programados:** `data/cierres_programados.csv` incluye solo los anuncios verificados, de 2022 y 2024; para 2023 solo hay notas sin año explícito. Esos días se clasifican "cierre programado", se excluyen del ajuste de los modelos y de los rezagos del pronóstico, y el pronóstico de un día cerrado es 0.
+  - Es información anunciada de antemano (por ejemplo, el 06/06 para el 08/06), así que no hay fuga. Sí exige que alguien cargue los anuncios: es la fuente n.° 3 de la hoja de ruta ("oferta programada").
+  - Con la regla nueva aparecen además cierres sin anunciar en el calendario: K del 27 al 30/06/2024, J del 30/10 al 01/11/2023, K del 02 al 04/11/2023, entre otros.
