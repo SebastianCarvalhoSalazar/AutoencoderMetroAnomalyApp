@@ -2,39 +2,30 @@
  "comparaciones": 44,
  "discrepancias": [],
  "problemas_pagina": [],
+ "animacion": {
+  "fotogramas": [
+   "9da8b0757b36",
+   "1b942470e8e7",
+   "f17a245982d1",
+   "4a2382e090c3",
+   "7a664bf933fb"
+  ],
+  "distintos": 5
+ },
  "reproduccion_marcas": {
   "8": 3,
   "17": 3,
   "19": 3
  },
- "axe": [
-  {
-   "id": "aria-allowed-attr",
-   "impact": "critical",
-   "n": 2,
-   "ejemplo": "#MainMenu"
-  },
-  {
-   "id": "button-name",
-   "impact": "critical",
-   "n": 2,
-   "ejemplo": "#MainMenu > .st-emotion-cache-4nevif.ef3psqc5[kind=\"headerNoPadding\"]"
-  },
-  {
-   "id": "summary-name",
-   "impact": "serious",
-   "n": 5,
-   "ejemplo": ".st-emotion-cache-u7glsr.stElementContainer[width=\"496.921875\"]:nth-child(2) > .st-emotion-cache-9aoz2h.e1vs0wn30[data-testid=\"stFullScreenFrame\"] > .stVegaLiteChart.st-emotion-cache-vmfiw.egd2k5h0 > details > summary"
-  }
- ],
+ "axe": null,
  "tiempos_ms": {
-  "carga_inicial": 5123,
-  "cambio_fecha_in3": 4399,
-  "cambio_fecha_elecciones": 4136,
-  "cambio_fecha_normal": 4096,
-  "cambio_fecha_nochebuena": 4158,
-  "pestana_pronostico": 1572,
-  "pestana_simulacion": 1570,
-  "pestana_catalogo": 1612
+  "carga_inicial": 5210,
+  "cambio_fecha_in3": 4323,
+  "cambio_fecha_elecciones": 4008,
+  "cambio_fecha_normal": 3954,
+  "cambio_fecha_nochebuena": 4216,
+  "pestana_pronostico": 1550,
+  "pestana_simulacion": 1558,
+  "pestana_catalogo": 1609
  }
 }

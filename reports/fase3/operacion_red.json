@@ -7,12 +7,12 @@
  "linea_dias_registrados": 319,
  "coinciden_con_reproduccion_historica": 319,
  "latencia_evaluacion_s": {
-  "mediana": 8.01,
-  "p95": 8.38
+  "mediana": 8.55,
+  "p95": 9.38
  },
  "latencia_pronostico_s": {
-  "mediana": 50.83,
-  "p95": 52.23
+  "mediana": 53.27,
+  "p95": 55.04
  },
  "alertas": [
   "2024-06-04 LINEA O",
@@ -117,11 +117,9 @@
     "cierres_programados_90d": 0
    }
   },
-  "advertencias": [
-   "LINEA P: cobertura del intervalo del 80 % = 0.63 fuera de [0.7, 0.9] en 29 días; recalibrar."
-  ],
+  "advertencias": [],
   "pronostico": {
-   "filas_con_dato": 5710,
+   "filas_con_dato": 5608,
    "lineas_dañadas": 0,
    "por_linea": {
     "LINEA 1": {
@@ -170,80 +168,108 @@
      "wape": 0.0727
     },
     "LINEA P": {
-     "dias": 29,
-     "cobertura_80": 0.628,
-     "wape": 0.1059
+     "dias": 23,
+     "cobertura_80": 0.782,
+     "wape": 0.0988
     },
     "LINEA T-A": {
      "dias": 29,
      "cobertura_80": 0.797,
      "wape": 0.0648
     }
+   },
+   "cierres_programados": {
+    "LINEA P": {
+     "dias": 6,
+     "entradas_residuales": 3129
+    }
    }
   }
  },
  "pronostico_diario_vs_mensual": {
   "LINEA 1": {
+   "wape_diario_con_cierres": 0.0397,
+   "wape_mensual_con_cierres": 0.04,
    "wape_diario": 0.0397,
    "wape_mensual": 0.04,
    "cobertura_diario": 0.819,
    "cobertura_mensual": 0.82
   },
   "LINEA 2": {
+   "wape_diario_con_cierres": 0.0612,
+   "wape_mensual_con_cierres": 0.0615,
    "wape_diario": 0.0612,
    "wape_mensual": 0.0615,
    "cobertura_diario": 0.856,
    "cobertura_mensual": 0.84
   },
   "LINEA A": {
+   "wape_diario_con_cierres": 0.0347,
+   "wape_mensual_con_cierres": 0.0346,
    "wape_diario": 0.0347,
    "wape_mensual": 0.0346,
    "cobertura_diario": 0.84,
    "cobertura_mensual": 0.858
   },
   "LINEA B": {
+   "wape_diario_con_cierres": 0.0524,
+   "wape_mensual_con_cierres": 0.0539,
    "wape_diario": 0.0524,
    "wape_mensual": 0.0539,
    "cobertura_diario": 0.813,
    "cobertura_mensual": 0.831
   },
   "LINEA H": {
+   "wape_diario_con_cierres": 0.0896,
+   "wape_mensual_con_cierres": 0.0902,
    "wape_diario": 0.0896,
    "wape_mensual": 0.0902,
    "cobertura_diario": 0.867,
    "cobertura_mensual": 0.853
   },
   "LINEA J": {
+   "wape_diario_con_cierres": 0.0579,
+   "wape_mensual_con_cierres": 0.0587,
    "wape_diario": 0.0579,
    "wape_mensual": 0.0587,
    "cobertura_diario": 0.824,
    "cobertura_mensual": 0.808
   },
   "LINEA K": {
+   "wape_diario_con_cierres": 0.0471,
+   "wape_mensual_con_cierres": 0.0468,
    "wape_diario": 0.0471,
    "wape_mensual": 0.0468,
    "cobertura_diario": 0.901,
    "cobertura_mensual": 0.883
   },
   "LINEA M": {
+   "wape_diario_con_cierres": 0.0702,
+   "wape_mensual_con_cierres": 0.0697,
    "wape_diario": 0.0702,
    "wape_mensual": 0.0697,
    "cobertura_diario": 0.845,
    "cobertura_mensual": 0.832
   },
   "LINEA O": {
+   "wape_diario_con_cierres": 0.0727,
+   "wape_mensual_con_cierres": 0.0729,
    "wape_diario": 0.0727,
    "wape_mensual": 0.0729,
    "cobertura_diario": 0.857,
    "cobertura_mensual": 0.858
   },
   "LINEA P": {
-   "wape_diario": 0.0919,
-   "wape_mensual": 0.276,
-   "cobertura_diario": 0.644,
-   "cobertura_mensual": 0.677
+   "wape_diario_con_cierres": 0.0919,
+   "wape_mensual_con_cierres": 0.276,
+   "wape_diario": 0.0854,
+   "wape_mensual": 0.0861,
+   "cobertura_diario": 0.787,
+   "cobertura_mensual": 0.827
   },
   "LINEA T-A": {
+   "wape_diario_con_cierres": 0.0648,
+   "wape_mensual_con_cierres": 0.0669,
    "wape_diario": 0.0648,
    "wape_mensual": 0.0669,
    "cobertura_diario": 0.797,

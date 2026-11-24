@@ -88,3 +88,38 @@ Sigue **no apta** para detección temprana de incidentes, localización de falla
 - revisar mensualmente la cobertura del intervalo y la tasa de alertas por línea;
 - reconstruir los artefactos con `scripts/fase3/build_plataforma.py` cada vez que lleguen datos nuevos y verificar `git_commit_build` en el manifiesto;
 - no presentar el alcance ni la redistribución como hallazgos validados.
+
+## 7. Cierre de pendientes y evaluación de extremo a extremo de la operación (F10.8)
+| Pendiente | Implementación | Evaluación |
+|---|---|---|
+| Operación diaria multilínea | `src/metro_anomaly/operacion_red.py`; `run_daily.py --red [--pronostico] [--monitor]`; auditoría JSON Lines idempotente; monitoreo por línea (tasa de alertas, cobertura del intervalo, días sin registro, cierres) | 14 pruebas de integración. Simulación cronológica de junio de 2024: **319/319** línea-días iguales a la reproducción histórica y sin advertencias del monitor |
+| Pronóstico operativo | `pronostico.forecast_day` con reajuste diario, banda calibrada con el factor conformal del manifiesto y calendario de cierres | Reajuste diario frente a mensual: WAPE equivalente en las 11 líneas (A: 0,0347 frente a 0,0346); cobertura del 80 % entre 0,797 y 0,901 (`reports/fase3/operacion_red.md`) |
+| Determinismo de la plataforma | `scripts/fase3/check_determinism_plataforma.py` | Dos construcciones aisladas, idénticas entre sí y a las versionadas (`reports/fase3/determinismo_plataforma.md`) |
+| Reproducibilidad desde un clon limpio | Las predicciones fuera de muestra se versionan en `reports/fase3/pronostico_oos_holdout.csv.gz` (antes dependían de un `.pkl` ignorado por git) | La construcción de la verificación de determinismo parte de copias sin `.git` ni `.pkl` |
+| Cierre del 24 y 31 de diciembre | `data/eventos_reales.csv` OP1–OP3; nota en `event_note` | Oficial en 2022 y 2024 (22:00); **2023 solo prensa** (21:00), coherente con los datos |
+| Animación de la reproducción | Botón "▶ Reproducir el día hora a hora" | E2E: 5/5 fotogramas distintos |
+| Fichas del modelo y de los datos | `docs/MODEL_CARD.md`, `docs/DATA_CARD.md` | — |
+
+**Defectos hallados por la evaluación de extremo a extremo y corregidos:**
+
+| # | Defecto | Cómo se detectó | Corrección y prueba |
+|---|---|---|---|
+| D9 | Una evaluación que empezaba a mitad de mes ajustaba con datos hasta t−1 en lugar de hasta el inicio del mes. La Línea 1 del 08/06/2024 perdía la alerta (score 5,80 → 4,66) | Simulación: 309/310 coincidencias | Ajuste siempre con datos anteriores al mes. `test_mid_month_start_matches_full_month` falla sin la corrección |
+| D10 | **Falla silenciosa:** una línea sin ningún registro en el día no generaba fila (M del 14 al 16 y H del 17 al 19/06/2024, cierres de 2022) | Análisis del error de pronóstico de la Línea P (WAPE 0,28) | Categoría "línea sin registro" (la línea operó ≥ 80 % de los 56 días previos) y calendario de cierres programados verificados. 52 días sin registro y 35 días de cierre programado en 2022-04…2024-06 |
+| D11 | El lote fallaba al registrar una línea sin fila en el día (`KeyError`) | Simulación tras D10 (27/06/2024, Línea K) | `reindex`; `test_line_without_records_is_logged` |
+
+**Hallazgo operativo verificado:** la Línea P registró 300–680 entradas al día del 8 al 13/06/2024, frente a unas 22 000 habituales. Fue el mantenimiento anual anunciado por Telemedellín el 06/06/2024.
+- Con el calendario de cierres anunciados, el WAPE de junio de la Línea P baja de 0,276 a 0,092.
+- Los días de cierre se pronostican en 0 por regla y quedan fuera de la cobertura y del WAPE del modelo.
+- Es información anunciada de antemano, sin fuga, pero depende de que alguien cargue los anuncios (fuente n.° 3 de la hoja de ruta).
+- Para 2023 no se halló un anuncio con año explícito: esos cierres aparecen como "línea sin registro".
+
+**Pruebas al cierre:**
+- 194 rápidas aprobadas y 1 omitida (TensorFlow), con 84,8 % de cobertura;
+- 2 E2E aprobadas;
+- verificación visual-datos: 44/44 celdas;
+- animación: 5/5 fotogramas distintos.
+
+**Latencia de la operación diaria:** evaluación de 11 líneas con p95 de 9,4 s; pronóstico del día siguiente con p95 de 55 s, por el reajuste diario de los GBM con 2,5 años de datos.
+
+**Pendiente que no depende del código:** validar la calibración del intervalo y H2/H3 con datos posteriores a junio de 2024 y con la bitácora oficial de incidentes.

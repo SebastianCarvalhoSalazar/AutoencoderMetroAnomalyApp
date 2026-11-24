@@ -355,3 +355,15 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
   - **Calendario de cierres programados:** `data/cierres_programados.csv` incluye solo los anuncios verificados, de 2022 y 2024; para 2023 solo hay notas sin año explícito. Esos días se clasifican "cierre programado", se excluyen del ajuste de los modelos y de los rezagos del pronóstico, y el pronóstico de un día cerrado es 0.
   - Es información anunciada de antemano (por ejemplo, el 06/06 para el 08/06), así que no hay fuga. Sí exige que alguien cargue los anuncios: es la fuente n.° 3 de la hoja de ruta ("oferta programada").
   - Con la regla nueva aparecen además cierres sin anunciar en el calendario: K del 27 al 30/06/2024, J del 30/10 al 01/11/2023, K del 02 al 04/11/2023, entre otros.
+
+## 2026-11-24 — [F10.8] Cierre: D11, simulación final y verificación completa
+- **D11:** el lote fallaba (`KeyError`) al registrar una línea "sin registro", que no tiene fila ese día. Lo halló la simulación del 27/06/2024 (Línea K). Se corrigió con `reindex` y la prueba `test_line_without_records_is_logged`.
+- **Cobertura del pronóstico:** los días de cierre programado se pronostican en 0 por regla. Se excluyen de la cobertura y del WAPE del modelo y se informan aparte (en una ejecución intermedia, la Línea P mostraba una cobertura de 0,644 por incluirlos).
+- **Simulación final de junio de 2024:**
+  - 319/319 línea-días iguales a la reproducción histórica;
+  - sin advertencias del monitor;
+  - WAPE con reajuste diario equivalente al mensual;
+  - WAPE de la Línea P con cierres: 0,092, frente a 0,276 sin el calendario.
+- **Artefactos:** reconstruidos (código `16b3ab3`; el manifiesto registra `02d9247`, que solo añade documentación) y con determinismo re-verificado.
+- **Pruebas:** 194 rápidas y 2 E2E aprobadas; cobertura del 84,8 %.
+- **Informe:** `docs/validacion/F10_fase3_plataforma.md` §7.
