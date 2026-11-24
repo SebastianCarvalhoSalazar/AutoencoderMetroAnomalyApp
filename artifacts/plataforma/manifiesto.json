@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
- "creado": "2026-11-24T02:29:34",
- "git_commit_build": "c1e0481",
+ "creado": "2026-11-24T03:21:24",
+ "git_commit_build": "221e1ea",
  "sha256_datos": "a6d683dcf5d56c25201a6c3f6c3326166d141ed16b7909e69d61fdb52d4c7b6f",
  "tipos_de_dato": {
   "real": "Dato real: entradas registradas (validaciones pagas) por línea y hora",
@@ -177,6 +177,19 @@
   "LINEA P": 0.778,
   "LINEA T-A": 0.756
  },
+ "factor_conformal": {
+  "LINEA 1": 1.1,
+  "LINEA 2": 1.05,
+  "LINEA A": 1.25,
+  "LINEA B": 1.15,
+  "LINEA H": 1.15,
+  "LINEA J": 1.1,
+  "LINEA K": 1.1,
+  "LINEA M": 1.05,
+  "LINEA O": 1.0,
+  "LINEA P": 1.1,
+  "LINEA T-A": 1.15
+ },
  "lineas_h6_validadas": [
   "LINEA A",
   "LINEA 2",
@@ -196,5 +209,5 @@
   "efecto_de_medicion": 24,
   "ausencia_simultanea_red": 21
  },
- "segundos_construccion": 271.0
+ "segundos_construccion": 269.5
 }
