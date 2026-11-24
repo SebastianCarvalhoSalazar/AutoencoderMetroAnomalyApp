@@ -186,3 +186,8 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - El artefacto se reconstruyó desde un commit limpio (`git_commit_build = d40e14e`), corrigiendo otra vez el desfase de procedencia: se había construido antes de hacer commit del código de los scores de referencia.
 - `reports/determinismo.md` se regeneró con el código actual: 8/8 salidas idénticas. El SHA-256 normalizado del artefacto versionado (`ec9cf22f0678e164`) coincide con el de las dos ejecuciones aisladas.
 - CI de GitHub Actions: ejecuciones 12, 13 y 14 en `success`.
+
+## 2026-11-24 — Guía visual y corrección de un defecto declarado como resuelto
+- **Cambio:** `tests/e2e/guia_visual.js` genera 7 capturas anotadas de los flujos principales (`docs/guia_visual/`).
+- **Hallazgo:** el defecto V2 (eje del score de la línea de tiempo con solo 0 y 50), registrado como corregido en F9, **no lo estaba**. Causa: las capas del umbral usaban un eje por defecto que, al fusionarse con el de las demás, anulaba las marcas configuradas. Un primer intento (`axis=None` en esas capas) eliminó el eje completo. Corrección: todas las capas comparten la misma escala y el mismo eje. Verificado visualmente (`docs/guia_visual/02_*`, `03_*`: marcas 0, 1, 2, 5, 10 y 50).
+- **Pruebas:** suite rápida en verde.

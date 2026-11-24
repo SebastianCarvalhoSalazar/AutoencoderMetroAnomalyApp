@@ -78,16 +78,20 @@ def timeline_chart(ts: pd.DataFrame, thr: float, selected=None):
     df["Estado"] = np.where(df["alerta"], "Anomalía estadística", "Sin anomalía")
     df["Fecha_txt"] = df["Fecha"].dt.strftime("%d/%m/%Y")
     x = alt.X("Fecha:T", title="Fecha", axis=alt.Axis(format="%d/%m", labelAngle=0))
-    y = alt.Y("score:Q", title="Score (escala log.)", scale=alt.Scale(type="symlog"),
-              axis=alt.Axis(values=[0, 1, 2, 5, 10, 20, 50, 100], labelExpr="replace(format(datum.value, ',.0f'), ',', '.')"))
+    y_axis = alt.Axis(values=[0, 1, 2, 5, 10, 20, 50, 100], labelExpr="replace(format(datum.value, ',.0f'), ',', '.')")
+    y_scale = alt.Scale(type="symlog")
+    y = alt.Y("score:Q", title="Score (escala log.)", scale=y_scale, axis=y_axis)
     line = alt.Chart(df).mark_line(color="#9ca3af").encode(x=x, y=y)
     pts = alt.Chart(df).mark_circle(size=60).encode(
         x=x, y=y, color=alt.Color("Estado:N", scale=alt.Scale(domain=["Sin anomalía", "Anomalía estadística"], range=["#4b5563", "#b42318"]),
                                   legend=alt.Legend(title=None, orient="top")),
         tooltip=[alt.Tooltip("Fecha_txt:N", title="Fecha"), alt.Tooltip("score:Q", format=".2f", title="Score"), "Estado:N"])
-    rule = alt.Chart(pd.DataFrame({"u": [thr], "t": [f"Umbral {num(thr, 2)}"]})).mark_rule(strokeDash=[4, 3], color="#b42318").encode(y="u:Q")
+    # Todas las capas deben declarar el mismo eje: si una usa el eje por defecto, al fusionarse se pierden las
+    # marcas configuradas (solo se veían 0 y 50); con axis=None desaparece el eje completo.
+    y_rule = alt.Y("u:Q", title="Score (escala log.)", scale=y_scale, axis=y_axis)
+    rule = alt.Chart(pd.DataFrame({"u": [thr], "t": [f"Umbral {num(thr, 2)}"]})).mark_rule(strokeDash=[4, 3], color="#b42318").encode(y=y_rule)
     lab = alt.Chart(pd.DataFrame({"u": [thr], "t": [f"Umbral {num(thr, 2)}"]})).mark_text(align="left", dx=4, dy=-6, color="#b42318").encode(
-        y="u:Q", x=alt.value(0), text="t:N")
+        y=y_rule, x=alt.value(0), text="t:N")
     layers = [line, rule, lab, pts]
     if selected is not None and pd.Timestamp(selected) in set(df["Fecha"]):
         sel = df[df["Fecha"] == pd.Timestamp(selected)]
