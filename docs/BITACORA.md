@@ -311,3 +311,33 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - **Fallo:** la ejecución 18 de GitHub Actions falló en la recolección de pruebas (`tests/unit/test_{red,pronostico,plataforma}.py`). Esos archivos importaban `tests.conftest`, lo que funciona con `python -m pytest`, que añade la raíz a `sys.path`, pero no con el ejecutable `pytest` que usa el CI. En local solo se había usado `python -m pytest`.
 - **Corrección:** se expone `make_series` como el fixture `series_factory` en `tests/conftest.py`.
 - **Verificación:** con `pytest`, igual que en el CI, desde la raíz: 174 aprobadas, 1 omitida, cobertura del 82,8 %.
+
+## 2026-11-24 — [F10.6] CI en verde y PR
+- La ejecución 19 de GitHub Actions pasó en sus dos trabajos, `tests` y `research`.
+- Se abrió el Draft PR #1 hacia `master`, a pedido del usuario.
+
+## 2026-11-24 — [F10.8] Cierre de pendientes de la fase 3 (a pedido del usuario)
+- **Operación diaria multilínea:** `src/metro_anomaly/operacion_red.py` y `run_daily.py --red [--pronostico] [--monitor]`.
+  - Evalúa las 11 líneas con la misma lógica causal y los mismos umbrales congelados que los artefactos.
+  - Registra la auditoría en JSON Lines de forma idempotente, con clave (fecha, línea, SHA-256 del manifiesto, SHA-256 de los datos).
+  - Emite el pronóstico del día siguiente con datos anteriores a la fecha objetivo (reajuste diario).
+  - Monitorea, por línea, la tasa de alertas a 90 días (> 10 %), la cobertura del intervalo (fuera de [0,70; 0,90] con ≥ 20 días) y las versiones del manifiesto.
+  - Acepta archivos oficiales con varias líneas (`--archivo`). Códigos de salida: 0, 2 y 3.
+  - **Verificado:** coincide con la reproducción histórica en 33 de 33 línea-días (`tests/integration/test_operacion_red.py`, 14 pruebas).
+- **Pronóstico como biblioteca:** `forecast_day`, `conformal_factor` y `conformal_online` pasan a `pronostico.py`.
+  - Al re-ejecutar las métricas del experimento, `reports/fase3/pronostico_*.md` queda idéntico.
+  - Para pronósticos nuevos, el factor conformal usa todas las predicciones fuera de muestra de cada línea. Valores: 1,0 en la O y hasta 1,25 en la A; queda en el manifiesto.
+- **Hueco de reproducibilidad corregido:** `build_plataforma.py` dependía de un `.pkl` de 24 MB que git ignora, así que un clon limpio no podía reconstruir la plataforma. Ahora usa `reports/fase3/pronostico_oos_holdout.csv.gz` (2,3 MB, versionado).
+- **Determinismo:** `scripts/fase3/check_determinism_plataforma.py` hizo dos construcciones en copias aisladas sin `.git`, y las 5 salidas resultaron idénticas entre sí y a las versionadas (`reports/fase3/determinismo_plataforma.md`). Los `.csv.gz` se escriben ahora sin fecha en el encabezado gzip.
+- **Procedencia:**
+  - Una primera reconstrucción quedó marcada `221e1ea+cambios_sin_commit` porque, durante la construcción, se creó un script nuevo sin versionar. La marca funcionó como se diseñó.
+  - Se hizo commit del script y se reconstruyó desde `221e1ea`, ya limpio.
+  - Diferencias frente a los artefactos anteriores: categorías y scores idénticos; cambian 44 notas de calendario y el factor conformal del pronóstico del día siguiente.
+- **Cierre anticipado del 24 y 31 de diciembre:**
+  - Oficial a las 22:00 en 2022 (Telemedellín citando al Metro) y en 2024 (comunicado N.° 2152 del Metro).
+  - **2023 solo con prensa** (Pulzo/Q'hubo: 21:00), coherente con los datos (h21 reducida y h22 sin registro).
+  - Se registró como OP1–OP3 en `data/eventos_reales.csv` y se anota en `event_note`. Las páginas se revisaron en busca de instrucciones inyectadas y no se hallaron.
+  - `reports/externo.md` se regeneró: solo cambia la nota del 24/12/2019 y el ancho de la columna.
+- **Animación:** botón "▶ Reproducir el día hora a hora" que dibuja un fotograma por hora (04–22) con la hora en el título. El E2E verifica 5 de 5 fotogramas distintos.
+- **Fichas:** `MODEL_CARD.md` (modelos de la fase 3, usos no previstos, operación y mantenimiento) y `DATA_CARD.md` (eventos actualizados, datos multilínea y fuentes externas).
+  - Se corrigió una afirmación desactualizada: "no se hallaron incidentes de la Línea A en 2022–2024" ya no era cierta desde F8 (IN1–IN3).
