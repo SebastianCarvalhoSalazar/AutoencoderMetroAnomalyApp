@@ -20,3 +20,9 @@ def make_series(start="2022-01-01", end="2023-06-30", seed=0, noise=0.03):
 @pytest.fixture
 def synth():
     return make_series()
+
+
+@pytest.fixture(scope="session")
+def series_factory():
+    """Acceso a `make_series` sin importar `tests.conftest` (el runner `pytest` no añade la raíz a sys.path)."""
+    return make_series

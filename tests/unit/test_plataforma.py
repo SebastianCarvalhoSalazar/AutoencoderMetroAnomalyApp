@@ -3,13 +3,13 @@ import pandas as pd
 import pytest
 
 from metro_anomaly import plataforma as PL
-from tests.conftest import make_series
 
 LINES = {"LINEA A": "metro", "LINEA B": "metro", "LINEA K": "cable", "LINEA 1": "bus", "LINEA 2": "bus"}
 
 
 @pytest.fixture(scope="module")
-def evaluated():
+def evaluated(series_factory):
+    make_series = series_factory
     Ws = {ln: make_series(start="2022-01-01", end="2022-04-30", seed=i, noise=0.02) for i, ln in enumerate(LINES)}
     Ws["LINEA A"].loc["2022-03-16", "h10"] = np.nan  # ausencia simultánea en 3 líneas
     Ws["LINEA B"].loc["2022-03-16", "h10"] = 0
@@ -57,8 +57,9 @@ def test_normal_days_mostly_clean(evaluated):
     assert (ev["categoria"] == "sin_anomalia").mean() > 0.8
 
 
-def test_history_is_causal(evaluated):
+def test_history_is_causal(evaluated, series_factory):
     """Los z de marzo no cambian si se alteran los datos de abril en adelante."""
+    make_series = series_factory
     horas, _, _ = evaluated
     Ws = {ln: make_series(start="2022-01-01", end="2022-04-30", seed=i, noise=0.02) for i, ln in enumerate(LINES)}
     red = PL.Red(Ws, pd.DataFrame({"linea": list(LINES), "modo": list(LINES.values())}), pd.DataFrame())

@@ -5,14 +5,14 @@ import pytest
 from metro_anomaly.data import SCORED_HOURS
 from metro_anomaly.detectors import ProfileContextDetector
 from metro_anomaly.red import CoherenceDetector, NetworkDataMonitor, classify_scope, fit_line_profiles, network_z
-from tests.conftest import make_series
 
 LINES = ["A", "B", "C", "D", "E"]
 
 
 @pytest.fixture(scope="module")
-def net():
+def net(series_factory):
     """Cinco líneas con un factor común diario (choque de red) más ruido propio."""
+    make_series = series_factory
     rng = np.random.default_rng(7)
     base = {ln: make_series(seed=i, noise=0.02) for i, ln in enumerate(LINES)}
     idx = base["A"].index

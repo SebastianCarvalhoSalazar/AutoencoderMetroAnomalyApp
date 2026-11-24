@@ -306,3 +306,8 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
   - rendimiento con AppTest: cambio de fecha con p95 de 0,48 s.
 - **Incidencia de entorno:** una prueba tardó 606 s por sobresuscripción de hilos mientras corría la construcción de artefactos. En solitario tarda 3 s.
 - **Cierre:** `docs/validacion/F10_fase3_plataforma.md` (dictamen) y `docs/fase3/HOJA_DE_RUTA_DATOS.md` (capacidades viables y no viables, y fuentes necesarias en orden de valor).
+
+## 2026-11-24 — [F10.6] CI en rojo por importación entre pruebas
+- **Fallo:** la ejecución 18 de GitHub Actions falló en la recolección de pruebas (`tests/unit/test_{red,pronostico,plataforma}.py`). Esos archivos importaban `tests.conftest`, lo que funciona con `python -m pytest`, que añade la raíz a `sys.path`, pero no con el ejecutable `pytest` que usa el CI. En local solo se había usado `python -m pytest`.
+- **Corrección:** se expone `make_series` como el fixture `series_factory` en `tests/conftest.py`.
+- **Verificación:** con `pytest`, igual que en el CI, desde la raíz: 174 aprobadas, 1 omitida, cobertura del 82,8 %.

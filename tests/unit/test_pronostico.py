@@ -4,12 +4,11 @@ import pytest
 
 from metro_anomaly.fuentes import clima
 from metro_anomaly.pronostico import FEATURES_BASE, GBMForecaster, build_rows, wape
-from tests.conftest import make_series
 
 
 @pytest.fixture(scope="module")
-def Ws():
-    return {"A": make_series(seed=1), "B": make_series(seed=2) * 0.3}
+def Ws(series_factory):
+    return {"A": series_factory(seed=1), "B": series_factory(seed=2) * 0.3}
 
 
 def test_build_rows_is_causal(Ws):
