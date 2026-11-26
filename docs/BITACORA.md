@@ -372,3 +372,15 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - Se creó la rama `claude/investigacion-autoencoders` desde `6fbdbaf`.
 - Se pre-registraron las hipótesis A1–A6 con sus criterios en `docs/investigacion_autoencoders/PLAN.md`, antes de cualquier experimento.
 - Punto de partida: `ae_contextual` empata con el perfil contextual en recall moderado, pero duplica la tasa de alertas, y es mejor en errores de datos. El AE original queda por detrás.
+
+## 2026-11-26 — [AE.1] Reproducción del punto de partida
+- **Qué se hizo:** reentrenamiento desde cero (rolling mensual, Línea A) de `perfil_contextual/peak_shift`, `ae_contextual/top2`, `ae_contextual/max` y `ae_original/max`, en DEV y en el holdout (`scripts/investigacion_ae/ae1_reproducir.py`).
+- **Resultado:** los scores diarios del holdout son **idénticos** a las corridas de la fase 2 (diferencia máxima 0) en las 4 configuraciones.
+  - **Defecto en mi primera comprobación:** marcó "no reproduce" en `ae_contextual/max` y `ae_original/max` porque las cifras publicadas de esas dos son promedios de 3 semillas y se compararon con la semilla 0.
+  - **Corrección:** con 3 semillas publicadas, el criterio es la igualdad exacta con la semilla 0 guardada. Se recalculó con `--reusar`, sin reentrenar.
+- **Hallazgo:** el AE y el perfil son complementarios por tipo de anomalía.
+  - El AE es mejor en caídas de 1–3 horas (0,975 frente a 0,745), en aumentos por evento (0,440 frente a 0,253) y en errores de datos (hora duplicada: 0,937 frente a 0,761).
+  - El AE es mucho peor en caídas de todo el día (0,151 frente a 0,522) y en un día hábil con perfil de festivo (0,058 frente a 1,000): trabaja sobre el perfil sin nivel y no ve los cambios de nivel.
+  - Recall moderado: AE 0,522 frente a perfil 0,506. Diferencia +0,016 [−0,038; 0,069], **sin diferencia demostrada**. Tasa de alertas en días reales: 4,9 % frente a 2,2 %.
+- **Implicación para A1:** la combinación tiene una base empírica más amplia que solo los errores de datos. El criterio pre-registrado de A1 **no se cambia**.
+- **Visualizaciones:** tablero "Autoencoders en el Metro" (artifact privado), alimentado por `scripts/investigacion_ae/exportar_tablero.py`.

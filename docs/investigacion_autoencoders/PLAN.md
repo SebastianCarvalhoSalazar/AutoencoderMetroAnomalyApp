@@ -1,7 +1,7 @@
 # Línea de investigación: usos del autoencoder en analítica de afluencia
 
 Rama: `claude/investigacion-autoencoders`, creada desde `claude/repository-technical-audit-89x93t` (commit `6fbdbaf`).
-Estado: **planificación**. No se ha ejecutado ningún experimento de esta línea.
+Estado: **en curso** (ver Tareas).
 
 ## Punto de partida (evidencia ya existente)
 | Hallazgo | Fuente |
@@ -35,7 +35,7 @@ Estado: **planificación**. No se ha ejecutado ningún experimento de esta líne
 | ID | Tarea | Estado |
 |---|---|---|
 | AE.0 | Rama y plan con hipótesis pre-registradas | COMPLETADA (este documento) |
-| AE.1 | Reproducir en esta rama los resultados existentes de `ae_contextual` (verificación de punto de partida) | PENDIENTE |
+| AE.1 | Reproducir en esta rama los resultados existentes de `ae_contextual` (verificación de punto de partida) | COMPLETADA — scores idénticos a la fase 2 en las 4 configuraciones; AE y perfil son complementarios por tipo de anomalía (`reports/investigacion_ae/ae1.md`) |
 | AE.2 | A1: detector complementario de errores de captura | PENDIENTE |
 | AE.3 | A2: autoencoder multilínea frente a la coherencia de red | PENDIENTE |
 | AE.4 | A3: imputación de horas faltantes con enmascaramiento | PENDIENTE |

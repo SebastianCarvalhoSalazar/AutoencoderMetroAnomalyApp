@@ -1,0 +1,309 @@
+<meta name="dash-one-writer">
+<meta name="dash-form" content="freeform">
+<style>
+  .ae-page { display: flex; flex-direction: column; gap: var(--cds-gap-xl); max-width: 1080px; font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+  .ae-head h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0 0 var(--cds-gap-sm); text-wrap: balance; }
+  .ae-lede { font-size: var(--cds-font-size-body); color: var(--color-fg); max-width: 68ch; margin: 0; line-height: 1.5; }
+  .ae-meta { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-xs) 0 0; }
+  .ae-section { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
+  .ae-section > h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; text-wrap: balance; }
+  .ae-eyebrow { font-size: var(--cds-font-size-caption); letter-spacing: .06em; text-transform: uppercase; color: var(--color-fg-muted); margin: 0; }
+  .ae-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-sm); min-width: 0; }
+  .ae-card h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .ae-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0; line-height: 1.45; max-width: 75ch; }
+  .ae-grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: var(--cds-gap-lg); }
+  .ae-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: var(--cds-gap-sm); }
+  .ae-step { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); display: flex; flex-direction: column; gap: 2px; min-width: 0; background: var(--color-bg); }
+  .ae-step-id { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+  .ae-step-name { font-size: var(--cds-font-size-caption); line-height: 1.35; }
+  .ae-chip { align-self: flex-start; font-size: var(--cds-font-size-caption); border-radius: 999px; padding: 1px 8px; border: 1px solid var(--color-border-line); color: var(--color-fg-muted); }
+  .ae-chip[data-state="COMPLETADA"] { border-color: var(--color-ok); color: var(--color-ok); }
+  .ae-chip[data-state="EN"] { border-color: var(--color-warn); color: var(--color-warn); }
+  .ae-chart { position: relative; min-height: 260px; }
+  .ae-chart svg { display: block; width: 100%; overflow: visible; }
+  .ae-chart text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); font-family: var(--font-anthropic-sans); }
+  .ae-chart .ae-axis line, .ae-chart .ae-axis path { stroke: var(--cds-chart-axis); }
+  .ae-chart .ae-grid line { stroke: var(--cds-chart-grid); }
+  .ae-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm) var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0; padding: 0; list-style: none; }
+  .ae-legend li { display: inline-flex; align-items: center; gap: 6px; }
+  .ae-swatch { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .ae-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: 6px 8px; font-size: var(--cds-font-size-caption); color: var(--color-fg); white-space: nowrap; z-index: 2; }
+  .ae-multi { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--cds-gap-md); }
+  .ae-mini h4 { font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); margin: 0 0 4px; color: var(--color-fg); }
+  .ae-mini .ae-chart { min-height: 150px; }
+  .ae-tablewrap { overflow-x: auto; }
+  .ae-table { border-collapse: collapse; width: 100%; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .ae-table th, .ae-table td { padding: 6px 8px; border-bottom: 1px solid var(--color-border-line); text-align: right; white-space: nowrap; }
+  .ae-table th:first-child, .ae-table td:first-child { text-align: left; }
+  .ae-table th { color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+  .ae-verdict { font-size: var(--cds-font-size-body); line-height: 1.5; margin: 0; max-width: 72ch; }
+  details.ae-foot summary { cursor: pointer; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  details.ae-foot p { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 75ch; line-height: 1.5; }
+</style>
+
+<div class="ae-page">
+  <header class="ae-head" id="encabezado">
+    <p class="ae-eyebrow">Línea de investigación · Metro de Medellín · Línea A</p>
+    <h1>Autoencoders en el Metro</h1>
+    <p class="ae-lede" data-read lang="es">¿Para qué sirve un autoencoder en la detección de anomalías de afluencia? Cada hipótesis se compara con el modelo vigente con el mismo número de alertas, solo con datos anteriores a cada mes evaluado. <span data-draw="lede"></span></p>
+    <p class="ae-meta">Resultados del periodo de evaluación 01/07/2023–30/06/2024; umbrales fijados con 2022-04–2023-06. Las anomalías evaluadas son simuladas sobre días reales.</p>
+  </header>
+
+  <section class="ae-section" id="avance">
+    <h2>Avance</h2>
+    <ul class="ae-steps" data-draw="pasos" data-source="progreso"></ul>
+  </section>
+
+  <section class="ae-section" id="ae1">
+    <p class="ae-eyebrow">AE.1 · Punto de partida</p>
+    <h2>¿Se reproduce lo que sabíamos de los autoencoders?</h2>
+    <p class="ae-verdict" data-read lang="es" data-draw="veredicto1">—</p>
+
+    <div class="ae-grid2">
+      <div class="ae-card" id="grafico-tipos">
+        <h3>Detección por tipo de anomalía simulada</h3>
+        <p class="ae-note">Proporción de días con la anomalía inyectada que superan el umbral. Cada modelo usa su propio umbral (p95 de sus scores en 2022-04–2023-06).</p>
+        <ul class="ae-legend" data-draw="leyenda1"></ul>
+        <div class="ae-chart dash-skeleton" data-draw="tipos" data-source="ae1_metricas"></div>
+      </div>
+      <div class="ae-card" id="grafico-diferencias">
+        <h3>Diferencia de detección moderada frente al modelo vigente</h3>
+        <p class="ae-note">Diferencia pareada sobre las mismas anomalías simuladas, con intervalo del 95 % (bootstrap por semanas). Si el intervalo cruza el cero, no hay diferencia demostrada.</p>
+        <div class="ae-chart dash-skeleton" data-draw="diferencias" data-source="ae1_diferencias"></div>
+      </div>
+    </div>
+
+    <div class="ae-card" id="grafico-serie">
+      <h3>Score diario en días reales, relativo a su umbral</h3>
+      <p class="ae-note">Escala logarítmica. Por encima de 1 el modelo alerta. Un modelo que alerta mucho en días normales cuesta revisiones; uno que no alerta nunca no sirve.</p>
+      <div class="ae-multi" data-draw="serie" data-source="ae1_serie"></div>
+    </div>
+
+    <div class="ae-card" id="tabla-ae1">
+      <h3>Métricas en el periodo de evaluación</h3>
+      <div class="ae-tablewrap">
+        <table class="ae-table" data-source="ae1_metricas" data-row-key="config">
+          <thead><tr>
+            <th data-field="modelo">Modelo</th>
+            <th data-field="umbral_dev">Umbral</th>
+            <th data-field="tasa_alertas">Alertas en días reales</th>
+            <th data-field="tasa_alertas_festivos">Alertas en festivos</th>
+            <th data-field="recall_severa">Detección severa</th>
+            <th data-field="recall_moderada">Detección moderada</th>
+            <th data-field="recall_leve">Detección leve</th>
+            <th data-field="recall_T4_duplicada">Hora duplicada</th>
+            <th data-field="recall_T4_desfase">Perfil desfasado</th>
+          </tr></thead>
+          <tbody data-draw="tabla1"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <details class="ae-foot" id="protocolo">
+    <summary>Cómo se evalúa cada hipótesis</summary>
+    <p>Los modelos se reentrenan cada mes solo con datos anteriores a ese mes. El umbral de cada modelo es el percentil 95 de sus scores en días reales de 2022-04 a 2023-06; con eso, cada uno alerta en cerca del 5 % de los días. Sobre días reales del periodo de evaluación se inyectan anomalías simuladas: caídas de 1–3 horas (T1), caídas de todo el día (T2), aumentos por evento (T3), errores de datos (T4: hora en cero, duplicada o desfasada) y un día hábil con perfil de festivo (T5). Moderada significa una caída del 50 % por horas, del 20 % en todo el día o un aumento del 50 %. Las diferencias entre modelos se calculan sobre las mismas anomalías, con intervalos del 95 % por bootstrap de semanas.</p>
+  </details>
+</div>
+
+<script>
+  const ORDER = ['perfil_contextual/peak_shift', 'ae_contextual/top2', 'ae_contextual/max', 'ae_original/max'];
+  const pct = d3.format('.0%');
+  const pct1 = d3.format('.1%');
+  const num2 = (v) => d3.format(',.2f')(v).replace(/,/g, 'X').replace(/\./g, ',').replace(/X/g, '.');
+  const pctEs = (v, f = pct) => f(v).replace('.', ',');
+  window.aeColor = (cfg) => dash.colors[Math.max(0, ORDER.indexOf(cfg)) % dash.colors.length];
+  window.aeRows = (id) => { const r = dash.data(id); return r.status === 'ok' ? r.data : null; };
+  window.aeTip = (box) => {
+    let tip = box.querySelector('.ae-tip');
+    if (!tip) { tip = document.createElement('div'); tip.className = 'ae-tip'; tip.hidden = true; box.appendChild(tip); }
+    return {
+      show(ev, html) {
+        tip.replaceChildren(...html.map((line) => { const d = document.createElement('div'); d.textContent = line; return d; }));
+        tip.hidden = false;
+        const b = box.getBoundingClientRect();
+        let x = ev.clientX - b.left + 12, y = ev.clientY - b.top + 12;
+        x = Math.min(x, b.width - tip.offsetWidth - 4); x = Math.max(0, x);
+        tip.style.left = x + 'px'; tip.style.top = y + 'px';
+      },
+      hide() { tip.hidden = true; },
+    };
+  };
+
+  dash.draw('lede', (el) => {
+    const p = aeRows('progreso');
+    if (!p) { el.textContent = ''; return; }
+    const done = p.filter((r) => r.estado === 'COMPLETADA').length;
+    el.textContent = `Van ${done} de ${p.length} tareas completadas.`;
+  });
+
+  dash.draw('pasos', (ul) => {
+    const p = aeRows('progreso');
+    if (!p) { ul.replaceChildren(); return; }
+    ul.replaceChildren(...p.map((r) => {
+      const li = document.createElement('li'); li.className = 'ae-step';
+      li.dataset.source = 'progreso'; li.dataset.where = 'id=' + encodeURIComponent(r.id); li.dataset.field = 'estado';
+      const a = document.createElement('span'); a.className = 'ae-step-id'; a.textContent = r.id;
+      const b = document.createElement('span'); b.className = 'ae-step-name'; b.textContent = r.tarea;
+      const c = document.createElement('span'); c.className = 'ae-chip'; c.dataset.state = r.estado; c.textContent = r.estado.toLowerCase();
+      li.append(a, b, c); return li;
+    }));
+  });
+
+  dash.draw('veredicto1', (el) => {
+    const m = aeRows('ae1_metricas'), d = aeRows('ae1_diferencias');
+    if (!m || !d) { el.textContent = '—'; return; }
+    const by = Object.fromEntries(m.map((r) => [r.config, r]));
+    const ref = by['perfil_contextual/peak_shift'], ae = by['ae_contextual/top2'], og = by['ae_original/max'];
+    const dae = d.find((r) => r.config === 'ae_contextual/top2'), dog = d.find((r) => r.config === 'ae_original/max');
+    if (!ref || !ae || !og || !dae || !dog) { el.textContent = '—'; return; }
+    const tie = dae.ic_inf <= 0 && dae.ic_sup >= 0;
+    const repro = m.every((r) => r.reproduce_publicado);
+    el.textContent = `${repro ? 'Sí: al reentrenar desde cero, los scores diarios son idénticos a los de la fase anterior.' : 'No del todo: alguna cifra difiere de la publicada; ver la tabla.'} ` +
+      `El autoencoder con calendario detecta el ${pctEs(ae.recall_moderada)} de las anomalías moderadas frente al ${pctEs(ref.recall_moderada)} del modelo vigente` +
+      `${tie ? ', una diferencia que no es significativa' : ''}, pero alerta en el ${pctEs(ae.tasa_alertas, pct1)} de los días reales frente al ${pctEs(ref.tasa_alertas, pct1)}. ` +
+      `Por tipo, son complementarios: el autoencoder detecta mejor las caídas de pocas horas (${pctEs(ae.recall_T1_moderada)} frente a ${pctEs(ref.recall_T1_moderada)}) ` +
+      `y los errores de datos (hora duplicada ${pctEs(ae.recall_T4_duplicada)} frente a ${pctEs(ref.recall_T4_duplicada)}), pero casi no ve las caídas de todo el día ` +
+      `(${pctEs(ae.recall_T2_moderada)} frente a ${pctEs(ref.recall_T2_moderada)}) ni un día hábil con forma de festivo (${pctEs(ae.recall_T5_perfil_festivo)} frente a ${pctEs(ref.recall_T5_perfil_festivo)}). ` +
+      `El autoencoder original queda claramente atrás (${pctEs(og.recall_moderada)} en anomalías moderadas).`;
+  });
+
+  dash.draw('leyenda1', (ul) => {
+    const m = aeRows('ae1_metricas');
+    if (!m) { ul.replaceChildren(); return; }
+    ul.replaceChildren(...ORDER.filter((c) => m.some((r) => r.config === c)).map((c) => {
+      const li = document.createElement('li'); const s = document.createElement('span'); s.className = 'ae-swatch';
+      s.style.background = aeColor(c); li.append(s, document.createTextNode(m.find((r) => r.config === c).modelo)); return li;
+    }));
+  });
+
+  const TYPES = [['recall_T1_moderada', 'Caída de horas (moderada)'], ['recall_T2_moderada', 'Caída de todo el día (moderada)'],
+    ['recall_T3_moderada', 'Aumento por evento (moderado)'], ['recall_severa', 'Todas las severas'], ['recall_leve', 'Todas las leves'],
+    ['recall_T4_cero', 'Error: hora en cero'], ['recall_T4_duplicada', 'Error: hora duplicada'], ['recall_T4_desfase', 'Error: perfil desfasado'],
+    ['recall_T5_perfil_festivo', 'Día hábil con perfil de festivo']];
+
+  dash.draw('tipos', (el) => {
+    const m = aeRows('ae1_metricas');
+    const st = dash.data('ae1_metricas').status;
+    if (st !== 'loading') el.classList.remove('dash-skeleton');
+    if (!m) { el.textContent = st === 'error' ? 'No se pudieron cargar las métricas.' : '—'; return; }
+    el.replaceChildren();
+    const W = el.clientWidth || 400, rowH = 30;
+    const labels = TYPES.map((t) => t[1]);
+    const svg = d3.select(el).append('svg').attr('role', 'img')
+      .attr('aria-label', 'Proporción detectada por tipo de anomalía simulada para cada modelo');
+    const tmp = svg.append('g');
+    const lw = d3.max(labels, (l) => tmp.append('text').text(l).node().getComputedTextLength()) || 150;
+    tmp.remove();
+    const mg = { t: 8, r: 16, b: 28, l: Math.min(lw + 10, W * 0.5) };
+    const H = mg.t + mg.b + rowH * TYPES.length;
+    svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const x = d3.scaleLinear().domain([0, 1]).range([mg.l, W - mg.r]);
+    const y = d3.scaleBand().domain(labels).range([mg.t, H - mg.b]).padding(0.3);
+    svg.append('g').attr('class', 'ae-grid').attr('transform', `translate(0,${H - mg.b})`)
+      .call(d3.axisBottom(x).ticks(5).tickSize(-(H - mg.t - mg.b)).tickFormat('')).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).ticks(W < 420 ? 3 : 5).tickFormat(pct));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).tickSize(0)).call((g) => g.select('.domain').remove());
+    const tip = aeTip(el);
+    const pts = [];
+    TYPES.forEach(([k, lab]) => m.forEach((r) => { if (r[k] != null) pts.push({ k, lab, cfg: r.config, modelo: r.modelo, v: r[k] }); }));
+    const off = d3.scalePoint().domain(ORDER).range([-y.bandwidth() / 2.6, y.bandwidth() / 2.6]);
+    TYPES.forEach(([, lab]) => {
+      const vals = pts.filter((p) => p.lab === lab);
+      svg.append('line').attr('x1', x(d3.min(vals, (p) => p.v))).attr('x2', x(d3.max(vals, (p) => p.v)))
+        .attr('y1', y(lab) + y.bandwidth() / 2).attr('y2', y(lab) + y.bandwidth() / 2).style('stroke', 'var(--cds-chart-muted)');
+    });
+    svg.append('g').selectAll('circle').data(pts).join('circle')
+      .attr('cx', (p) => x(p.v)).attr('cy', (p) => y(p.lab) + y.bandwidth() / 2 + off(p.cfg)).attr('r', 5)
+      .style('fill', (p) => aeColor(p.cfg)).style('stroke', 'var(--color-panel)').style('stroke-width', 1.5)
+      .on('pointermove', (ev, p) => tip.show(ev, [p.modelo, `${p.lab}: ${pctEs(p.v, pct1)}`]))
+      .on('pointerleave', () => tip.hide());
+  });
+
+  dash.draw('diferencias', (el) => {
+    const d = aeRows('ae1_diferencias');
+    const st = dash.data('ae1_diferencias').status;
+    if (st !== 'loading') el.classList.remove('dash-skeleton');
+    if (!d) { el.textContent = st === 'error' ? 'No se pudieron cargar las diferencias.' : '—'; return; }
+    el.replaceChildren();
+    const rows = ORDER.map((c) => d.find((r) => r.config === c)).filter(Boolean);
+    const W = el.clientWidth || 400, rowH = 46;
+    const svg = d3.select(el).append('svg').attr('role', 'img')
+      .attr('aria-label', 'Diferencia de detección moderada de cada autoencoder frente al modelo vigente, con intervalo del 95 %');
+    const tmp = svg.append('g');
+    const lw = d3.max(rows, (r) => tmp.append('text').text(r.modelo).node().getComputedTextLength()) || 140;
+    tmp.remove();
+    const mg = { t: 10, r: 18, b: 30, l: Math.min(lw + 12, W * 0.45) };
+    const H = mg.t + mg.b + rowH * rows.length;
+    svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const lo = Math.min(-0.1, d3.min(rows, (r) => r.ic_inf)), hi = Math.max(0.1, d3.max(rows, (r) => r.ic_sup));
+    const x = d3.scaleLinear().domain([lo, hi]).nice().range([mg.l, W - mg.r]);
+    const y = d3.scaleBand().domain(rows.map((r) => r.modelo)).range([mg.t, H - mg.b]).padding(0.4);
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`)
+      .call(d3.axisBottom(x).ticks(W < 420 ? 4 : 6).tickFormat((v) => (v > 0 ? '+' : '') + d3.format('.0%')(v)));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).tickSize(0)).call((g) => g.select('.domain').remove());
+    svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', mg.t).attr('y2', H - mg.b).style('stroke', 'var(--cds-chart-reference)').style('stroke-dasharray', '4 3');
+    const tip = aeTip(el);
+    const g = svg.append('g').selectAll('g').data(rows).join('g').attr('transform', (r) => `translate(0,${y(r.modelo) + y.bandwidth() / 2})`);
+    g.append('line').attr('x1', (r) => x(r.ic_inf)).attr('x2', (r) => x(r.ic_sup)).style('stroke', (r) => aeColor(r.config)).style('stroke-width', 2);
+    g.append('circle').attr('cx', (r) => x(r.diferencia)).attr('r', 6).style('fill', (r) => aeColor(r.config)).style('stroke', 'var(--color-panel)').style('stroke-width', 1.5);
+    g.append('text').attr('x', (r) => x(r.diferencia)).attr('y', -11).attr('text-anchor', 'middle')
+      .text((r) => (r.diferencia > 0 ? '+' : '') + pctEs(r.diferencia, pct1));
+    g.on('pointermove', (ev, r) => tip.show(ev, [r.modelo, `Diferencia: ${(r.diferencia > 0 ? '+' : '') + pctEs(r.diferencia, pct1)}`,
+      `IC 95 %: ${pctEs(r.ic_inf, pct1)} a ${pctEs(r.ic_sup, pct1)}`, `${r.n} anomalías comparadas`])).on('pointerleave', () => tip.hide());
+  });
+
+  dash.draw('serie', (el) => {
+    const s = aeRows('ae1_serie');
+    if (!s) { el.textContent = dash.data('ae1_serie').status === 'error' ? 'No se pudo cargar la serie.' : '—'; return; }
+    el.replaceChildren();
+    const parse = d3.utcParse('%Y-%m-%d'), fmt = d3.utcFormat('%d/%m/%Y'), fmtM = d3.utcFormat('%b');
+    const groups = ORDER.map((c) => ({ c, rows: s.filter((r) => r.config === c).map((r) => ({ ...r, t: parse(r.fecha) })) })).filter((g) => g.rows.length);
+    const all = s.map((r) => Math.max(r.relativo, 1e-3));
+    const yDom = [Math.max(d3.min(all), 0.02), d3.max(all)];
+    groups.forEach((gr) => {
+      const box = document.createElement('div'); box.className = 'ae-mini';
+      const h = document.createElement('h4');
+      const n = gr.rows.filter((r) => r.alerta).length;
+      h.textContent = `${gr.rows[0].modelo} · ${n} días sobre el umbral de ${gr.rows.length}`;
+      const ch = document.createElement('div'); ch.className = 'ae-chart';
+      box.append(h, ch); el.appendChild(box);
+      const W = ch.clientWidth || 320, H = 150, mg = { t: 6, r: 8, b: 22, l: 34 };
+      const svg = d3.select(ch).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H).attr('role', 'img')
+        .attr('aria-label', `Score diario de ${gr.rows[0].modelo} relativo a su umbral en el periodo de evaluación`);
+      const x = d3.scaleUtc().domain(d3.extent(gr.rows, (r) => r.t)).range([mg.l, W - mg.r]);
+      const y = d3.scaleLog().domain(yDom).range([H - mg.b, mg.t]).clamp(true);
+      svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).ticks(W < 360 ? 3 : 5).tickFormat(fmtM));
+      svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).ticks(3, '~g'));
+      svg.append('line').attr('x1', mg.l).attr('x2', W - mg.r).attr('y1', y(1)).attr('y2', y(1)).style('stroke', 'var(--cds-chart-reference)').style('stroke-dasharray', '4 3');
+      svg.append('path').datum(gr.rows).attr('d', d3.line().x((r) => x(r.t)).y((r) => y(Math.max(r.relativo, yDom[0])))).style('fill', 'none')
+        .style('stroke', aeColor(gr.c)).style('stroke-width', 1.2).style('opacity', 0.85);
+      svg.append('g').selectAll('circle').data(gr.rows.filter((r) => r.alerta)).join('circle').attr('cx', (r) => x(r.t)).attr('cy', (r) => y(r.relativo)).attr('r', 2.6)
+        .style('fill', 'var(--cds-chart-status-critical)');
+      const tip = aeTip(ch);
+      const bis = d3.bisector((r) => r.t).center;
+      svg.append('rect').attr('x', mg.l).attr('y', mg.t).attr('width', W - mg.l - mg.r).attr('height', H - mg.t - mg.b).style('fill', 'transparent')
+        .on('pointermove', (ev) => {
+          const [px] = d3.pointer(ev); const r = gr.rows[bis(gr.rows, x.invert(px))];
+          tip.show(ev, [fmt(r.t), `Score/umbral: ${num2(r.relativo)}`, r.alerta ? 'Alerta' : 'Sin alerta']);
+        }).on('pointerleave', () => tip.hide());
+    });
+  });
+
+  dash.draw('tabla1', (tb) => {
+    const m = aeRows('ae1_metricas');
+    if (!m) { tb.replaceChildren(); return; }
+    const cols = ['modelo', 'umbral_dev', 'tasa_alertas', 'tasa_alertas_festivos', 'recall_severa', 'recall_moderada', 'recall_leve', 'recall_T4_duplicada', 'recall_T4_desfase'];
+    const rows = ORDER.map((c) => m.find((r) => r.config === c)).filter(Boolean);
+    tb.replaceChildren(...rows.map((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = encodeURIComponent(r.config);
+      cols.forEach((k) => {
+        const td = document.createElement('td');
+        const v = r[k];
+        td.textContent = k === 'modelo' ? v : k === 'umbral_dev' ? num2(v) : v == null ? '—' : pctEs(v, pct1);
+        tr.appendChild(td);
+      });
+      return tr;
+    }));
+  });
+</script>

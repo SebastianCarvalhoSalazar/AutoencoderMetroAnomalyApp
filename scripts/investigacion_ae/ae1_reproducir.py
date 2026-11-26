@@ -25,11 +25,13 @@ OUT = ROOT / "reports" / "investigacion_ae"
 RUNS = OUT / "runs"
 CONFIGS = [("perfil_contextual", "peak_shift"), ("ae_contextual", "top2"), ("ae_contextual", "max"), ("ae_original", "max")]
 REF = "perfil_contextual/peak_shift"
-# Valores publicados en reports/holdout.md (fase 2) para verificar la reproducción.
-PUBLICADO = {"perfil_contextual/peak_shift": {"umbral": 7.388, "tasa_alertas": 0.022, "recall_moderada": 0.506},
-             "ae_contextual/top2": {"umbral": 9.529, "tasa_alertas": 0.049, "recall_moderada": 0.522},
-             "ae_contextual/max": {"umbral": 11.294, "tasa_alertas": 0.043, "recall_moderada": 0.485},
-             "ae_original/max": {"umbral": 3578.13, "tasa_alertas": 0.024, "recall_moderada": 0.304}}
+# Valores publicados en reports/holdout.md (fase 2). Las configuraciones con 3 semillas se publicaron como PROMEDIO de
+# las semillas 0–2, así que no son comparables con una sola semilla: para ellas la prueba de reproducción es la igualdad
+# exacta de scores con la corrida guardada de la semilla 0 (`max_dif_score_vs_cache`).
+PUBLICADO = {"perfil_contextual/peak_shift": {"umbral": 7.388, "tasa_alertas": 0.022, "recall_moderada": 0.506, "semillas": 1},
+             "ae_contextual/top2": {"umbral": 9.529, "tasa_alertas": 0.049, "recall_moderada": 0.522, "semillas": 1},
+             "ae_contextual/max": {"umbral": 11.294, "tasa_alertas": 0.043, "recall_moderada": 0.485, "semillas": 3},
+             "ae_original/max": {"umbral": 3578.13, "tasa_alertas": 0.024, "recall_moderada": 0.304, "semillas": 3}}
 
 
 def _run_eval():
@@ -39,12 +41,21 @@ def _run_eval():
 
 
 def main():
+    import sys
+    reusar = "--reusar" in sys.argv  # recalcula métricas con las corridas ya guardadas en RUNS (sin reentrenar)
     RUNS.mkdir(parents=True, exist_ok=True)
-    rev = _run_eval()
-    W = rev.load_W()
     res, secs = {}, {}
+    prev = json.loads((OUT / "ae1.json").read_text(encoding="utf-8")).get("segundos", {}) if reusar and (OUT / "ae1.json").exists() else {}
+    if not reusar:
+        rev = _run_eval()
+        W = rev.load_W()
     for per in ("dev", "holdout"):
         for det, agg in CONFIGS:
+            if reusar:
+                with open(RUNS / per / f"{det}__{agg}__s0.pkl", "rb") as fh:
+                    res[(per, f"{det}/{agg}")] = pickle.load(fh)
+                secs[f"{per}:{det}/{agg}"] = prev.get(f"{per}:{det}/{agg}")
+                continue
             t0 = time.perf_counter()
             _, r = rev.run(per, det, agg, 0, out_dir=RUNS / per, W=W)
             res[(per, f"{det}/{agg}")] = r
@@ -67,15 +78,19 @@ def main():
             row["diferencia_recall_moderada_vs_perfil"] = {k: round(v, 3) if isinstance(v, float) else v for k, v in d.items()}
         # Reproducción frente a lo publicado y frente a la caché de la fase 2
         pub = PUBLICADO[cfg]
-        row["reproduce_publicado"] = bool(abs(row["umbral_dev"] - pub["umbral"]) < 0.01 * max(1, pub["umbral"]) and
-                                          abs(row["tasa_alertas"] - pub["tasa_alertas"]) <= 0.001 and
-                                          abs(row["recall_moderada"] - pub["recall_moderada"]) <= 0.001)
+        row["semillas_publicadas"] = pub["semillas"]
         cache = ROOT / "reports" / "runs" / "holdout" / f"{det}__{agg}__s0.pkl"
+        row["max_dif_score_vs_cache"] = None
         if cache.exists():
             with open(cache, "rb") as fh:
                 old = pickle.load(fh)
             a, b = old.real["score"].to_numpy(), h.real["score"].to_numpy()
             row["max_dif_score_vs_cache"] = float(np.nanmax(np.abs(a - b))) if a.shape == b.shape else None
+        same_scores = row["max_dif_score_vs_cache"] == 0.0
+        same_pub = (abs(row["umbral_dev"] - pub["umbral"]) < 0.01 * max(1, pub["umbral"]) and
+                    abs(row["tasa_alertas"] - pub["tasa_alertas"]) <= 0.001 and abs(row["recall_moderada"] - pub["recall_moderada"]) <= 0.001)
+        # Con una semilla publicada se exige igualdad con lo publicado; con 3 (promedio), igualdad exacta con la semilla 0.
+        row["reproduce_publicado"] = bool(same_pub if pub["semillas"] == 1 else same_scores)
         out["configs"][cfg] = row
         # Datos para las visualizaciones: score diario real del holdout y umbral
         out.setdefault("serie_holdout", {})[cfg] = {"fechas": [str(x.date()) for x in h.real.index],
