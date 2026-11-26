@@ -10,9 +10,7 @@ dark = len(sys.argv) > 4 and sys.argv[4] == "dark"
 import os
 d3 = Path(os.environ.get("D3_JS", Path(__file__).resolve().parents[1] / "node_modules" / "d3" / "dist" / "d3.min.js")).read_text()  # d3@7.9.0 (npm)
 data = {}
-for f in data_dir.glob("*.json"):
-    j = json.loads(f.read_text(encoding="utf-8"))
-    data[f.stem] = j["rows"] if isinstance(j, dict) and "rows" in j else j
+raw = {f.stem: f.read_text(encoding="utf-8") for f in data_dir.glob("*.json")}  # se parsean en el navegador con JSON.parse
 light = dict(fg="#1f1e1d", muted="#6b6a66", bg="#ffffff", panel="#faf9f7", line="#e3e1dc", grid="#ecebe7", axis="#c9c7c1",
              ref="#8a8883", pop="#ffffff", txt2="#5f5e5a", c=["#2a78d6", "#eb6834", "#1baf7a", "#a35fd6", "#d6a12a"])
 darkp = dict(fg="#f2f1ee", muted="#a8a6a1", bg="#1a1a19", panel="#232322", line="#3a3936", grid="#2e2d2b", axis="#55534f",
@@ -31,7 +29,7 @@ tokens = f"""
 body{{margin:0;background:{p['bg']};color:{p['fg']};font:14px system-ui}} #dash-root{{padding:16px}}
 .dash-skeleton{{background:{p['grid']}}}"""
 mock = """
-window.__ERR=[];window.addEventListener('error',e=>__ERR.push(String(e.message)));
+window.addEventListener('error',e=>__ERR.push(String(e.message)));
 const __draws={}, __ondata=[];
 window.dash={colors:[0,1,2,3,4].map(i=>`var(--c${i})`),
  data(id){const r=__DATA[id];return r?{status:'ok',data:r,columns:Object.keys(r[0]||{})}:{status:'missing',data:[]};},
@@ -43,7 +41,9 @@ const __origDraw=dash.draw; dash.draw=function(name,fn){ if(fn===undefined){docu
 """
 html = page.read_text(encoding="utf-8")
 out.write_text(f"""<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
-<style>{tokens}</style><script>{d3}</script><script>window.__DATA={json.dumps(data, ensure_ascii=False)};{mock}</script></head>
+<style>{tokens}</style><script>{d3}</script><script>window.__ERR=[];window.__DATA={{}};const __RAW={json.dumps(raw, ensure_ascii=False)};
+for(const [k,t] of Object.entries(__RAW)){{try{{const j=JSON.parse(t);window.__DATA[k]=(j&&j.rows)?j.rows:j;}}catch(e){{window.__ERR.push('JSON inválido en '+k+': '+e.message);}}}}
+{mock}</script></head>
 <body><div id="dash-root"></div><template id="pg">{html}</template>
 <script>
 const root=document.getElementById('dash-root');root.innerHTML=document.getElementById('pg').innerHTML;
@@ -51,4 +51,4 @@ root.querySelectorAll('script').forEach(s=>{{const n=document.createElement('scr
 requestAnimationFrame(()=>{{__runDraws();window.__READY=true;}});
 window.addEventListener('resize',()=>__runDraws());
 </script></body></html>""", encoding="utf-8")
-print("ok", out, sorted(data))
+print("ok", out, sorted(raw))

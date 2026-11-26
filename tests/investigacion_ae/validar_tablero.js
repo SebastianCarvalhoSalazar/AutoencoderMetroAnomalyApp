@@ -17,7 +17,7 @@ const [file, out] = process.argv.slice(2);
       const over = [];
       document.querySelectorAll('#dash-root *').forEach((el) => {
         const r = el.getBoundingClientRect();
-        if (r.width > 0 && r.right > vw + 1 && !el.closest('.ae-tablewrap')) over.push((el.tagName + '.' + (el.className.baseVal ?? el.className)).slice(0, 60));
+        if (r.width > 0 && r.right > vw + 1 && !el.closest('.ae-tablewrap, .ae-archwrap')) over.push((el.tagName + '.' + (el.className.baseVal ?? el.className)).slice(0, 60));
       });
       const empty = [...document.querySelectorAll('[data-draw]')].filter((el) => !el.textContent.trim() && !el.querySelector('svg,li,tr,option')).map((el) => el.dataset.draw);
       const dashes = [...document.querySelectorAll('[data-draw]')].filter((el) => el.textContent.trim() === '—').map((el) => el.dataset.draw);

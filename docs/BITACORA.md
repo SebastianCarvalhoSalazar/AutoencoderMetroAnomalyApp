@@ -408,3 +408,7 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
   - Lo esperado a las 6 h baja a 21 560 frente a 64 208 observados.
   - El AE alerta (score 69,3 frente a un umbral de 9,5), pero señala las 6 h y las 19 h; el perfil señala las 18 h y las 19 h.
   - Un día anómalo contamina la reconstrucción de horas normales, lo que explica la menor precisión del AE al localizar la hora (0,935 frente a 0,983).
+- **Defecto hallado por la página real, no por el arnés:** `ae1_metricas.json` contenía `NaN` (la localización del AE original). El JSON estándar no lo admite, así que el tablero rechazó el archivo ("no tiene filas legibles").
+  - El arnés no lo vio porque insertaba los datos como JavaScript, donde `NaN` es válido.
+  - **Corrección:** el exportador escribe `null` y valida con `allow_nan=False`; el arnés ahora parsea con `JSON.parse`, igual que el tablero.
+  - **Verificado:** el arnés detecta el error con el archivo anterior y queda limpio con el nuevo.

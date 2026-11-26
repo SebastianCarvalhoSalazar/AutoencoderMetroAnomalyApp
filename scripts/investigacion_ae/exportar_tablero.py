@@ -21,9 +21,21 @@ def code_meta(*scripts):
     return [{"label": s, "value": (ROOT / s).read_text(encoding="utf-8"), "type": "code", "lang": "python"} for s in scripts]
 
 
+def _clean(v):
+    """JSON estricto: NaN e infinitos no son JSON válido (el navegador rechaza el archivo); se escriben como null."""
+    if isinstance(v, float) and (v != v or v in (float("inf"), float("-inf"))):
+        return None
+    if isinstance(v, dict):
+        return {k: _clean(x) for k, x in v.items()}
+    if isinstance(v, list):
+        return [_clean(x) for x in v]
+    return v
+
+
 def write(name, rows, meta):
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / f"{name}.json").write_text(json.dumps({"rows": rows, "meta": meta}, ensure_ascii=False), encoding="utf-8")
+    txt = json.dumps({"rows": _clean(rows), "meta": meta}, ensure_ascii=False, allow_nan=False)
+    (OUT / f"{name}.json").write_text(txt, encoding="utf-8")
     print(name, len(rows))
 
 
