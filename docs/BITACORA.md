@@ -412,3 +412,13 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
   - El arnés no lo vio porque insertaba los datos como JavaScript, donde `NaN` es válido.
   - **Corrección:** el exportador escribe `null` y valida con `allow_nan=False`; el arnés ahora parsea con `JSON.parse`, igual que el tablero.
   - **Verificado:** el arnés detecta el error con el archivo anterior y queda limpio con el nuevo.
+
+## 2026-11-26 — [AE.2] Diseño de la combinación (fijado ANTES de calcular resultados)
+- **Regla de combinación:** score combinado = max(score_perfil / umbral_perfil, score_AE / umbral_AE), con los umbrales de DEV de AE.1. El umbral combinado es el p95 de ese máximo en los días reales de DEV (2022-04…2023-06): el mismo presupuesto del 5 %.
+  - No se ajusta ningún peso ni reparto: es la forma más simple de unir dos detectores calibrados.
+- **Hora señalada:** la del detector cuyo cociente es mayor.
+- **Criterio (sin cambios desde `PLAN.md`):**
+  1. Recall T4 medio (cero, duplicada, desfase) ≥ +0,05 frente al perfil solo, con IC 95 % > 0.
+  2. Recall moderado T1–T3 sin pérdida: el IC del cambio contiene 0 o está por encima.
+  - Ambos con diferencias pareadas sobre las mismas inyecciones y bootstrap por semanas.
+- **Insumos:** las corridas de AE.1 (semilla 0), sin reentrenar.
