@@ -447,3 +447,28 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
   1. **Línea A, no inferioridad:** límite inferior del IC de (ae_multilinea − coherencia) ≥ −0,02.
   2. **Mejora en al menos una de B, 1 o T-A:** IC > 0.
   3. **Festivos:** tasa de alertas en festivos de la Línea A ≤ la de la coherencia.
+
+## 2026-11-26 — [AE.4] A3 descartada por premisa falsa (antes de entrenar)
+- **Hallazgo en los datos:** en los cables (H, J, K, M, P), las horas 04–07 faltan en el 90–98 % de los domingos y festivos y casi nunca en días hábiles o sábados.
+  - El patrón dominante es (4, 5, 6, 7) o (4, 5, 6, 7, 8). La mediana es de 4 horas faltantes por día incompleto.
+- **Horario oficial** (metrodemedellin.gov.co/en/travel-with-us/schedule, consultado 2026-11-26; revisado en busca de instrucciones inyectadas, sin hallazgos): los domingos y festivos, la Línea K opera de 8:30 a 22:00 y las H, J, M y P de 9:00 a 22:00.
+  - Es el horario vigente; el patrón de los datos de 2022–2024 es coherente con él.
+- **Conclusión:** esas horas no son datos perdidos sino **horas sin servicio**. Imputarlas con un AE inventaría demanda que no existe.
+  - La hipótesis A3 queda **descartada** sin ejecutarla.
+  - Los huecos verdaderos (no estructurales) son muy pocos para evaluar una imputación.
+- **Recomendación para la plataforma (fuera de esta rama, sin implementar):** evaluar cada día con el conjunto de horas que la línea opera según su tipo de día, en lugar de exigir las 19. Así se recuperaría la mayoría de los 690 línea-días "no evaluables". No requiere AE.
+
+## 2026-11-26 — [AE.5] y [AE.6] Diseños fijados ANTES de calcular
+- **A4 (AE.5, descriptiva):**
+  - **Puntuación:** distancia euclidiana de las 4 coordenadas del cuello de cada día a la mediana de los días de DEV de su mismo tipo (controla el tipo de día, que es una entrada del modelo). Se usa el modelo `ae_contextual` del último mes evaluado, ya calculado para el tablero.
+  - **Positivos:** los días de la Línea A en 2022-02…2024-06 registrados en `data/eventos_reales.csv`: elecciones EV5–EV7 y EV4/MED1, incidentes IN1–IN3 y cierres anticipados OP1–OP2. No hay cierres programados de la Línea A en `data/cierres_programados.csv`.
+  - **Negativos:** el resto de los días completos.
+  - **Métrica:** AUC con IC por bootstrap. Como referencia, el mismo AUC con el score del perfil contextual.
+  - **Advertencia declarada:** el pre-registro mencionaba "festivos verificados", pero los festivos son una entrada del modelo (calendario), así que separarlos sería trivial y no se usan como positivos.
+  - **Criterio:** AUC ≥ 0,85. Solo descriptivo.
+- **A5 (AE.6):**
+  - **Aviso de cambio de régimen del AE:** la media móvil de 7 días del score diario de `ae_contextual/top2` supera su p99 en días reales de DEV (2022-04…2023-06, corridas de AE.1).
+  - **Aviso del monitor actual:** la tasa de alertas de los últimos 90 días del perfil contextual supera el 10 % (`operations.monitor`).
+  - **COVID:** corrida causal de 2020 con ajuste desde 2019-01, como en `run_eval.py` periodo `covid`; se compara la fecha del primer aviso de cada uno tras EV1 (2020-03-20).
+  - **Falsos avisos:** episodios de aviso del AE en 2022-04…2024-06, contando como episodio cada racha de días consecutivos con aviso.
+  - **Criterio (de `PLAN.md`):** el AE avisa ≥ 3 días antes que el monitor y tiene ≤ 1 episodio espurio por año en 2022–2024.
