@@ -433,3 +433,17 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - **DEV (solo referencia):** T4 +0,040 [0,018; 0,066] y moderado +0,008 [−0,029; 0,048]. En DEV no había pérdida: la conclusión depende del periodo, y decide el holdout pre-registrado.
 - **Lo que sí muestra:** en el combinado, el AE aporta la mayoría de las detecciones de T1 y T3, y el perfil la mayoría de las de T2, T4 y T5. La complementariedad es real, pero con una sola cuota de alertas, ganar en un tipo cuesta en otro.
 - **No se prueban otras reglas de combinación** sobre el holdout: sería ajustar a la vista del resultado. Otra regla tendría que pre-registrarse y evaluarse con datos nuevos (posteriores a junio de 2024).
+
+## 2026-11-26 — [AE.3] Diseño de A2 (fijado ANTES de entrenar)
+- **Modelo `ae_multilinea`:**
+  - **Entrada:** el día completo de las 11 líneas principales, es decir, 209 celdas. Cada celda es log1p menos el nivel causal de su línea, estandarizada con la media y el desvío de entrenamiento; una celda sin dato vale 0 (la media). Se añaden los 11 rasgos de calendario de `ae_contextual`.
+  - **Red:** 64-32-**8**-32-64 con salida lineal de 209, pérdida MAE, early stopping con validación temporal y semilla 0. Es la escala de `ae_contextual` (16-8-4 para 30 entradas) llevada a 220 entradas.
+  - **Score de la línea objetivo:** z = residuo × sd / MAD de los residuos de entrenamiento, en sus 19 columnas; agregación top2, igual que `ae_contextual`.
+- **Protocolo:** idéntico al de H1 (`scripts/fase3/exp_red.py`).
+  - Holdout rolling 2023-07…2024-06 con ajuste desde 2022-01, e inyecciones solo en la línea objetivo.
+  - Umbral de cada detector = p95 de sus scores reales del periodo (mismo presupuesto) y diferencia pareada de recall moderado con IC por bootstrap semanal.
+  - Comparación con `coherencia_red`, recalculada en la misma corrida.
+- **Criterio (pre-registrado en `PLAN.md`), concretado:**
+  1. **Línea A, no inferioridad:** límite inferior del IC de (ae_multilinea − coherencia) ≥ −0,02.
+  2. **Mejora en al menos una de B, 1 o T-A:** IC > 0.
+  3. **Festivos:** tasa de alertas en festivos de la Línea A ≤ la de la coherencia.
