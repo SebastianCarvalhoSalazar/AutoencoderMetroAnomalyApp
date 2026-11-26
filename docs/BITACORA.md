@@ -489,3 +489,15 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
   - Festivos en A: **no cumple** (0,167 frente a 0,111).
 - **Control:** las cifras de la coherencia reproducen exactamente H1 (`reports/fase3/red.md`): A 0,900, B 0,691, 1 0,794 y T-A 0,077.
 - **Hallazgo secundario (no adoptable por sí solo):** en el tranvía, donde la coherencia no mejoraba al perfil, el AE multilínea sí detecta más anomalías locales. Valdría pre-registrarlo como hipótesis específica y evaluarlo con datos nuevos; no se adopta a partir de este resultado.
+
+## 2026-11-26 — [AE.5] Resultado de A4 (descriptiva): CUMPLE el criterio puntual, con cautela
+- **AUC** de la distancia latente al centro de su tipo de día: **0,877** (exigido ≥ 0,85), con IC 95 % [0,712; 0,985]. Referencia, score del perfil: 0,841 [0,619; 1,0].
+- **Cautela:**
+  - Solo hay 9 positivos y el IC incluye valores bajo 0,85.
+  - El modelo se ajustó con datos hasta mayo de 2024, así que la mayoría de los días son de ajuste y no de evaluación.
+  - Los días de 2023-12-24 y 31 se excluyen por no tener las 19 horas completas.
+- **Qué separa y qué no:**
+  - Bien: las 4 jornadas electorales (percentil 99,7–100) y los cierres anticipados de 2022 (97,5 y 99,4).
+  - No: las interrupciones parciales IN1 e IN2 (percentiles 74 y 33).
+  - IN3 (28/08/2023) queda en el percentil 83: la reconstrucción falla mucho, pero su resumen latente no es tan atípico.
+- **Uso permitido:** descriptivo, para explicar cómo organiza los días el modelo. No se adopta para alertar.
