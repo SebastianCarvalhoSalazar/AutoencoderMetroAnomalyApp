@@ -501,3 +501,10 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
   - No: las interrupciones parciales IN1 e IN2 (percentiles 74 y 33).
   - IN3 (28/08/2023) queda en el percentil 83: la reconstrucción falla mucho, pero su resumen latente no es tan atípico.
 - **Uso permitido:** descriptivo, para explicar cómo organiza los días el modelo. No se adopta para alertar.
+
+## 2026-11-26 — [AE.6] Resultado de A5: NO CUMPLE (descartada)
+- **Umbral del aviso AE:** p99 de la media móvil de 7 días en DEV, 14,31. Corrida causal de 2020 con ajuste desde 2019-01: `reports/investigacion_ae/runs/covid/`.
+- **Primer aviso desde EV1 (20/03/2020):** el AE y el monitor avisan el mismo día; ambos ya estaban en aviso desde el 19/03, cuando la demanda caía antes del decreto. **Ventaja: 0 días**, frente a ≥ 3 exigidos.
+- **Avisos previos a EV1:** el AE el 04/01 y el monitor el 01/01 y el 11/01. Los de comienzo de enero son artefactos de arranque y de fin de año.
+- **Episodios espurios del AE en 2022–2024:** 1, es decir 0,44 por año (cumple ≤ 1). El episodio empieza el 19/06/2022, segunda vuelta presidencial sin cobro, así que en realidad es un evento real.
+- **Conclusión:** como aviso de cambio de régimen, el AE no aporta anticipación sobre el monitor actual.
