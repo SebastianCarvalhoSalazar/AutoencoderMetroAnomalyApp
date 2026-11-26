@@ -184,4 +184,4 @@ class AEMultilineDetector(Detector):
         return Scores(aggregate(z, self.agg), z)
 
 
-REGISTRY_NN["ae_multilinea"] = AEMultilineDetector
+# AEMultilineDetector no va en REGISTRY_NN: requiere la línea objetivo y la red (se usa directamente en AE.3).

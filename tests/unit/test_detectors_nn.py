@@ -41,3 +41,24 @@ def test_determinism_with_seed(fitted, name):
     days = s.loc["2023-02-01":"2023-02-10"]
     again = REGISTRY_NN[name](seed=0).fit(s.loc[:"2023-01-31"], s)
     pd.testing.assert_series_equal(dets[name].score(days, s).day, again.score(days, s).day)
+
+
+def test_multiline_ae_is_causal_and_detects_local_drop():
+    """AE.3: el autoencoder multilínea no usa datos futuros de ninguna línea y detecta una caída fuerte de la objetivo."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from conftest import make_series
+    from metro_anomaly.detectors_nn import AEMultilineDetector
+    Ws = {ln: make_series(seed=i) for i, ln in enumerate(["A", "B", "C"])}
+    det = AEMultilineDetector("A", Ws, seed=0).fit(Ws["A"].loc[:"2023-01-31"], Ws["A"])
+    days = Ws["A"].loc["2023-02-01":"2023-02-28"]
+    base = det.score(days, Ws["A"]).day
+    t = days.index[10]
+    det.Ws = {k: v.copy() for k, v in Ws.items()}
+    for v in det.Ws.values():
+        v.loc[t + pd.Timedelta(days=1):] *= 5
+    assert det.score(days.loc[[t]], Ws["A"]).day.iloc[0] == pytest.approx(base.loc[t], rel=1e-4)
+    det.Ws = Ws
+    inj = det.score(inject(days, "T1_severa", 0, Ws["A"])[0], Ws["A"]).day
+    assert (inj.to_numpy() > base.to_numpy()).mean() > 0.8

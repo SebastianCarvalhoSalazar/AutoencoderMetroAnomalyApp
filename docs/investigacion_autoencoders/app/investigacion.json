@@ -1,0 +1,29 @@
+{
+ "checks": [
+  {
+   "tag": "inicial",
+   "exceptions": 0,
+   "pageOverflow": false,
+   "clipped": []
+  },
+  {
+   "tag": "incidente",
+   "exceptions": 0,
+   "pageOverflow": false,
+   "clipped": []
+  },
+  {
+   "tag": "caida_dia",
+   "exceptions": 0,
+   "pageOverflow": false,
+   "clipped": []
+  },
+  {
+   "tag": "movil",
+   "exceptions": 0,
+   "pageOverflow": false,
+   "clipped": []
+  }
+ ],
+ "errors": []
+}

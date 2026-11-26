@@ -508,3 +508,18 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - **Avisos previos a EV1:** el AE el 04/01 y el monitor el 01/01 y el 11/01. Los de comienzo de enero son artefactos de arranque y de fin de año.
 - **Episodios espurios del AE en 2022–2024:** 1, es decir 0,44 por año (cumple ≤ 1). El episodio empieza el 19/06/2022, segunda vuelta presidencial sin cobro, así que en realidad es un evento real.
 - **Conclusión:** como aviso de cambio de régimen, el AE no aporta anticipación sobre el monitor actual.
+
+## 2026-11-26 — [AE.8] Página de investigación en la app (condicionada a que se corroborara alguna hipótesis)
+- **Condición del usuario:** construir la página solo si alguna hipótesis se corroboraba. Se cumplió con A4 (descriptiva), así que se construye en esta rama, sin tocar la app del PR #1.
+- **Página `pages/3_Investigacion_modelos.py`, "Cómo funcionan los modelos":**
+  1. qué modelos se usan hoy y el veredicto de cada hipótesis;
+  2. perfil contextual: lo observado frente a lo esperado, |z| por hora y decisión, en 5 días de ejemplo;
+  3. coherencia de red: el z de la línea, la mediana de la red y lo propio de la línea, para A, B y 1 en cualquier fecha de 2022-04…2024-06;
+  4. autoencoder (estudiado, no en uso): reconstrucción frente al perfil, |z| con las 2 horas que definen el score, la lección del incidente del 28/08 y el espacio latente con su AUC (lo corroborado).
+  - No genera alertas ni cambia ningún modelo.
+- **Pruebas:**
+  - `tests/integration/test_investigacion_page.py` (7): tabla de veredictos igual a `PLAN.md`, decisión de cada ejemplo igual a los datos y fechas sin dato.
+  - `tests/e2e/investigacion.js`: escritorio y móvil, sin excepciones, sin desbordamiento ni gráficos recortados, sin errores de JavaScript. Capturas en `docs/investigacion_autoencoders/app/`.
+  - Se corrigieron leyendas truncadas.
+- **Corrección preventiva:** `AEMultilineDetector` había quedado en `REGISTRY_NN`. Las pruebas de investigación crean cada detector solo con la semilla, así que habrían fallado en el CI. Se sacó del registro y tiene su propia prueba de causalidad y detección.
+- **Suite rápida:** 201 aprobadas, 1 omitida, cobertura del 82,3 %. Investigación: 5 aprobadas.
