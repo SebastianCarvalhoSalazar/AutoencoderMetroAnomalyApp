@@ -367,3 +367,8 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - **Artefactos:** reconstruidos (código `16b3ab3`; el manifiesto registra `02d9247`, que solo añade documentación) y con determinismo re-verificado.
 - **Pruebas:** 194 rápidas y 2 E2E aprobadas; cobertura del 84,8 %.
 - **Informe:** `docs/validacion/F10_fase3_plataforma.md` §7.
+
+## 2026-11-26 — [AE.0] Rama de investigación de autoencoders (a pedido del usuario)
+- Se creó la rama `claude/investigacion-autoencoders` desde `6fbdbaf`.
+- Se pre-registraron las hipótesis A1–A6 con sus criterios en `docs/investigacion_autoencoders/PLAN.md`, antes de cualquier experimento.
+- Punto de partida: `ae_contextual` empata con el perfil contextual en recall moderado, pero duplica la tasa de alertas, y es mejor en errores de datos. El AE original queda por detrás.
