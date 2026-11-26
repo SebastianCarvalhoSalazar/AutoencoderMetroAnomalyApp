@@ -1,7 +1,7 @@
 # Línea de investigación: usos del autoencoder en analítica de afluencia
 
 Rama: `claude/investigacion-autoencoders`, creada desde `claude/repository-technical-audit-89x93t` (commit `6fbdbaf`).
-Estado: **en curso** (ver Tareas).
+Estado: **cerrada** el 2026-11-26 (ver `INFORME.md`). A6 sigue bloqueada por falta de datos por estación.
 
 ## Punto de partida (evidencia ya existente)
 | Hallazgo | Fuente |
@@ -41,7 +41,7 @@ Estado: **en curso** (ver Tareas).
 | AE.4 | A3: imputación de horas faltantes con enmascaramiento | **DESCARTADA sin ejecutar**: las horas faltantes de los cables (04–07 los domingos y festivos) son horas sin servicio según el horario oficial; imputarlas inventaría demanda (docs/BITACORA.md) |
 | AE.5 | A4: espacio latente y días atípicos (descriptivo) | COMPLETADA — **CUMPLE** (descriptiva): AUC 0,877 [0,712; 0,985] con solo 9 eventos; separa elecciones y cierres, no interrupciones parciales (`reports/investigacion_ae/ae5.md`) |
 | AE.6 | A5: cambio de régimen | COMPLETADA — **NO CUMPLE**: el AE y el monitor avisan el mismo día (19/03/2020), sin anticipación; 1 episodio en 2022–2024, una elección (`reports/investigacion_ae/ae6.md`) |
-| AE.7 | Informe de la línea con veredicto por hipótesis | PENDIENTE |
+| AE.7 | Informe de la línea con veredicto por hipótesis | COMPLETADA — `docs/investigacion_autoencoders/INFORME.md`: solo A4 (descriptiva) se corrobora; ningún modelo de alerta cambia |
 
 ## Reglas de integración
 Nada de esta rama pasa a la plataforma sin:
