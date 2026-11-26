@@ -422,3 +422,14 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
   2. Recall moderado T1–T3 sin pérdida: el IC del cambio contiene 0 o está por encima.
   - Ambos con diferencias pareadas sobre las mismas inyecciones y bootstrap por semanas.
 - **Insumos:** las corridas de AE.1 (semilla 0), sin reentrenar.
+
+## 2026-11-26 — [AE.2] Resultado de A1: NO CUMPLE (descartada)
+- **Holdout, combinado − perfil, pareado:**
+  - Recall T4 medio: +0,058 [0,027; 0,094]. Cumple su parte.
+  - Recall moderado T1–T3: −0,054 [−0,102; −0,006]. El IC está por debajo de 0: hay pérdida y **no cumple**.
+- **Causa:** el combinado conserva el presupuesto del 5 % subiendo el umbral efectivo de cada detector (el umbral combinado de DEV es 1,214 veces el de cada uno).
+  - El perfil pierde las caídas de todo el día que detectaba cerca del umbral: T2 moderada pasa de 0,522 a 0,165.
+  - En el holdout, el combinado alerta en el 4,1 % de los días reales, frente al 2,2 % del perfil, cuyo umbral de DEV resultó conservador.
+- **DEV (solo referencia):** T4 +0,040 [0,018; 0,066] y moderado +0,008 [−0,029; 0,048]. En DEV no había pérdida: la conclusión depende del periodo, y decide el holdout pre-registrado.
+- **Lo que sí muestra:** en el combinado, el AE aporta la mayoría de las detecciones de T1 y T3, y el perfil la mayoría de las de T2, T4 y T5. La complementariedad es real, pero con una sola cuota de alertas, ganar en un tipo cuesta en otro.
+- **No se prueban otras reglas de combinación** sobre el holdout: sería ajustar a la vista del resultado. Otra regla tendría que pre-registrarse y evaluarse con datos nuevos (posteriores a junio de 2024).
