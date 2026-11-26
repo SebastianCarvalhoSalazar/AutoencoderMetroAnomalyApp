@@ -37,7 +37,7 @@ Estado: **en curso** (ver Tareas).
 | AE.0 | Rama y plan con hipótesis pre-registradas | COMPLETADA (este documento) |
 | AE.1 | Reproducir en esta rama los resultados existentes de `ae_contextual` (verificación de punto de partida) | COMPLETADA — scores idénticos a la fase 2 en las 4 configuraciones; AE y perfil son complementarios por tipo de anomalía (`reports/investigacion_ae/ae1.md`) |
 | AE.2 | A1: detector complementario de errores de captura | COMPLETADA — **NO CUMPLE**: T4 +0,058 [0,027; 0,094] cumple, pero el recall moderado cae −0,054 [−0,102; −0,006] (`reports/investigacion_ae/ae2.md`). A1 descartada |
-| AE.3 | A2: autoencoder multilínea frente a la coherencia de red | PENDIENTE |
+| AE.3 | A2: autoencoder multilínea frente a la coherencia de red | COMPLETADA — **NO CUMPLE**: peor en A (−0,141), B y 1; mejor solo en T-A (+0,126); más alertas en festivos (`reports/investigacion_ae/ae3.md`) |
 | AE.4 | A3: imputación de horas faltantes con enmascaramiento | **DESCARTADA sin ejecutar**: las horas faltantes de los cables (04–07 los domingos y festivos) son horas sin servicio según el horario oficial; imputarlas inventaría demanda (docs/BITACORA.md) |
 | AE.5 | A4: espacio latente y días atípicos (descriptivo) | PENDIENTE |
 | AE.6 | A5: cambio de régimen | PENDIENTE |

@@ -472,3 +472,20 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
   - **COVID:** corrida causal de 2020 con ajuste desde 2019-01, como en `run_eval.py` periodo `covid`; se compara la fecha del primer aviso de cada uno tras EV1 (2020-03-20).
   - **Falsos avisos:** episodios de aviso del AE en 2022-04…2024-06, contando como episodio cada racha de días consecutivos con aviso.
   - **Criterio (de `PLAN.md`):** el AE avisa ≥ 3 días antes que el monitor y tiene ≤ 1 episodio espurio por año en 2022–2024.
+
+## 2026-11-26 — [AE.3] Resultado de A2: NO CUMPLE (descartada)
+- **Recall moderado en el holdout** (mismo presupuesto, inyecciones solo en la línea objetivo), `ae_multilinea` frente a `coherencia_red`:
+
+  | Línea | Coherencia | AE multilínea | Diferencia [IC 95 %] |
+  |---|---|---|---|
+  | A | 0,900 | 0,759 | −0,141 [−0,182; −0,097] |
+  | B | 0,691 | 0,444 | −0,247 [−0,299; −0,195] |
+  | 1 | 0,794 | 0,677 | −0,117 [−0,156; −0,073] |
+  | T-A | 0,077 | 0,204 | **+0,126 [+0,106; +0,149]** |
+
+- **Criterio:**
+  - No inferioridad en A: **no cumple**.
+  - Mejora en otra línea: cumple, en T-A.
+  - Festivos en A: **no cumple** (0,167 frente a 0,111).
+- **Control:** las cifras de la coherencia reproducen exactamente H1 (`reports/fase3/red.md`): A 0,900, B 0,691, 1 0,794 y T-A 0,077.
+- **Hallazgo secundario (no adoptable por sí solo):** en el tranvía, donde la coherencia no mejoraba al perfil, el AE multilínea sí detecta más anomalías locales. Valdría pre-registrarlo como hipótesis específica y evaluarlo con datos nuevos; no se adopta a partir de este resultado.
