@@ -35,8 +35,36 @@
   .ae-table { border-collapse: collapse; width: 100%; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
   .ae-table th, .ae-table td { padding: 6px 8px; border-bottom: 1px solid var(--color-border-line); text-align: right; white-space: nowrap; }
   .ae-table th:first-child, .ae-table td:first-child { text-align: left; }
-  .ae-table th { color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+  .ae-table th { color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); white-space: normal; vertical-align: bottom; min-width: 64px; }
   .ae-verdict { font-size: var(--cds-font-size-body); line-height: 1.5; margin: 0; max-width: 72ch; }
+  .ae-flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: var(--cds-gap-sm); list-style: none; margin: 0; padding: 0; counter-reset: paso; }
+  .ae-flow li { counter-increment: paso; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); background: var(--color-bg); font-size: var(--cds-font-size-caption); line-height: 1.4; min-width: 0; }
+  .ae-flow li::before { content: counter(paso); display: block; font-variant-numeric: tabular-nums; color: var(--color-fg-muted); margin-bottom: 2px; }
+  .ae-flow li strong { display: block; font-weight: var(--cds-font-weight-medium); margin-bottom: 2px; }
+  .ae-archwrap { overflow-x: auto; }
+  .ae-arch { width: 100%; min-width: 560px; max-width: 760px; height: auto; display: block; margin: 0 auto; }
+  .ae-arch .lay { fill: var(--color-bg); stroke: var(--cds-chart-axis); stroke-width: 1.2; }
+  .ae-arch .lay-in { fill: var(--color-bg); stroke: var(--cds-chart-axis); }
+  .ae-arch .lay-neck { fill: var(--color-panel); stroke: var(--color-fg); stroke-width: 1.6; }
+  .ae-arch .lnk { stroke: var(--cds-chart-grid); stroke-width: 1; }
+  .ae-arch text { fill: var(--color-fg-muted); font-size: 11px; font-family: var(--font-anthropic-sans); }
+  .ae-arch .big { fill: var(--color-fg); font-size: 12px; }
+  .ae-arch .cap { fill: var(--color-fg-muted); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; }
+  .ae-pick { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cds-gap-sm) var(--cds-gap-md); }
+  .ae-pick label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .ae-pick .dash-select { min-width: min(100%, 360px); }
+  .ae-kind { font-size: var(--cds-font-size-caption); border: 1px solid var(--color-border-line); border-radius: 999px; padding: 1px 8px; color: var(--color-fg-muted); }
+  .ae-kind[data-kind="sim"] { border-color: var(--color-warn); color: var(--color-warn); }
+  .ae-kind[data-kind="real"] { border-color: var(--color-ok); color: var(--color-ok); }
+  .ae-dec { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: var(--cds-gap-md); }
+  .ae-decbox { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); display: flex; flex-direction: column; gap: 6px; background: var(--color-bg); min-width: 0; }
+  .ae-decbox .who { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .ae-decbox .what { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); }
+  .ae-decbox .what[data-alert="true"] { color: var(--color-bad); }
+  .ae-decbox .what[data-alert="false"] { color: var(--color-ok); }
+  .ae-decbox .why { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+  .ae-heat { min-height: 230px; }
+  .ae-subh { font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); margin: 0 0 4px; }
   details.ae-foot summary { cursor: pointer; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
   details.ae-foot p { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 75ch; line-height: 1.5; }
 </style>
@@ -96,6 +124,102 @@
           </tr></thead>
           <tbody data-draw="tabla1"></tbody>
         </table>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="ae-section" id="como-funciona">
+    <p class="ae-eyebrow">Cómo funciona</p>
+    <h2>Qué hace el autoencoder con un día y cómo decide si alertar</h2>
+    <p class="ae-lede" data-read lang="es">El autoencoder con calendario aprende cómo suele verse un día: recibe las 19 horas (04–22 h) sin el nivel general de demanda, las comprime en 4 números y con ellos intenta reconstruirlas. Si un día se parece a lo aprendido, la reconstrucción queda cerca de lo observado; si no, las horas que no logra reconstruir delatan la anomalía.</p>
+
+    <div class="ae-card" id="arquitectura">
+      <h3>Arquitectura</h3>
+      <div class="ae-archwrap"><svg class="ae-arch" viewBox="0 0 760 250" role="img" aria-label="Red de 30 entradas que se comprimen en capas de 16, 8 y 4 neuronas y se expanden en 8 y 16 hasta reconstruir las 19 horas">
+        <text class="cap" x="70" y="18" text-anchor="middle">Entrada</text>
+        <text class="cap" x="270" y="18" text-anchor="middle">Codificador</text>
+        <text class="cap" x="380" y="18" text-anchor="middle">Cuello</text>
+        <text class="cap" x="490" y="18" text-anchor="middle">Decodificador</text>
+        <text class="cap" x="690" y="18" text-anchor="middle">Salida</text>
+        <g class="lnk">
+          <line x1="120" y1="125" x2="200" y2="125"/><line x1="220" y1="125" x2="290" y2="125"/><line x1="310" y1="125" x2="370" y2="125"/>
+          <line x1="390" y1="125" x2="450" y2="125"/><line x1="470" y1="125" x2="540" y2="125"/><line x1="560" y1="125" x2="640" y2="125"/>
+        </g>
+        <rect class="lay-in" x="20" y="35" width="100" height="114" rx="6"/>
+        <text class="big" x="70" y="88" text-anchor="middle">19 horas</text>
+        <text x="70" y="104" text-anchor="middle">sin nivel,</text>
+        <text x="70" y="118" text-anchor="middle">estandarizadas</text>
+        <rect class="lay-in" x="20" y="155" width="100" height="66" rx="6"/>
+        <text class="big" x="70" y="186" text-anchor="middle">11 rasgos</text>
+        <text x="70" y="202" text-anchor="middle">de calendario</text>
+        <rect class="lay" x="200" y="65" width="20" height="120" rx="4"/><text x="210" y="205" text-anchor="middle">16</text>
+        <rect class="lay" x="290" y="95" width="20" height="60" rx="4"/><text x="300" y="175" text-anchor="middle">8</text>
+        <rect class="lay-neck" x="370" y="110" width="20" height="30" rx="4"/><text class="big" x="380" y="160" text-anchor="middle">4</text>
+        <rect class="lay" x="450" y="95" width="20" height="60" rx="4"/><text x="460" y="175" text-anchor="middle">8</text>
+        <rect class="lay" x="540" y="65" width="20" height="120" rx="4"/><text x="550" y="205" text-anchor="middle">16</text>
+        <rect class="lay-in" x="640" y="68" width="100" height="114" rx="6"/>
+        <text class="big" x="690" y="121" text-anchor="middle">19 horas</text>
+        <text x="690" y="137" text-anchor="middle">reconstruidas</text>
+        <text x="380" y="236" text-anchor="middle">Los 4 números del cuello resumen la forma del día</text>
+      </svg></div>
+      <ol class="ae-flow" aria-label="Pasos de la decisión">
+        <li><strong>Quitar el nivel</strong>Se resta la demanda típica de las 4 semanas previas, para comparar la forma del día y no su volumen.</li>
+        <li><strong>Comprimir y reconstruir</strong>La red pasa las 19 horas y el calendario por el cuello de 4 números y reconstruye las 19 horas.</li>
+        <li><strong>Residuo por hora</strong>Para cada hora, lo observado menos lo reconstruido, dividido por la variación típica de esa hora: es el z.</li>
+        <li><strong>Score del día</strong>Promedio de los 2 z más grandes en valor absoluto (agregación top2).</li>
+        <li><strong>Decisión</strong>Si el score supera el umbral (percentil 95 de los días de 2022-04–2023-06), alerta y señala esas 2 horas.</li>
+      </ol>
+    </div>
+
+    <div class="ae-card" id="ejemplos">
+      <h3>Un día, paso a paso</h3>
+      <div class="ae-pick">
+        <label for="ej-select">Ejemplo</label>
+        <select class="dash-select" id="ej-select">
+          <option value="normal">Día normal</option>
+          <option value="caida_horas">Caída simulada de 2 horas</option>
+          <option value="caida_dia">Caída simulada de todo el día</option>
+          <option value="hora_duplicada">Error de datos simulado: hora duplicada</option>
+          <option value="incidente_real">Incidente real del 28/08/2023</option>
+        </select>
+        <span class="ae-kind" data-draw="ej-tipo"></span>
+      </div>
+      <p class="ae-verdict" data-read lang="es" data-draw="ej-texto">—</p>
+      <div class="ae-grid2">
+        <div>
+          <h4 class="ae-subh">Lo observado frente a lo que cada modelo esperaba</h4>
+          <ul class="ae-legend" data-draw="ej-leyenda"></ul>
+          <div class="ae-chart dash-skeleton" data-draw="ej-curvas" data-source="ex_horas"></div>
+        </div>
+        <div>
+          <h4 class="ae-subh">Desviación por hora (|z|)</h4>
+          <p class="ae-note">Barras: autoencoder; las 2 más altas (en rojo) definen su score. Puntos: modelo vigente. Escala que comprime los valores grandes.</p>
+          <div class="ae-chart dash-skeleton" data-draw="ej-z" data-source="ex_horas"></div>
+        </div>
+      </div>
+      <div class="ae-dec" data-draw="ej-decision" data-source="ex_ejemplos"></div>
+    </div>
+
+    <div class="ae-card" id="umbral">
+      <h3>Cómo se fija el umbral y qué tan bien separa</h3>
+      <p class="ae-note">Score dividido por su umbral (escala logarítmica). Cada barra va del percentil 25 al 75, la línea delgada del 5 al 95 y la marca es la mediana. A la derecha, el porcentaje de días que supera el umbral: en días reales es el costo (alertas), en anomalías simuladas es lo detectado.</p>
+      <ul class="ae-legend" data-draw="dist-leyenda"></ul>
+      <div class="ae-chart dash-skeleton" data-draw="dist" data-source="ex_distribucion"></div>
+    </div>
+
+    <div class="ae-grid2">
+      <div class="ae-card" id="latente">
+        <h3>Qué aprendió: el resumen de 4 números de cada día</h3>
+        <p class="ae-note">Cada punto es un día real de 2022-02 a 2024-06, ubicado según sus 4 números del cuello (proyectados a 2 dimensiones; ejes en escala que comprime los extremos). Con borde rojo, los días que superan el umbral.</p>
+        <ul class="ae-legend" data-draw="lat-leyenda"></ul>
+        <div class="ae-chart dash-skeleton" data-draw="latente" data-source="ex_latente"></div>
+        <p class="ae-note" data-draw="lat-nota">—</p>
+      </div>
+      <div class="ae-card" id="mapa">
+        <h3>Dónde ve anomalías: |z| por día y hora</h3>
+        <p class="ae-note">Periodo evaluado, días reales. Más oscuro, mayor desviación (tope en 10). Las marcas rojas arriba son los días con alerta.</p>
+        <div class="ae-chart ae-heat dash-skeleton" data-draw="mapa" data-source="ex_mapa"></div>
       </div>
     </div>
   </section>
@@ -261,13 +385,18 @@
     const groups = ORDER.map((c) => ({ c, rows: s.filter((r) => r.config === c).map((r) => ({ ...r, t: parse(r.fecha) })) })).filter((g) => g.rows.length);
     const all = s.map((r) => Math.max(r.relativo, 1e-3));
     const yDom = [Math.max(d3.min(all), 0.02), d3.max(all)];
-    groups.forEach((gr) => {
+    // Primero se agregan todas las cajas (la cuadrícula auto-fit cambia de ancho al recibirlas) y luego se mide cada una.
+    const boxes = groups.map((gr) => {
       const box = document.createElement('div'); box.className = 'ae-mini';
       const h = document.createElement('h4');
       const n = gr.rows.filter((r) => r.alerta).length;
       h.textContent = `${gr.rows[0].modelo} · ${n} días sobre el umbral de ${gr.rows.length}`;
       const ch = document.createElement('div'); ch.className = 'ae-chart';
       box.append(h, ch); el.appendChild(box);
+      return ch;
+    });
+    groups.forEach((gr, gi) => {
+      const ch = boxes[gi];
       const W = ch.clientWidth || 320, H = 150, mg = { t: 6, r: 8, b: 22, l: 34 };
       const svg = d3.select(ch).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H).attr('role', 'img')
         .attr('aria-label', `Score diario de ${gr.rows[0].modelo} relativo a su umbral en el periodo de evaluación`);
@@ -305,5 +434,257 @@
       });
       return tr;
     }));
+  });
+</script>
+<script>
+  // ---------- Cómo funciona: utilidades ----------
+  const fmtEs = (v, d = 0) => (v == null || isNaN(v)) ? '—' : d3.format(`,.${d}f`)(v).replace(/,/g, 'X').replace(/\./g, ',').replace(/X/g, '.');
+  const pctE = (v) => (v == null || isNaN(v)) ? '—' : d3.format('.1%')(v).replace('.', ',');
+  const C_AE = () => dash.colors[1], C_PR = () => dash.colors[0], C_OBS = 'var(--color-fg)';
+  window.aeEj = 'normal';
+  const statusOf = (id) => dash.data(id).status;
+  function settle(el, id) { if (statusOf(id) !== 'loading') el.classList.remove('dash-skeleton'); }
+  function failText(el, id, what) { el.textContent = statusOf(id) === 'error' ? `No se pudo cargar ${what}.` : '—'; }
+  function measure(svg, texts) { const g = svg.append('g'); const w = d3.max(texts, (t) => g.append('text').text(t).node().getComputedTextLength()) || 0; g.remove(); return w; }
+
+  document.querySelectorAll('#ej-select').forEach((sel) => {
+    sel.addEventListener('change', () => {
+      window.aeEj = sel.value;
+      ['ej-tipo', 'ej-texto', 'ej-curvas', 'ej-z', 'ej-decision'].forEach((n) => dash.draw(n));
+    });
+  });
+
+  const exRow = () => { const e = aeRows('ex_ejemplos'); return e ? e.find((r) => r.ejemplo === window.aeEj) : null; };
+  const exHours = () => { const h = aeRows('ex_horas'); return h ? h.filter((r) => r.ejemplo === window.aeEj).sort((a, b) => a.hora - b.hora) : null; };
+
+  dash.draw('ej-tipo', (el) => {
+    const e = exRow();
+    if (!e) { el.textContent = ''; return; }
+    const sim = e.tipo_dato.startsWith('Simulación');
+    el.dataset.kind = sim ? 'sim' : 'real';
+    el.textContent = sim ? 'Simulación sobre un día real' : 'Dato real';
+  });
+
+  dash.draw('ej-texto', (el) => {
+    const e = exRow(), h = exHours();
+    if (!e || !h) { el.textContent = '—'; return; }
+    const top = e.horas_top2.map((x) => `${x} h`).join(' y ');
+    const prTop = [...h].sort((a, b) => Math.abs(b.z_perfil) - Math.abs(a.z_perfil)).slice(0, 2).map((r) => r.hora).sort((a, b) => a - b).map((x) => `${x} h`).join(' y ');
+    const ae = e.alerta_ae ? `el autoencoder alerta (score ${fmtEs(e.score_ae, 1)} frente a un umbral de ${fmtEs(e.umbral_ae, 1)}) y señala las ${top}`
+      : `el autoencoder no alerta (score ${fmtEs(e.score_ae, 1)} frente a un umbral de ${fmtEs(e.umbral_ae, 1)})`;
+    const pr = e.alerta_perfil ? `el modelo vigente alerta (${fmtEs(e.score_perfil, 1)} frente a ${fmtEs(e.umbral_perfil, 1)}) y sus horas más desviadas son las ${prTop}`
+      : `el modelo vigente no alerta (${fmtEs(e.score_perfil, 1)} frente a ${fmtEs(e.umbral_perfil, 1)})`;
+    const notes = {
+      normal: 'Lo observado coincide con lo esperado por ambos modelos: ninguna hora se aleja lo suficiente.',
+      caida_horas: 'Una caída de pocas horas rompe la forma del día, justo lo que el autoencoder detecta mejor.',
+      caida_dia: 'Bajar todo el día por igual conserva la forma; como el autoencoder trabaja sin el nivel, casi no la nota.',
+      hora_duplicada: 'Un valor duplicado es un pico de forma imposible, que el autoencoder detecta con facilidad.',
+      incidente_real: 'La caída extrema de la tarde distorsiona toda la reconstrucción: el autoencoder alerta, pero culpa a horas que estaban normales. Es la razón de su menor precisión al localizar la hora.',
+    };
+    el.textContent = `${e.titulo}: ${ae}; ${pr}. ${notes[e.ejemplo] || ''}`;
+  });
+
+  dash.draw('ej-leyenda', (ul) => {
+    const items = [['Observado', C_OBS], ['Esperado por el autoencoder', C_AE()], ['Esperado por el modelo vigente', C_PR()]];
+    ul.replaceChildren(...items.map(([t, c]) => { const li = document.createElement('li'); const s = document.createElement('span'); s.className = 'ae-swatch'; s.style.background = c; li.append(s, document.createTextNode(t)); return li; }));
+  });
+
+  dash.draw('ej-curvas', (el) => {
+    settle(el, 'ex_horas');
+    const h = exHours(), e = exRow();
+    if (!h || !h.length) { failText(el, 'ex_horas', 'el ejemplo'); return; }
+    el.replaceChildren();
+    const W = el.clientWidth || 400, H = 250, mg = { t: 10, r: 10, b: 26, l: 52 };
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H).attr('role', 'img')
+      .attr('aria-label', 'Entradas por hora observadas y esperadas por el autoencoder y por el modelo vigente');
+    const x = d3.scaleLinear().domain([4, 22]).range([mg.l, W - mg.r]);
+    const ymax = d3.max(h, (r) => Math.max(r.observado, r.esperado_ae, r.esperado_perfil));
+    const y = d3.scaleLinear().domain([0, ymax]).nice().range([H - mg.b, mg.t]);
+    svg.append('g').attr('class', 'ae-grid').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).ticks(4).tickSize(-(W - mg.l - mg.r)).tickFormat('')).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).ticks(W < 420 ? 6 : 10).tickFormat((d) => `${d} h`));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat((v) => fmtEs(v / 1000) + ' mil'));
+    if (e && e.alerta_ae) e.horas_top2.forEach((hr) => svg.append('rect').attr('x', x(hr) - (x(5) - x(4)) / 2).attr('width', x(5) - x(4)).attr('y', mg.t).attr('height', H - mg.t - mg.b)
+      .style('fill', 'var(--cds-chart-status-critical)').style('opacity', 0.08));
+    const line = (k) => d3.line().x((r) => x(r.hora)).y((r) => y(r[k]));
+    svg.append('path').datum(h).attr('d', line('esperado_perfil')).style('fill', 'none').style('stroke', C_PR()).style('stroke-width', 2);
+    svg.append('path').datum(h).attr('d', line('esperado_ae')).style('fill', 'none').style('stroke', C_AE()).style('stroke-width', 2).style('stroke-dasharray', '5 3');
+    svg.append('path').datum(h).attr('d', line('observado')).style('fill', 'none').style('stroke', C_OBS).style('stroke-width', 2);
+    svg.append('g').selectAll('circle').data(h).join('circle').attr('cx', (r) => x(r.hora)).attr('cy', (r) => y(r.observado)).attr('r', 3).style('fill', C_OBS);
+    const tip = aeTip(el);
+    svg.append('rect').attr('x', mg.l).attr('y', mg.t).attr('width', W - mg.l - mg.r).attr('height', H - mg.t - mg.b).style('fill', 'transparent')
+      .on('pointermove', (ev) => { const [px] = d3.pointer(ev); const r = h[Math.max(0, Math.min(h.length - 1, Math.round(x.invert(px)) - 4))];
+        tip.show(ev, [`${r.hora}:00–${r.hora}:59`, `Observado: ${fmtEs(r.observado)}`, `Autoencoder esperaba: ${fmtEs(r.esperado_ae)}`, `Modelo vigente esperaba: ${fmtEs(r.esperado_perfil)}`]); })
+      .on('pointerleave', () => tip.hide());
+  });
+
+  dash.draw('ej-z', (el) => {
+    settle(el, 'ex_horas');
+    const h = exHours();
+    if (!h || !h.length) { failText(el, 'ex_horas', 'el ejemplo'); return; }
+    el.replaceChildren();
+    const W = el.clientWidth || 400, H = 250, mg = { t: 10, r: 10, b: 26, l: 36 };
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H).attr('role', 'img')
+      .attr('aria-label', 'Desviación absoluta por hora del autoencoder (barras) y del modelo vigente (puntos)');
+    const x = d3.scaleBand().domain(h.map((r) => r.hora)).range([mg.l, W - mg.r]).padding(0.25);
+    const zmax = Math.max(5, d3.max(h, (r) => Math.max(Math.abs(r.z_ae), Math.abs(r.z_perfil))));
+    const y = d3.scaleSymlog().constant(1).domain([0, zmax]).range([H - mg.b, mg.t]);
+    const ticks = [0, 1, 3, 10, 30, 100].filter((t) => t <= zmax);
+    svg.append('g').attr('class', 'ae-grid').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).tickValues(ticks).tickSize(-(W - mg.l - mg.r)).tickFormat('')).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).tickValues(h.map((r) => r.hora).filter((v, i) => W < 420 ? i % 3 === 0 : i % 2 === 0)).tickFormat((d) => `${d}`));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).tickValues(ticks).tickFormat((v) => `${v}`));
+    const tip = aeTip(el);
+    svg.append('g').selectAll('rect').data(h).join('rect').attr('x', (r) => x(r.hora)).attr('width', x.bandwidth())
+      .attr('y', (r) => y(Math.abs(r.z_ae))).attr('height', (r) => y(0) - y(Math.abs(r.z_ae))).attr('rx', 2)
+      .style('fill', (r) => r.top2 ? 'var(--cds-chart-status-critical)' : C_AE())
+      .on('pointermove', (ev, r) => tip.show(ev, [`${r.hora} h`, `|z| autoencoder: ${fmtEs(Math.abs(r.z_ae), 1)}${r.top2 ? ' (define el score)' : ''}`, `|z| modelo vigente: ${fmtEs(Math.abs(r.z_perfil), 1)}`]))
+      .on('pointerleave', () => tip.hide());
+    svg.append('g').selectAll('circle').data(h).join('circle').attr('cx', (r) => x(r.hora) + x.bandwidth() / 2).attr('cy', (r) => y(Math.abs(r.z_perfil))).attr('r', 3.5)
+      .style('fill', C_PR()).style('stroke', 'var(--color-panel)').style('stroke-width', 1.2).style('pointer-events', 'none');
+  });
+
+  dash.draw('ej-decision', (el) => {
+    const e = exRow();
+    if (!e) { el.replaceChildren(); return; }
+    const mk = (who, score, thr, alert, why) => {
+      const box = document.createElement('div'); box.className = 'ae-decbox';
+      const a = document.createElement('span'); a.className = 'who'; a.textContent = who;
+      const b = document.createElement('span'); b.className = 'what'; b.dataset.alert = String(alert); b.textContent = alert ? 'Alerta' : 'Sin alerta';
+      const c = document.createElement('span'); c.className = 'why'; c.textContent = `Score ${fmtEs(score, 2)} · umbral ${fmtEs(thr, 2)} · ${fmtEs(score / thr, 2)} veces el umbral${why}`;
+      const bar = document.createElement('div');
+      box.append(a, b, c, bar);
+      const drawBar = () => {
+        const W = bar.clientWidth || 260, H = 26;
+        const svg = d3.select(bar).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H).attr('role', 'img').attr('aria-label', `${who}: score ${fmtEs(score / thr, 2)} veces el umbral`);
+        const x = d3.scaleLog().domain([0.05, Math.max(10, score / thr * 1.2)]).range([2, W - 2]).clamp(true);
+        svg.append('rect').attr('x', 2).attr('y', 9).attr('width', W - 4).attr('height', 8).attr('rx', 4).style('fill', 'var(--cds-chart-grid)');
+        svg.append('rect').attr('x', 2).attr('y', 9).attr('width', Math.max(2, x(score / thr) - 2)).attr('height', 8).attr('rx', 4)
+          .style('fill', alert ? 'var(--cds-chart-status-critical)' : 'var(--cds-chart-muted)');
+        svg.append('line').attr('x1', x(1)).attr('x2', x(1)).attr('y1', 3).attr('y2', 23).style('stroke', 'var(--color-fg)').style('stroke-width', 1.5);
+      };
+      return [box, drawBar];
+    };
+    const items = [
+      mk('Autoencoder con calendario', e.score_ae, e.umbral_ae, e.alerta_ae, e.alerta_ae ? ` · horas ${e.horas_top2.join(' y ')}` : ''),
+      mk('Modelo vigente (perfil contextual)', e.score_perfil, e.umbral_perfil, e.alerta_perfil, '')];
+    el.replaceChildren(...items.map((i) => i[0]));
+    items.forEach((i) => i[1]());  // se dibujan con el ancho real, ya en la página
+  });
+
+  // ---------- Umbral y separación ----------
+  dash.draw('dist-leyenda', (ul) => {
+    const items = [['Autoencoder con calendario', C_AE()], ['Modelo vigente', C_PR()]];
+    ul.replaceChildren(...items.map(([t, c]) => { const li = document.createElement('li'); const s = document.createElement('span'); s.className = 'ae-swatch'; s.style.background = c; li.append(s, document.createTextNode(t)); return li; }));
+  });
+
+  dash.draw('dist', (el) => {
+    settle(el, 'ex_distribucion');
+    const d = aeRows('ex_distribucion');
+    if (!d) { failText(el, 'ex_distribucion', 'la distribución'); return; }
+    el.replaceChildren();
+    const groups = [...new Set([...d].sort((a, b) => a.orden - b.orden).map((r) => r.grupo))];
+    const W = el.clientWidth || 500, rowH = 46;
+    const svg = d3.select(el).append('svg').attr('role', 'img').attr('aria-label', 'Distribución del score relativo al umbral por grupo de días, para el autoencoder y el modelo vigente');
+    const lw = Math.min(measure(svg, groups) + 10, W * 0.42);
+    const rw = 92;
+    const mg = { t: 8, r: rw, b: 28, l: lw };
+    const H = mg.t + mg.b + rowH * groups.length;
+    svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const x = d3.scaleLog().domain([0.02, 20]).range([mg.l, W - mg.r]).clamp(true);
+    const y = d3.scaleBand().domain(groups).range([mg.t, H - mg.b]).padding(0.15);
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).tickValues([0.03, 0.1, 0.3, 1, 3, 10].filter((v, i) => W >= 460 || i % 2 === 1)).tickFormat((v) => fmtEs(v, v < 0.1 ? 2 : v < 1 ? 1 : 0)));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).tickSize(0)).call((g) => g.select('.domain').remove())
+      .call((g) => g.selectAll('.tick text').each(function (t) { const s = this; const words = t.split(' '); if (s.getComputedTextLength() > lw - 12 && words.length > 2) { d3.select(s).text(null); const half = Math.ceil(words.length / 2); d3.select(s).append('tspan').attr('x', -9).attr('dy', '-0.3em').text(words.slice(0, half).join(' ')); d3.select(s).append('tspan').attr('x', -9).attr('dy', '1.1em').text(words.slice(half).join(' ')); } }));
+    svg.append('line').attr('x1', x(1)).attr('x2', x(1)).attr('y1', mg.t).attr('y2', H - mg.b).style('stroke', 'var(--cds-chart-reference)').style('stroke-dasharray', '4 3');
+    svg.append('text').attr('x', x(1) + 4).attr('y', mg.t + 9).text('umbral');
+    const tip = aeTip(el);
+    const off = { 'ae_contextual/top2': -0.22, 'perfil_contextual/peak_shift': 0.22 };
+    d.forEach((r) => {
+      const cy = y(r.grupo) + y.bandwidth() / 2 + off[r.config] * y.bandwidth();
+      const c = r.config.startsWith('ae') ? C_AE() : C_PR();
+      const g = svg.append('g');
+      g.append('line').attr('x1', x(r.p5)).attr('x2', x(r.p95)).attr('y1', cy).attr('y2', cy).style('stroke', c).style('stroke-width', 1.2);
+      g.append('rect').attr('x', x(r.p25)).attr('width', Math.max(2, x(r.p75) - x(r.p25))).attr('y', cy - 6).attr('height', 12).attr('rx', 3).style('fill', c).style('opacity', 0.85);
+      g.append('line').attr('x1', x(r.p50)).attr('x2', x(r.p50)).attr('y1', cy - 7).attr('y2', cy + 7).style('stroke', 'var(--color-panel)').style('stroke-width', 2);
+      g.append('text').attr('x', W - rw + 8).attr('y', cy + 4).text(pctE(r.sobre_umbral)).style('fill', c === C_AE() ? 'var(--color-fg)' : 'var(--color-fg-muted)');
+      g.on('pointermove', (ev) => tip.show(ev, [r.modelo, r.grupo, `Mediana: ${fmtEs(r.p50, 2)} veces el umbral`, `Supera el umbral: ${pctE(r.sobre_umbral)} de ${fmtEs(r.n)} días`])).on('pointerleave', () => tip.hide());
+    });
+    svg.append('text').attr('x', W - rw + 8).attr('y', H - 8).text('% sobre umbral');
+  });
+
+  // ---------- Espacio latente ----------
+  const TIPO = { habil: 'Hábil', sabado: 'Sábado', domingo_festivo: 'Domingo o festivo', especial: '24 y 31 de diciembre' };
+  const TIPO_ORD = ['habil', 'sabado', 'domingo_festivo', 'especial'];
+  dash.draw('lat-leyenda', (ul) => {
+    ul.replaceChildren(...TIPO_ORD.map((t, i) => { const li = document.createElement('li'); const s = document.createElement('span'); s.className = 'ae-swatch'; s.style.background = dash.colors[(i + 2) % dash.colors.length]; li.append(s, document.createTextNode(TIPO[t])); return li; }));
+  });
+  dash.draw('latente', (el) => {
+    settle(el, 'ex_latente');
+    const d = aeRows('ex_latente');
+    if (!d) { failText(el, 'ex_latente', 'el espacio latente'); return; }
+    el.replaceChildren();
+    const W = el.clientWidth || 400, H = Math.min(340, Math.max(260, W * 0.7)), mg = { t: 10, r: 10, b: 30, l: 40 };
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H).attr('role', 'img')
+      .attr('aria-label', 'Días reales ubicados según el resumen de 4 números del autoencoder, coloreados por tipo de día');
+    // Escala symlog: separa la nube principal sin ocultar los pocos días extremos.
+    const x = d3.scaleSymlog().constant(1).domain(d3.extent(d, (r) => r.pc1)).range([mg.l, W - mg.r]);
+    const y = d3.scaleSymlog().constant(1).domain(d3.extent(d, (r) => r.pc2)).range([H - mg.b, mg.t]);
+    const tk = (sc) => [-30, -10, -3, -1, 0, 1, 3, 10, 30].filter((v) => v >= sc.domain()[0] && v <= sc.domain()[1]);
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).tickValues(tk(x)));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).tickValues(tk(y)));
+    svg.append('text').attr('x', W - mg.r).attr('y', H - mg.b - 6).attr('text-anchor', 'end').text('Componente 1');
+    svg.append('text').attr('x', mg.l + 4).attr('y', mg.t + 10).text('Componente 2');
+    const col = (t) => dash.colors[(TIPO_ORD.indexOf(t) + 2) % dash.colors.length];
+    const tip = aeTip(el);
+    const fmtD = d3.utcFormat('%d/%m/%Y'), parse = d3.utcParse('%Y-%m-%d');
+    const pts = [...d].sort((a, b) => (a.score_rel > 1) - (b.score_rel > 1));
+    svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', (r) => x(r.pc1)).attr('cy', (r) => y(r.pc2))
+      .attr('r', (r) => r.score_rel > 1 ? 4.5 : 3).style('fill', (r) => col(r.tipo_dia)).style('fill-opacity', 0.75)
+      .style('stroke', (r) => r.score_rel > 1 ? 'var(--cds-chart-status-critical)' : 'none').style('stroke-width', 1.8)
+      .on('pointermove', (ev, r) => tip.show(ev, [fmtD(parse(r.fecha)), TIPO[r.tipo_dia] || r.tipo_dia, `Score/umbral: ${fmtEs(r.score_rel, 2)}`, r.nota].filter(Boolean)))
+      .on('pointerleave', () => tip.hide());
+  });
+  dash.draw('lat-nota', (el) => {
+    const d = aeRows('ex_latente');
+    if (!d) { el.textContent = '—'; return; }
+    const out = d.filter((r) => r.score_rel > 1);
+    const byT = d3.rollup(out, (v) => v.length, (r) => r.tipo_dia);
+    const parts = TIPO_ORD.filter((t) => byT.get(t)).map((t) => `${byT.get(t)} ${TIPO[t].toLowerCase()}`);
+    el.textContent = `Los días se agrupan por tipo: el autoencoder aprendió sobre todo la forma de cada tipo de día. De ${fmtEs(d.length)} días, ${fmtEs(out.length)} superan el umbral (${parts.join(', ')}). Este modelo se ajustó con datos hasta mayo de 2024, así que en esos meses lo mostrado es ajuste y no evaluación.`;
+  });
+
+  // ---------- Mapa de calor ----------
+  dash.draw('mapa', (el) => {
+    settle(el, 'ex_mapa');
+    const d = aeRows('ex_mapa');
+    if (!d) { failText(el, 'ex_mapa', 'el mapa'); return; }
+    el.replaceChildren();
+    const parse = d3.utcParse('%Y-%m-%d'), fmtD = d3.utcFormat('%d/%m/%Y');
+    const days = [...new Set(d.map((r) => r.fecha))].sort();
+    const W = el.clientWidth || 400, mg = { t: 14, r: 6, b: 24, l: 34 }, rowH = 10;
+    const H = mg.t + mg.b + rowH * 19;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H).attr('role', 'img')
+      .attr('aria-label', 'Desviación absoluta del autoencoder por día y hora en el periodo evaluado');
+    const x = d3.scaleUtc().domain([parse(days[0]), d3.utcDay.offset(parse(days[days.length - 1]), 1)]).range([mg.l, W - mg.r]);
+    const y = d3.scaleBand().domain(d3.range(4, 23)).range([mg.t, H - mg.b]);
+    const cw = Math.max(1, (W - mg.l - mg.r) / days.length);
+    const op = d3.scaleLinear().domain([0, 10]).range([0.04, 1]).clamp(true);
+    const g = svg.append('g');
+    g.selectAll('rect').data(d).join('rect').attr('x', (r) => x(parse(r.fecha))).attr('y', (r) => y(r.hora)).attr('width', cw + 0.3).attr('height', y.bandwidth())
+      .style('fill', C_AE()).style('fill-opacity', (r) => op(r.z));
+    const alerts = [...new Set(d.filter((r) => r.alerta).map((r) => r.fecha))];
+    svg.append('g').selectAll('rect').data(alerts).join('rect').attr('x', (f) => x(parse(f))).attr('y', 2).attr('width', Math.max(2, cw)).attr('height', 8)
+      .style('fill', 'var(--cds-chart-status-critical)');
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).ticks(W < 420 ? 4 : 8).tickFormat(d3.utcFormat('%b')));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).tickValues([6, 10, 14, 18, 22]).tickFormat((v) => `${v} h`)).call((gg) => gg.select('.domain').remove());
+    const tip = aeTip(el);
+    const idx = d3.index(d, (r) => r.fecha, (r) => r.hora);
+    svg.append('rect').attr('x', mg.l).attr('y', mg.t).attr('width', W - mg.l - mg.r).attr('height', H - mg.t - mg.b).style('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [px, py] = d3.pointer(ev);
+        const day = d3.utcDay.floor(x.invert(px)); const hr = 4 + Math.floor((py - mg.t) / y.step());
+        const key = d3.utcFormat('%Y-%m-%d')(day); const r = idx.get(key)?.get(hr);
+        if (!r) { tip.hide(); return; }
+        tip.show(ev, [`${fmtD(day)}, ${hr} h`, `|z|: ${fmtEs(r.z, 1)}`, r.alerta ? 'Día con alerta' : 'Día sin alerta']);
+      }).on('pointerleave', () => tip.hide());
   });
 </script>

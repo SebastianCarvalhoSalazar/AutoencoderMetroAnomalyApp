@@ -384,3 +384,27 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
   - Recall moderado: AE 0,522 frente a perfil 0,506. Diferencia +0,016 [−0,038; 0,069], **sin diferencia demostrada**. Tasa de alertas en días reales: 4,9 % frente a 2,2 %.
 - **Implicación para A1:** la combinación tiene una base empírica más amplia que solo los errores de datos. El criterio pre-registrado de A1 **no se cambia**.
 - **Visualizaciones:** tablero "Autoencoders en el Metro" (artifact privado), alimentado por `scripts/investigacion_ae/exportar_tablero.py`.
+
+## 2026-11-26 — [AE.1+] Validación y ampliación del tablero de visualizaciones (a pedido del usuario)
+- **Validación propia de la página:** la página no reportó ninguna apertura con los datos nuevos, así que se validó en un arnés local.
+  - El arnés reproduce el entorno del tablero (`tests/investigacion_ae/arnes_tablero.py`) en un Chromium real, a 1280 y 400 px, en tema claro y oscuro, con los mismos archivos de datos (`tests/investigacion_ae/validar_tablero.js`).
+  - **Defectos hallados y corregidos:**
+    1. El primer minigráfico de la serie diaria medía su ancho antes de que la cuadrícula ubicara todas las cajas y se dibujaba diminuto.
+    2. La última columna de la tabla quedaba cortada.
+    3. Los nombres de las tareas mostraban acentos graves del Markdown.
+    4. El diagrama de arquitectura se veía ilegible en el móvil y su texto se salía de las cajas.
+    5. Unos pocos días extremos aplastaban el espacio latente; se pasó a escala symlog.
+    6. Una etiqueta de eje quedaba superpuesta.
+    7. Las barras de decisión se medían antes de estar en la página.
+  - **Estado final:** sin errores de JavaScript, sin desbordamiento de página y sin dibujos vacíos, en ambos anchos y temas; los 5 ejemplos se recorren sin errores.
+- **Nueva sección "Cómo funciona"** (`scripts/investigacion_ae/ae_explicar.py`, con los mismos modelos de la evaluación rolling y la semilla 0):
+  - diagrama de la arquitectura (30 entradas → 16 → 8 → **4** → 8 → 16 → 19) y los 5 pasos de la decisión;
+  - explorador de 5 días: lo observado frente a lo esperado por cada modelo, |z| por hora y decisión de ambos;
+  - distribución del score respecto del umbral;
+  - espacio latente: los días se agrupan por tipo, con 91,5 % y 6,9 % de varianza en dos componentes;
+  - mapa |z| por día y hora.
+  - **Control cruzado:** la proporción de días sobre el umbral en la distribución coincide con AE.1 (moderadas: AE 52,2 % y perfil 50,6 %; días reales: 4,95 % y 2,2 %).
+- **Hallazgo:** en el incidente real del 28/08/2023, la caída extrema de las 18–19 h distorsiona toda la reconstrucción del AE.
+  - Lo esperado a las 6 h baja a 21 560 frente a 64 208 observados.
+  - El AE alerta (score 69,3 frente a un umbral de 9,5), pero señala las 6 h y las 19 h; el perfil señala las 18 h y las 19 h.
+  - Un día anómalo contamina la reconstrucción de horas normales, lo que explica la menor precisión del AE al localizar la hora (0,935 frente a 0,983).

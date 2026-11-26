@@ -35,7 +35,7 @@ def progreso():
         m = re.match(r"\|\s*(AE\.\d+)\s*\|\s*(.+?)\s*\|\s*(.+?)\s*\|\s*$", line)
         if m:
             estado = m.group(3)
-            rows.append({"orden": len(rows) + 1, "id": m.group(1), "tarea": m.group(2),
+            rows.append({"orden": len(rows) + 1, "id": m.group(1), "tarea": m.group(2).replace("`", ""),
                          "estado": estado.split(" ")[0].strip("*"), "detalle": estado})
     write("progreso", rows, [{"label": "Fuente", "value": "docs/investigacion_autoencoders/PLAN.md, sección Tareas"}])
 
@@ -66,6 +66,37 @@ def ae1():
     write("ae1_serie", serie, meta)
 
 
+def explicar():
+    p = IA / "explicar.json"
+    if not p.exists():
+        return
+    import numpy as np
+    d = json.loads(p.read_text(encoding="utf-8"))
+    meta = code_meta("scripts/investigacion_ae/ae_explicar.py") + [
+        {"label": "Modelos", "value": "Los mismos de la evaluación rolling: ajuste con datos anteriores al mes del día mostrado, semilla 0; "
+                                      "umbrales fijados en 2022-04…2023-06"}]
+    write("ex_ejemplos", d["ejemplos"], meta)
+    write("ex_horas", d["ejemplos_horas"], meta)
+    lm = d["latente_meta"]
+    write("ex_latente", d["latente"], meta + [{"label": "Proyección", "value": f"PCA de las {lm['dim_cuello']} coordenadas del cuello de botella; "
+                                                                               f"varianza explicada {lm['varianza_pc'][0]:.1%} y {lm['varianza_pc'][1]:.1%}"}])
+    # Distribución: resumen por cuantiles (el detalle está en explicar.json)
+    rows = []
+    groups = ["Días reales 2022–2023 (fijan el umbral)", "Días reales del periodo evaluado", "Anomalías simuladas leves",
+              "Anomalías simuladas moderadas", "Anomalías simuladas severas"]
+    for cfg in ("ae_contextual/top2", "perfil_contextual/peak_shift"):
+        for gi, g in enumerate(groups):
+            v = np.array([r["rel"] for r in d["distribucion"] if r["config"] == cfg and r["grupo"] == g])
+            if len(v):
+                q = np.quantile(v, [0.05, 0.25, 0.5, 0.75, 0.95])
+                rows.append({"config": cfg, "modelo": LABEL[cfg], "orden": gi + 1, "grupo": g, "n": int(len(v)),
+                             "sobre_umbral": round(float((v > 1).mean()), 4), **{f"p{k}": round(float(x), 4) for k, x in zip((5, 25, 50, 75, 95), q)}})
+    write("ex_distribucion", rows, meta + [{"label": "Cálculo", "value": "Cuantiles 5, 25, 50, 75 y 95 de score/umbral por grupo; "
+                                                                          "sobre_umbral = proporción de días con score mayor que el umbral"}])
+    write("ex_mapa", d["mapa"], meta)
+
+
 if __name__ == "__main__":
     progreso()
     ae1()
+    explicar()
