@@ -19,6 +19,11 @@
   .ae-chip { align-self: flex-start; font-size: var(--cds-font-size-caption); border-radius: 999px; padding: 1px 8px; border: 1px solid var(--color-border-line); color: var(--color-fg-muted); }
   .ae-chip[data-state="COMPLETADA"] { border-color: var(--color-ok); color: var(--color-ok); }
   .ae-chip[data-state="EN"] { border-color: var(--color-warn); color: var(--color-warn); }
+  .ae-chip[data-state="DESCARTADA"], .ae-chip[data-verdict="descartada"] { border-color: var(--color-fg-muted); color: var(--color-fg-muted); }
+  .ae-chip[data-verdict="no cumple"] { border-color: var(--color-bad); color: var(--color-bad); }
+  .ae-chip[data-verdict="cumple"] { border-color: var(--color-ok); color: var(--color-ok); background: var(--color-panel); }
+  .ae-step { gap: 4px; }
+  .ae-step .ae-chip + .ae-chip { margin-top: 0; }
   .ae-chart { position: relative; min-height: 260px; }
   .ae-chart svg { display: block; width: 100%; overflow: visible; }
   .ae-chart text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); font-family: var(--font-anthropic-sans); }
@@ -154,6 +159,53 @@
     </div>
   </section>
 
+  <section class="ae-section" id="ae3">
+    <p class="ae-eyebrow">AE.3 · Hipótesis A2</p>
+    <h2>¿Un autoencoder de toda la red supera a la coherencia de red?</h2>
+    <p class="ae-verdict" data-read lang="es">El autoencoder reconstruye el día de las 11 líneas a la vez (209 celdas) y puntúa la línea objetivo; se compara con el detector de coherencia de red adoptado, con el mismo número de alertas y anomalías simuladas solo en la línea objetivo. <span data-draw="ae3-veredicto"></span></p>
+    <div class="ae-card" id="ae3-card">
+      <h3>Detección de anomalías moderadas locales por línea</h3>
+      <ul class="ae-legend" data-draw="ae3-leyenda"></ul>
+      <div class="ae-chart dash-skeleton" data-draw="ae3" data-source="ae3_lineas"></div>
+    </div>
+  </section>
+
+  <section class="ae-section" id="ae4">
+    <p class="ae-eyebrow">AE.4 · Hipótesis A3</p>
+    <h2>¿Completar las horas faltantes de los cables?</h2>
+    <p class="ae-verdict" data-read lang="es">Descartada antes de entrenar. En los cables, las horas de 4 a 7 de la mañana faltan en casi todos los domingos y festivos y casi nunca en días hábiles. El horario oficial del Metro lo explica: esos días la Línea K abre a las 8:30 y las H, J, M y P a las 9:00. No son datos perdidos sino horas sin servicio, y completarlas inventaría demanda. Lo útil, sin autoencoder, es evaluar cada día solo con las horas en que la línea opera.</p>
+  </section>
+
+  <section class="ae-section" id="ae5">
+    <p class="ae-eyebrow">AE.5 · Hipótesis A4 (descriptiva)</p>
+    <h2>¿El resumen de 4 números aísla los días con eventos reales?</h2>
+    <p class="ae-verdict" data-read lang="es">Para cada día se mide qué tan lejos queda su resumen del centro de los días de su mismo tipo. <span data-draw="ae5-veredicto"></span></p>
+    <div class="ae-grid2">
+      <div class="ae-card" id="ae5-dist">
+        <h3>Distancia de cada día al centro de su tipo</h3>
+        <p class="ae-note">Escala logarítmica. Cada punto es un día real; los días con eventos verificados están resaltados y rotulados.</p>
+        <div class="ae-chart dash-skeleton" data-draw="ae5" data-source="ae5_dias"></div>
+      </div>
+      <div class="ae-card" id="ae5-auc">
+        <h3>Qué tan bien separa (AUC)</h3>
+        <p class="ae-note">1 = separa perfectamente; 0,5 = al azar. La línea gris marca el mínimo exigido (0,85). Con solo 9 eventos, los intervalos son anchos.</p>
+        <div class="ae-chart dash-skeleton" data-draw="ae5-auc" data-source="ae5_resumen"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ae-section" id="ae6">
+    <p class="ae-eyebrow">AE.6 · Hipótesis A5</p>
+    <h2>¿Avisa antes un cambio de régimen, como la cuarentena de 2020?</h2>
+    <p class="ae-verdict" data-read lang="es"><span data-draw="ae6-veredicto">—</span></p>
+    <div class="ae-card" id="ae6-card">
+      <h3>Primer semestre de 2020: cada aviso frente a su propio umbral</h3>
+      <p class="ae-note">Escala logarítmica, en veces el umbral de aviso de cada uno. La línea vertical marca el decreto municipal del 20/03/2020. Los valores altos de los primeros días de enero son un artefacto de arranque: el monitor tiene pocos días acumulados y coinciden con la temporada de fin de año.</p>
+      <ul class="ae-legend" data-draw="ae6-leyenda"></ul>
+      <div class="ae-chart dash-skeleton" data-draw="ae6" data-source="ae6_covid"></div>
+    </div>
+  </section>
+
   <section class="ae-section" id="como-funciona">
     <p class="ae-eyebrow">Cómo funciona</p>
     <h2>Qué hace el autoencoder con un día y cómo decide si alertar</h2>
@@ -282,8 +334,11 @@
   dash.draw('lede', (el) => {
     const p = aeRows('progreso');
     if (!p) { el.textContent = ''; return; }
-    const done = p.filter((r) => r.estado === 'COMPLETADA').length;
-    el.textContent = `Van ${done} de ${p.length} tareas completadas.`;
+    const done = p.filter((r) => r.estado !== 'PENDIENTE').length;
+    const ok = p.filter((r) => r.veredicto === 'cumple').length, no = p.filter((r) => r.veredicto === 'no cumple').length, ds = p.filter((r) => r.veredicto === 'descartada').length;
+    el.textContent = done === p.length
+      ? `Línea cerrada: de las hipótesis evaluadas, ${ok} cumple su criterio, ${no} no lo cumplen y ${ds} se descartó por premisa falsa. Ningún modelo de alerta cambia.`
+      : `Van ${done} de ${p.length} tareas cerradas.`;
   });
 
   dash.draw('pasos', (ul) => {
@@ -295,7 +350,11 @@
       const a = document.createElement('span'); a.className = 'ae-step-id'; a.textContent = r.id;
       const b = document.createElement('span'); b.className = 'ae-step-name'; b.textContent = r.tarea;
       const c = document.createElement('span'); c.className = 'ae-chip'; c.dataset.state = r.estado; c.textContent = r.estado.toLowerCase();
-      li.append(a, b, c); return li;
+      li.append(a, b, c);
+      if (r.veredicto && r.veredicto !== r.estado.toLowerCase()) {
+        const v = document.createElement('span'); v.className = 'ae-chip'; v.dataset.verdict = r.veredicto; v.textContent = r.veredicto; li.append(v);
+      }
+      return li;
     }));
   });
 
@@ -814,5 +873,149 @@
       .attr('x', x(0)).attr('y', (r) => y(r.tipo) + y.bandwidth() / 2 + off(r.clave) - 3).attr('height', 6).attr('rx', 3)
       .attr('width', (r) => Math.max(1, x(r.recall) - x(0))).style('fill', (r) => ae2Col(r.clave))
       .on('pointermove', (ev, r) => tip.show(ev, [r.modelo, `${r.tipo}: ${pctE(r.recall)}`])).on('pointerleave', () => tip.hide());
+  });
+</script>
+
+<script>
+  // ---------- AE.3 a AE.6 ----------
+  const pctS3 = (v) => (v > 0 ? '+' : '') + d3.format('.1%')(v).replace('.', ',');
+  const leg3 = (ul, items) => ul.replaceChildren(...items.map(([t, c]) => { const li = document.createElement('li'); const s = document.createElement('span'); s.className = 'ae-swatch'; s.style.background = c; li.append(s, document.createTextNode(t)); return li; }));
+
+  dash.draw('ae3-veredicto', (el) => {
+    const d = aeRows('ae3_lineas');
+    if (!d) { el.textContent = ''; return; }
+    const by = Object.fromEntries(d.map((r) => [r.linea, r]));
+    const worse = d.filter((r) => r.ic_sup < 0).map((r) => r.linea), better = d.filter((r) => r.ic_inf > 0).map((r) => r.linea);
+    el.textContent = `Resultado: no cumple. Es peor en ${worse.join(', ')} (Línea A: ${pctS3(by.A.diferencia)}) y solo mejora en ${better.join(', ')} (${better.map((l) => pctS3(by[l].diferencia)).join(', ')}), justo donde la coherencia no aportaba. Además alerta más en festivos en la Línea A (${pctE(by.A.festivos_ae)} frente a ${pctE(by.A.festivos_coherencia)}).`;
+  });
+  dash.draw('ae3-leyenda', (ul) => leg3(ul, [['Coherencia de red (adoptada)', dash.colors[2]], ['Autoencoder multilínea', dash.colors[1]]]));
+  dash.draw('ae3', (el) => {
+    settle(el, 'ae3_lineas');
+    const d = aeRows('ae3_lineas');
+    if (!d) { failText(el, 'ae3_lineas', 'los resultados'); return; }
+    el.replaceChildren();
+    const rows = [...d].sort((a, b) => a.orden - b.orden);
+    const W = el.clientWidth || 500, rowH = 40, mg = { t: 22, r: 110, b: 28, l: 48 };
+    const H = mg.t + mg.b + rowH * rows.length;
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H).attr('role', 'img').attr('aria-label', 'Detección moderada por línea de la coherencia de red y del autoencoder multilínea');
+    const x = d3.scaleLinear().domain([0, 1]).range([mg.l, W - mg.r]);
+    const y = d3.scaleBand().domain(rows.map((r) => r.linea)).range([mg.t, H - mg.b]).padding(0.3);
+    svg.append('g').attr('class', 'ae-grid').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).ticks(5).tickSize(-(H - mg.t - mg.b)).tickFormat('')).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).ticks(W < 420 ? 3 : 5).tickFormat(d3.format('.0%')));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).tickSize(0).tickFormat((l) => `Línea ${l}`)).call((g) => g.select('.domain').remove());
+    const tip = aeTip(el);
+    rows.forEach((r) => {
+      const cy = y(r.linea) + y.bandwidth() / 2, g = svg.append('g');
+      g.append('line').attr('x1', x(r.coherencia)).attr('x2', x(r.ae_multilinea)).attr('y1', cy).attr('y2', cy).style('stroke', 'var(--cds-chart-muted)').style('stroke-width', 2);
+      g.append('circle').attr('cx', x(r.coherencia)).attr('cy', cy).attr('r', 6).style('fill', dash.colors[2]);
+      g.append('circle').attr('cx', x(r.ae_multilinea)).attr('cy', cy).attr('r', 6).style('fill', dash.colors[1]);
+      g.append('text').attr('x', W - mg.r + 8).attr('y', cy + 4).text(`${pctS3(r.diferencia)}`).style('fill', r.ic_inf > 0 ? 'var(--color-ok)' : r.ic_sup < 0 ? 'var(--color-bad)' : 'var(--color-fg-muted)');
+      g.on('pointermove', (ev) => tip.show(ev, [`Línea ${r.linea}`, `Coherencia: ${pctE(r.coherencia)}`, `Autoencoder multilínea: ${pctE(r.ae_multilinea)}`, `Diferencia: ${pctS3(r.diferencia)} (IC ${pctS3(r.ic_inf)} a ${pctS3(r.ic_sup)})`])).on('pointerleave', () => tip.hide());
+    });
+    svg.append('text').attr('x', W - mg.r + 8).attr('y', 12).text('diferencia');
+  });
+
+  dash.draw('ae5-veredicto', (el) => {
+    const r = aeRows('ae5_resumen');
+    if (!r) { el.textContent = ''; return; }
+    const a = r.find((x) => x.orden === 1), b = r.find((x) => x.orden === 2);
+    el.textContent = `Resultado: cumple el criterio (AUC ${fmtEs(a.auc, 3)}, exigido 0,85), con cautela: el intervalo va de ${fmtEs(a.ic_inf, 2)} a ${fmtEs(a.ic_sup, 2)} porque hay solo 9 eventos. Separa muy bien las jornadas electorales sin cobro y los cierres anticipados de diciembre, pero no las interrupciones parciales. Sirve para explicar cómo organiza los días el modelo, no para alertar.`;
+  });
+  dash.draw('ae5', (el) => {
+    settle(el, 'ae5_dias');
+    const d = aeRows('ae5_dias');
+    if (!d) { failText(el, 'ae5_dias', 'las distancias'); return; }
+    el.replaceChildren();
+    const TIPO5 = { habil: 'Hábil', sabado: 'Sábado', domingo_festivo: 'Domingo o festivo', especial: '24/31 dic' };
+    const W = el.clientWidth || 420, H = 300, mg = { t: 16, r: 12, b: 30, l: 112 };
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H).attr('role', 'img').attr('aria-label', 'Distancia latente de cada día al centro de su tipo, con los días de eventos verificados resaltados');
+    const x = d3.scaleLog().domain([Math.max(0.05, d3.min(d, (r) => r.distancia)), d3.max(d, (r) => r.distancia) * 1.3]).range([mg.l, W - mg.r]).clamp(true);
+    const tipos = ['habil', 'sabado', 'domingo_festivo', 'especial'].filter((t) => d.some((r) => r.tipo_dia === t));
+    const y = d3.scaleBand().domain(tipos).range([mg.t, H - mg.b]).padding(0.2);
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).ticks(W < 420 ? 3 : 6, '~g'));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).tickSize(0).tickFormat((t) => TIPO5[t] || t)).call((g) => g.select('.domain').remove());
+    const rnd = d3.randomLcg(7);
+    const tip = aeTip(el);
+    const fmtD = d3.utcFormat('%d/%m/%Y'), parse = d3.utcParse('%Y-%m-%d');
+    const pts = [...d].sort((a, b) => a.evento - b.evento).map((r) => ({ ...r, jy: (rnd() - 0.5) * y.bandwidth() * 0.8 }));
+    svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', (r) => x(r.distancia)).attr('cy', (r) => y(r.tipo_dia) + y.bandwidth() / 2 + r.jy)
+      .attr('r', (r) => r.evento ? 5.5 : 2.4).style('fill', (r) => r.evento ? 'var(--cds-chart-status-critical)' : dash.colors[1]).style('fill-opacity', (r) => r.evento ? 1 : 0.45)
+      .style('stroke', (r) => r.evento ? 'var(--color-panel)' : 'none').style('stroke-width', 1.5)
+      .on('pointermove', (ev, r) => tip.show(ev, [fmtD(parse(r.fecha)), TIPO5[r.tipo_dia] || r.tipo_dia, `Distancia: ${fmtEs(r.distancia, 2)}`, r.evento ? 'Evento verificado' : ''].filter(Boolean)))
+      .on('pointerleave', () => tip.hide());
+    // Etiquetas: los eventos muy cercanos del mismo tipo se agrupan en una sola etiqueta (el detalle está en el tooltip).
+    const evs = pts.filter((r) => r.evento).sort((a, b) => a.tipo_dia.localeCompare(b.tipo_dia) || a.distancia - b.distancia);
+    const groups5 = [];
+    evs.forEach((r) => { const g = groups5[groups5.length - 1]; if (g && g[0].tipo_dia === r.tipo_dia && x(r.distancia) - x(g[g.length - 1].distancia) < 56) g.push(r); else groups5.push([r]); });
+    svg.append('g').selectAll('text').data(groups5).join('text')
+      .attr('x', (g) => d3.mean(g, (r) => x(r.distancia))).attr('y', (g) => d3.min(g, (r) => y(r.tipo_dia) + y.bandwidth() / 2 + r.jy) - 9).attr('text-anchor', 'middle')
+      .text((g) => g.length === 1 ? d3.utcFormat('%d/%m/%y')(parse(g[0].fecha)) : `${g.length} eventos`).style('font-size', '10px');
+  });
+  dash.draw('ae5-auc', (el) => {
+    settle(el, 'ae5_resumen');
+    const d = aeRows('ae5_resumen');
+    if (!d) { failText(el, 'ae5_resumen', 'el AUC'); return; }
+    el.replaceChildren();
+    const rows = [...d].sort((a, b) => a.orden - b.orden);
+    const W = el.clientWidth || 380, rowH = 60;
+    const svg = d3.select(el).append('svg').attr('role', 'img').attr('aria-label', 'AUC con intervalo de la distancia latente y del score del modelo vigente');
+    const lw = Math.min(measure(svg, rows.map((r) => r.medida)) + 12, W * 0.5);
+    const mg = { t: 12, r: 14, b: 28, l: lw };
+    const H = mg.t + mg.b + rowH * rows.length;
+    svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const x = d3.scaleLinear().domain([0.5, 1]).range([mg.l, W - mg.r]);
+    const y = d3.scaleBand().domain(rows.map((r) => r.medida)).range([mg.t, H - mg.b]).padding(0.35);
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).ticks(5).tickFormat((v) => fmtEs(v, 2)));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).tickSize(0)).call((g) => g.select('.domain').remove())
+      .call((g) => g.selectAll('.tick text').each(function (t) { const s = this; const w = t.split(' '); if (s.getComputedTextLength() > lw - 12 && w.length > 2) { d3.select(s).text(null); const h = Math.ceil(w.length / 2); d3.select(s).append('tspan').attr('x', -9).attr('dy', '-0.3em').text(w.slice(0, h).join(' ')); d3.select(s).append('tspan').attr('x', -9).attr('dy', '1.1em').text(w.slice(h).join(' ')); } }));
+    svg.append('line').attr('x1', x(0.85)).attr('x2', x(0.85)).attr('y1', mg.t).attr('y2', H - mg.b).style('stroke', 'var(--cds-chart-muted)').style('stroke-width', 3);
+    rows.forEach((r) => {
+      const cy = y(r.medida) + y.bandwidth() / 2, c = r.orden === 1 ? dash.colors[1] : dash.colors[0];
+      svg.append('line').attr('x1', x(r.ic_inf)).attr('x2', x(Math.min(1, r.ic_sup))).attr('y1', cy).attr('y2', cy).style('stroke', c).style('stroke-width', 2.5);
+      svg.append('circle').attr('cx', x(r.auc)).attr('cy', cy).attr('r', 6).style('fill', c).style('stroke', 'var(--color-panel)').style('stroke-width', 1.5);
+      svg.append('text').attr('x', x(r.auc)).attr('y', cy - 11).attr('text-anchor', 'middle').text(fmtEs(r.auc, 3));
+    });
+  });
+
+  dash.draw('ae6-veredicto', (el) => {
+    const r = aeRows('ae6_resumen');
+    if (!r || !r.length) { el.textContent = '—'; return; }
+    const x = r[0], f = (s) => s ? d3.utcFormat('%d/%m/%Y')(d3.utcParse('%Y-%m-%d')(s)) : '—';
+    const same = x.aviso_activo_desde_ae && x.aviso_activo_desde_ae === x.aviso_activo_desde_monitor;
+    el.textContent = `Resultado: no cumple. El aviso del autoencoder (media de 7 días sobre su percentil 99) y el del monitor actual (más del 10 % de días con alerta en 90 días) ${same ? `ya estaban activos desde el ${f(x.aviso_activo_desde_ae)}, un día antes del decreto` : `quedan activos el ${f(x.primer_aviso_ae)} y el ${f(x.primer_aviso_monitor)}`}: el autoencoder no se adelanta al monitor (${x.ventaja_dias} días de ventaja; se exigían 3). En 2022–2024 el autoencoder habría avisado en ${fmtEs(x.episodios_por_anio, 2).replace(',00', '')} episodios por año, y ese único episodio fue una jornada electoral.`;
+  });
+  dash.draw('ae6-leyenda', (ul) => leg3(ul, [['Autoencoder (media de 7 días)', dash.colors[1]], ['Monitor actual (alertas en 90 días)', dash.colors[0]]]));
+  dash.draw('ae6', (el) => {
+    settle(el, 'ae6_covid');
+    const d = aeRows('ae6_covid');
+    if (!d) { failText(el, 'ae6_covid', 'la serie de 2020'); return; }
+    el.replaceChildren();
+    const parse = d3.utcParse('%Y-%m-%d'), fmtD = d3.utcFormat('%d/%m/%Y');
+    const series = d3.group(d.map((r) => ({ ...r, t: parse(r.fecha) })), (r) => r.serie);
+    const W = el.clientWidth || 500, H = 260, mg = { t: 10, r: 12, b: 26, l: 40 };
+    const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H).attr('role', 'img').attr('aria-label', 'Avisos de cambio de régimen del autoencoder y del monitor en el primer semestre de 2020');
+    const x = d3.scaleUtc().domain(d3.extent(d, (r) => parse(r.fecha))).range([mg.l, W - mg.r]);
+    const vals = d.map((r) => Math.max(r.relativo, 0.01));
+    const y = d3.scaleLog().domain([Math.max(0.05, d3.min(vals)), d3.max(vals) * 1.1]).range([H - mg.b, mg.t]).clamp(true);
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).ticks(W < 420 ? 4 : 6).tickFormat(d3.utcFormat('%b')));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).ticks(4, '~g'));
+    svg.append('line').attr('x1', mg.l).attr('x2', W - mg.r).attr('y1', y(1)).attr('y2', y(1)).style('stroke', 'var(--cds-chart-reference)').style('stroke-dasharray', '4 3');
+    svg.append('text').attr('x', W - mg.r).attr('y', y(1) - 4).attr('text-anchor', 'end').text('umbral de aviso');
+    const ev = parse('2020-03-20');
+    svg.append('line').attr('x1', x(ev)).attr('x2', x(ev)).attr('y1', mg.t).attr('y2', H - mg.b).style('stroke', 'var(--color-fg-muted)');
+    svg.append('text').attr('x', x(ev) + 4).attr('y', mg.t + 10).text('decreto 20/03');
+    const cols = { 'Autoencoder (media de 7 días)': dash.colors[1], 'Monitor actual (alertas en 90 días)': dash.colors[0] };
+    for (const [k, rows] of series) {
+      svg.append('path').datum(rows).attr('d', d3.line().x((r) => x(r.t)).y((r) => y(Math.max(r.relativo, 0.01)))).style('fill', 'none').style('stroke', cols[k] || dash.colors[2]).style('stroke-width', 2);
+    }
+    const tip = aeTip(el);
+    const bis = d3.bisector((r) => r.t).center;
+    svg.append('rect').attr('x', mg.l).attr('y', mg.t).attr('width', W - mg.l - mg.r).attr('height', H - mg.t - mg.b).style('fill', 'transparent')
+      .on('pointermove', (evn) => {
+        const [px] = d3.pointer(evn), t = x.invert(px);
+        const lines = [fmtD(t)];
+        for (const [k, rows] of series) { const r = rows[bis(rows, t)]; if (r) lines.push(`${k}: ${fmtEs(r.relativo, 2)} veces su umbral`); }
+        tip.show(evn, lines);
+      }).on('pointerleave', () => tip.hide());
   });
 </script>

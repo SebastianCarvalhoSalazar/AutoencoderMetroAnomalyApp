@@ -47,8 +47,10 @@ def progreso():
         m = re.match(r"\|\s*(AE\.\d+)\s*\|\s*(.+?)\s*\|\s*(.+?)\s*\|\s*$", line)
         if m:
             estado = m.group(3)
+            ver = ("no cumple" if "NO CUMPLE" in estado else "descartada" if "DESCARTADA" in estado else
+                   "cumple" if "CUMPLE" in estado else "")
             rows.append({"orden": len(rows) + 1, "id": m.group(1), "tarea": m.group(2).replace("`", ""),
-                         "estado": estado.split(" ")[0].strip("*"), "detalle": estado})
+                         "estado": estado.split(" ")[0].strip("*"), "veredicto": ver, "detalle": estado.replace("`", "").replace("**", "")})
     write("progreso", rows, [{"label": "Fuente", "value": "docs/investigacion_autoencoders/PLAN.md, sección Tareas"}])
 
 
@@ -153,7 +155,41 @@ def ae3():
     write("ae3_lineas", rows, meta + [{"label": "Veredicto", "value": d["criterio"]["veredicto"]}])
 
 
+def ae5():
+    p = IA / "ae5.json"
+    if not p.exists():
+        return
+    d = json.loads(p.read_text(encoding="utf-8"))
+    meta = code_meta("scripts/investigacion_ae/ae5_latente.py")
+    write("ae5_dias", d["dias"], meta)
+    write("ae5_resumen", [{"medida": "Distancia en el espacio latente (autoencoder)", **d["auc_latente"], "orden": 1},
+                          {"medida": "Score del modelo vigente (referencia)", **{k: d["auc_perfil_referencia"][k] for k in ("auc", "ic_inf", "ic_sup")}, "orden": 2}],
+          meta + [{"label": "Positivos", "value": ", ".join(d["positivos"])}])
+
+
+def ae6():
+    p = IA / "ae6.json"
+    if not p.exists():
+        return
+    d = json.loads(p.read_text(encoding="utf-8"))
+    meta = code_meta("scripts/investigacion_ae/ae6_regimen.py")
+    rows = []
+    for r in d["serie_covid"]:
+        if r["ma7_ae_rel"] is not None:
+            rows.append({"fecha": r["fecha"], "serie": "Autoencoder (media de 7 días)", "relativo": r["ma7_ae_rel"]})
+        if r["tasa90_monitor"] is not None:
+            rows.append({"fecha": r["fecha"], "serie": "Monitor actual (alertas en 90 días)", "relativo": round(r["tasa90_monitor"] / 0.10, 4)})
+    write("ae6_covid", rows, meta + [{"label": "Escala", "value": "Cada serie dividida por su propio umbral de aviso: p99 de DEV para el AE y 10 % para el monitor"}])
+    prev = d["avisos_previos_a_ev1"]
+    write("ae6_resumen", [{"primer_aviso_ae": d["primer_aviso_ae_desde_ev1"], "primer_aviso_monitor": d["primer_aviso_monitor_desde_ev1"],
+                           "aviso_activo_desde_ae": prev["ae"][-1] if prev["ae"] else None,
+                           "aviso_activo_desde_monitor": prev["monitor"][-1] if prev["monitor"] else None,
+                           "ventaja_dias": d["ventaja_dias"], "episodios_por_anio": d["episodios_por_anio"], "veredicto": d["criterio"]["veredicto"]}], meta)
+
+
 if __name__ == "__main__":
+    ae5()
+    ae6()
     progreso()
     ae1()
     explicar()
