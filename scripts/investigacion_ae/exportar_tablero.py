@@ -108,7 +108,54 @@ def explicar():
     write("ex_mapa", d["mapa"], meta)
 
 
+def ae2():
+    p = IA / "ae2.json"
+    if not p.exists():
+        return
+    d = json.loads(p.read_text(encoding="utf-8"))
+    meta = code_meta("scripts/investigacion_ae/ae2_combinacion.py") + [{"label": "Regla", "value": d["regla"]}]
+    names = {"perfil": "Perfil contextual (vigente)", "ae": "AE con calendario (top2)", "combinado": "Combinado (max de cocientes)"}
+    types = [("recall_T1_moderada", "Caída de horas (moderada)"), ("recall_T2_moderada", "Caída de todo el día (moderada)"),
+             ("recall_T3_moderada", "Aumento por evento (moderado)"), ("recall_T4_cero", "Error: hora en cero"),
+             ("recall_T4_duplicada", "Error: hora duplicada"), ("recall_T4_desfase", "Error: perfil desfasado"),
+             ("recall_T5_perfil_festivo", "Día hábil con perfil de festivo")]
+    rows = []
+    for k, nm in names.items():
+        m = d["modelos"][f"holdout|{k}"]
+        for ti, (col, lab) in enumerate(types):
+            rows.append({"modelo": nm, "clave": k, "orden_tipo": ti + 1, "tipo": lab, "recall": m[col]})
+        rows.append({"modelo": nm, "clave": k, "orden_tipo": 0, "tipo": "Alertas en días reales", "recall": m["tasa_alertas"]})
+    write("ae2_tipos", rows, meta)
+    c = d["criterio"]
+    crit = [{"orden": 1, "criterio": "Detección de errores de datos (T4 medio)", "exigido": "≥ +5 puntos con IC > 0", "minimo": 0.05,
+             **{k: c["recall_T4_medio"][k] for k in ("diferencia", "ic_inf", "ic_sup", "n", "cumple")}},
+            {"orden": 2, "criterio": "Detección moderada T1–T3 (sin pérdida)", "exigido": "IC que incluya 0 o esté por encima", "minimo": None,
+             **{k: c["recall_moderado_T1_T3"][k] for k in ("diferencia", "ic_inf", "ic_sup", "n", "cumple")}}]
+    write("ae2_criterio", crit, meta + [{"label": "Veredicto", "value": c["veredicto"]}])
+    orig = [{"tipo": t, "perfil": int(v.get("perfil", 0)), "autoencoder": int(v.get("autoencoder", 0))} for t, v in d["origen_detecciones_por_tipo"].items()]
+    write("ae2_origen", orig, meta)
+
+
+def ae3():
+    p = IA / "ae3.json"
+    if not p.exists():
+        return
+    d = json.loads(p.read_text(encoding="utf-8"))
+    meta = code_meta("scripts/investigacion_ae/ae3_multilinea.py")
+    rows = []
+    for i, (ln, v) in enumerate(d["lineas"].items(), 1):
+        x = v["diferencia_recall_moderada"]
+        rows.append({"orden": i, "linea": ln.replace("LINEA ", ""), "coherencia": v["coherencia"]["recall_moderada"],
+                     "ae_multilinea": v["ae_multilinea"]["recall_moderada"], "diferencia": x["diferencia"], "ic_inf": x["ic_inf"],
+                     "ic_sup": x["ic_sup"], "festivos_coherencia": v["coherencia"]["tasa_alertas_festivos"],
+                     "festivos_ae": v["ae_multilinea"]["tasa_alertas_festivos"],
+                     "loc_coherencia": v["coherencia"]["localizacion_hora"], "loc_ae": v["ae_multilinea"]["localizacion_hora"]})
+    write("ae3_lineas", rows, meta + [{"label": "Veredicto", "value": d["criterio"]["veredicto"]}])
+
+
 if __name__ == "__main__":
     progreso()
     ae1()
     explicar()
+    ae2()
+    ae3()

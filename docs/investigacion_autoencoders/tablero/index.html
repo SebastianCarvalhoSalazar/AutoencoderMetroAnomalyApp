@@ -129,6 +129,31 @@
   </section>
 
 
+  <section class="ae-section" id="ae2">
+    <p class="ae-eyebrow">AE.2 · Hipótesis A1</p>
+    <h2>¿Sirve combinar el autoencoder con el modelo vigente?</h2>
+    <p class="ae-verdict" data-read lang="es">Regla fijada antes de calcular: alertar si cualquiera de los dos supera su umbral por un mismo factor, elegido para que la combinación siga alertando en el 5 % de los días de 2022-04–2023-06. <span data-draw="ae2-veredicto"></span></p>
+    <div class="ae-grid2">
+      <div class="ae-card" id="ae2-criterio-card">
+        <h3>Criterio pre-registrado: combinado menos modelo vigente</h3>
+        <p class="ae-note">Diferencia pareada en el periodo de evaluación, con intervalo del 95 %. La línea punteada vertical es el cero; la marca gris, el mínimo exigido.</p>
+        <div class="ae-chart dash-skeleton" data-draw="ae2-criterio" data-source="ae2_criterio"></div>
+      </div>
+      <div class="ae-card" id="ae2-origen-card">
+        <h3>Quién detecta cada tipo dentro del combinado</h3>
+        <p class="ae-note">Anomalías simuladas detectadas por el combinado, según qué modelo superó más su umbral.</p>
+        <ul class="ae-legend" data-draw="ae2-origen-leyenda"></ul>
+        <div class="ae-chart dash-skeleton" data-draw="ae2-origen" data-source="ae2_origen"></div>
+      </div>
+    </div>
+    <div class="ae-card" id="ae2-tipos-card">
+      <h3>Detección por tipo: vigente, autoencoder y combinado</h3>
+      <p class="ae-note">La primera fila es el costo: proporción de días reales con alerta.</p>
+      <ul class="ae-legend" data-draw="ae2-tipos-leyenda"></ul>
+      <div class="ae-chart dash-skeleton" data-draw="ae2-tipos" data-source="ae2_tipos"></div>
+    </div>
+  </section>
+
   <section class="ae-section" id="como-funciona">
     <p class="ae-eyebrow">Cómo funciona</p>
     <h2>Qué hace el autoencoder con un día y cómo decide si alertar</h2>
@@ -446,6 +471,7 @@
   function settle(el, id) { if (statusOf(id) !== 'loading') el.classList.remove('dash-skeleton'); }
   function failText(el, id, what) { el.textContent = statusOf(id) === 'error' ? `No se pudo cargar ${what}.` : '—'; }
   function measure(svg, texts) { const g = svg.append('g'); const w = d3.max(texts, (t) => g.append('text').text(t).node().getComputedTextLength()) || 0; g.remove(); return w; }
+  Object.assign(window, { fmtEs, pctE, settle, failText, measure });  // compartidas con los demás scripts
 
   document.querySelectorAll('#ej-select').forEach((sel) => {
     sel.addEventListener('change', () => {
@@ -686,5 +712,107 @@
         if (!r) { tip.hide(); return; }
         tip.show(ev, [`${fmtD(day)}, ${hr} h`, `|z|: ${fmtEs(r.z, 1)}`, r.alerta ? 'Día con alerta' : 'Día sin alerta']);
       }).on('pointerleave', () => tip.hide());
+  });
+</script>
+
+<script>
+  // ---------- AE.2 ----------
+  const AE2K = ['perfil', 'ae', 'combinado'];
+  const ae2Col = (k) => k === 'perfil' ? dash.colors[0] : k === 'ae' ? dash.colors[1] : dash.colors[3];
+  const pctS = (v) => (v > 0 ? '+' : '') + d3.format('.1%')(v).replace('.', ',');
+  const legend = (ul, items) => ul.replaceChildren(...items.map(([t, c]) => { const li = document.createElement('li'); const s = document.createElement('span'); s.className = 'ae-swatch'; s.style.background = c; li.append(s, document.createTextNode(t)); return li; }));
+
+  dash.draw('ae2-veredicto', (el) => {
+    const c = aeRows('ae2_criterio');
+    if (!c || c.length < 2) { el.textContent = ''; return; }
+    const [t4, mod] = [...c].sort((a, b) => a.orden - b.orden);
+    const ok = t4.cumple && mod.cumple;
+    el.textContent = ok ? 'Resultado: cumple ambos criterios.'
+      : `Resultado: no cumple. Mejora la detección de errores de datos (${pctS(t4.diferencia)}, intervalo ${pctS(t4.ic_inf)} a ${pctS(t4.ic_sup)}), pero pierde detección de anomalías de demanda moderadas (${pctS(mod.diferencia)}, intervalo ${pctS(mod.ic_inf)} a ${pctS(mod.ic_sup)}), sobre todo en las caídas de todo el día: con una sola cuota de alertas, lo que gana un tipo lo pierde otro. La hipótesis queda descartada.`;
+  });
+
+  dash.draw('ae2-criterio', (el) => {
+    settle(el, 'ae2_criterio');
+    const c = aeRows('ae2_criterio');
+    if (!c) { failText(el, 'ae2_criterio', 'el criterio'); return; }
+    el.replaceChildren();
+    const rows = [...c].sort((a, b) => a.orden - b.orden);
+    const W = el.clientWidth || 400, rowH = 56;
+    const svg = d3.select(el).append('svg').attr('role', 'img').attr('aria-label', 'Diferencias del combinado frente al modelo vigente con su intervalo y el mínimo exigido');
+    const lw = Math.min(measure(svg, rows.map((r) => r.criterio)) + 12, W * 0.48);
+    const mg = { t: 12, r: 16, b: 30, l: lw };
+    const H = mg.t + mg.b + rowH * rows.length;
+    svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const x = d3.scaleLinear().domain([Math.min(-0.12, d3.min(rows, (r) => r.ic_inf)), Math.max(0.12, d3.max(rows, (r) => r.ic_sup))]).nice().range([mg.l, W - mg.r]);
+    const y = d3.scaleBand().domain(rows.map((r) => r.criterio)).range([mg.t, H - mg.b]).padding(0.35);
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).ticks(W < 420 ? 4 : 6).tickFormat((v) => (v > 0 ? '+' : '') + d3.format('.0%')(v)));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).tickSize(0)).call((g) => g.select('.domain').remove())
+      .call((g) => g.selectAll('.tick text').each(function (t) { const s = this; const w = t.split(' '); if (s.getComputedTextLength() > lw - 12 && w.length > 2) { d3.select(s).text(null); const h = Math.ceil(w.length / 2); d3.select(s).append('tspan').attr('x', -9).attr('dy', '-0.3em').text(w.slice(0, h).join(' ')); d3.select(s).append('tspan').attr('x', -9).attr('dy', '1.1em').text(w.slice(h).join(' ')); } }));
+    svg.append('line').attr('x1', x(0)).attr('x2', x(0)).attr('y1', mg.t).attr('y2', H - mg.b).style('stroke', 'var(--cds-chart-reference)').style('stroke-dasharray', '4 3');
+    const tip = aeTip(el);
+    rows.forEach((r) => {
+      const cy = y(r.criterio) + y.bandwidth() / 2;
+      const col = r.cumple ? 'var(--color-ok)' : 'var(--cds-chart-status-critical)';
+      const g = svg.append('g');
+      if (r.minimo != null) g.append('line').attr('x1', x(r.minimo)).attr('x2', x(r.minimo)).attr('y1', cy - 14).attr('y2', cy + 14).style('stroke', 'var(--cds-chart-muted)').style('stroke-width', 3);
+      g.append('line').attr('x1', x(r.ic_inf)).attr('x2', x(r.ic_sup)).attr('y1', cy).attr('y2', cy).style('stroke', col).style('stroke-width', 2.5);
+      g.append('circle').attr('cx', x(r.diferencia)).attr('cy', cy).attr('r', 6).style('fill', col).style('stroke', 'var(--color-panel)').style('stroke-width', 1.5);
+      g.append('text').attr('x', x(r.diferencia)).attr('y', cy - 11).attr('text-anchor', 'middle').text(`${pctS(r.diferencia)} · ${r.cumple ? 'cumple' : 'no cumple'}`);
+      g.on('pointermove', (ev) => tip.show(ev, [r.criterio, `Diferencia: ${pctS(r.diferencia)}`, `IC 95 %: ${pctS(r.ic_inf)} a ${pctS(r.ic_sup)}`, `Exigido: ${r.exigido}`])).on('pointerleave', () => tip.hide());
+    });
+  });
+
+  const TIPO_T = { T1: 'Caída de horas', T2: 'Caída de todo el día', T3: 'Aumento por evento', T4: 'Error de datos', T5: 'Día hábil con forma de festivo' };
+  dash.draw('ae2-origen-leyenda', (ul) => legend(ul, [['Lo detectó el perfil', dash.colors[0]], ['Lo detectó el autoencoder', dash.colors[1]]]));
+  dash.draw('ae2-origen', (el) => {
+    settle(el, 'ae2_origen');
+    const d = aeRows('ae2_origen');
+    if (!d) { failText(el, 'ae2_origen', 'el origen'); return; }
+    el.replaceChildren();
+    const rows = [...d].sort((a, b) => a.tipo.localeCompare(b.tipo)).map((r) => ({ ...r, lab: TIPO_T[r.tipo] || r.tipo, tot: r.perfil + r.autoencoder }));
+    const W = el.clientWidth || 400, rowH = 34;
+    const svg = d3.select(el).append('svg').attr('role', 'img').attr('aria-label', 'Proporción de detecciones del combinado aportadas por el perfil y por el autoencoder, por tipo');
+    const lw = Math.min(measure(svg, rows.map((r) => r.lab)) + 12, W * 0.45);
+    const mg = { t: 6, r: 12, b: 26, l: lw };
+    const H = mg.t + mg.b + rowH * rows.length;
+    svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const x = d3.scaleLinear().domain([0, 1]).range([mg.l, W - mg.r]);
+    const y = d3.scaleBand().domain(rows.map((r) => r.lab)).range([mg.t, H - mg.b]).padding(0.25);
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).ticks(4).tickFormat(d3.format('.0%')));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).tickSize(0)).call((g) => g.select('.domain').remove());
+    const tip = aeTip(el);
+    rows.forEach((r) => {
+      const fp = r.perfil / r.tot, y0 = y(r.lab), bh = y.bandwidth();
+      const g = svg.append('g');
+      g.append('rect').attr('x', x(0)).attr('y', y0).attr('width', x(fp) - x(0) - 1).attr('height', bh).attr('rx', 3).style('fill', dash.colors[0]);
+      g.append('rect').attr('x', x(fp) + 1).attr('y', y0).attr('width', Math.max(0, x(1) - x(fp) - 1)).attr('height', bh).attr('rx', 3).style('fill', dash.colors[1]);
+      g.on('pointermove', (ev) => tip.show(ev, [r.lab, `Perfil: ${fmtEs(r.perfil)} (${pctE(fp)})`, `Autoencoder: ${fmtEs(r.autoencoder)} (${pctE(1 - fp)})`])).on('pointerleave', () => tip.hide());
+    });
+  });
+
+  dash.draw('ae2-tipos-leyenda', (ul) => legend(ul, [['Perfil contextual (vigente)', ae2Col('perfil')], ['AE con calendario', ae2Col('ae')], ['Combinado', ae2Col('combinado')]]));
+  dash.draw('ae2-tipos', (el) => {
+    settle(el, 'ae2_tipos');
+    const d = aeRows('ae2_tipos');
+    if (!d) { failText(el, 'ae2_tipos', 'la detección por tipo'); return; }
+    el.replaceChildren();
+    const types = [...new Set([...d].sort((a, b) => a.orden_tipo - b.orden_tipo).map((r) => r.tipo))];
+    const W = el.clientWidth || 500, rowH = 34;
+    const svg = d3.select(el).append('svg').attr('role', 'img').attr('aria-label', 'Detección por tipo de anomalía para el modelo vigente, el autoencoder y el combinado');
+    const lw = Math.min(measure(svg, types) + 12, W * 0.45);
+    const mg = { t: 6, r: 16, b: 26, l: lw };
+    const H = mg.t + mg.b + rowH * types.length;
+    svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const x = d3.scaleLinear().domain([0, 1]).range([mg.l, W - mg.r]);
+    const y = d3.scaleBand().domain(types).range([mg.t, H - mg.b]).padding(0.2);
+    const off = d3.scalePoint().domain(AE2K).range([-y.bandwidth() / 3, y.bandwidth() / 3]);
+    svg.append('g').attr('class', 'ae-grid').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).ticks(5).tickSize(-(H - mg.t - mg.b)).tickFormat('')).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(0,${H - mg.b})`).call(d3.axisBottom(x).ticks(W < 420 ? 3 : 5).tickFormat(d3.format('.0%')));
+    svg.append('g').attr('class', 'ae-axis').attr('transform', `translate(${mg.l},0)`).call(d3.axisLeft(y).tickSize(0)).call((g) => g.select('.domain').remove());
+    const tip = aeTip(el);
+    svg.append('g').selectAll('rect').data(d.filter((r) => r.recall != null)).join('rect')
+      .attr('x', x(0)).attr('y', (r) => y(r.tipo) + y.bandwidth() / 2 + off(r.clave) - 3).attr('height', 6).attr('rx', 3)
+      .attr('width', (r) => Math.max(1, x(r.recall) - x(0))).style('fill', (r) => ae2Col(r.clave))
+      .on('pointermove', (ev, r) => tip.show(ev, [r.modelo, `${r.tipo}: ${pctE(r.recall)}`])).on('pointerleave', () => tip.hide());
   });
 </script>
