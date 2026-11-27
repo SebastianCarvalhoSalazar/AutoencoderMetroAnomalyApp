@@ -1,0 +1,176 @@
+{
+ "lineas": {
+  "LINEA A": {
+   "coherencia": {
+    "tasa_alertas": 0.0522,
+    "tasa_alertas_festivos": 0.1111,
+    "recall_moderada": 0.9002,
+    "recall_severa": 0.9856,
+    "recall_leve": 0.5815,
+    "localizacion_hora": 0.9819,
+    "recall_T1_moderada": 0.956,
+    "recall_T2_moderada": 0.9148,
+    "recall_T3_moderada": 0.8297,
+    "recall_T4_cero": 1.0,
+    "recall_T4_duplicada": 0.9368,
+    "recall_T4_desfase": 0.9863,
+    "recall_T5_perfil_festivo": 1.0
+   },
+   "ae_multilinea": {
+    "tasa_alertas": 0.0522,
+    "tasa_alertas_festivos": 0.1667,
+    "recall_moderada": 0.7592,
+    "recall_severa": 0.9984,
+    "recall_leve": 0.283,
+    "localizacion_hora": 0.9781,
+    "recall_T1_moderada": 0.9973,
+    "recall_T2_moderada": 0.3736,
+    "recall_T3_moderada": 0.9066,
+    "recall_T4_cero": 1.0,
+    "recall_T4_duplicada": 0.989,
+    "recall_T4_desfase": 1.0,
+    "recall_T5_perfil_festivo": 1.0
+   },
+   "diferencia_recall_moderada": {
+    "diferencia": -0.141,
+    "ic_inf": -0.1824,
+    "ic_sup": -0.0967,
+    "n": 1092
+   }
+  },
+  "LINEA B": {
+   "coherencia": {
+    "tasa_alertas": 0.0525,
+    "tasa_alertas_festivos": 0.1111,
+    "recall_moderada": 0.6906,
+    "recall_severa": 0.9407,
+    "recall_leve": 0.1971,
+    "localizacion_hora": 0.9669,
+    "recall_T1_moderada": 0.8315,
+    "recall_T2_moderada": 0.7707,
+    "recall_T3_moderada": 0.4696,
+    "recall_T4_cero": 1.0,
+    "recall_T4_duplicada": 0.8481,
+    "recall_T4_desfase": 0.9475,
+    "recall_T5_perfil_festivo": 1.0
+   },
+   "ae_multilinea": {
+    "tasa_alertas": 0.0525,
+    "tasa_alertas_festivos": 0.1667,
+    "recall_moderada": 0.4438,
+    "recall_severa": 0.949,
+    "recall_leve": 0.1556,
+    "localizacion_hora": 0.9539,
+    "recall_T1_moderada": 0.8895,
+    "recall_T2_moderada": 0.1077,
+    "recall_T3_moderada": 0.3343,
+    "recall_T4_cero": 1.0,
+    "recall_T4_duplicada": 0.6657,
+    "recall_T4_desfase": 1.0,
+    "recall_T5_perfil_festivo": 1.0
+   },
+   "diferencia_recall_moderada": {
+    "diferencia": -0.2468,
+    "ic_inf": -0.2988,
+    "ic_sup": -0.1947,
+    "n": 1086
+   }
+  },
+  "LINEA 1": {
+   "coherencia": {
+    "tasa_alertas": 0.0522,
+    "tasa_alertas_festivos": 0.1111,
+    "recall_moderada": 0.794,
+    "recall_severa": 0.9707,
+    "recall_leve": 0.369,
+    "localizacion_hora": 0.9752,
+    "recall_T1_moderada": 0.9093,
+    "recall_T2_moderada": 0.8242,
+    "recall_T3_moderada": 0.6484,
+    "recall_T4_cero": 1.0,
+    "recall_T4_duplicada": 0.8984,
+    "recall_T4_desfase": 0.9835,
+    "recall_T5_perfil_festivo": 1.0
+   },
+   "ae_multilinea": {
+    "tasa_alertas": 0.0522,
+    "tasa_alertas_festivos": 0.1111,
+    "recall_moderada": 0.6767,
+    "recall_severa": 0.993,
+    "recall_leve": 0.2491,
+    "localizacion_hora": 0.9748,
+    "recall_T1_moderada": 0.9835,
+    "recall_T2_moderada": 0.2445,
+    "recall_T3_moderada": 0.8022,
+    "recall_T4_cero": 1.0,
+    "recall_T4_duplicada": 0.9533,
+    "recall_T4_desfase": 1.0,
+    "recall_T5_perfil_festivo": 1.0
+   },
+   "diferencia_recall_moderada": {
+    "diferencia": -0.1172,
+    "ic_inf": -0.1563,
+    "ic_sup": -0.0729,
+    "n": 1092
+   }
+  },
+  "LINEA T-A": {
+   "coherencia": {
+    "tasa_alertas": 0.0525,
+    "tasa_alertas_festivos": 0.1667,
+    "recall_moderada": 0.0773,
+    "recall_severa": 0.5769,
+    "recall_leve": 0.0552,
+    "localizacion_hora": 0.8787,
+    "recall_T1_moderada": 0.1077,
+    "recall_T2_moderada": 0.0746,
+    "recall_T3_moderada": 0.0497,
+    "recall_T4_cero": 1.0,
+    "recall_T4_duplicada": 0.0773,
+    "recall_T4_desfase": 0.4199,
+    "recall_T5_perfil_festivo": 0.9461
+   },
+   "ae_multilinea": {
+    "tasa_alertas": 0.0525,
+    "tasa_alertas_festivos": 0.1667,
+    "recall_moderada": 0.2035,
+    "recall_severa": 0.6142,
+    "recall_leve": 0.0681,
+    "localizacion_hora": 0.8818,
+    "recall_T1_moderada": 0.4586,
+    "recall_T2_moderada": 0.0856,
+    "recall_T3_moderada": 0.0663,
+    "recall_T4_cero": 1.0,
+    "recall_T4_duplicada": 0.1077,
+    "recall_T4_desfase": 0.6271,
+    "recall_T5_perfil_festivo": 1.0
+   },
+   "diferencia_recall_moderada": {
+    "diferencia": 0.1262,
+    "ic_inf": 0.1061,
+    "ic_sup": 0.1486,
+    "n": 1086
+   }
+  }
+ },
+ "criterio": {
+  "A_no_inferior": {
+   "cumple": false,
+   "ic_inf": -0.1824,
+   "exigido": "≥ −0,02"
+  },
+  "mejora_en_otra_linea": {
+   "cumple": true,
+   "lineas": [
+    "LINEA T-A"
+   ],
+   "exigido": "IC > 0 en B, 1 o T-A"
+  },
+  "festivos_A": {
+   "cumple": false,
+   "ae": 0.1667,
+   "coherencia": 0.1111
+  },
+  "veredicto": "NO CUMPLE"
+ }
+}

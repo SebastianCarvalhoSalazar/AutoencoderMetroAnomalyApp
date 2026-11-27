@@ -115,3 +115,73 @@ class AEContextDetector(Detector):
 
 
 REGISTRY_NN = {"ae_original": AEOriginalDetector, "ae_contextual": AEContextDetector}
+
+
+class AEMultilineDetector(Detector):
+    """Investigación (AE.3 / A2): reconstruye el día completo de la red (líneas × 19 horas) y puntúa la línea objetivo.
+
+    Entrada: log1p − nivel causal de cada línea, estandarizado con media y desvío de entrenamiento (celda sin dato = 0)
+    más los rasgos de calendario de ``AEContextDetector``. Red 64-32-8-32-64, salida lineal. z de la línea objetivo =
+    residuo × sd / MAD de los residuos de entrenamiento; agregación ``agg`` (top2 por defecto)."""
+
+    name = "ae_multilinea"
+
+    def __init__(self, target: str, Ws: dict, agg="top2", seed=0):
+        super().__init__(agg)
+        self.target, self.Ws, self.seed = target, Ws, seed
+        self.lines = sorted(Ws)
+
+    def _matrix(self, dates, override: pd.DataFrame | None = None) -> np.ndarray:
+        from .detectors import level_series
+        dates = pd.DatetimeIndex(dates)
+        blocks = []
+        for ln in self.lines:
+            W = self.Ws[ln][SCORED_HOURS]
+            X = override if (override is not None and ln == self.target) else W.reindex(dates)
+            lvl = level_series(W, dates)
+            blocks.append(np.log1p(X[SCORED_HOURS].to_numpy(float)) - lvl.to_numpy()[:, None])
+        return np.hstack(blocks)
+
+    def _units(self):
+        return (64, 32, 8, 32, 64)
+
+    def fit(self, hist, context):
+        tf = _tf()
+        dates = hist.index[hist[SCORED_HOURS].notna().all(axis=1)]
+        M = self._matrix(dates)
+        ok = ~np.isnan(M[:, self._tcols()]).any(1)
+        M, dates = M[ok], dates[ok]
+        self.mu_ = np.nanmean(M, 0)
+        self.sd_ = np.nan_to_num(np.nanstd(M, 0), nan=1.0) + 1e-6
+        Ms = np.nan_to_num((M - self.mu_) / self.sd_, nan=0.0)
+        Xin = np.hstack([Ms, AEContextDetector._cal(dates)])
+        tf.keras.utils.set_random_seed(self.seed)
+        inp = tf.keras.layers.Input(shape=(Xin.shape[1],))
+        x = inp
+        for u in self._units():
+            x = tf.keras.layers.Dense(u, activation="relu")(x)
+        out = tf.keras.layers.Dense(Ms.shape[1], activation="linear")(x)
+        m = tf.keras.models.Model(inp, out)
+        m.compile(optimizer="adam", loss="mae")
+        self.m_ = _fit_time_split(tf, m, Xin, Ms)
+        R = (self.m_.predict(Xin, verbose=0) - Ms)[:, self._tcols()] * self.sd_[self._tcols()]
+        self.sig_ = np.clip(MAD_K * np.median(np.abs(R - np.median(R, 0)), 0), SIGMA_FLOOR, None)
+        return self
+
+    def _tcols(self):
+        i = self.lines.index(self.target)
+        return np.arange(i * len(SCORED_HOURS), (i + 1) * len(SCORED_HOURS))
+
+    def score(self, X, context):
+        M = self._matrix(X.index, override=X)
+        z = pd.DataFrame(np.nan, index=X.index, columns=SCORED_HOURS)
+        tc = self._tcols()
+        ok = ~np.isnan(M[:, tc]).any(1)
+        if ok.any():
+            Ms = np.nan_to_num((M[ok] - self.mu_) / self.sd_, nan=0.0)
+            rec = self.m_.predict(np.hstack([Ms, AEContextDetector._cal(X.index[ok])]), verbose=0)
+            z.iloc[ok] = (Ms[:, tc] - rec[:, tc]) * self.sd_[tc] / self.sig_
+        return Scores(aggregate(z, self.agg), z)
+
+
+# AEMultilineDetector no va en REGISTRY_NN: requiere la línea objetivo y la red (se usa directamente en AE.3).

@@ -163,3 +163,4 @@ cython_debug/
 reports/runs/
 reports/operacion/
 reports/fase3/*.pkl
+reports/investigacion_ae/runs/

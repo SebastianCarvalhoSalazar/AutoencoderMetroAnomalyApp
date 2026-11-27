@@ -367,3 +367,174 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
 - **Artefactos:** reconstruidos (código `16b3ab3`; el manifiesto registra `02d9247`, que solo añade documentación) y con determinismo re-verificado.
 - **Pruebas:** 194 rápidas y 2 E2E aprobadas; cobertura del 84,8 %.
 - **Informe:** `docs/validacion/F10_fase3_plataforma.md` §7.
+
+## 2026-11-26 — [AE.0] Rama de investigación de autoencoders (a pedido del usuario)
+- Se creó la rama `claude/investigacion-autoencoders` desde `6fbdbaf`.
+- Se pre-registraron las hipótesis A1–A6 con sus criterios en `docs/investigacion_autoencoders/PLAN.md`, antes de cualquier experimento.
+- Punto de partida: `ae_contextual` empata con el perfil contextual en recall moderado, pero duplica la tasa de alertas, y es mejor en errores de datos. El AE original queda por detrás.
+
+## 2026-11-26 — [AE.1] Reproducción del punto de partida
+- **Qué se hizo:** reentrenamiento desde cero (rolling mensual, Línea A) de `perfil_contextual/peak_shift`, `ae_contextual/top2`, `ae_contextual/max` y `ae_original/max`, en DEV y en el holdout (`scripts/investigacion_ae/ae1_reproducir.py`).
+- **Resultado:** los scores diarios del holdout son **idénticos** a las corridas de la fase 2 (diferencia máxima 0) en las 4 configuraciones.
+  - **Defecto en mi primera comprobación:** marcó "no reproduce" en `ae_contextual/max` y `ae_original/max` porque las cifras publicadas de esas dos son promedios de 3 semillas y se compararon con la semilla 0.
+  - **Corrección:** con 3 semillas publicadas, el criterio es la igualdad exacta con la semilla 0 guardada. Se recalculó con `--reusar`, sin reentrenar.
+- **Hallazgo:** el AE y el perfil son complementarios por tipo de anomalía.
+  - El AE es mejor en caídas de 1–3 horas (0,975 frente a 0,745), en aumentos por evento (0,440 frente a 0,253) y en errores de datos (hora duplicada: 0,937 frente a 0,761).
+  - El AE es mucho peor en caídas de todo el día (0,151 frente a 0,522) y en un día hábil con perfil de festivo (0,058 frente a 1,000): trabaja sobre el perfil sin nivel y no ve los cambios de nivel.
+  - Recall moderado: AE 0,522 frente a perfil 0,506. Diferencia +0,016 [−0,038; 0,069], **sin diferencia demostrada**. Tasa de alertas en días reales: 4,9 % frente a 2,2 %.
+- **Implicación para A1:** la combinación tiene una base empírica más amplia que solo los errores de datos. El criterio pre-registrado de A1 **no se cambia**.
+- **Visualizaciones:** tablero "Autoencoders en el Metro" (artifact privado), alimentado por `scripts/investigacion_ae/exportar_tablero.py`.
+
+## 2026-11-26 — [AE.1+] Validación y ampliación del tablero de visualizaciones (a pedido del usuario)
+- **Validación propia de la página:** la página no reportó ninguna apertura con los datos nuevos, así que se validó en un arnés local.
+  - El arnés reproduce el entorno del tablero (`tests/investigacion_ae/arnes_tablero.py`) en un Chromium real, a 1280 y 400 px, en tema claro y oscuro, con los mismos archivos de datos (`tests/investigacion_ae/validar_tablero.js`).
+  - **Defectos hallados y corregidos:**
+    1. El primer minigráfico de la serie diaria medía su ancho antes de que la cuadrícula ubicara todas las cajas y se dibujaba diminuto.
+    2. La última columna de la tabla quedaba cortada.
+    3. Los nombres de las tareas mostraban acentos graves del Markdown.
+    4. El diagrama de arquitectura se veía ilegible en el móvil y su texto se salía de las cajas.
+    5. Unos pocos días extremos aplastaban el espacio latente; se pasó a escala symlog.
+    6. Una etiqueta de eje quedaba superpuesta.
+    7. Las barras de decisión se medían antes de estar en la página.
+  - **Estado final:** sin errores de JavaScript, sin desbordamiento de página y sin dibujos vacíos, en ambos anchos y temas; los 5 ejemplos se recorren sin errores.
+- **Nueva sección "Cómo funciona"** (`scripts/investigacion_ae/ae_explicar.py`, con los mismos modelos de la evaluación rolling y la semilla 0):
+  - diagrama de la arquitectura (30 entradas → 16 → 8 → **4** → 8 → 16 → 19) y los 5 pasos de la decisión;
+  - explorador de 5 días: lo observado frente a lo esperado por cada modelo, |z| por hora y decisión de ambos;
+  - distribución del score respecto del umbral;
+  - espacio latente: los días se agrupan por tipo, con 91,5 % y 6,9 % de varianza en dos componentes;
+  - mapa |z| por día y hora.
+  - **Control cruzado:** la proporción de días sobre el umbral en la distribución coincide con AE.1 (moderadas: AE 52,2 % y perfil 50,6 %; días reales: 4,95 % y 2,2 %).
+- **Hallazgo:** en el incidente real del 28/08/2023, la caída extrema de las 18–19 h distorsiona toda la reconstrucción del AE.
+  - Lo esperado a las 6 h baja a 21 560 frente a 64 208 observados.
+  - El AE alerta (score 69,3 frente a un umbral de 9,5), pero señala las 6 h y las 19 h; el perfil señala las 18 h y las 19 h.
+  - Un día anómalo contamina la reconstrucción de horas normales, lo que explica la menor precisión del AE al localizar la hora (0,935 frente a 0,983).
+- **Defecto hallado por la página real, no por el arnés:** `ae1_metricas.json` contenía `NaN` (la localización del AE original). El JSON estándar no lo admite, así que el tablero rechazó el archivo ("no tiene filas legibles").
+  - El arnés no lo vio porque insertaba los datos como JavaScript, donde `NaN` es válido.
+  - **Corrección:** el exportador escribe `null` y valida con `allow_nan=False`; el arnés ahora parsea con `JSON.parse`, igual que el tablero.
+  - **Verificado:** el arnés detecta el error con el archivo anterior y queda limpio con el nuevo.
+
+## 2026-11-26 — [AE.2] Diseño de la combinación (fijado ANTES de calcular resultados)
+- **Regla de combinación:** score combinado = max(score_perfil / umbral_perfil, score_AE / umbral_AE), con los umbrales de DEV de AE.1. El umbral combinado es el p95 de ese máximo en los días reales de DEV (2022-04…2023-06): el mismo presupuesto del 5 %.
+  - No se ajusta ningún peso ni reparto: es la forma más simple de unir dos detectores calibrados.
+- **Hora señalada:** la del detector cuyo cociente es mayor.
+- **Criterio (sin cambios desde `PLAN.md`):**
+  1. Recall T4 medio (cero, duplicada, desfase) ≥ +0,05 frente al perfil solo, con IC 95 % > 0.
+  2. Recall moderado T1–T3 sin pérdida: el IC del cambio contiene 0 o está por encima.
+  - Ambos con diferencias pareadas sobre las mismas inyecciones y bootstrap por semanas.
+- **Insumos:** las corridas de AE.1 (semilla 0), sin reentrenar.
+
+## 2026-11-26 — [AE.2] Resultado de A1: NO CUMPLE (descartada)
+- **Holdout, combinado − perfil, pareado:**
+  - Recall T4 medio: +0,058 [0,027; 0,094]. Cumple su parte.
+  - Recall moderado T1–T3: −0,054 [−0,102; −0,006]. El IC está por debajo de 0: hay pérdida y **no cumple**.
+- **Causa:** el combinado conserva el presupuesto del 5 % subiendo el umbral efectivo de cada detector (el umbral combinado de DEV es 1,214 veces el de cada uno).
+  - El perfil pierde las caídas de todo el día que detectaba cerca del umbral: T2 moderada pasa de 0,522 a 0,165.
+  - En el holdout, el combinado alerta en el 4,1 % de los días reales, frente al 2,2 % del perfil, cuyo umbral de DEV resultó conservador.
+- **DEV (solo referencia):** T4 +0,040 [0,018; 0,066] y moderado +0,008 [−0,029; 0,048]. En DEV no había pérdida: la conclusión depende del periodo, y decide el holdout pre-registrado.
+- **Lo que sí muestra:** en el combinado, el AE aporta la mayoría de las detecciones de T1 y T3, y el perfil la mayoría de las de T2, T4 y T5. La complementariedad es real, pero con una sola cuota de alertas, ganar en un tipo cuesta en otro.
+- **No se prueban otras reglas de combinación** sobre el holdout: sería ajustar a la vista del resultado. Otra regla tendría que pre-registrarse y evaluarse con datos nuevos (posteriores a junio de 2024).
+
+## 2026-11-26 — [AE.3] Diseño de A2 (fijado ANTES de entrenar)
+- **Modelo `ae_multilinea`:**
+  - **Entrada:** el día completo de las 11 líneas principales, es decir, 209 celdas. Cada celda es log1p menos el nivel causal de su línea, estandarizada con la media y el desvío de entrenamiento; una celda sin dato vale 0 (la media). Se añaden los 11 rasgos de calendario de `ae_contextual`.
+  - **Red:** 64-32-**8**-32-64 con salida lineal de 209, pérdida MAE, early stopping con validación temporal y semilla 0. Es la escala de `ae_contextual` (16-8-4 para 30 entradas) llevada a 220 entradas.
+  - **Score de la línea objetivo:** z = residuo × sd / MAD de los residuos de entrenamiento, en sus 19 columnas; agregación top2, igual que `ae_contextual`.
+- **Protocolo:** idéntico al de H1 (`scripts/fase3/exp_red.py`).
+  - Holdout rolling 2023-07…2024-06 con ajuste desde 2022-01, e inyecciones solo en la línea objetivo.
+  - Umbral de cada detector = p95 de sus scores reales del periodo (mismo presupuesto) y diferencia pareada de recall moderado con IC por bootstrap semanal.
+  - Comparación con `coherencia_red`, recalculada en la misma corrida.
+- **Criterio (pre-registrado en `PLAN.md`), concretado:**
+  1. **Línea A, no inferioridad:** límite inferior del IC de (ae_multilinea − coherencia) ≥ −0,02.
+  2. **Mejora en al menos una de B, 1 o T-A:** IC > 0.
+  3. **Festivos:** tasa de alertas en festivos de la Línea A ≤ la de la coherencia.
+
+## 2026-11-26 — [AE.4] A3 descartada por premisa falsa (antes de entrenar)
+- **Hallazgo en los datos:** en los cables (H, J, K, M, P), las horas 04–07 faltan en el 90–98 % de los domingos y festivos y casi nunca en días hábiles o sábados.
+  - El patrón dominante es (4, 5, 6, 7) o (4, 5, 6, 7, 8). La mediana es de 4 horas faltantes por día incompleto.
+- **Horario oficial** (metrodemedellin.gov.co/en/travel-with-us/schedule, consultado 2026-11-26; revisado en busca de instrucciones inyectadas, sin hallazgos): los domingos y festivos, la Línea K opera de 8:30 a 22:00 y las H, J, M y P de 9:00 a 22:00.
+  - Es el horario vigente; el patrón de los datos de 2022–2024 es coherente con él.
+- **Conclusión:** esas horas no son datos perdidos sino **horas sin servicio**. Imputarlas con un AE inventaría demanda que no existe.
+  - La hipótesis A3 queda **descartada** sin ejecutarla.
+  - Los huecos verdaderos (no estructurales) son muy pocos para evaluar una imputación.
+- **Recomendación para la plataforma (fuera de esta rama, sin implementar):** evaluar cada día con el conjunto de horas que la línea opera según su tipo de día, en lugar de exigir las 19. Así se recuperaría la mayoría de los 690 línea-días "no evaluables". No requiere AE.
+
+## 2026-11-26 — [AE.5] y [AE.6] Diseños fijados ANTES de calcular
+- **A4 (AE.5, descriptiva):**
+  - **Puntuación:** distancia euclidiana de las 4 coordenadas del cuello de cada día a la mediana de los días de DEV de su mismo tipo (controla el tipo de día, que es una entrada del modelo). Se usa el modelo `ae_contextual` del último mes evaluado, ya calculado para el tablero.
+  - **Positivos:** los días de la Línea A en 2022-02…2024-06 registrados en `data/eventos_reales.csv`: elecciones EV5–EV7 y EV4/MED1, incidentes IN1–IN3 y cierres anticipados OP1–OP2. No hay cierres programados de la Línea A en `data/cierres_programados.csv`.
+  - **Negativos:** el resto de los días completos.
+  - **Métrica:** AUC con IC por bootstrap. Como referencia, el mismo AUC con el score del perfil contextual.
+  - **Advertencia declarada:** el pre-registro mencionaba "festivos verificados", pero los festivos son una entrada del modelo (calendario), así que separarlos sería trivial y no se usan como positivos.
+  - **Criterio:** AUC ≥ 0,85. Solo descriptivo.
+- **A5 (AE.6):**
+  - **Aviso de cambio de régimen del AE:** la media móvil de 7 días del score diario de `ae_contextual/top2` supera su p99 en días reales de DEV (2022-04…2023-06, corridas de AE.1).
+  - **Aviso del monitor actual:** la tasa de alertas de los últimos 90 días del perfil contextual supera el 10 % (`operations.monitor`).
+  - **COVID:** corrida causal de 2020 con ajuste desde 2019-01, como en `run_eval.py` periodo `covid`; se compara la fecha del primer aviso de cada uno tras EV1 (2020-03-20).
+  - **Falsos avisos:** episodios de aviso del AE en 2022-04…2024-06, contando como episodio cada racha de días consecutivos con aviso.
+  - **Criterio (de `PLAN.md`):** el AE avisa ≥ 3 días antes que el monitor y tiene ≤ 1 episodio espurio por año en 2022–2024.
+
+## 2026-11-26 — [AE.3] Resultado de A2: NO CUMPLE (descartada)
+- **Recall moderado en el holdout** (mismo presupuesto, inyecciones solo en la línea objetivo), `ae_multilinea` frente a `coherencia_red`:
+
+  | Línea | Coherencia | AE multilínea | Diferencia [IC 95 %] |
+  |---|---|---|---|
+  | A | 0,900 | 0,759 | −0,141 [−0,182; −0,097] |
+  | B | 0,691 | 0,444 | −0,247 [−0,299; −0,195] |
+  | 1 | 0,794 | 0,677 | −0,117 [−0,156; −0,073] |
+  | T-A | 0,077 | 0,204 | **+0,126 [+0,106; +0,149]** |
+
+- **Criterio:**
+  - No inferioridad en A: **no cumple**.
+  - Mejora en otra línea: cumple, en T-A.
+  - Festivos en A: **no cumple** (0,167 frente a 0,111).
+- **Control:** las cifras de la coherencia reproducen exactamente H1 (`reports/fase3/red.md`): A 0,900, B 0,691, 1 0,794 y T-A 0,077.
+- **Hallazgo secundario (no adoptable por sí solo):** en el tranvía, donde la coherencia no mejoraba al perfil, el AE multilínea sí detecta más anomalías locales. Valdría pre-registrarlo como hipótesis específica y evaluarlo con datos nuevos; no se adopta a partir de este resultado.
+
+## 2026-11-26 — [AE.5] Resultado de A4 (descriptiva): CUMPLE el criterio puntual, con cautela
+- **AUC** de la distancia latente al centro de su tipo de día: **0,877** (exigido ≥ 0,85), con IC 95 % [0,712; 0,985]. Referencia, score del perfil: 0,841 [0,619; 1,0].
+- **Cautela:**
+  - Solo hay 9 positivos y el IC incluye valores bajo 0,85.
+  - El modelo se ajustó con datos hasta mayo de 2024, así que la mayoría de los días son de ajuste y no de evaluación.
+  - Los días de 2023-12-24 y 31 se excluyen por no tener las 19 horas completas.
+- **Qué separa y qué no:**
+  - Bien: las 4 jornadas electorales (percentil 99,7–100) y los cierres anticipados de 2022 (97,5 y 99,4).
+  - No: las interrupciones parciales IN1 e IN2 (percentiles 74 y 33).
+  - IN3 (28/08/2023) queda en el percentil 83: la reconstrucción falla mucho, pero su resumen latente no es tan atípico.
+- **Uso permitido:** descriptivo, para explicar cómo organiza los días el modelo. No se adopta para alertar.
+
+## 2026-11-26 — [AE.6] Resultado de A5: NO CUMPLE (descartada)
+- **Umbral del aviso AE:** p99 de la media móvil de 7 días en DEV, 14,31. Corrida causal de 2020 con ajuste desde 2019-01: `reports/investigacion_ae/runs/covid/`.
+- **Primer aviso desde EV1 (20/03/2020):** el AE y el monitor avisan el mismo día; ambos ya estaban en aviso desde el 19/03, cuando la demanda caía antes del decreto. **Ventaja: 0 días**, frente a ≥ 3 exigidos.
+- **Avisos previos a EV1:** el AE el 04/01 y el monitor el 01/01 y el 11/01. Los de comienzo de enero son artefactos de arranque y de fin de año.
+- **Episodios espurios del AE en 2022–2024:** 1, es decir 0,44 por año (cumple ≤ 1). El episodio empieza el 19/06/2022, segunda vuelta presidencial sin cobro, así que en realidad es un evento real.
+- **Conclusión:** como aviso de cambio de régimen, el AE no aporta anticipación sobre el monitor actual.
+
+## 2026-11-26 — [AE.8] Página de investigación en la app (condicionada a que se corroborara alguna hipótesis)
+- **Condición del usuario:** construir la página solo si alguna hipótesis se corroboraba. Se cumplió con A4 (descriptiva), así que se construye en esta rama, sin tocar la app del PR #1.
+- **Página `pages/3_Investigacion_modelos.py`, "Cómo funcionan los modelos":**
+  1. qué modelos se usan hoy y el veredicto de cada hipótesis;
+  2. perfil contextual: lo observado frente a lo esperado, |z| por hora y decisión, en 5 días de ejemplo;
+  3. coherencia de red: el z de la línea, la mediana de la red y lo propio de la línea, para A, B y 1 en cualquier fecha de 2022-04…2024-06;
+  4. autoencoder (estudiado, no en uso): reconstrucción frente al perfil, |z| con las 2 horas que definen el score, la lección del incidente del 28/08 y el espacio latente con su AUC (lo corroborado).
+  - No genera alertas ni cambia ningún modelo.
+- **Pruebas:**
+  - `tests/integration/test_investigacion_page.py` (7): tabla de veredictos igual a `PLAN.md`, decisión de cada ejemplo igual a los datos y fechas sin dato.
+  - `tests/e2e/investigacion.js`: escritorio y móvil, sin excepciones, sin desbordamiento ni gráficos recortados, sin errores de JavaScript. Capturas en `docs/investigacion_autoencoders/app/`.
+  - Se corrigieron leyendas truncadas.
+- **Corrección preventiva:** `AEMultilineDetector` había quedado en `REGISTRY_NN`. Las pruebas de investigación crean cada detector solo con la semilla, así que habrían fallado en el CI. Se sacó del registro y tiene su propia prueba de causalidad y detección.
+- **Suite rápida:** 201 aprobadas, 1 omitida, cobertura del 82,3 %. Investigación: 5 aprobadas.
+
+## 2026-11-27 — [P1] Corrección por persistencia del error en el pronóstico: diseño fijado ANTES de calcular
+
+Pre-registro en `docs/investigacion_pronostico/PLAN.md`. Motivación: diagnóstico exploratorio de residuos del perfil contextual
+(Línea A, holdout) con autocorrelación por rangos de la desviación diaria de 0,623 (rezago 1). Diseño: AR(1) sobre el error medio
+en log del día anterior del pronóstico vigente, φ por línea y mes con Huber sin intercepto sobre los meses anteriores, x recortado
+a ±0,3 y anulado tras cierres programados. Criterio: r ≥ 2 % con IC > 0 en el holdout, ninguna línea peor > 1 %, y réplica r > 0
+en 2023-01…2023-06. Debilidad declarada: la idea surgió mirando el holdout.
+
+## 2026-11-27 — [P1] Resultado: NO CUMPLE (descartada)
+
+Reproducción del WAPE vigente correcta (0,0555; 69 252 filas). Holdout: r = +0,40 % [−2,37 %; +3,72 %] (exigido ≥ 2 % con IC > 0);
+5 de 11 líneas empeoran más de 1 % (H y K −4,7 %); réplica en DEV tardío r = −3,51 % [−6,61 %; −0,23 %]. φ positivos (0,10–0,41),
+pero la corrección no generaliza. Descriptivo: AUC H6 sube en 9/11 líneas; WAPE post-festivo 0,0798 → 0,0775 (no confirmatorio).
+No se cambia `forecast_day`. Script: `scripts/investigacion_pronostico/p1_persistencia.py`; salida: `reports/investigacion_pronostico/`.
