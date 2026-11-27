@@ -55,3 +55,19 @@ Si cumple: se propone (no se aplica sin decisión) incorporarlo a `forecast_day`
 
 r por línea; WAPE en días posteriores a festivos; AUC de días de alta demanda (H6) con el pronóstico corregido; φ por línea y mes.
 La banda del 80 % no se modifica en esta prueba.
+
+## Resultado (2026-11-27, calculado después de fijar lo anterior)
+
+**P1: NO CUMPLE (descartada).** Detalle en `reports/investigacion_pronostico/p1.md`. Reproducción previa del WAPE vigente: correcta
+(0,0555; 69 252 filas).
+
+| Criterio | Exigido | Obtenido | ¿Cumple? |
+|---|---|---|---|
+| 1. r en holdout | ≥ 2 % | +0,40 % | no |
+| 2. IC 95 % de r | límite inferior > 0 | [−2,37 %; +3,72 %] | no |
+| 3. Ninguna línea peor > 1 % | todas | 5 de 11 empeoran más de 1 % (H −4,7 %, K −4,7 %, P −3,9 %, O −2,0 %, J −1,8 %) | no |
+| 4. Réplica DEV 2023-01…2023-06 | r > 0 | −3,51 % [−6,61 %; −0,23 %] | no |
+
+Los φ estimados son positivos (0,10–0,41): el error sí persiste dentro de la muestra de ajuste, pero trasladarlo al día siguiente no
+reduce el error fuera de muestra. Descriptivo, sin valor confirmatorio: el AUC de días de alta demanda (H6) sube en 9 de 11 líneas
+y el WAPE de los días posteriores a festivo baja de 0,0798 a 0,0775. El pronóstico vigente no se modifica.

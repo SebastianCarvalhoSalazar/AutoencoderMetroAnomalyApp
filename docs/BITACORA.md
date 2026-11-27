@@ -531,3 +531,10 @@ Pre-registro en `docs/investigacion_pronostico/PLAN.md`. Motivación: diagnósti
 en log del día anterior del pronóstico vigente, φ por línea y mes con Huber sin intercepto sobre los meses anteriores, x recortado
 a ±0,3 y anulado tras cierres programados. Criterio: r ≥ 2 % con IC > 0 en el holdout, ninguna línea peor > 1 %, y réplica r > 0
 en 2023-01…2023-06. Debilidad declarada: la idea surgió mirando el holdout.
+
+## 2026-11-27 — [P1] Resultado: NO CUMPLE (descartada)
+
+Reproducción del WAPE vigente correcta (0,0555; 69 252 filas). Holdout: r = +0,40 % [−2,37 %; +3,72 %] (exigido ≥ 2 % con IC > 0);
+5 de 11 líneas empeoran más de 1 % (H y K −4,7 %); réplica en DEV tardío r = −3,51 % [−6,61 %; −0,23 %]. φ positivos (0,10–0,41),
+pero la corrección no generaliza. Descriptivo: AUC H6 sube en 9/11 líneas; WAPE post-festivo 0,0798 → 0,0775 (no confirmatorio).
+No se cambia `forecast_day`. Script: `scripts/investigacion_pronostico/p1_persistencia.py`; salida: `reports/investigacion_pronostico/`.
