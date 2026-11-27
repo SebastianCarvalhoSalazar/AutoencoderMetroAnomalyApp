@@ -523,3 +523,11 @@ Formato: `## AAAA-MM-DD — [Fase/Tarea] título` · **Cambio** · **Decisión**
   - Se corrigieron leyendas truncadas.
 - **Corrección preventiva:** `AEMultilineDetector` había quedado en `REGISTRY_NN`. Las pruebas de investigación crean cada detector solo con la semilla, así que habrían fallado en el CI. Se sacó del registro y tiene su propia prueba de causalidad y detección.
 - **Suite rápida:** 201 aprobadas, 1 omitida, cobertura del 82,3 %. Investigación: 5 aprobadas.
+
+## 2026-11-27 — [P1] Corrección por persistencia del error en el pronóstico: diseño fijado ANTES de calcular
+
+Pre-registro en `docs/investigacion_pronostico/PLAN.md`. Motivación: diagnóstico exploratorio de residuos del perfil contextual
+(Línea A, holdout) con autocorrelación por rangos de la desviación diaria de 0,623 (rezago 1). Diseño: AR(1) sobre el error medio
+en log del día anterior del pronóstico vigente, φ por línea y mes con Huber sin intercepto sobre los meses anteriores, x recortado
+a ±0,3 y anulado tras cierres programados. Criterio: r ≥ 2 % con IC > 0 en el holdout, ninguna línea peor > 1 %, y réplica r > 0
+en 2023-01…2023-06. Debilidad declarada: la idea surgió mirando el holdout.
